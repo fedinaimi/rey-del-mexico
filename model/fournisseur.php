@@ -17,7 +17,7 @@
 			$this->categorie=$categorie;
 			$this->local=$local;
 		}
-		function getidFournisseur(): int{
+		function getIdFournisseur(): int{
 			return $this->id_fournisseur;
 		}
 		function getNom(): string{

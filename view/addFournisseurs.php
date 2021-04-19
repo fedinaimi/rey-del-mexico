@@ -4,24 +4,32 @@
 
     $error = "";
     $fournisseur = null;
-    $fournisseurC = new fournisseurC(); //iset verifier si y a eu un evoie
+    $fournisseurC = new fournisseurC(); 
+    $fournisseur1C = new fournisseurC();
+	$listeCategorie= $fournisseur1C->listeCategorie();
+    $fournisseur2C = new fournisseurC();
+	$listeLocal= $fournisseur2C->listeLocal();
+ 
+    //iset verifier si y a eu un evoie
+
     if( isset($_POST['nom']) 
         && isset($_POST['prenom']) 
         && isset($_POST['email']) 
         && isset($_POST['tel'])
-         && isset($_POST['categorie'])
-         && isset($_POST['local'])) 
+         && isset($_POST["categorie"])
+         && isset($_POST["local"])) 
          {
              if( !empty($_POST['nom']) &&
              !empty($_POST['prenom']) &&
              !empty($_POST['email']) &&
              !empty($_POST['tel']) &&
-             !empty($_POST['categorie']) &&
-             !empty($_POST['local']) )
+             !empty($_POST["categorie"]) &&
+             !empty($_POST["local"]) )
                 {
                 $fournisseur= new fournisseur($_POST['nom'],$_POST['prenom'],$_POST['email'],$_POST['tel'],$_POST['categorie'] ,$_POST['local'] );
                 $fournisseurC->ajoutFournisseur($fournisseur);
-           }
+              
+              }
            else 
                 $error =" Missing information";
         }
@@ -435,7 +443,7 @@
                     <td><input type="email" name="email" id="email" maxlength="20"></td>
                 </tr>
                 <tr>
-                    <td>    <label for="tel">tel: </label></td> 
+                    <td>    <label for="tel">Téléphone: </label></td> 
                 </tr> 
                 <tr>
                     <td><input type="tel" name="tel" id="tel" maxlength="20"></td> 
@@ -445,13 +453,38 @@
                     <td>    <label for="categorie">Categorie: </label></td> 
                 </tr> 
                 <tr>
-                    <td><input type="text" name="categorie" id="categorie" maxlength="20"></td> 
+                <td>
+                     <select name="categorie" id="categorie">
+                     <option value="select" selected>Select</option>
+                        
+          <?php
+          foreach($listeCategorie as $listeC){
+           ?>
+           <option value = "<?PHP $listeC['id_categorie'] ?>"> <?PHP echo $listeC['libelle']; ?></option>
+           <?php
+          }
+          ?>
+                     </select>   
+                </td> 
                 </tr>
                 <tr>
                     <td>    <label for="local">Local: </label></td> 
                 </tr> 
                 <tr>
-                    <td><input type="text" name="local" id="local" maxlength="20"></td> 
+                    <td>
+                    <select name="local" id="local">
+                     <option value="select" selected>Select</option>
+                        
+          <?php
+          foreach($listeLocal as $localC){
+           ?>
+           <option value = " <?PHP $localC['id_local'] ?>"> <?PHP echo $localC['adresse']; ?></option>
+           <?php
+          }
+          ?>
+                     </select>   
+                     
+                    </td> 
                 </tr>
                 <div class="row">
                             <div class="col-md-12">

@@ -15,6 +15,28 @@ class fournisseurC{
           die('Erreur: ' .$e->getMessage());
       }
     }
+    function listeCategorie()
+    {
+      $sql = " SELECT * FROM categorie";
+      $db = config::getConnexion();
+      try {
+        $liste= $db->query($sql);
+        return $liste;
+      } catch(Exception $e) {
+          die('Erreur: ' .$e->getMessage());
+      }
+    }
+    function listeLocal()
+    {
+      $sql = " SELECT * FROM local";
+      $db = config::getConnexion();
+      try {
+        $liste= $db->query($sql);
+        return $liste;
+      } catch(Exception $e) {
+          die('Erreur: ' .$e->getMessage());
+      }
+    }
 	
     function ajoutFournisseur($fourni)
     {
