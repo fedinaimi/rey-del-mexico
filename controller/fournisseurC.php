@@ -19,8 +19,8 @@ class fournisseurC{
     function ajoutFournisseur($fourni)
     {
         
-       $sql = "INSERT INTO fournisseur (nom_fournisseur,prenom_fournisseur,email,tel)
-       values(:nom_fournisseur,:prenom_fournisseur,:email,:tel)";
+       $sql = "INSERT INTO fournisseur (nom_fournisseur,prenom_fournisseur,email,tel,categorie,local)
+       values(:nom_fournisseur,:prenom_fournisseur,:email,:tel,:categorie,:local)";
        $db = config::getConnexion();
        try {
         $query = $db->prepare($sql);
@@ -28,7 +28,9 @@ class fournisseurC{
             'nom_fournisseur' => $fourni->getNom(),
             'prenom_fournisseur' => $fourni->getPrenom(),
             'email' => $fourni->getEmail(),
-			'tel' => $fourni->getTel(),
+	         	'tel' => $fourni->getTel(),
+             'categorie' => $fourni->getCategorie(),
+	         	'local' => $fourni->getLocal(),
             
         ]);
         

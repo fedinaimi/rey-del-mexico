@@ -17,7 +17,6 @@
 			$this->categorie=$categorie;
 			$this->local=$local;
 		}
-		
 		function getidFournisseur(): int{
 			return $this->id_fournisseur;
 		}
@@ -39,8 +38,6 @@
 		function getLocal(): int{
 			return $this->local;
 		}
-
-
 		function setNom(string $nom_fournisseur): void
         {
 			$this->nom_fournisseur=$nom_fournisseur;
