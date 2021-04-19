@@ -1,46 +1,51 @@
 <?php
+    include_once "../controller/fournisseurC.php";
     include_once '../model/fournisseur.php';
-    include_once '../controller/fournisseurC.php';
 
-    $error1 = "";
-    $error = "";
-    $fournisseur = null;
+	$fournisseur = null;
     $fournisseurC = new fournisseurC(); 
     $fournisseur1C = new fournisseurC();
 	$listeCategorie= $fournisseur1C->listeCategorie();
     $fournisseur2C = new fournisseurC();
 	$listeLocal= $fournisseur2C->listeLocal();
- 
-    //iset verifier si y a eu un evoie
+$error="";
 
-    if( isset($_POST['nom']) 
-        && isset($_POST['prenom']) 
-        && isset($_POST['email']) 
-        && isset($_POST['tel'])
-         && isset($_POST["categorie"])
-         && isset($_POST["local"])) 
-         { 
-            $error1 =" jjjjjjjjj";
-             if( !empty($_POST['nom']) &&
-             !empty($_POST['prenom']) &&
-             !empty($_POST['email']) &&
-             !empty($_POST['tel']) &&
-             !empty($_POST["categorie"]) &&
-             !empty($_POST["local"]) )
-                {
-                $fournisseur= new fournisseur($_POST['nom'],$_POST['prenom'],$_POST['email'],$_POST['tel'],$_POST['categorie'] ,$_POST['local'] );
-                $fournisseurC->ajoutFournisseur($fournisseur);
-                header('Location:fournisseur.php');
-                }
-           else 
-               {
-                   $error =" Missing information";
-               } 
-        }
+if (
+    isset($_POST['nom']) 
+	&& isset($_POST['prenom']) 
+	&& isset($_POST['email']) 
+	&& isset($_POST['tel'])
+	 && isset($_POST["categorie"])
+	 && isset($_POST["local"])
+){
+    if (
+        !empty($_POST['nom']) &&
+        !empty($_POST['prenom']) &&
+        !empty($_POST['email']) &&
+        !empty($_POST['tel']) &&
+        !empty($_POST["categorie"]) &&
+        !empty($_POST["local"])
+    ) {
+        $fournisseur = new fournisseur(
+            $_POST['nom'],
+		 $_POST['prenom'],
+		 $_POST['email'],
+		 $_POST['tel'],
+		 $_POST["categorie"],
+		 $_POST["local"]
+        );
+        
+        $fournisseurC->modifierFournisseur($fournisseur, $_GET['id_fournisseur']);
+        //header('refresh:5;url=afficherUtilisateurs.php');
+    }
+    else
+        $error = "Missing information";
+}
+	
+		
+		
 
-    
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -53,7 +58,7 @@
 	<meta name="keywords" content="au theme template">
 
 	<!-- Title Page-->
-	<title>Fournisseur</title>
+	<title>Modifier Fournisseur</title>
 
 	<!-- Fontfaces CSS-->
 	<link href="css/font-face.css" rel="stylesheet" media="all">
@@ -79,6 +84,8 @@
 </head>
 
 <body class="animsition">
+
+
     <div class="page-wrapper">
         <!-- HEADER MOBILE-->
         <header class="header-mobile d-block d-lg-none">
@@ -420,37 +427,55 @@
 						<div class="row">
                             <div class="col-lg-9">
 								<br>
-                                <h2 class="title-1 m-b-25">Ajouter un nouveau fournisseur</h2>
+                              
+                            <div class="col-md-12">
+                                <div class="overview-wrap">
+                                    
+                                    <button class="au-btn au-btn-icon au-btn--blue">
+                                    <a href="fournisseur.php">  <i class="zmdi zmdi text-center"></i>Retour à la liste</button></a>
+                                </div>
+                            </div>
+                        
+                                 <hr>
+                                 <br>
+                                <h2 class="title-1 m-b-25 text-center">Update</h2>
                                 <div id="error">
                                     <?php echo $error; ?>
-                                        </div>
-                                <form action="" method="POST">
+                                </div>
+			<?php
+			if (isset($_GET['id_fournisseur']))
+			{
+				$fournisseur = $fournisseurC->recupererFournisseur($_GET['id_fournisseur']);
+			
+				
+		    ?>
+             <form action="" method="POST" >
                   <table  align="center">
                  <tr> 
                     <td> <label for="nom">Nom: </label>
                     </td> 
                 </tr>
                  <tr>
-                    <td><input type="text" name="nom" id="nom" maxlength="20"></td>
+                    <td><input type="text" name="nom" id="nom"  ></td>
                 </tr>
                 <tr>
                     <td><label for="prenom">prenom: </label>  </td> 
                 </tr> 
                 <tr>
-                    <td><input type="text" name="prenom" id="prenom" maxlength="20"></td>
+                    <td><input type="text" name="prenom" id="prenom" maxlength="20" ></td>
                 </tr>
                 <tr>
                     <td> <label for="email">Email: </label>  </td> 
  
                 </tr> 
                 <tr>
-                    <td><input type="email" name="email" id="email" maxlength="20"></td>
+                    <td><input type="email" name="email" id="email" maxlength="100" ></td>
                 </tr>
                 <tr>
                     <td>    <label for="tel">Téléphone: </label></td> 
                 </tr> 
                 <tr>
-                    <td><input type="tel" name="tel" id="tel" maxlength="20"></td> 
+                    <td><input type="tel" name="tel" id="tel" maxlength="8" ></td> 
                 </tr>
                 
                 <tr>
@@ -497,21 +522,25 @@
                             <div class="col-md-12">
                                 <div class="overview-wrap">
                                     <input type="submit" class="au-btn au-btn-icon au-btn--blue" value="Envoyer">
-                                        
+                                    <td>
+                        <input type="reset"  class="au-btn au-btn-icon au-btn--blue" value="Annuler" >
+                    </td>   
                                 </div>
                             </div>
                 </div></td></tr>
                 
                   </table>
         </form>                   
-                            
+        <?php
+		}
+		?>                      
    </div>
 </div>
 						
                  	<div class="row">
 								<div class="col-md-12">
 										<div class="copyright">
-												<p>&copy; Copyright.Tous droits réservés. <a href="../view/front/1.html">Rey Del México</a>.</p>
+												<p>&copy; Copyright.Tous droits réservés. <a href="front/1.html">Rey Del México</a>.</p>
 										</div>
 								</div>
 						</div>
@@ -552,6 +581,7 @@
 
 </html>
 <!-- end document-->
+
 
 
 

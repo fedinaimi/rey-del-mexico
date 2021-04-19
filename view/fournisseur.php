@@ -426,10 +426,16 @@ foreach($listefournissseur as $fournisseur){
 <td class="text-center"><?PHP echo $fournisseur['tel']; ?></td>
 <td class="text-center"><?PHP echo $fournisseur['categorie']; ?></td>
 <td class="text-center"><?PHP echo $fournisseur['local']; ?></td>
-<td class="text-center"> <button class="au-btn au-btn-icon au-btn--blue">
- <i class="zmdi zmdi"></i>Supprimer</button></td>
+<td class="text-center"> 
+<form method="POST" action="deleteFournisseur.php">
+<button type="submit" name="supprimer" class="au-btn au-btn-icon au-btn--blue">
+ <i class="zmdi zmdi"></i>Supprimer</button>
+ <input type="hidden" value=<?PHP echo $fournisseur['id_fournisseur']; ?> name="id_fournisseur">
+ </form>  
+ </td>
+
  <td class="text-center"> <button class="au-btn au-btn-icon au-btn--blue">
- <i class="zmdi zmdi"></i>Modifier</button></td>
+ <a href="updateFournisseur.php?id=<?PHP echo $fournisseur['id_fournisseur']; ?>"><i class="zmdi zmdi"></i>Modifier</button> </a></td>
 </tr>
 <?PHP
 }
