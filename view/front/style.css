@@ -429,6 +429,58 @@ img {
   border-radius: 50%;
   opacity: 1;
 }
+/*==================
+	ABOUT US SECTION
+====================*/
+
+#mu-evenement {
+  display: inline;
+  float: left;
+  width: 100%;
+  padding: 100px 0;
+}
+
+.mu-evenement-area {
+  display: inline;
+  float: left;
+  width: 100%;
+}
+
+.mu-evenement-right {
+  display: inline;
+  float: left;
+  margin-top: 20px;
+  padding-top: 30px;
+  padding-left: 15px;
+  width: 100%;
+}
+
+.mu-evenement-right ul {
+  margin-bottom: 20px;
+  padding-left: 25px;
+}
+
+.mu-evenement-right ul li {
+  line-height: 24px;
+  margin-bottom: 10px;
+}
+
+.mu-evenement-right ul li:before {
+  content: "\f0da";
+  font-family: fontAwesome;
+  margin-right: 10px;
+}
+
+.mu-evenement-left {
+  display: inline;
+  float: left;
+  margin-top: 20px;
+  padding-top: 30px;
+  padding-right: 15px;
+  width: 100%;
+}
+
+
 
 
 /*==================
@@ -712,7 +764,128 @@ img {
   margin-top: 10px;
   font-size: 14px;
 }
+/*==================
+connexion SECTION
+====================*/
 
+#mu-connexion {
+  background-color: #222;
+  display: inline;
+  float: left;
+  padding: 100px 0;
+  width: 100%;
+}
+
+.mu-connexion-area {
+  display: inline;
+  float: left;
+  width: 100%;
+}
+
+.mu-connexion-area .mu-title h2 {
+  color: #fff;
+}
+
+.mu-connexion-content {
+  display: inline;
+  float: left;
+  margin-top: 20px;
+  padding: 0 100px;
+  width: 100%;
+}
+
+.mu-connexion-content h3 {
+  color: #fff;
+  display: inline-block;
+  padding-bottom: 10px;
+  font-weight: bold;
+}
+
+.mu-connexion-content p {
+  color: #fff;
+  letter-spacing: 0.5px;
+  padding: 0 50px;
+  text-align: center;
+}
+
+.mu-connexion-left {
+  display: inline;
+  float: left;
+  margin-top: 30px;
+  width: 100%;
+}
+
+.mu-connexion-form .form-control {
+  margin-bottom: 20px;
+}
+
+.mu-connexion-form input[type="text"],
+.mu-connexion-form input[type="email"] {
+  border-radius: 0;
+  color: #000;
+  height: 40px;
+}
+
+.mu-connexion-form input[type="text"]:focus,
+.mu-connexion-form input[type="email"]:focus {
+  box-shadow: none;
+}
+
+.mu-connexion-form input[type="text"]::-webkit-input-placeholder,
+.mu-connexion-form input[type="email"]::-webkit-input-placeholder {
+  color: #555;
+}
+
+.mu-connexion-form input[type="text"]:-moz-placeholder,
+.mu-connexion-form input[type="email"]:-moz-placeholder {
+  color: #555;
+}
+
+.mu-connexion-form input[type="text"]::-moz-placeholder,
+.mu-connexion-form input[type="email"]::-moz-placeholder {
+  color: #555;
+}
+
+.mu-connexion-form input[type="text"]:-ms-input-placeholder,
+.mu-connexion-form input[type="email"]:-ms-input-placeholder {
+  color: #555;
+}
+
+.mu-connexion-form select {
+  border-radius: 0;
+  height: 40px;
+}
+
+.mu-connexion-form select:focus {
+  box-shadow: none;
+}
+
+.mu-connexion-form select option {
+  margin-bottom: 10px;
+  color: #000;
+}
+
+.mu-connexion-form textarea {
+  border-radius: 0;
+  color: #000;
+  padding: 10px;
+}
+
+.mu-connexion-form textarea:focus {
+  box-shadow: none;
+}
+
+.mu-connexion-form textarea::-webkit-input-placeholder {
+  color: #555;
+}
+
+ .mu-connexion-form textarea:-moz-placeholder {
+  color: #555;
+}
+
+.mu-connexion-form textarea::-moz-placeholder {
+  color: #555;
+}
 /*==================
 RESERVATION SECTION
 ====================*/
@@ -839,8 +1012,16 @@ RESERVATION SECTION
 .mu-reservation-form textarea:-ms-input-placeholder {
   color: #555;
 }
+.mu-connexion-form textarea:-ms-input-placeholder {
+  color: #555;
+}
 
 .mu-reservation-form button[type="submit"] {
+  border: none;
+  margin-top: 20px;
+  margin-left: 15px;
+}
+.mu-connexion-form button[type="submit"] {
   border: none;
   margin-top: 20px;
   margin-left: 15px;
@@ -879,7 +1060,22 @@ RESERVATION SECTION
   width: 100%;
   padding: 10px;
 }
-
+.mu-connexion-right {
+  background-color: #fff;
+  display: inline;
+  float: left;
+  margin-top: 40px;
+  width: 100%;
+  padding: 10px;
+}
+.mu-inscription-right {
+  background-color: #fff;
+  display: inline;
+  float: left;
+  margin-top: 40px;
+  width: 100%;
+  padding: 30px;
+}
 .mu-opening-hour {
   display: inline;
   float: left;
@@ -1518,7 +1714,9 @@ RESERVATION SECTION
   .mu-reservation-content {
     padding: 0;
   }
-
+  .mu-connexion-content {
+    padding: 0;
+  }
   .mu-testimonial-slider li .mu-testimonial-single {
     padding: 0 50px;
   }
@@ -1547,13 +1745,25 @@ RESERVATION SECTION
   .mu-top-slider-content .mu-reservation-btn {
     display: none;
   }
+  .mu-top-slider-content .mu-connexion-btn {
+    display: none;
+  }
 
   .mu-about-us-left,
   .mu-reservation-form {
     text-align: center;
   }
-  
+  .mu-evenement-left,
+  .mu-reservation-form {
+    text-align: center;
+  }
+  .mu-connexion-form {
+    text-align: center;
+  }
   .mu-reservation-right {
+    margin-top: 60px;
+  }
+  .mu-connexion-right {
     margin-top: 60px;
   }
   
@@ -1674,7 +1884,9 @@ RESERVATION SECTION
   }
 
 }
-.rightT { float:right; margin:-50px -1100px -10px -10px; }
+.rightT1 { float:right; margin:-49px -1030px -10px -10px; }
+.right1 { float:right; margin:-50px -1070px -10px -10px; }
+.rightT { float:right; margin:-49px -1060px -10px -10px; }
 .right { float:right; margin:-50px -1100px -10px -10px; }
 @media (max-width: 480px) {
 
@@ -1689,6 +1901,10 @@ RESERVATION SECTION
   .mu-reservation-content p {
     padding: 0;
   }
+  .mu-connexion-content p {
+    padding: 0;
+  }
+
 
 
   .mu-title {
@@ -1751,7 +1967,9 @@ RESERVATION SECTION
   #mu-about-us {
     padding: 100px 0 50px;
   }
-
+  #mu-evenement {
+    padding: 100px 0 50px;
+  }
   #mu-restaurant-menu {
     padding-bottom: 0px;
   }
@@ -1759,7 +1977,9 @@ RESERVATION SECTION
   #mu-reservation .mu-reservation-area .mu-reservation-content {
     padding: 0;
   }
-
+  #mu-connexion .mu-connexion-area .mu-connexion-content {
+    padding: 0;
+  }
   .mu-opening-hour h2 {
     font-size: 42px;
     padding-bottom: 10px;
