@@ -2,16 +2,16 @@
 	class fournisseur
     {
 		private ?int $id_fournisseur = null;
-		private ?string $nom_fournisseur = null;
-		private ?string $prenom_fournisseur= null;
+		private ?string $nom = null;
+		private ?string $prenom= null;
 		private ?string $email = null;
 		private ?int $tel = null;	
 		private ?int $categorie = null;	
 		private ?int $local = null;	
-		function __construct( string $nom_fournisseur, string $prenom_fournisseur, string $email,int $tel,int $categorie,int $local)
+		function __construct( string $nom, string $prenom, string $email,int $tel,int $categorie,int $local)
         {
-			$this->nom_fournisseur=$nom_fournisseur;
-			$this->prenom_fournisseur=$prenom_fournisseur;
+			$this->nom=$nom;
+			$this->prenom=$prenom;
 			$this->email=$email;
 			$this->tel=$tel;
 			$this->categorie=$categorie;
@@ -21,10 +21,10 @@
 			return $this->id_fournisseur;
 		}
 		function getNom(): string{
-			return $this->nom_fournisseur;
+			return $this->nom;
 		}
 		function getPrenom(): string{
-			return $this->prenom_fournisseur;
+			return $this->prenom;
 		}
 		function getEmail(): string{
 			return $this->email;
@@ -38,13 +38,13 @@
 		function getLocal(): int{
 			return $this->local;
 		}
-		function setNom(string $nom_fournisseur): void
+		function setNom(string $nom): void
         {
-			$this->nom_fournisseur=$nom_fournisseur;
+			$this->nom=$nom;
 		}
-		function setPrenom(string $prenom_fournisseur): void
+		function setPrenom(string $prenom): void
         {
-			$this->prenom_fournisseur=$prenom_fournisseur;
+			$this->prenom=$prenom;
 		}
 		function setEmail(string $email): void
         {

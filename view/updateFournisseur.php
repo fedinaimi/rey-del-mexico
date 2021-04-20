@@ -1,49 +1,48 @@
 <?php
-    include_once "../controller/fournisseurC.php";
-    include_once '../model/fournisseur.php';
+	  include_once "../controller/fournisseurC.php";
+      include_once '../model/fournisseur.php';
 
-	$fournisseur = null;
+	
+	$error = "";
+
     $fournisseurC = new fournisseurC(); 
     $fournisseur1C = new fournisseurC();
 	$listeCategorie= $fournisseur1C->listeCategorie();
     $fournisseur2C = new fournisseurC();
 	$listeLocal= $fournisseur2C->listeLocal();
-$error="";
 
-if (
-    isset($_POST['nom']) 
-	&& isset($_POST['prenom']) 
-	&& isset($_POST['email']) 
-	&& isset($_POST['tel'])
-	 && isset($_POST["categorie"])
-	 && isset($_POST["local"])
-){
-    if (
-        !empty($_POST['nom']) &&
-        !empty($_POST['prenom']) &&
-        !empty($_POST['email']) &&
-        !empty($_POST['tel']) &&
-        !empty($_POST["categorie"]) &&
-        !empty($_POST["local"])
-    ) {
-        $fournisseur = new fournisseur(
-            $_POST['nom'],
-		 $_POST['prenom'],
-		 $_POST['email'],
-		 $_POST['tel'],
-		 $_POST["categorie"],
-		 $_POST["local"]
-        );
-        
-        $fournisseurC->modifierFournisseur($fournisseur, $_GET['id_fournisseur']);
-        //header('refresh:5;url=afficherUtilisateurs.php');
-    }
-    else
-        $error = "Missing information";
-}
 	
-		
-		
+	if (
+        isset($_POST['nom']) 
+        && isset($_POST['prenom']) 
+        && isset($_POST['email']) 
+        && isset($_POST['tel'])
+         && isset($_POST['categorie'])
+         && isset($_POST['local'])
+	){
+		if (
+            !empty($_POST['nom']) &&
+            !empty($_POST['prenom']) &&
+            !empty($_POST['email']) &&
+            !empty($_POST['tel']) &&
+            !empty($_POST['categorie']) &&
+            !empty($_POST['local'])
+        ) {
+            $fournisseur = new fournisseur(
+                $_POST['nom'],
+                $_POST['prenom'], 
+                $_POST['email'],
+                $_POST['tel'],
+                $_POST['categorie'],
+                $_POST['local']
+			);
+			
+            $fournisseurC->modifierFournisseur($fournisseur, $_GET['id']);
+            header('Location:fournisseur.php');
+        }
+        else
+            $error = "Missing information";
+	}
 
 ?>
 <!DOCTYPE html>
@@ -443,13 +442,11 @@ if (
                                     <?php echo $error; ?>
                                 </div>
 			<?php
-			if (isset($_GET['id_fournisseur']))
+			if (isset($_GET['id']))
 			{
-				$fournisseur = $fournisseurC->recupererFournisseur($_GET['id_fournisseur']);
-			
-				
-		    ?>
-             <form action="" method="POST" >
+				$fournisseur = $fournisseurC->recupererFournisseur1($_GET['id']);	
+		       ?>
+                <form action="" method="POST" >
                   <table  align="center">
                  <tr> 
                     <td> <label for="nom">Nom: </label>
@@ -486,13 +483,13 @@ if (
                      <select name="categorie" id="categorie">
                      <option value="select" selected>Select</option>
                         
-           <?php
-           foreach($listeCategorie as $listeC){
-           ?>
-           <option value ='<?PHP echo $listeC['id_categorie']; ?>'> <?PHP echo $listeC['libelle']; ?></option>
-           <?php
-           }
-           ?>
+               <?php
+                foreach($listeCategorie as $listeC){
+               ?>
+                <option value ='<?PHP echo $listeC['id_categorie']; ?>'> <?PHP echo $listeC['libelle']; ?></option>
+                   <?php
+             }
+                  ?>
                      </select>   
                 </td> 
                 </tr>

@@ -41,14 +41,14 @@ class fournisseurC{
     function ajoutFournisseur($fourni)
     {
         
-       $sql = "INSERT INTO fournisseur (nom_fournisseur, prenom_fournisseur, email, tel, categorie, local)
-       values(:nom_fournisseur, :prenom_fournisseur, :email, :tel, :categorie, :local)";
+       $sql = "INSERT INTO fournisseur (nom, prenom, email, tel, categorie, local)
+       values(:nom, :prenom, :email, :tel, :categorie, :local)";
        $db = config::getConnexion();
        try {
         $query = $db->prepare($sql);
         $query->execute([
-            'nom_fournisseur' => $fourni->getNom(),
-            'prenom_fournisseur' => $fourni->getPrenom(),
+            'nom' => $fourni->getNom(),
+            'prenom' => $fourni->getPrenom(),
             'email' => $fourni->getEmail(),
 	         	'tel' => $fourni->getTel(),
             'categorie' => $fourni->getCategorie(),
@@ -72,50 +72,63 @@ class fournisseurC{
 				die('Erreur: '.$e->getMessage());
 			}
 		}
-
-    function modifierFournisseur($fourni, $id_fournisseur){
+    function modifierFournisseur($Utilisateur, $id_fournisseur){
 			try {
 				$db = config::getConnexion();
 				$query = $db->prepare(
 					'UPDATE fournisseur SET 
-						nom_fournisseur = :nom_fournisseur, 
-						prenom_fournisseur = :prenom_fournisseur,
+						nom = :nom, 
+						prenom = :prenom,
 						email = :email,
-            tel = :tel, 
+						tel = :tel,
 						categorie = :categorie,
-						local = :local,
+            local = :local
 					WHERE id_fournisseur = :id_fournisseur'
 				);
 				$query->execute([
-          'nom_fournisseur' => $fourni->getNom(),
-          'prenom_fournisseur' => $fourni->getPrenom(),
-          'email' => $fourni->getEmail(),
-           'tel' => $fourni->getTel(),
-          'categorie' => $fourni->getCategorie(),
-           'local' => $fourni->getLocal()
+					'nom' => $Utilisateur->getNom(),
+					'prenom' => $Utilisateur->getPrenom(),
+					'email' => $Utilisateur->getEmail(),
+					'tel' => $Utilisateur->getTel(),
+					'categorie' => $Utilisateur->getCategorie(),
+					'id_fournisseur' => $id_fournisseur,
+          'local' => $Utilisateur->getLocal(),
 				]);
 				echo $query->rowCount() . " records UPDATED successfully <br>";
 			} catch (PDOException $e) {
 				$e->getMessage();
 			}
 		}
-		function recupererFournisseur($id_fournisseur)
-        {
-			$sql="SELECT * from fournisseur where id_fournisseur=$id_fournisseur";
+		function recupererFournisseur($id_fournisseur){
+			$sql="SELECT * from fournisseur where	id_fournisseur=$id_fournisseur";
 			$db = config::getConnexion();
 			try{
 				$query=$db->prepare($sql);
 				$query->execute();
 
-				$fournisseur=$query->fetch(PDO::FETCH_OBJ);
-				return $fournisseur;
+				$user=$query->fetch();
+				return $user;
 			}
 			catch (Exception $e){
 				die('Erreur: '.$e->getMessage());
 			}
 		}
 
+		function recupererFournisseur1($id_fournisseur){
+			$sql="SELECT * from fournisseur where id_fournisseur=$id_fournisseur";
+			$db = config::getConnexion();
+			try{
+				$query=$db->prepare($sql);
+				$query->execute();
+				
+				$user = $query->fetch(PDO::FETCH_OBJ);
+				return $user;
+			}
+			catch (Exception $e){
+				die('Erreur: '.$e->getMessage());
+			}
+		}
+		
+	}
 
-}
-
-?>
+  

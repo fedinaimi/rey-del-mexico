@@ -420,8 +420,8 @@ foreach($listefournissseur as $fournisseur){
 ?>
 <tr>
 <td class="text-center"><?PHP echo $fournisseur['id_fournisseur']; ?></td>
-<td class="text-center"><?PHP echo $fournisseur['nom_fournisseur']; ?></td>
-<td class="text-center"><?PHP echo $fournisseur['prenom_fournisseur']; ?></td>
+<td class="text-center"><?PHP echo $fournisseur['nom']; ?></td>
+<td class="text-center"><?PHP echo $fournisseur['prenom']; ?></td>
 <td class="text-center"><?PHP echo $fournisseur['email']; ?></td>
 <td class="text-center"><?PHP echo $fournisseur['tel']; ?></td>
 <td class="text-center"><?PHP echo $fournisseur['categorie']; ?></td>
@@ -434,8 +434,12 @@ foreach($listefournissseur as $fournisseur){
  </form>  
  </td>
 
- <td class="text-center"> <button class="au-btn au-btn-icon au-btn--blue">
- <a href="updateFournisseur.php?id=<?PHP echo $fournisseur['id_fournisseur']; ?>"><i class="zmdi zmdi"></i>Modifier</button> </a></td>
+ <td class="text-center"> 
+ <button class="au-btn au-btn-icon au-btn--blue">
+ <a href="updateFournisseur.php?id=<?PHP echo $fournisseur['id_fournisseur']; ?>">
+ <i class="zmdi zmdi"></i>Modifier</button>
+  </a>
+ </td>
 </tr>
 <?PHP
 }
