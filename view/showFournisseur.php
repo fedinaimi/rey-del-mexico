@@ -1,46 +1,10 @@
-<?php
-    include_once '../model/fournisseur.php';
-    include_once '../controller/fournisseurC.php';
+<?PHP
+	include "../controller/fournisseurC.php";
 
-   
-    $error = "";
-    $fournisseur = null;
-    $fournisseurC = new fournisseurC(); 
-    $fournisseur1C = new fournisseurC();
-	$listeCategorie= $fournisseur1C->listeCategorie();
-    $fournisseur2C = new fournisseurC();
-	$listeLocal= $fournisseur2C->listeLocal();
- 
-    //iset verifier si y a eu un evoie
+	$fournisseurC = new fournisseurC();
+	$listefournissseur= $fournisseurC->afficherFournisseur();
 
-    if( isset($_POST['nom']) 
-        && isset($_POST['prenom']) 
-        && isset($_POST['email']) 
-        && isset($_POST['tel'])
-         && isset($_POST["categorie"])
-         && isset($_POST["local"])) 
-         { 
-            
-             if( !empty($_POST['nom']) &&
-             !empty($_POST['prenom']) &&
-             !empty($_POST['email']) &&
-             !empty($_POST['tel']) &&
-             !empty($_POST["categorie"]) &&
-             !empty($_POST["local"]) )
-                {
-                $fournisseur= new fournisseur($_POST['nom'],$_POST['prenom'],$_POST['email'],$_POST['tel'],$_POST['categorie'] ,$_POST['local'] );
-                $fournisseurC->ajoutFournisseur($fournisseur);
-                header('Location:showFournisseur.php');
-                }
-           else 
-               {
-                   $error =" Missing information";
-               } 
-        }
-
-    
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -86,7 +50,7 @@
                 <div class="container-fluid">
                     <div class="header-mobile-inner">
                         <a class="logo" href="index.html">
-                            <img src="images/icon/ahmed.png" alt="reydelmexico" />
+                            <img src="images/icon/ahmed.png" alt="CoolAdmin" />
                         </a>
                         <button class="hamburger hamburger--slider" type="button">
                             <span class="hamburger-box">
@@ -170,7 +134,7 @@
         <aside class="menu-sidebar d-none d-lg-block">
             <div class="logo">
                 <a href="#">
-                    <img src="images/icon/logo.png" alt="reydelmexico" />
+                    <img src="images/icon/logo.png" alt="Cool Admin" />
                 </a>
             </div>
             <div class="menu-sidebar__content js-scrollbar1">
@@ -236,7 +200,6 @@
                         </li>
                       
                       
-                      
                             </ul>
                         </li>
                     </ul>
@@ -252,7 +215,12 @@
 				<div class="section__content section__content--p30">
 					<div class="container-fluid">
 						<div class="header-wrap">
-							
+							<form class="form-header" action="" method="POST">
+								<input class="au-input au-input--xl" type="text" name="search" placeholder="Recherche fournisseur..." />
+								<button class="au-btn--submit" type="submit">
+									<i class="zmdi zmdi-search"></i>
+								</button>
+							</form>
 							<div class="header-button">
                                 <div class="noti-wrap">
                                     <div class="noti__item js-item-menu">
@@ -274,7 +242,7 @@
                                             </div>
                                             <div class="mess__item">
                                                 <div class="image img-cir img-40">
-                                                    <img src="back/images/icon/avatar-04.jpg" alt="Diane Myers" />
+                                                    <img src="images/icon/avatar-04.jpg" alt="Diane Myers" />
                                                 </div>
                                                 <div class="content">
                                                     <h6>Diane Myers</h6>
@@ -416,113 +384,85 @@
 			<div class="main-content">
 				<div class="section__content section__content--p30">
 					<div class="container-fluid">
-						
+						<div class="row">
+                            <div class="col-md-12">
+                                <div class="overview-wrap">
+                                    
+                                    <button class="au-btn au-btn-icon au-btn--blue">
+                                        <a href="addFournisseurs.php">  <i class="zmdi zmdi-plus text-center"></i>Ajouter Fournisseur </a></button>
+                                </div>
+                            </div>
+                        </div>
 						<div class="row">
                             <div class="col-lg-9">
 								<br>
-                                <h2 class="title-1 m-b-25">Ajouter un nouveau fournisseur</h2>
-                                <div id="error">
-                                    <?php echo $error; ?>
-                                        </div>
-                                <form action="" method="POST">
-                  <table  align="center">
-                 <tr> 
-                    <td> <label for="nom">Nom: </label>
-                    </td> 
-                </tr>
-                 <tr>
-                    <td><input type="text" name="nom" id="nom" required maxlength="20"></td>
-                </tr>
-                <tr>
-                    <td><label for="prenom">prenom: </label>  </td> 
-                </tr> 
-                <tr>
-                    <td><input type="text" name="prenom" id="prenom" required maxlength="20"></td>
-                </tr>
-                <tr>
-                    <td> <label for="email">Email: </label>  </td> 
- 
-                </tr> 
-                <tr>
-                    <td><input type="email" name="email" id="email" maxlength="20" required pattern=".+@gmail.com|.+@esprit.tn"></td>
-                </tr>
-                <tr>
-                    <td>    <label for="tel">Téléphone: </label></td> 
-                </tr> 
-                <tr>
-                    <td><input type="tel" name="tel" id="tel" placeholder="12-345-678"  pattern="[0-9]{2}-[0-9]{3}-[0-9]{3}"required  maxlength="20"></td> 
-                </tr>
-                
-                <tr>
-                    <td>    <label for="categorie">Categorie: </label></td> 
-                </tr> 
-                <tr>
-                <td>
-                     <select name="categorie" id="categorie" required >
-                     <option value="0" selected>Select</option>
-                        
-           <?php
-           foreach($listeCategorie as $listeC){
-           ?>
-           <option value ='<?PHP echo $listeC['id_categorie']; ?>'> <?PHP echo $listeC['libelle']; ?></option>
-           <?php
-           }
-           ?>
-                     </select>   
-                </td> 
-                </tr>
-                <tr>
-                    <td><label for="local">Local:</label></td> 
-                </tr> 
-                <tr>
-                    <td>
-                    <select name="local" id="local" required >
-                     <option value="0" selected>Select</option>
-                        
-          <?php
-          foreach($listeLocal as $localC){
-           ?>
-           <option value ='<?PHP echo $localC['id_local']; ?>'> <?PHP echo $localC['adresse']; ?></option>
-           <?php
-          }
-          ?>
-          </select>   
-                     
-                    </td> 
-                </tr>
-                <tr></tr>
-                <tr></tr>
-                <tr>
-                    <td></td><td> <div class="row">
-                            <div class="col-md-12">
-                                <div class="overview-wrap">
-                                    <input type="submit" class="au-btn au-btn-icon au-btn--blue" value="Envoyer">
-                                        
+                                <h2 class="title-1 m-b-25">Informations Fournisseurs</h2>
+                                <div class="table-responsive table--no-card m-b-40">
+                                    <table class="table table-borderless table-striped table-earning">
+                                        <thead>
+                                            <tr>
+                                                <th class="text-center">ID</th>
+                                                <th class="text-center">NOM</th>
+                                                <th class="text-center">Prénom</th>
+                                                <th class="text-center">Email</th>
+                                                <th class="text-center">Tel</th>
+                                                <th class="text-center">Catégorie</th>
+                                                <th class="text-center">Local</th>
+                                                <th class="text-center"></th>
+                                                <th class="text-right"></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                           
+                                        <?PHP
+foreach($listefournissseur as $fournisseur){
+?>
+<tr>
+<td class="text-center"><?PHP echo $fournisseur['id_fournisseur']; ?></td>
+<td class="text-center"><?PHP echo $fournisseur['nom']; ?></td>
+<td class="text-center"><?PHP echo $fournisseur['prenom']; ?></td>
+<td class="text-center"><?PHP echo $fournisseur['email']; ?></td>
+<td class="text-center"><?PHP echo $fournisseur['tel']; ?></td>
+<td class="text-center"><?PHP echo $fournisseur['categorie']; ?></td>
+<td class="text-center"><?PHP echo $fournisseur['local']; ?></td>
+<td class="text-center"> 
+<form method="POST" action="deleteFournisseur.php">
+<button type="submit" name="supprimer" class="au-btn au-btn-icon au-btn--blue">
+ <i class="zmdi zmdi"></i>Supprimer</button>
+ <input type="hidden" value=<?PHP echo $fournisseur['id_fournisseur']; ?> name="id_fournisseur">
+ </form>  
+ </td>
+
+ <td class="text-center"> 
+ <button class="au-btn au-btn-icon au-btn--blue">
+ <a href="updateFournisseur.php?id=<?PHP echo $fournisseur['id_fournisseur']; ?>">
+ <i class="zmdi zmdi"></i>Modifier</button>
+  </a>
+ </td>
+</tr>
+<?PHP
+}
+?>
+                                       
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
-                </div></td></tr>
-                
-                  </table>
-        </form>                   
-                            
-   </div>
-</div>
 						
-                 	<div class="row">
+						<div class="row">
 								<div class="col-md-12">
 										<div class="copyright">
-												<p>&copy; Copyright.Tous droits réservés. <a href="../view/front/1.html">Rey Del México</a>.</p>
+												<p>&copy; Copyright.Tous droits réservés. <a href="1.html">Rey Del México</a>.</p>
 										</div>
 								</div>
 						</div>
-
 					</div>
 				</div>
 			</div>
-		
+		</div>
 		<!-- END PAGE CONTAINER-->
 
-	
+	</div>
 
 	<!-- Jquery JS-->
 	<script src="vendor/jquery-3.2.1.min.js"></script>
@@ -552,9 +492,3 @@
 
 </html>
 <!-- end document-->
-
-
-
-
-
-

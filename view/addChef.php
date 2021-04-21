@@ -1,36 +1,36 @@
 <?php
-    include_once '../model/fournisseur.php';
-    include_once '../controller/fournisseurC.php';
+    include_once '../model/chef.php';
+    include_once '../controller/chefC.php';
 
-   
+    $error1 = "";
     $error = "";
-    $fournisseur = null;
-    $fournisseurC = new fournisseurC(); 
-    $fournisseur1C = new fournisseurC();
-	$listeCategorie= $fournisseur1C->listeCategorie();
-    $fournisseur2C = new fournisseurC();
-	$listeLocal= $fournisseur2C->listeLocal();
+    $chef = null;
+    $chefC = new chefC(); 
+    $chef1C = new chefC();
+	$listeLocal= $chef1C->listeLocal1();
  
-    //iset verifier si y a eu un evoie
+  
 
     if( isset($_POST['nom']) 
         && isset($_POST['prenom']) 
         && isset($_POST['email']) 
-        && isset($_POST['tel'])
-         && isset($_POST["categorie"])
+        && isset($_POST['adresse'])
+        && isset($_POST['dateNais'])
+         && isset($_POST["categories"])
          && isset($_POST["local"])) 
          { 
             
              if( !empty($_POST['nom']) &&
              !empty($_POST['prenom']) &&
              !empty($_POST['email']) &&
-             !empty($_POST['tel']) &&
-             !empty($_POST["categorie"]) &&
+             !empty($_POST['adresse']) &&
+             !empty($_POST['dateNais']) &&
+             !empty($_POST["categories"]) &&
              !empty($_POST["local"]) )
                 {
-                $fournisseur= new fournisseur($_POST['nom'],$_POST['prenom'],$_POST['email'],$_POST['tel'],$_POST['categorie'] ,$_POST['local'] );
-                $fournisseurC->ajoutFournisseur($fournisseur);
-                header('Location:showFournisseur.php');
+                $chef= new chef($_POST['nom'],$_POST['prenom'],$_POST['email'],$_POST['adresse'],$_POST['dateNais'],$_POST['categories'] ,$_POST['local'] );
+                $chefC->ajoutChef($chef);
+                header('Location:showChef.php');
                 }
            else 
                {
@@ -53,7 +53,7 @@
 	<meta name="keywords" content="au theme template">
 
 	<!-- Title Page-->
-	<title>Fournisseur</title>
+	<title>Ajout Chef</title>
 
 	<!-- Fontfaces CSS-->
 	<link href="css/font-face.css" rel="stylesheet" media="all">
@@ -420,7 +420,7 @@
 						<div class="row">
                             <div class="col-lg-9">
 								<br>
-                                <h2 class="title-1 m-b-25">Ajouter un nouveau fournisseur</h2>
+                                <h2 class="title-1 m-b-25">Ajouter un nouveau chef</h2>
                                 <div id="error">
                                     <?php echo $error; ?>
                                         </div>
@@ -444,32 +444,26 @@
  
                 </tr> 
                 <tr>
-                    <td><input type="email" name="email" id="email" maxlength="20" required pattern=".+@gmail.com|.+@esprit.tn"></td>
+                    <td><input type="email" name="email" id="email" maxlength="50" required pattern=".+@gmail.com|.+@esprit.tn"></td>
                 </tr>
                 <tr>
-                    <td>    <label for="tel">Téléphone: </label></td> 
+                    <td>    <label for="adresse">Adresse: </label></td> 
                 </tr> 
                 <tr>
-                    <td><input type="tel" name="tel" id="tel" placeholder="12-345-678"  pattern="[0-9]{2}-[0-9]{3}-[0-9]{3}"required  maxlength="20"></td> 
+                    <td><input type="text" name="adresse" id="adresse"  required  maxlength="200"></td> 
+                </tr>
+                <tr>
+                    <td>    <label for="dateNais">Date de Naissance: </label></td> 
+                </tr> 
+                <tr>
+                    <td><input type="date" name="dateNais" id="dateNais"  required  maxlength="200"></td> 
                 </tr>
                 
                 <tr>
-                    <td>    <label for="categorie">Categorie: </label></td> 
+                    <td>    <label for="categories">Categorie: </label></td> 
                 </tr> 
                 <tr>
-                <td>
-                     <select name="categorie" id="categorie" required >
-                     <option value="0" selected>Select</option>
-                        
-           <?php
-           foreach($listeCategorie as $listeC){
-           ?>
-           <option value ='<?PHP echo $listeC['id_categorie']; ?>'> <?PHP echo $listeC['libelle']; ?></option>
-           <?php
-           }
-           ?>
-                     </select>   
-                </td> 
+                <td><input type="text" name="categories" id="categories"  required  maxlength="200"></td>
                 </tr>
                 <tr>
                     <td><label for="local">Local:</label></td> 
@@ -497,7 +491,7 @@
                             <div class="col-md-12">
                                 <div class="overview-wrap">
                                     <input type="submit" class="au-btn au-btn-icon au-btn--blue" value="Envoyer">
-                                        
+                                    <input type="reset" class="au-btn au-btn-icon au-btn--blue" value="Annuler">
                                 </div>
                             </div>
                 </div></td></tr>

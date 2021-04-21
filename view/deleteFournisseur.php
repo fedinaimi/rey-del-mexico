@@ -5,7 +5,7 @@
 	
 	if (isset($_POST["id_fournisseur"])){
 		$fournisseurC->supprimerFournisseur($_POST["id_fournisseur"]);
-		header('Location:fournisseur.php');
+		header('Location:showFournisseur.php');
 	}
 
 ?>

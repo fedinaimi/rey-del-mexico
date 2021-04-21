@@ -1,3 +1,41 @@
+<?php
+    include_once '../model/carte.php';
+    include_once '../controller/carteC.php';
+
+    $error1 = "";
+    $error = "";
+    $carte = null;
+    $carteC = new carteC(); 
+    $carte1C = new carteC();
+	$listeClient= $carte1C->listeClientSansCarte();
+ 
+    //iset verifier si y a eu un evoie
+
+    if( isset($_POST['points']) 
+        && isset($_POST['client']) 
+        && isset($_POST['statut']) 
+        && isset($_POST['dateCreation'])
+         ) 
+         { 
+            
+             if( !empty($_POST['points']) &&
+             !empty($_POST['client']) &&
+             !empty($_POST['statut']) &&
+             !empty($_POST['dateCreation']))
+                {
+                $carte= new carte($_POST['points'],$_POST['client'],$_POST['statut'],$_POST['dateCreation']);
+                $carteC->ajoutCarte($carte);
+                header('Location:showCarteFidelite.php');
+                }
+           else 
+               {
+                   $error =" Missing information";
+               } 
+        }
+
+    
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,7 +48,7 @@
 	<meta name="keywords" content="au theme template">
 
 	<!-- Title Page-->
-	<title>Carte fidélité</title>
+	<title>Ajout Carte</title>
 
 	<!-- Fontfaces CSS-->
 	<link href="css/font-face.css" rel="stylesheet" media="all">
@@ -32,8 +70,7 @@
 
 	<!-- Main CSS-->
 	<link href="css/theme.css" rel="stylesheet" media="all">
-::selection {
-background#ffe400 
+
 </head>
 
 <body class="animsition">
@@ -44,7 +81,7 @@ background#ffe400
                 <div class="container-fluid">
                     <div class="header-mobile-inner">
                         <a class="logo" href="index.html">
-                            <img src="images/icon/ahmed.png" alt="CoolAdmin" />
+                            <img src="images/icon/ahmed.png" alt="reydelmexico" />
                         </a>
                         <button class="hamburger hamburger--slider" type="button">
                             <span class="hamburger-box">
@@ -59,61 +96,62 @@ background#ffe400
                     <ul class="navbar-mobile__list list-unstyled">
                         <li class="has-sub">
                             <a class="js-arrow" href="index.html">
-                                <i class="fas fa-tachometer-alt"></i>Général</a>
+                                <i class="fa fa-bar-chart"></i>Général</a>
                             
                         </li>
                         <li>
-                            <a href="client.html">
-                                <i class="fas fa-chart-bar"></i>Clients</a>
+                            <a href="showClientlient.php">
+                                <i class="fas fa-users"></i>Clients</a>
                         </li>
                         <li>
-                            <a href="commande.html">
-                                <i class="fas fa-table"></i>Commandes</a>
+                            <a href="showCommande.php">
+                                <i class="fas fa-cart-arrow-down"></i>Commandes</a>
                         </li>
                         <li>
-                            <a href="produit.html">
-                                <i class="far fa-check-square"></i>Produits</a>
+                            <a href="showProduit.php">
+                                <i class="fa fa-pie-chart"></i>Produits</a>
                         </li>
                         <li>
-                            <a href="catégorie.html">
-                                <i class="fas fa-calendar-alt"></i>Catégories</a>
+                            <a href="showCategorie.php">
+                                <i class="fa fa-lightbulb-o"></i>Catégories</a>
                         </li>
                         <li>
-                            <a href="fournisseur.html">
-                                <i class="fas fa-map-marker-alt"></i>Fournisseurs</a>
+                            <a href="showFournisseur.php">
+                                <i class="fas fa-users"></i>Fournisseurs</a>
                         </li>
                         <li>
-                            <a href="réclamation.html">
-                                <i class="fas fa-map-marker-alt"></i>Réclamations</a>
+                            <a href="showReclamation.php">
+                                <i class="fas fa-comment-alt"></i>Réclamations</a>
                         </li>
                         <li>
-                            <a href="réservation.html">
-                                <i class="fas fa-map-marker-alt"></i>Réservations</a>
+                            <a href="showReservation.php">
+                                <i class="far fa-calendar-plus"></i>Réservations</a>
                         </li>
                         <li>
-                            <a href="livraison.html">
-                                <i class="fas fa-map-marker-alt"></i>Livraisons</a>
+                            <a href="showLivraison.php">
+                                <i class="fa fa-automobile" ></i>Livraisons</a>
                         </li>
                         <li>
-                            <a href="carte_fidélité.html">
-                                <i class="fas fa-map-marker-alt"></i>Cartes Fidélité</a>
+                            <a href="showCarteFidelite.php">
+                                <i class="fa fa-address-card"></i>Cartes Fidélité</a>
                         </li>
                         <li>
-                            <a href="chef.html">
-                                <i class="fas fa-map-marker-alt"></i>Chefs</a>
+                            <a href="showChef.php">
+                                <i class="fas fa-users"></i>Chefs</a>
                         </li>
                         <li>
-                            <a href="service.html">
-                                <i class="fas fa-map-marker-alt"></i>Services de table</a>
+                            <a href="showService.php">
+                                <i class="	fas fa-utensils"></i>Services de table</a>
                         </li>
                         <li>
-                            <a href="local.html">
+                            <a href="showLocal.php">
                                 <i class="fas fa-map-marker-alt"></i>Locaux</a>
                         </li>
                         <li>
-                            <a href="evenement.html">
-                                <i class="fas fa-map-marker-alt"></i>Evénements</a>
+                            <a href="showEvenement.php">
+                                <i class="fas fa-music"></i>Evénements</a>
                         </li>
+                       
                       
                         
                     </ul>
@@ -126,7 +164,7 @@ background#ffe400
         <aside class="menu-sidebar d-none d-lg-block">
             <div class="logo">
                 <a href="#">
-                    <img src="images/icon/logo.png" alt="Cool Admin" />
+                    <img src="images/icon/logo.png" alt="reydelmexico" />
                 </a>
             </div>
             <div class="menu-sidebar__content js-scrollbar1">
@@ -139,59 +177,59 @@ background#ffe400
                             
                         </li>
                         <li>
-                            <a href="client.html">
+                            <a href="showClientlient.php">
                                 <i class="fas fa-users"></i>Clients</a>
                         </li>
                         <li>
-                            <a href="commande.html">
+                            <a href="showCommande.php">
                                 <i class="fas fa-cart-arrow-down"></i>Commandes</a>
                         </li>
                         <li>
-                            <a href="produit.html">
+                            <a href="showProduit.php">
                                 <i class="fa fa-pie-chart"></i>Produits</a>
                         </li>
                         <li>
-                            <a href="catégorie.html">
+                            <a href="showCategorie.php">
                                 <i class="fa fa-lightbulb-o"></i>Catégories</a>
                         </li>
                         <li>
-                            <a href="fournisseur.html">
+                            <a href="showFournisseur.php">
                                 <i class="fas fa-users"></i>Fournisseurs</a>
                         </li>
                         <li>
-                            <a href="réclamation.html">
+                            <a href="showReclamation.php">
                                 <i class="fas fa-comment-alt"></i>Réclamations</a>
                         </li>
                         <li>
-                            <a href="réservation.html">
+                            <a href="showReservation.php">
                                 <i class="far fa-calendar-plus"></i>Réservations</a>
                         </li>
                         <li>
-                            <a href="livraison.html">
+                            <a href="showLivraison.php">
                                 <i class="fa fa-automobile" ></i>Livraisons</a>
                         </li>
                         <li>
-                            <a href="carte_fidélité.html">
+                            <a href="showCarteFidelite.php">
                                 <i class="fa fa-address-card"></i>Cartes Fidélité</a>
                         </li>
                         <li>
-                            <a href="chef.html">
+                            <a href="showChef.php">
                                 <i class="fas fa-users"></i>Chefs</a>
                         </li>
                         <li>
-                            <a href="service.html">
+                            <a href="showService.php">
                                 <i class="	fas fa-utensils"></i>Services de table</a>
                         </li>
                         <li>
-                            <a href="local.html">
+                            <a href="showLocal.php">
                                 <i class="fas fa-map-marker-alt"></i>Locaux</a>
                         </li>
                         <li>
-                            <a href="evenement.html">
+                            <a href="showEvenement.php">
                                 <i class="fas fa-music"></i>Evénements</a>
                         </li>
                       
-                    
+                      
                       
                             </ul>
                         </li>
@@ -208,12 +246,7 @@ background#ffe400
 				<div class="section__content section__content--p30">
 					<div class="container-fluid">
 						<div class="header-wrap">
-							<form class="form-header" action="" method="POST">
-								<input class="au-input au-input--xl" type="text" name="search" placeholder="Recherche carte..." />
-								<button class="au-btn--submit" type="submit">
-									<i class="zmdi zmdi-search"></i>
-								</button>
-							</form>
+							
 							<div class="header-button">
                                 <div class="noti-wrap">
                                     <div class="noti__item js-item-menu">
@@ -235,7 +268,7 @@ background#ffe400
                                             </div>
                                             <div class="mess__item">
                                                 <div class="image img-cir img-40">
-                                                    <img src="images/icon/avatar-04.jpg" alt="Diane Myers" />
+                                                    <img src="back/images/icon/avatar-04.jpg" alt="Diane Myers" />
                                                 </div>
                                                 <div class="content">
                                                     <h6>Diane Myers</h6>
@@ -377,90 +410,95 @@ background#ffe400
 			<div class="main-content">
 				<div class="section__content section__content--p30">
 					<div class="container-fluid">
-						<div class="row">
-                            <div class="col-md-12">
-                                <div class="overview-wrap">
-                                    
-                                    <button class="au-btn au-btn-icon au-btn--blue">
-                                        <i class="zmdi zmdi-plus"></i>Ajout Carte</button>
-                                </div>
-                            </div>
-                        </div>
+						
 						<div class="row">
                             <div class="col-lg-9">
 								<br>
-                                <h2 class="title-1 m-b-25">Informations Cartes</h2>
-                                <div class="table-responsive table--no-card m-b-40">
-                                    <table class="table table-borderless table-striped table-earning">
-                                        <thead>
-                                            <tr>
-                                                <th>date</th>
-                                                <th>order ID</th>
-                                                <th>name</th>
-                                                <th class="text-right">price</th>
-                                                <th class="text-right">quantity</th>
-                                                <th class="text-right">total</th>
-                                                <th class="text-right">Supprimer</th>
-                                                <th class="text-right">Modifier</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>2018-09-29 05:57</td>
-                                                <td>100398</td>
-                                                <td>tacos al pastor</td>
-                                                <td class="text-right">11 dt</td>
-                                                <td class="text-right">1</td>
-                                                <td class="text-right">$999.00</td>
-                                                <td class="text-right"> <button class="au-btn au-btn-icon au-btn--blue">
-                                                    <i class="zmdi zmdi"></i>Supprimer</button></td>
-                                                    <td class="text-right"> <button class="au-btn au-btn-icon au-btn--blue">
-                                                        <i class="zmdi zmdi"></i>Modifier</button></td>
-                                            </tr>
-                                            <tr>
-                                                <td>2018-09-28 01:22</td>
-                                                <td>100397</td>
-                                                <td>buritos</td>
-                                                <td class="text-right">15 dt </td>
-                                                <td class="text-right">1</td>
-                                                <td class="text-right"></td>
-                                                <td class="text-right"> <button class="au-btn au-btn-icon au-btn--blue">
-                                                    <i class="zmdi zmdi"></i>Supprimer</button></td>
-                                                    <td class="text-right"> <button class="au-btn au-btn-icon au-btn--blue">
-                                                        <i class="zmdi zmdi"></i>Modifier</button></td>
-                                            </tr>
-                                            <tr>
-                                                <td>2018-09-27 02:12</td>
-                                                <td>100396</td>
-                                                <td>breakfast</td>
-                                                <td class="text-right">16.5 dt</td>
-                                                <td class="text-right">2</td>
-                                                <td class="text-right">33.00 dt</td>
-                                                <td class="text-right"> <button class="au-btn au-btn-icon au-btn--blue">
-                                                    <i class="zmdi zmdi"></i>Supprimer</button></td>
-                                                    <td class="text-right"> <button class="au-btn au-btn-icon au-btn--blue">
-                                                        <i class="zmdi zmdi"></i>Modifier</button></td>
-                                            </tr>
-                                           
-                                        </tbody>
-                                    </table>
+                                <h2 class="title-1 m-b-25">Ajouter une nouvelle carte</h2>
+                                <div id="error">
+                                    <?php echo $error; ?>
+                                        </div>
+                                <form action="" method="POST">
+                  <table  align="center">
+                 <tr> 
+                    <td> <label for="points">Points Fidélités: </label>
+                    </td> 
+                </tr>
+                 <tr>
+                    <td><input type="text" name="points" id="points" required maxlength="20"></td>
+                </tr>
+                <tr>
+                    <td><label for="client">Client: </label>  </td> 
+                </tr> 
+                <tr>
+                    <td>
+                    <select name="client" id="client" required >
+                     <option value="0" selected>Select</option>
+                        
+             <?php
+           foreach($listeClient as $listeC){
+           ?>
+           <option value ='<?PHP echo $listeC['id_client']; ?>'> <?PHP echo $listeC['nom']; echo $listeC['prenom']; ?></option>
+           <?php
+           }
+           ?>
+                     </select>  
+                </td>
+                </tr>
+                <tr>
+                    <td> <label for="statut">Statut: </label>  </td> 
+ 
+                </tr> 
+                <tr>
+                    <td>
+                     <select name="statut" id="statut" required>
+                         <option value="0" selected>Select</option>
+                         <option value="1" > Libre</option>
+                         <option value="2" > Effectué </option>
+                     </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>    <label for="dateCreation">Date de création: </label></td> 
+                </tr> 
+                <tr>
+                    <td><input type="date" name="dateCreation" id="dateCreation" required  maxlength="20"></td> 
+                </tr>
+                
+               
+                <tr></tr>
+                <tr></tr>
+                <tr>
+                    <td></td><td> <div class="row">
+                            <div class="col-md-12">
+                                <div class="overview-wrap">
+                                    <input type="submit" class="au-btn au-btn-icon au-btn--blue" value="Envoyer">
+                                    <input type="reset" class="au-btn au-btn-icon au-btn--blue" value="Annuler"> 
                                 </div>
                             </div>
+                </div></td></tr>
+                
+                  </table>
+        </form>                   
+                            
+   </div>
+</div>
 						
-						<div class="row">
+                 	<div class="row">
 								<div class="col-md-12">
 										<div class="copyright">
-												<p>&copy; Copyright.Tous droits réservés. <a href="1.html">Rey Del México</a>.</p>
+												<p>&copy; Copyright.Tous droits réservés. <a href="../view/front/1.html">Rey Del México</a>.</p>
 										</div>
 								</div>
 						</div>
+
 					</div>
 				</div>
 			</div>
-		</div>
+		
 		<!-- END PAGE CONTAINER-->
 
-	</div>
+	
 
 	<!-- Jquery JS-->
 	<script src="vendor/jquery-3.2.1.min.js"></script>
@@ -490,3 +528,9 @@ background#ffe400
 
 </html>
 <!-- end document-->
+
+
+
+
+
+

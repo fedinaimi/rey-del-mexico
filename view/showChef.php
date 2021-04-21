@@ -1,3 +1,12 @@
+<?PHP
+	include "../controller/chefC.php";
+
+	$chefC = new chefC();
+	$listeChef= $chefC->afficherChef();
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -62,55 +71,55 @@
                             
                         </li>
                         <li>
-                            <a href="client.html">
+                            <a href="showClientlient.php">
                                 <i class="fas fa-users"></i>Clients</a>
                         </li>
                         <li>
-                            <a href="commande.html">
+                            <a href="showCommande.php">
                                 <i class="fas fa-cart-arrow-down"></i>Commandes</a>
                         </li>
                         <li>
-                            <a href="produit.html">
+                            <a href="showProduit.php">
                                 <i class="fa fa-pie-chart"></i>Produits</a>
                         </li>
                         <li>
-                            <a href="catégorie.html">
+                            <a href="showCategorie.php">
                                 <i class="fa fa-lightbulb-o"></i>Catégories</a>
                         </li>
                         <li>
-                            <a href="fournisseur.html">
+                            <a href="showFournisseur.php">
                                 <i class="fas fa-users"></i>Fournisseurs</a>
                         </li>
                         <li>
-                            <a href="réclamation.html">
+                            <a href="showReclamation.php">
                                 <i class="fas fa-comment-alt"></i>Réclamations</a>
                         </li>
                         <li>
-                            <a href="réservation.html">
+                            <a href="showReservation.php">
                                 <i class="far fa-calendar-plus"></i>Réservations</a>
                         </li>
                         <li>
-                            <a href="livraison.html">
+                            <a href="showLivraison.php">
                                 <i class="fa fa-automobile" ></i>Livraisons</a>
                         </li>
                         <li>
-                            <a href="carte_fidélité.html">
+                            <a href="showCarteFidelite.php">
                                 <i class="fa fa-address-card"></i>Cartes Fidélité</a>
                         </li>
                         <li>
-                            <a href="chef.html">
+                            <a href="showChef.php">
                                 <i class="fas fa-users"></i>Chefs</a>
                         </li>
                         <li>
-                            <a href="service.html">
+                            <a href="showService.php">
                                 <i class="	fas fa-utensils"></i>Services de table</a>
                         </li>
                         <li>
-                            <a href="local.html">
+                            <a href="showLocal.php">
                                 <i class="fas fa-map-marker-alt"></i>Locaux</a>
                         </li>
                         <li>
-                            <a href="evenement.html">
+                            <a href="showEvenement.php">
                                 <i class="fas fa-music"></i>Evénements</a>
                         </li>
                       
@@ -138,56 +147,57 @@
                                 <i class="fa fa-bar-chart"></i>Général</a>
                             
                         </li>
+                       
                         <li>
-                            <a href="client.html">
+                            <a href="showClientlient.php">
                                 <i class="fas fa-users"></i>Clients</a>
                         </li>
                         <li>
-                            <a href="commande.html">
+                            <a href="showCommande.php">
                                 <i class="fas fa-cart-arrow-down"></i>Commandes</a>
                         </li>
                         <li>
-                            <a href="produit.html">
+                            <a href="showProduit.php">
                                 <i class="fa fa-pie-chart"></i>Produits</a>
                         </li>
                         <li>
-                            <a href="catégorie.html">
+                            <a href="showCategorie.php">
                                 <i class="fa fa-lightbulb-o"></i>Catégories</a>
                         </li>
                         <li>
-                            <a href="fournisseur.html">
+                            <a href="showFournisseur.php">
                                 <i class="fas fa-users"></i>Fournisseurs</a>
                         </li>
                         <li>
-                            <a href="réclamation.html">
+                            <a href="showReclamation.php">
                                 <i class="fas fa-comment-alt"></i>Réclamations</a>
                         </li>
                         <li>
-                            <a href="réservation.html">
+                            <a href="showReservation.php">
                                 <i class="far fa-calendar-plus"></i>Réservations</a>
                         </li>
                         <li>
-                            <a href="livraison.html">
+                            <a href="showLivraison.php">
                                 <i class="fa fa-automobile" ></i>Livraisons</a>
                         </li>
                         <li>
-                            <a href="carte_fidélité.html">
+                            <a href="showCarteFidelite.php">
                                 <i class="fa fa-address-card"></i>Cartes Fidélité</a>
                         </li>
                         <li>
-                            <a href="chef.html">
+                            <a href="showChef.php">
                                 <i class="fas fa-users"></i>Chefs</a>
                         </li>
                         <li>
-                            <a href="service.html">
+                            <a href="showService.php">
                                 <i class="	fas fa-utensils"></i>Services de table</a>
                         </li>
                         <li>
-                            <a href="local.html">
+                            <a href="showLocal.php">
                                 <i class="fas fa-map-marker-alt"></i>Locaux</a>
                         </li>
                         <li>
-                            <a href="evenement.html">
+                            <a href="showEvenement.php">
                                 <i class="fas fa-music"></i>Evénements</a>
                         </li>
                       
@@ -381,7 +391,7 @@
                                 <div class="overview-wrap">
                                     
                                     <button class="au-btn au-btn-icon au-btn--blue">
-                                        <i class="zmdi zmdi-plus"></i>Ajout Chef</button>
+                                    <a href="addChef.php"> <i class="zmdi zmdi-plus">Ajout Chef</i></a></button>
                                 </div>
                             </div>
                         </div>
@@ -393,53 +403,52 @@
                                     <table class="table table-borderless table-striped table-earning">
                                         <thead>
                                             <tr>
-                                                <th>date</th>
-                                                <th>order ID</th>
-                                                <th>name</th>
-                                                <th class="text-right">price</th>
-                                                <th class="text-right">quantity</th>
-                                                <th class="text-right">total</th>
-                                                <th class="text-right">Supprimer</th>
-                                                <th class="text-right">Modifier</th>
+                                            <th class="text-center">ID</th>
+                                                <th class="text-center">NOM</th>
+                                                <th class="text-center">Prénom</th>
+                                                <th class="text-center">Email</th>
+                                                <th class="text-center">Adresse</th>
+                                                <th class="text-center">Date de Naissance</th>
+                                                <th class="text-center">Catégorie</th>
+                                                <th class="text-center">Local</th>
+                                                <th class="text-center"></th>
+                                                <th class="text-right"></th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>2018-09-29 05:57</td>
-                                                <td>100398</td>
-                                                <td>tacos al pastor</td>
-                                                <td class="text-right">11 dt</td>
-                                                <td class="text-right">1</td>
-                                                <td class="text-right">$999.00</td>
-                                                <td class="text-right"> <button class="au-btn au-btn-icon au-btn--blue">
-                                                    <i class="zmdi zmdi"></i>Supprimer</button></td>
-                                                    <td class="text-right"> <button class="au-btn au-btn-icon au-btn--blue">
-                                                        <i class="zmdi zmdi"></i>Modifier</button></td>
-                                            </tr>
-                                            <tr>
-                                                <td>2018-09-28 01:22</td>
-                                                <td>100397</td>
-                                                <td>buritos</td>
-                                                <td class="text-right">15 dt </td>
-                                                <td class="text-right">1</td>
-                                                <td class="text-right"></td>
-                                                <td class="text-right"> <button class="au-btn au-btn-icon au-btn--blue">
-                                                    <i class="zmdi zmdi"></i>Supprimer</button></td>
-                                                    <td class="text-right"> <button class="au-btn au-btn-icon au-btn--blue">
-                                                        <i class="zmdi zmdi"></i>Modifier</button></td>
-                                            </tr>
-                                            <tr>
-                                                <td>2018-09-27 02:12</td>
-                                                <td>100396</td>
-                                                <td>breakfast</td>
-                                                <td class="text-right">16.5 dt</td>
-                                                <td class="text-right">2</td>
-                                                <td class="text-right">33.00 dt</td>
-                                                <td class="text-right"> <button class="au-btn au-btn-icon au-btn--blue">
-                                                    <i class="zmdi zmdi"></i>Supprimer</button></td>
-                                                    <td class="text-right"> <button class="au-btn au-btn-icon au-btn--blue">
-                                                        <i class="zmdi zmdi"></i>Modifier</button></td>
-                                            </tr>
+                                           
+                                            
+                                              
+                                        <?PHP
+foreach($listeChef as $chef){
+?>
+<tr>
+<td class="text-center"><?PHP echo $chef['id']; ?></td>
+<td class="text-center"><?PHP echo $chef['nom']; ?></td>
+<td class="text-center"><?PHP echo $chef['prenom']; ?></td>
+<td class="text-center"><?PHP echo $chef['email']; ?></td>
+<td class="text-center"><?PHP echo $chef['adresse']; ?></td>
+<td class="text-center"><?PHP echo $chef['dateNais']; ?></td>
+<td class="text-center"><?PHP echo $chef['categories']; ?></td>
+<td class="text-center"><?PHP echo $chef['local']; ?></td>
+<td class="text-center"> 
+<form method="POST" action="deleteChef.php">
+<button type="submit" name="supprimer" class="au-btn au-btn-icon au-btn--blue">
+ <i class="zmdi zmdi"></i>Supprimer</button>
+ <input type="hidden" value=<?PHP echo $chef['id']; ?> name="id">
+ </form>  
+ </td>
+
+ <td class="text-center"> 
+ <button class="au-btn au-btn-icon au-btn--blue">
+ <a href="updateChef.php?id=<?PHP echo $chef['id']; ?>">
+ <i class="zmdi zmdi"></i>Modifier</button>
+  </a>
+ </td>
+</tr>
+<?PHP
+}
+?>
                                            
                                         </tbody>
                                     </table>

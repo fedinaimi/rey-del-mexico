@@ -38,7 +38,7 @@
 			);
 			
             $fournisseurC->modifierFournisseur($fournisseur, $_GET['id']);
-            header('Location:fournisseur.php');
+            header('Location:showFournisseur.php');
         }
         else
             $error = "Missing information";
@@ -111,55 +111,55 @@
                             
                         </li>
                         <li>
-                            <a href="client.html">
+                            <a href="showClientlient.php">
                                 <i class="fas fa-users"></i>Clients</a>
                         </li>
                         <li>
-                            <a href="commande.html">
+                            <a href="showCommande.php">
                                 <i class="fas fa-cart-arrow-down"></i>Commandes</a>
                         </li>
                         <li>
-                            <a href="produit.html">
+                            <a href="showProduit.php">
                                 <i class="fa fa-pie-chart"></i>Produits</a>
                         </li>
                         <li>
-                            <a href="catégorie.html">
+                            <a href="showCategorie.php">
                                 <i class="fa fa-lightbulb-o"></i>Catégories</a>
                         </li>
                         <li>
-                            <a href="fournisseur.html">
+                            <a href="showFournisseur.php">
                                 <i class="fas fa-users"></i>Fournisseurs</a>
                         </li>
                         <li>
-                            <a href="réclamation.html">
+                            <a href="showReclamation.php">
                                 <i class="fas fa-comment-alt"></i>Réclamations</a>
                         </li>
                         <li>
-                            <a href="réservation.html">
+                            <a href="showReservation.php">
                                 <i class="far fa-calendar-plus"></i>Réservations</a>
                         </li>
                         <li>
-                            <a href="livraison.html">
+                            <a href="showLivraison.php">
                                 <i class="fa fa-automobile" ></i>Livraisons</a>
                         </li>
                         <li>
-                            <a href="carte_fidélité.html">
+                            <a href="showCarteFidelite.php">
                                 <i class="fa fa-address-card"></i>Cartes Fidélité</a>
                         </li>
                         <li>
-                            <a href="chef.html">
+                            <a href="showChef.php">
                                 <i class="fas fa-users"></i>Chefs</a>
                         </li>
                         <li>
-                            <a href="service.html">
+                            <a href="showService.php">
                                 <i class="	fas fa-utensils"></i>Services de table</a>
                         </li>
                         <li>
-                            <a href="local.html">
+                            <a href="showLocal.php">
                                 <i class="fas fa-map-marker-alt"></i>Locaux</a>
                         </li>
                         <li>
-                            <a href="evenement.html">
+                            <a href="showEvenement.php">
                                 <i class="fas fa-music"></i>Evénements</a>
                         </li>
                       
@@ -189,58 +189,57 @@
                             
                         </li>
                         <li>
-                            <a href="client.html">
+                            <a href="showClientlient.php">
                                 <i class="fas fa-users"></i>Clients</a>
                         </li>
                         <li>
-                            <a href="commande.html">
+                            <a href="showCommande.php">
                                 <i class="fas fa-cart-arrow-down"></i>Commandes</a>
                         </li>
                         <li>
-                            <a href="produit.html">
+                            <a href="showProduit.php">
                                 <i class="fa fa-pie-chart"></i>Produits</a>
                         </li>
                         <li>
-                            <a href="catégorie.html">
+                            <a href="showCategorie.php">
                                 <i class="fa fa-lightbulb-o"></i>Catégories</a>
                         </li>
                         <li>
-                            <a href="fournisseur.php">
+                            <a href="showFournisseur.php">
                                 <i class="fas fa-users"></i>Fournisseurs</a>
                         </li>
                         <li>
-                            <a href="réclamation.html">
+                            <a href="showReclamation.php">
                                 <i class="fas fa-comment-alt"></i>Réclamations</a>
                         </li>
                         <li>
-                            <a href="réservation.html">
+                            <a href="showReservation.php">
                                 <i class="far fa-calendar-plus"></i>Réservations</a>
                         </li>
                         <li>
-                            <a href="livraison.html">
+                            <a href="showLivraison.php">
                                 <i class="fa fa-automobile" ></i>Livraisons</a>
                         </li>
                         <li>
-                            <a href="carte_fidélité.html">
+                            <a href="showCarteFidelite.php">
                                 <i class="fa fa-address-card"></i>Cartes Fidélité</a>
                         </li>
                         <li>
-                            <a href="chef.html">
+                            <a href="showChef.php">
                                 <i class="fas fa-users"></i>Chefs</a>
                         </li>
                         <li>
-                            <a href="service.html">
+                            <a href="showService.php">
                                 <i class="	fas fa-utensils"></i>Services de table</a>
                         </li>
                         <li>
-                            <a href="local.html">
+                            <a href="showLocal.php">
                                 <i class="fas fa-map-marker-alt"></i>Locaux</a>
                         </li>
                         <li>
-                            <a href="evenement.html">
+                            <a href="showEvenement.php">
                                 <i class="fas fa-music"></i>Evénements</a>
                         </li>
-                      
                       
                       
                             </ul>
@@ -453,26 +452,26 @@
                     </td> 
                 </tr>
                  <tr>
-                    <td><input type="text" name="nom" id="nom"  ></td>
+                    <td><input type="text" name="nom" id="nom"  required value = "<?php echo $fournisseur->nom; ?>"></td>
                 </tr>
                 <tr>
                     <td><label for="prenom">prenom: </label>  </td> 
                 </tr> 
                 <tr>
-                    <td><input type="text" name="prenom" id="prenom" maxlength="20" ></td>
+                    <td><input type="text" name="prenom" id="prenom" maxlength="20" required value = "<?php echo $fournisseur->prenom; ?>" ></td>
                 </tr>
                 <tr>
                     <td> <label for="email">Email: </label>  </td> 
  
                 </tr> 
                 <tr>
-                    <td><input type="email" name="email" id="email" maxlength="100" ></td>
+                    <td><input type="email" name="email" id="email" maxlength="100" required pattern=".+@gmail.com|.+@esprit.tn" value = "<?php echo $fournisseur->email; ?>"></td>
                 </tr>
                 <tr>
                     <td>    <label for="tel">Téléphone: </label></td> 
                 </tr> 
                 <tr>
-                    <td><input type="tel" name="tel" id="tel" maxlength="8" ></td> 
+                    <td><input type="tel" name="tel" id="tel" maxlength="8" pattern="[0-9]{2}[0-9]{3}[0-9]{3}" required value = "<?php echo $fournisseur->tel; ?>"></td> 
                 </tr>
                 
                 <tr>
@@ -480,8 +479,8 @@
                 </tr> 
                 <tr>
                 <td>
-                     <select name="categorie" id="categorie">
-                     <option value="select" selected>Select</option>
+                     <select name="categorie" id="categorie" required>
+                     <option value="0" selected>Select</option>
                         
                <?php
                 foreach($listeCategorie as $listeC){
@@ -498,8 +497,8 @@
                 </tr> 
                 <tr>
                     <td>
-                    <select name="local" id="local">
-                     <option value="select" selected>Select</option>
+                    <select name="local" id="local" required>
+                     <option value="0" selected>Select</option>
                         
           <?php
           foreach($listeLocal as $localC){
