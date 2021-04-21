@@ -1,45 +1,46 @@
 <?php
-	  include_once "../controller/carteC.php";
-      include_once '../model/carte.php';
+   
+    include_once '../../controller/chefC.php';
 
-	
-	$error = "";
+    $error1 = "";
+    $error = "";
+    $chef = null;
+    $chefC = new chefC(); 
+    $chef1C = new chefC();
+	$listeLocal= $chef1C->listeLocal1();
+ 
+  
 
-    $carteC = new carteC(); 
-    $carte1C = new carteC();
-	$listeClient= $carte1C->listeClientSansCarte();
-    
-	
-	if (
-        isset($_POST['points']) 
-        && isset($_POST['client']) 
-        && isset($_POST['statut']) 
-        && isset($_POST['dateCreation'])
-        
-	){
-		if (
-            !empty($_POST['points']) &&
-            !empty($_POST['client']) &&
-            !empty($_POST['statut']) &&
-            !empty($_POST['dateCreation']) 
-           
-        ) {
-            $carte = new carte(
-                $_POST['points'],
-                $_POST['client'], 
-                $_POST['statut'],
-                $_POST['dateCreation']
-               
-			);
-			
-            $carteC->modifierCarte($carte, $_GET['id']);
-            header('Location:showCarteFidelite.php');
+    if( isset($_POST['nom']) 
+        && isset($_POST['prenom']) 
+        && isset($_POST['email']) 
+        && isset($_POST['adresse'])
+        && isset($_POST['dateNais'])
+         && isset($_POST["categories"])
+         && isset($_POST["local"])) 
+         { 
+            
+             if( !empty($_POST['nom']) &&
+             !empty($_POST['prenom']) &&
+             !empty($_POST['email']) &&
+             !empty($_POST['adresse']) &&
+             !empty($_POST['dateNais']) &&
+             !empty($_POST["categories"]) &&
+             !empty($_POST["local"]) )
+                {
+                $chef= new chef($_POST['nom'],$_POST['prenom'],$_POST['email'],$_POST['adresse'],$_POST['dateNais'],$_POST['categories'] ,$_POST['local'] );
+                $chefC->ajoutChef($chef);
+                header('Location:showChef.php');
+                }
+           else 
+               {
+                   $error =" Missing information";
+               } 
         }
-        else
-            $error = "Missing information";
-	}
 
+    
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -52,7 +53,7 @@
 	<meta name="keywords" content="au theme template">
 
 	<!-- Title Page-->
-	<title>Modifier Carte</title>
+	<title>Ajout Chef</title>
 
 	<!-- Fontfaces CSS-->
 	<link href="css/font-face.css" rel="stylesheet" media="all">
@@ -78,8 +79,6 @@
 </head>
 
 <body class="animsition">
-
-
     <div class="page-wrapper">
         <!-- HEADER MOBILE-->
         <header class="header-mobile d-block d-lg-none">
@@ -421,74 +420,70 @@
 						<div class="row">
                             <div class="col-lg-9">
 								<br>
-                              
-                            <div class="col-md-12">
-                                <div class="overview-wrap">
-                                    
-                                    <button class="au-btn au-btn-icon au-btn--blue">
-                                    <a href="carte_fidélité.php">  <i class="zmdi zmdi text-center"></i>Retour à la liste</button></a>
-                                </div>
-                            </div>
-                        
-                                 <hr>
-                                 <br>
-                                <h2 class="title-1 m-b-25 text-center">Modifier La Carte</h2>
+                                <h2 class="title-1 m-b-25">Ajouter un nouveau chef</h2>
                                 <div id="error">
                                     <?php echo $error; ?>
-                                </div>
-			<?php
-			if (isset($_GET['id']))
-			{
-				$carte = $carteC->recupererCarte1($_GET['id']);	
-		       ?>
-                <form action="" method="POST" >
+                                        </div>
+                                <form action="" method="POST">
                   <table  align="center">
                  <tr> 
-                    <td> <label for="points">Points: </label>
+                    <td> <label for="nom">Nom: </label>
                     </td> 
                 </tr>
                  <tr>
-                    <td><input type="text" name="points" id="points"  required value = "<?php echo $carte->points; ?>"></td>
+                    <td><input type="text" name="nom" id="nom" required maxlength="20"></td>
                 </tr>
                 <tr>
-                    <td><label for="statut">Statut: </label>  </td> 
+                    <td><label for="prenom">prenom: </label>  </td> 
                 </tr> 
                 <tr>
-                    <td>
-                        <select name="statut" id="statut">
-                            <option value="0" selected>Select</option>
-                            <option value="1">Libre</option>
-                            <option value="2">Utilisée</option>
-                        </select>
-                    </td>
+                    <td><input type="text" name="prenom" id="prenom" required maxlength="20"></td>
                 </tr>
                 <tr>
-                    <td> <label for="dateCreation">Date de la création: </label>  </td> 
+                    <td> <label for="email">Email: </label>  </td> 
  
                 </tr> 
                 <tr>
-                    <td><input type="date" name="dateCreation" id="dateCreation"  value = "<?php echo $carte->date; ?>"></td>
+                    <td><input type="email" name="email" id="email" maxlength="50" required pattern=".+@gmail.com|.+@esprit.tn"></td>
+                </tr>
+                <tr>
+                    <td>    <label for="adresse">Adresse: </label></td> 
                 </tr> 
                 <tr>
-                    <td>    <label for="client">Client: </label></td> 
+                    <td><input type="text" name="adresse" id="adresse"  required  maxlength="200"></td> 
+                </tr>
+                <tr>
+                    <td>    <label for="dateNais">Date de Naissance: </label></td> 
                 </tr> 
                 <tr>
-                <td>
-                     <select name="client" id="client" required>
-                     <option value="0" selected>Select</option>
-                        
-               <?php
-                foreach($listeClient as $listeC){
-               ?>
-                <option value ='<?PHP echo $listeC['id_client']; ?>'> <?PHP echo $listeC['nom']; ?></option>
-                   <?php
-             }
-                  ?>
-                     </select>   
-                </td> 
+                    <td><input type="date" name="dateNais" id="dateNais"  required  maxlength="200"></td> 
                 </tr>
                 
-         
+                <tr>
+                    <td>    <label for="categories">Categorie: </label></td> 
+                </tr> 
+                <tr>
+                <td><input type="text" name="categories" id="categories"  required  maxlength="200"></td>
+                </tr>
+                <tr>
+                    <td><label for="local">Local:</label></td> 
+                </tr> 
+                <tr>
+                    <td>
+                    <select name="local" id="local" required >
+                     <option value="0" selected>Select</option>
+                        
+          <?php
+          foreach($listeLocal as $localC){
+           ?>
+           <option value ='<?PHP echo $localC['id_local']; ?>'> <?PHP echo $localC['adresse']; ?></option>
+           <?php
+          }
+          ?>
+          </select>   
+                     
+                    </td> 
+                </tr>
                 <tr></tr>
                 <tr></tr>
                 <tr>
@@ -496,25 +491,21 @@
                             <div class="col-md-12">
                                 <div class="overview-wrap">
                                     <input type="submit" class="au-btn au-btn-icon au-btn--blue" value="Envoyer">
-                                    <td>
-                        <input type="reset"  class="au-btn au-btn-icon au-btn--blue" value="Annuler" >
-                    </td>   
+                                    <input type="reset" class="au-btn au-btn-icon au-btn--blue" value="Annuler">
                                 </div>
                             </div>
                 </div></td></tr>
                 
                   </table>
         </form>                   
-        <?php
-		}
-		?>                      
+                            
    </div>
 </div>
 						
                  	<div class="row">
 								<div class="col-md-12">
 										<div class="copyright">
-												<p>&copy; Copyright.Tous droits réservés. <a href="front/1.html">Rey Del México</a>.</p>
+												<p>&copy; Copyright.Tous droits réservés. <a href="../view/front/1.html">Rey Del México</a>.</p>
 										</div>
 								</div>
 						</div>
@@ -555,7 +546,6 @@
 
 </html>
 <!-- end document-->
-
 
 
 

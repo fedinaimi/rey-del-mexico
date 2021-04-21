@@ -1,12 +1,53 @@
-<?PHP
-	include "../controller/chefC.php";
+<?php
+	  include_once "../../controller/chefC.php";
+    
 
-	$chefC = new chefC();
-	$listeChef= $chefC->afficherChef();
+	
+      $error1 = "";
+      $error = "";
+      $chef = null;
+      $chefC = new chefC(); 
+      $chef1C = new chefC();
+      $listeLocal= $chef1C->listeLocal1();
+   
+    
+  
+      if( isset($_POST['nom']) 
+          && isset($_POST['prenom']) 
+          && isset($_POST['email']) 
+          && isset($_POST['adresse'])
+          && isset($_POST['dateNais'])
+           && isset($_POST["categories"])
+           && isset($_POST["local"])) 
+           { 
+              
+               if( !empty($_POST['nom']) &&
+               !empty($_POST['prenom']) &&
+               !empty($_POST['email']) &&
+               !empty($_POST['adresse']) &&
+               !empty($_POST['dateNais']) &&
+               !empty($_POST["categories"]) &&
+               !empty($_POST["local"]) ) 
+               {
+            $chef = new chef(
+                $_POST['nom'],
+                $_POST['prenom'], 
+                $_POST['email'],
+                $_POST['adresse'],
+                $_POST['dateNais'], 
+                $_POST['categories'],
+                $_POST['local']
+               
+			);
+			
+            $chefC->modifierChef($chef, $_GET['id']);
+            header('Location:showChef.php');
+        }
+        else
+            $error = "Missing information";
+	}
 
 ?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -19,7 +60,7 @@
 	<meta name="keywords" content="au theme template">
 
 	<!-- Title Page-->
-	<title>Commande</title>
+	<title>Modifier Chef</title>
 
 	<!-- Fontfaces CSS-->
 	<link href="css/font-face.css" rel="stylesheet" media="all">
@@ -45,6 +86,8 @@
 </head>
 
 <body class="animsition">
+
+
     <div class="page-wrapper">
         <!-- HEADER MOBILE-->
         <header class="header-mobile d-block d-lg-none">
@@ -52,7 +95,7 @@
                 <div class="container-fluid">
                     <div class="header-mobile-inner">
                         <a class="logo" href="index.html">
-                            <img src="images/icon/ahmed.png" alt="CoolAdmin" />
+                            <img src="images/icon/ahmed.png" alt="reydelmexico" />
                         </a>
                         <button class="hamburger hamburger--slider" type="button">
                             <span class="hamburger-box">
@@ -124,6 +167,8 @@
                         </li>
                       
                       
+                       
+                      
                         
                     </ul>
                 </div>
@@ -135,7 +180,7 @@
         <aside class="menu-sidebar d-none d-lg-block">
             <div class="logo">
                 <a href="#">
-                    <img src="images/icon/logo.png" alt="Cool Admin" />
+                    <img src="images/icon/logo.png" alt="reydelmexico" />
                 </a>
             </div>
             <div class="menu-sidebar__content js-scrollbar1">
@@ -202,6 +247,8 @@
                         </li>
                       
                       
+                      
+                      
                             </ul>
                         </li>
                     </ul>
@@ -217,12 +264,7 @@
 				<div class="section__content section__content--p30">
 					<div class="container-fluid">
 						<div class="header-wrap">
-							<form class="form-header" action="" method="POST">
-								<input class="au-input au-input--xl" type="text" name="search" placeholder="Recherche chef..." />
-								<button class="au-btn--submit" type="submit">
-									<i class="zmdi zmdi-search"></i>
-								</button>
-							</form>
+							
 							<div class="header-button">
                                 <div class="noti-wrap">
                                     <div class="noti__item js-item-menu">
@@ -244,7 +286,7 @@
                                             </div>
                                             <div class="mess__item">
                                                 <div class="image img-cir img-40">
-                                                    <img src="images/icon/avatar-04.jpg" alt="Diane Myers" />
+                                                    <img src="back/images/icon/avatar-04.jpg" alt="Diane Myers" />
                                                 </div>
                                                 <div class="content">
                                                     <h6>Diane Myers</h6>
@@ -386,89 +428,126 @@
 			<div class="main-content">
 				<div class="section__content section__content--p30">
 					<div class="container-fluid">
+						
 						<div class="row">
+                            <div class="col-lg-9">
+								<br>
+                              
                             <div class="col-md-12">
                                 <div class="overview-wrap">
                                     
                                     <button class="au-btn au-btn-icon au-btn--blue">
-                                    <a href="addChef.php"> <i class="zmdi zmdi-plus">Ajout Chef</i></a></button>
+                                    <a href="showChef.php">  <i class="zmdi zmdi text-center"></i>Retour à la liste</button></a>
                                 </div>
                             </div>
-                        </div>
-						<div class="row">
-                            <div class="col-lg-9">
-								<br>
-                                <h2 class="title-1 m-b-25">Informations Chefs</h2>
-                                <div class="table-responsive table--no-card m-b-40">
-                                    <table class="table table-borderless table-striped table-earning">
-                                        <thead>
-                                            <tr>
-                                            <th class="text-center">ID</th>
-                                                <th class="text-center">NOM</th>
-                                                <th class="text-center">Prénom</th>
-                                                <th class="text-center">Email</th>
-                                                <th class="text-center">Adresse</th>
-                                                <th class="text-center">Date de Naissance</th>
-                                                <th class="text-center">Catégorie</th>
-                                                <th class="text-center">Local</th>
-                                                <th class="text-center"></th>
-                                                <th class="text-right"></th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                           
-                                            
-                                              
-                                        <?PHP
-foreach($listeChef as $chef){
-?>
-<tr>
-<td class="text-center"><?PHP echo $chef['id']; ?></td>
-<td class="text-center"><?PHP echo $chef['nom']; ?></td>
-<td class="text-center"><?PHP echo $chef['prenom']; ?></td>
-<td class="text-center"><?PHP echo $chef['email']; ?></td>
-<td class="text-center"><?PHP echo $chef['adresse']; ?></td>
-<td class="text-center"><?PHP echo $chef['dateNais']; ?></td>
-<td class="text-center"><?PHP echo $chef['categories']; ?></td>
-<td class="text-center"><?PHP echo $chef['local']; ?></td>
-<td class="text-center"> 
-<form method="POST" action="deleteChef.php">
-<button type="submit" name="supprimer" class="au-btn au-btn-icon au-btn--blue">
- <i class="zmdi zmdi"></i>Supprimer</button>
- <input type="hidden" value=<?PHP echo $chef['id']; ?> name="id">
- </form>  
- </td>
-
- <td class="text-center"> 
- <button class="au-btn au-btn-icon au-btn--blue">
- <a href="updateChef.php?id=<?PHP echo $chef['id']; ?>">
- <i class="zmdi zmdi"></i>Modifier</button>
-  </a>
- </td>
-</tr>
-<?PHP
-}
-?>
-                                           
-                                        </tbody>
-                                    </table>
+                        
+                                 <hr>
+                                 <br>
+                                <h2 class="title-1 m-b-25 text-center">Modifier Chef</h2>
+                                <div id="error">
+                                    <?php echo $error; ?>
+                                </div>
+			<?php
+			if (isset($_GET['id']))
+			{
+				$chef = $chefC->recupererChef1($_GET['id']);	
+		       ?>
+                <form action="" method="POST" >
+                  <table  align="center">
+                
+                  <tr> 
+                    <td> <label for="nom">Nom: </label>
+                    </td> 
+                </tr>
+                 <tr>
+                    <td><input type="text" name="nom" id="nom" required maxlength="20"></td>
+                </tr>
+                <tr>
+                    <td><label for="prenom">prenom: </label>  </td> 
+                </tr> 
+                <tr>
+                    <td><input type="text" name="prenom" id="prenom" required maxlength="20"></td>
+                </tr>
+                <tr>
+                    <td> <label for="email">Email: </label>  </td> 
+ 
+                </tr> 
+                <tr>
+                    <td><input type="email" name="email" id="email" maxlength="50" required pattern=".+@gmail.com|.+@esprit.tn"></td>
+                </tr>
+                <tr>
+                    <td>    <label for="adresse">Adresse: </label></td> 
+                </tr> 
+                <tr>
+                    <td><input type="text" name="adresse" id="adresse"  required  maxlength="200"></td> 
+                </tr>
+                <tr>
+                    <td>    <label for="dateNais">Date de Naissance: </label></td> 
+                </tr> 
+                <tr>
+                    <td><input type="date" name="dateNais" id="dateNais"  required  maxlength="200"></td> 
+                </tr>
+                
+                <tr>
+                    <td>    <label for="categories">Categorie: </label></td> 
+                </tr> 
+                <tr>
+                <td><input type="text" name="categories" id="categories"  required  maxlength="200"></td>
+                </tr>
+                <tr>
+                    <td><label for="local">Local:</label></td> 
+                </tr> 
+                <tr>
+                    <td>
+                    <select name="local" id="local" required >
+                     <option value="0" selected>Select</option>
+                        
+          <?php
+          foreach($listeLocal as $localC){
+           ?>
+           <option value ='<?PHP echo $localC['id_local']; ?>'> <?PHP echo $localC['adresse']; ?></option>
+           <?php
+          }
+          ?>
+          </select>   
+                     
+                    </td> 
+                </tr>
+                <tr></tr>
+                <tr></tr>
+                <tr>
+                    <td></td><td> <div class="row">
+                            <div class="col-md-12">
+                                <div class="overview-wrap">
+                                    <input type="submit" class="au-btn au-btn-icon au-btn--blue" value="Envoyer">
+                                    <input type="reset" class="au-btn au-btn-icon au-btn--blue" value="Annuler">
                                 </div>
                             </div>
+                </div></td></tr>
+                
+                  </table>
+        </form>                   
+        <?php
+		}
+		?>                      
+   </div>
+</div>
 						
-						<div class="row">
+                 	<div class="row">
 								<div class="col-md-12">
 										<div class="copyright">
-												<p>&copy; Copyright.Tous droits réservés. <a href="1.html">Rey Del México</a>.</p>
+												<p>&copy; Copyright.Tous droits réservés. <a href="front/1.html">Rey Del México</a>.</p>
 										</div>
 								</div>
 						</div>
+
 					</div>
 				</div>
 			</div>
-		</div>
+		
 		<!-- END PAGE CONTAINER-->
 
-	</div>
+	
 
 	<!-- Jquery JS-->
 	<script src="vendor/jquery-3.2.1.min.js"></script>
@@ -498,3 +577,10 @@ foreach($listeChef as $chef){
 
 </html>
 <!-- end document-->
+
+
+
+
+
+
+

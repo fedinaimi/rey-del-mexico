@@ -1,5 +1,5 @@
 <?PHP
-	include "../controller/carteC.php";
+	include_once "../../controller/carteC.php";
 
 	$carteC=new carteC();
 	

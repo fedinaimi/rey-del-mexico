@@ -1,6 +1,6 @@
 <?php
-    include_once '../model/local.php';
-    include_once '../controller/localC.php';
+   
+    include_once '../../controller/localC.php';
 
     $error1 = "";
     $error = "";
@@ -439,20 +439,20 @@
                     <td><label for="nbTables">Nombre de Tables: </label>  </td> 
                 </tr> 
                 <tr>
-                <td><input type="text" name="nbTables" id="nbTables" required maxlength="20"></td>
+                <td><input type="number" name="nbTables" id="nbTables" required maxlength="20"></td>
                 </tr>
                 <tr>
                     <td> <label for="nbChaises">Nombre de Chaises: </label>  </td> 
  
                 </tr> 
                 <tr>
-                <td><input type="text" name="nbChaises" id="nbChaises" required maxlength="20"></td>
+                <td><input type="number" name="nbChaises" id="nbChaises" required maxlength="20"></td>
                 </tr>
                 <tr>
                     <td>    <label for="surface">Surface: </label></td> 
                 </tr> 
                 <tr>
-                    <td><input type="text" name="surface" id="surface" required  maxlength="20"></td> 
+                    <td><input type="number" name="surface" id="surface" required  maxlength="20"></td> 
                 </tr>
                 
                

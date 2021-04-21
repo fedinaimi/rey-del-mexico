@@ -1,7 +1,7 @@
 <?php
-	  include_once "../controller/fournisseurC.php";
-      include_once '../model/fournisseur.php';
-
+	  include_once "../../controller/fournisseurC.php";
+ 
+      
 	
 	$error = "";
 
@@ -436,7 +436,7 @@
                         
                                  <hr>
                                  <br>
-                                <h2 class="title-1 m-b-25 text-center">Update</h2>
+                                <h2 class="title-1 m-b-25 text-center">Update Fournisseur</h2>
                                 <div id="error">
                                     <?php echo $error; ?>
                                 </div>

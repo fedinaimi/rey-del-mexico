@@ -1,5 +1,5 @@
 <?PHP
-	include "../controller/fournisseurC.php";
+	include_once "../../controller/fournisseurC.php";
 
 	$fournisseurC=new fournisseurC();
 	

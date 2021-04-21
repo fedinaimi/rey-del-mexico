@@ -1,10 +1,8 @@
-
-
 <?PHP
-	include "../controller/carteC.php";
+	include "../../controller/localC.php";
 
-	$carteC = new carteC();
-	$listeCarte= $carteC->afficherCarte();
+	$localC = new localC();
+	$listeLocal= $localC->afficherLocal();
 
 ?>
 <!DOCTYPE html>
@@ -19,7 +17,7 @@
 	<meta name="keywords" content="au theme template">
 
 	<!-- Title Page-->
-	<title>Carte fidélité</title>
+	<title>Local</title>
 
 	<!-- Fontfaces CSS-->
 	<link href="css/font-face.css" rel="stylesheet" media="all">
@@ -42,7 +40,6 @@
 	<!-- Main CSS-->
 	<link href="css/theme.css" rel="stylesheet" media="all">
 
-
 </head>
 
 <body class="animsition">
@@ -53,7 +50,7 @@
                 <div class="container-fluid">
                     <div class="header-mobile-inner">
                         <a class="logo" href="index.html">
-                            <img src="images/icon/ahmed.png" alt="admin" />
+                            <img src="images/icon/ahmed.png" alt="CoolAdmin" />
                         </a>
                         <button class="hamburger hamburger--slider" type="button">
                             <span class="hamburger-box">
@@ -66,81 +63,6 @@
             <nav class="navbar-mobile">
                 <div class="container-fluid">
                     <ul class="navbar-mobile__list list-unstyled">
-                        <li class="has-sub">
-                            <a class="js-arrow" href="index.html">
-                                <i class="fas fa-tachometer-alt"></i>Général</a>
-                            
-                        </li>
-                        <li>
-                            <a href="showClientlient.php">
-                                <i class="fas fa-users"></i>Clients</a>
-                        </li>
-                        <li>
-                            <a href="showCommande.php">
-                                <i class="fas fa-cart-arrow-down"></i>Commandes</a>
-                        </li>
-                        <li>
-                            <a href="showProduit.php">
-                                <i class="fa fa-pie-chart"></i>Produits</a>
-                        </li>
-                        <li>
-                            <a href="showCategorie.php">
-                                <i class="fa fa-lightbulb-o"></i>Catégories</a>
-                        </li>
-                        <li>
-                            <a href="showFournisseur.php">
-                                <i class="fas fa-users"></i>Fournisseurs</a>
-                        </li>
-                        <li>
-                            <a href="showReclamation.php">
-                                <i class="fas fa-comment-alt"></i>Réclamations</a>
-                        </li>
-                        <li>
-                            <a href="showReservation.php">
-                                <i class="far fa-calendar-plus"></i>Réservations</a>
-                        </li>
-                        <li>
-                            <a href="showLivraison.php">
-                                <i class="fa fa-automobile" ></i>Livraisons</a>
-                        </li>
-                        <li>
-                            <a href="showCarteFidelite.php">
-                                <i class="fa fa-address-card"></i>Cartes Fidélité</a>
-                        </li>
-                        <li>
-                            <a href="showChef.php">
-                                <i class="fas fa-users"></i>Chefs</a>
-                        </li>
-                        <li>
-                            <a href="showService.php">
-                                <i class="	fas fa-utensils"></i>Services de table</a>
-                        </li>
-                        <li>
-                            <a href="showLocal.php">
-                                <i class="fas fa-map-marker-alt"></i>Locaux</a>
-                        </li>
-                        <li>
-                            <a href="showEvenement.php">
-                                <i class="fas fa-music"></i>Evénements</a>
-                        </li>
-                        
-                    </ul>
-                </div>
-            </nav>
-        </header>
-        <!-- END HEADER MOBILE-->
-
-        <!-- MENU SIDEBAR-->
-        <aside class="menu-sidebar d-none d-lg-block">
-            <div class="logo">
-                <a href="#">
-                    <img src="images/icon/logo.png" alt="Cool Admin" />
-                </a>
-            </div>
-            <div class="menu-sidebar__content js-scrollbar1">
-                <nav class="navbar-sidebar">
-                    <ul class="list-unstyled navbar__list">
-                        
                         <li class="has-sub">
                             <a class="js-arrow" href="index.html">
                                 <i class="fa fa-bar-chart"></i>Général</a>
@@ -199,7 +121,82 @@
                                 <i class="fas fa-music"></i>Evénements</a>
                         </li>
                       
-                    
+                        
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <!-- END HEADER MOBILE-->
+
+        <!-- MENU SIDEBAR-->
+        <aside class="menu-sidebar d-none d-lg-block">
+            <div class="logo">
+                <a href="#">
+                    <img src="images/icon/logo.png" alt="Cool Admin" />
+                </a>
+            </div>
+            <div class="menu-sidebar__content js-scrollbar1">
+                <nav class="navbar-sidebar">
+                    <ul class="list-unstyled navbar__list">
+                        
+                      
+                        <li class="has-sub">
+                            <a class="js-arrow" href="index.html">
+                                <i class="fa fa-bar-chart"></i>Général</a>
+                            
+                        </li>
+                        <li>
+                            <a href="showClientlient.php">
+                                <i class="fas fa-users"></i>Clients</a>
+                        </li>
+                        <li>
+                            <a href="showCommande.php">
+                                <i class="fas fa-cart-arrow-down"></i>Commandes</a>
+                        </li>
+                        <li>
+                            <a href="showProduit.php">
+                                <i class="fa fa-pie-chart"></i>Produits</a>
+                        </li>
+                        <li>
+                            <a href="showCategorie.php">
+                                <i class="fa fa-lightbulb-o"></i>Catégories</a>
+                        </li>
+                        <li>
+                            <a href="showFournisseur.php">
+                                <i class="fas fa-users"></i>Fournisseurs</a>
+                        </li>
+                        <li>
+                            <a href="showReclamation.php">
+                                <i class="fas fa-comment-alt"></i>Réclamations</a>
+                        </li>
+                        <li>
+                            <a href="showReservation.php">
+                                <i class="far fa-calendar-plus"></i>Réservations</a>
+                        </li>
+                        <li>
+                            <a href="showLivraison.php">
+                                <i class="fa fa-automobile" ></i>Livraisons</a>
+                        </li>
+                        <li>
+                            <a href="showCarteFidelite.php">
+                                <i class="fa fa-address-card"></i>Cartes Fidélité</a>
+                        </li>
+                        <li>
+                            <a href="showChef.php">
+                                <i class="fas fa-users"></i>Chefs</a>
+                        </li>
+                        <li>
+                            <a href="showService.php">
+                                <i class="	fas fa-utensils"></i>Services de table</a>
+                        </li>
+                        <li>
+                            <a href="showLocal.php">
+                                <i class="fas fa-map-marker-alt"></i>Locaux</a>
+                        </li>
+                        <li>
+                            <a href="showEvenement.php">
+                                <i class="fas fa-music"></i>Evénements</a>
+                        </li>
                       
                             </ul>
                         </li>
@@ -217,7 +214,7 @@
 					<div class="container-fluid">
 						<div class="header-wrap">
 							<form class="form-header" action="" method="POST">
-								<input class="au-input au-input--xl" type="text" name="search" placeholder="Recherche carte..." />
+								<input class="au-input au-input--xl" type="text" name="search" placeholder="Recherche local..." />
 								<button class="au-btn--submit" type="submit">
 									<i class="zmdi zmdi-search"></i>
 								</button>
@@ -390,49 +387,54 @@
                                 <div class="overview-wrap">
                                     
                                     <button class="au-btn au-btn-icon au-btn--blue">
-                                    <a href="addCarte.php">   <i class="zmdi zmdi-plus">Ajout Carte</i></a></button>
+                                    <a href="addLocal.php">   <i class="zmdi zmdi-plus">Ajout Local</i></a></button>
                                 </div>
                             </div>
                         </div>
 						<div class="row">
                             <div class="col-lg-9">
 								<br>
-                                <h2 class="title-1 m-b-25">Informations Cartes</h2>
+                                <h2 class="title-1 m-b-25">Informations Locaux</h2>
                                 <div class="table-responsive table--no-card m-b-40">
                                     <table class="table table-borderless table-striped table-earning">
                                         <thead>
                                             <tr>
-                                                <th class="text-center">ID Carte</th>
-                                                <th class="text-center">Points fidélités</th>
-                                                <th class="text-center">ID Client</th>
-                                                <th class="text-center">Statut</th>
-                                                <th class="text-center">Date Création</th>
-                                                <th class="text-right">Supprimer</th>
-                                                <th class="text-right">Modifier</th>
+                                            <th class="text-center">ID Local</th>
+                                                <th class="text-center">Libelle</th>
+                                                <th class="text-center">Adresse</th>
+                                                <th class="text-center">Nb de Tables</th>
+                                                <th class="text-center">Nb de Chaises</th>
+                                                <th class="text-center">Surface</th>
+                                               
+                                                <th class="text-center"></th>
+                                                <th class="text-right"></th>
                                             </tr>
                                         </thead>
                                         <tbody>
+                                           
                                         <?PHP
-foreach($listeCarte as $carte){
+foreach($listeLocal as $local){
 ?>
 <tr>
-<td class="text-center"><?PHP echo $carte['id_carte']; ?></td>
-<td class="text-center"><?PHP echo $carte['points']; ?></td>
-<td class="text-center"><?PHP echo $carte['client']; ?></td>
-<td class="text-center"><?PHP echo $carte['statut']; ?></td>
-<td class="text-center"><?PHP echo $carte['dateCreation']; ?></td>
+<td class="text-center"><?PHP echo $local['id_local']; ?></td>
+<td class="text-center"><?PHP echo $local['libelle']; ?></td>
+<td class="text-center"><?PHP echo $local['adresse']; ?></td>
+<td class="text-center"><?PHP echo $local['nbTables']; ?></td>
+<td class="text-center"><?PHP echo $local['nbChaises']; ?></td>
+<td class="text-center"><?PHP echo $local['surface']; ?></td>
+
 
 <td class="text-center"> 
-<form method="POST" action="deleteCarte.php">
+<form method="POST" action="deleteLocal.php">
 <button type="submit" name="supprimer" class="au-btn au-btn-icon au-btn--blue">
  <i class="zmdi zmdi"></i>Supprimer</button>
- <input type="hidden" value=<?PHP echo $carte['id_carte']; ?> name="id_carte">
+ <input type="hidden" value=<?PHP echo $local['id_local']; ?> name="id_local">
  </form>  
  </td>
 
  <td class="text-center"> 
  <button class="au-btn au-btn-icon au-btn--blue">
- <a href="updateCarte.php?id=<?PHP echo $carte['id_carte']; ?>">
+ <a href="updateLocal.php?id=<?PHP echo $local['id_local']; ?>">
  <i class="zmdi zmdi"></i>Modifier</button>
   </a>
  </td>

@@ -1,6 +1,6 @@
 <?php
-include "../config.php";
-require_once "../model/fournisseur.php"; 
+include "../../config.php";
+require_once "../../model/fournisseur.php"; 
 
 class fournisseurC{
 

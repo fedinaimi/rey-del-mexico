@@ -1,5 +1,6 @@
 <?PHP
-	include "../controller/localC.php";
+	
+    include_once '../../controller/localC.php';
 
 	$localC=new localC();
 	

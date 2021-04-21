@@ -1,31 +1,36 @@
 <?php
-    include_once '../model/carte.php';
-    include_once '../controller/carteC.php';
+    
+    include_once '../../controller/fournisseurC.php';
 
-    $error1 = "";
+   
     $error = "";
-    $carte = null;
-    $carteC = new carteC(); 
-    $carte1C = new carteC();
-	$listeClient= $carte1C->listeClientSansCarte();
+    $fournisseur = null;
+    $fournisseurC = new fournisseurC(); 
+    $fournisseur1C = new fournisseurC();
+	$listeCategorie= $fournisseur1C->listeCategorie();
+    $fournisseur2C = new fournisseurC();
+	$listeLocal= $fournisseur2C->listeLocal();
  
     //iset verifier si y a eu un evoie
 
-    if( isset($_POST['points']) 
-        && isset($_POST['client']) 
-        && isset($_POST['statut']) 
-        && isset($_POST['dateCreation'])
-         ) 
+    if( isset($_POST['nom']) 
+        && isset($_POST['prenom']) 
+        && isset($_POST['email']) 
+        && isset($_POST['tel'])
+         && isset($_POST["categorie"])
+         && isset($_POST["local"])) 
          { 
             
-             if( !empty($_POST['points']) &&
-             !empty($_POST['client']) &&
-             !empty($_POST['statut']) &&
-             !empty($_POST['dateCreation']))
+             if( !empty($_POST['nom']) &&
+             !empty($_POST['prenom']) &&
+             !empty($_POST['email']) &&
+             !empty($_POST['tel']) &&
+             !empty($_POST["categorie"]) &&
+             !empty($_POST["local"]) )
                 {
-                $carte= new carte($_POST['points'],$_POST['client'],$_POST['statut'],$_POST['dateCreation']);
-                $carteC->ajoutCarte($carte);
-                header('Location:showCarteFidelite.php');
+                $fournisseur= new fournisseur($_POST['nom'],$_POST['prenom'],$_POST['email'],$_POST['tel'],$_POST['categorie'] ,$_POST['local'] );
+                $fournisseurC->ajoutFournisseur($fournisseur);
+                header('Location:showFournisseur.php');
                 }
            else 
                {
@@ -48,7 +53,7 @@
 	<meta name="keywords" content="au theme template">
 
 	<!-- Title Page-->
-	<title>Ajout Carte</title>
+	<title>Fournisseur</title>
 
 	<!-- Fontfaces CSS-->
 	<link href="css/font-face.css" rel="stylesheet" media="all">
@@ -151,6 +156,7 @@
                             <a href="showEvenement.php">
                                 <i class="fas fa-music"></i>Evénements</a>
                         </li>
+                      
                        
                       
                         
@@ -414,58 +420,76 @@
 						<div class="row">
                             <div class="col-lg-9">
 								<br>
-                                <h2 class="title-1 m-b-25">Ajouter une nouvelle carte</h2>
+                                <h2 class="title-1 m-b-25">Ajouter un nouveau fournisseur</h2>
                                 <div id="error">
                                     <?php echo $error; ?>
                                         </div>
                                 <form action="" method="POST">
                   <table  align="center">
                  <tr> 
-                    <td> <label for="points">Points Fidélités: </label>
+                    <td> <label for="nom">Nom: </label>
                     </td> 
                 </tr>
                  <tr>
-                    <td><input type="text" name="points" id="points" required maxlength="20"></td>
+                    <td><input type="text" name="nom" id="nom" required maxlength="20"></td>
                 </tr>
                 <tr>
-                    <td><label for="client">Client: </label>  </td> 
+                    <td><label for="prenom">prenom: </label>  </td> 
                 </tr> 
                 <tr>
-                    <td>
-                    <select name="client" id="client" required >
-                     <option value="0" selected>Select</option>
-                        
-             <?php
-           foreach($listeClient as $listeC){
-           ?>
-           <option value ='<?PHP echo $listeC['id_client']; ?>'> <?PHP echo $listeC['nom']; echo $listeC['prenom']; ?></option>
-           <?php
-           }
-           ?>
-                     </select>  
-                </td>
+                    <td><input type="text" name="prenom" id="prenom" required maxlength="20"></td>
                 </tr>
                 <tr>
-                    <td> <label for="statut">Statut: </label>  </td> 
+                    <td> <label for="email">Email: </label>  </td> 
  
                 </tr> 
                 <tr>
-                    <td>
-                     <select name="statut" id="statut" required>
-                         <option value="0" selected>Select</option>
-                         <option value="1" > Libre</option>
-                         <option value="2" > Effectué </option>
-                     </select>
-                    </td>
+                    <td><input type="email" name="email" id="email" maxlength="50" required pattern=".+@gmail.com|.+@esprit.tn"></td>
                 </tr>
                 <tr>
-                    <td>    <label for="dateCreation">Date de création: </label></td> 
+                    <td>    <label for="tel">Téléphone: </label></td> 
                 </tr> 
                 <tr>
-                    <td><input type="date" name="dateCreation" id="dateCreation" required  maxlength="20"></td> 
+                    <td><input type="tel" name="tel" id="tel" placeholder="12-345-678"  pattern="[0-9]{2}-[0-9]{3}-[0-9]{3}"required  maxlength="20"></td> 
                 </tr>
                 
-               
+                <tr>
+                    <td>    <label for="categorie">Categorie: </label></td> 
+                </tr> 
+                <tr>
+                <td>
+                     <select name="categorie" id="categorie" required >
+                     <option value="0" selected>Select</option>
+                        
+           <?php
+           foreach($listeCategorie as $listeC){
+           ?>
+           <option value ='<?PHP echo $listeC['id_categorie']; ?>'> <?PHP echo $listeC['libelle']; ?></option>
+           <?php
+           }
+           ?>
+                     </select>   
+                </td> 
+                </tr>
+                <tr>
+                    <td><label for="local">Local:</label></td> 
+                </tr> 
+                <tr>
+                    <td>
+                    <select name="local" id="local" required >
+                     <option value="0" selected>Select</option>
+                        
+          <?php
+          foreach($listeLocal as $localC){
+           ?>
+           <option value ='<?PHP echo $localC['id_local']; ?>'> <?PHP echo $localC['adresse']; ?></option>
+           <?php
+          }
+          ?>
+          </select>   
+                     
+                    </td> 
+                </tr>
                 <tr></tr>
                 <tr></tr>
                 <tr>
@@ -473,7 +497,7 @@
                             <div class="col-md-12">
                                 <div class="overview-wrap">
                                     <input type="submit" class="au-btn au-btn-icon au-btn--blue" value="Envoyer">
-                                    <input type="reset" class="au-btn au-btn-icon au-btn--blue" value="Annuler"> 
+                                        
                                 </div>
                             </div>
                 </div></td></tr>

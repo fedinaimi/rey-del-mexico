@@ -1,47 +1,41 @@
 <?php
-	  include_once "../controller/chefC.php";
-      include_once '../model/chef.php';
+	  
+      include_once '../../controller/localC.php';
 
 	
       $error1 = "";
       $error = "";
-      $chef = null;
-      $chefC = new chefC(); 
-      $chef1C = new chefC();
-      $listeLocal= $chef1C->listeLocal1();
+      $local = null;
+      $localC = new localC(); 
+      
    
-    
+      //iset verifier si y a eu un evoie
   
-      if( isset($_POST['nom']) 
-          && isset($_POST['prenom']) 
-          && isset($_POST['email']) 
-          && isset($_POST['adresse'])
-          && isset($_POST['dateNais'])
-           && isset($_POST["categories"])
-           && isset($_POST["local"])) 
+      if( isset($_POST['adresse']) 
+          && isset($_POST['nbTables']) 
+          && isset($_POST['nbChaises']) 
+          && isset($_POST['surface'])
+          && isset($_POST['libelle'])
+           ) 
            { 
               
-               if( !empty($_POST['nom']) &&
-               !empty($_POST['prenom']) &&
-               !empty($_POST['email']) &&
-               !empty($_POST['adresse']) &&
-               !empty($_POST['dateNais']) &&
-               !empty($_POST["categories"]) &&
-               !empty($_POST["local"]) ) 
-               {
-            $chef = new chef(
-                $_POST['nom'],
-                $_POST['prenom'], 
-                $_POST['email'],
+               if( !empty($_POST['adresse']) &&
+               !empty($_POST['nbTables']) &&
+               !empty($_POST['nbChaises']) &&
+               !empty($_POST['surface']) &&
+               !empty($_POST['libelle']))
+                  { 
+            $local = new local(
                 $_POST['adresse'],
-                $_POST['dateNais'], 
-                $_POST['categories'],
-                $_POST['local']
+                $_POST['nbTables'], 
+                $_POST['nbChaises'],
+                $_POST['surface'],
+                $_POST['libelle']
                
 			);
 			
-            $chefC->modifierChef($chef, $_GET['id']);
-            header('Location:showChef.php');
+            $localC->modifierLocal($local, $_GET['id']);
+            header('Location:showLocal.php');
         }
         else
             $error = "Missing information";
@@ -60,7 +54,7 @@
 	<meta name="keywords" content="au theme template">
 
 	<!-- Title Page-->
-	<title>Modifier Chef</title>
+	<title>Modifier Local</title>
 
 	<!-- Fontfaces CSS-->
 	<link href="css/font-face.css" rel="stylesheet" media="all">
@@ -166,7 +160,6 @@
                                 <i class="fas fa-music"></i>Evénements</a>
                         </li>
                       
-                      
                        
                       
                         
@@ -192,7 +185,6 @@
                                 <i class="fa fa-bar-chart"></i>Général</a>
                             
                         </li>
-                       
                         <li>
                             <a href="showClientlient.php">
                                 <i class="fas fa-users"></i>Clients</a>
@@ -245,7 +237,6 @@
                             <a href="showEvenement.php">
                                 <i class="fas fa-music"></i>Evénements</a>
                         </li>
-                      
                       
                       
                       
@@ -437,82 +428,58 @@
                                 <div class="overview-wrap">
                                     
                                     <button class="au-btn au-btn-icon au-btn--blue">
-                                    <a href="showChef.php">  <i class="zmdi zmdi text-center"></i>Retour à la liste</button></a>
+                                    <a href="showLocal.php">  <i class="zmdi zmdi text-center"></i>Retour à la liste</button></a>
                                 </div>
                             </div>
                         
                                  <hr>
                                  <br>
-                                <h2 class="title-1 m-b-25 text-center">Modifier Chef</h2>
+                                <h2 class="title-1 m-b-25 text-center">Modifier Le Local</h2>
                                 <div id="error">
                                     <?php echo $error; ?>
                                 </div>
 			<?php
 			if (isset($_GET['id']))
 			{
-				$chef = $chefC->recupererChef1($_GET['id']);	
-		       ?>
+				$local = $localC->recupererLocal1($_GET['id']);	
+		 ?>
                 <form action="" method="POST" >
                   <table  align="center">
-                
                   <tr> 
-                    <td> <label for="nom">Nom: </label>
+                    <td> <label for="adresse">Adresse: </label>
                     </td> 
                 </tr>
                  <tr>
-                    <td><input type="text" name="nom" id="nom" required maxlength="20"></td>
+                    <td><input type="text" name="adresse" id="adresse" required value = "<?php echo $local->adresse; ?>" maxlength="20"></td>
+                </tr>
+                <tr> 
+                    <td> <label for="libelle">Libelle: </label>
+                    </td> 
+                </tr>
+                 <tr>
+                    <td><input type="text" name="libelle" id="libelle" required value = "<?php echo $local->libelle; ?>"maxlength="20"></td>
                 </tr>
                 <tr>
-                    <td><label for="prenom">prenom: </label>  </td> 
+                    <td><label for="nbTables">Nombre de Tables: </label>  </td> 
                 </tr> 
                 <tr>
-                    <td><input type="text" name="prenom" id="prenom" required maxlength="20"></td>
+                <td><input type="number" name="nbTables" id="nbTables" required value = "<?php echo $local->nbTables; ?>"maxlength="20"></td>
                 </tr>
                 <tr>
-                    <td> <label for="email">Email: </label>  </td> 
+                    <td> <label for="nbChaises">Nombre de Chaises: </label>  </td> 
  
                 </tr> 
                 <tr>
-                    <td><input type="email" name="email" id="email" maxlength="50" required pattern=".+@gmail.com|.+@esprit.tn"></td>
+                <td><input type="numer" name="nbChaises" id="nbChaises" required value = "<?php echo $local->nbChaises; ?>" maxlength="20"></td>
                 </tr>
                 <tr>
-                    <td>    <label for="adresse">Adresse: </label></td> 
+                    <td>    <label for="surface">Surface: </label></td> 
                 </tr> 
                 <tr>
-                    <td><input type="text" name="adresse" id="adresse"  required  maxlength="200"></td> 
-                </tr>
-                <tr>
-                    <td>    <label for="dateNais">Date de Naissance: </label></td> 
-                </tr> 
-                <tr>
-                    <td><input type="date" name="dateNais" id="dateNais"  required  maxlength="200"></td> 
+                    <td><input type="number" name="surface" id="surface" required value = "<?php echo $local->surface; ?>" maxlength="20"></td> 
                 </tr>
                 
-                <tr>
-                    <td>    <label for="categories">Categorie: </label></td> 
-                </tr> 
-                <tr>
-                <td><input type="text" name="categories" id="categories"  required  maxlength="200"></td>
-                </tr>
-                <tr>
-                    <td><label for="local">Local:</label></td> 
-                </tr> 
-                <tr>
-                    <td>
-                    <select name="local" id="local" required >
-                     <option value="0" selected>Select</option>
-                        
-          <?php
-          foreach($listeLocal as $localC){
-           ?>
-           <option value ='<?PHP echo $localC['id_local']; ?>'> <?PHP echo $localC['adresse']; ?></option>
-           <?php
-          }
-          ?>
-          </select>   
-                     
-                    </td> 
-                </tr>
+               
                 <tr></tr>
                 <tr></tr>
                 <tr>
@@ -520,10 +487,11 @@
                             <div class="col-md-12">
                                 <div class="overview-wrap">
                                     <input type="submit" class="au-btn au-btn-icon au-btn--blue" value="Envoyer">
-                                    <input type="reset" class="au-btn au-btn-icon au-btn--blue" value="Annuler">
+                                    <input type="reset" class="au-btn au-btn-icon au-btn--blue" value="Annuler"> 
                                 </div>
                             </div>
                 </div></td></tr>
+                
                 
                   </table>
         </form>                   

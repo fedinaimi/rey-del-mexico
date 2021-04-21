@@ -1,7 +1,6 @@
 <?php
-include "../config.php";
-require_once "../model/local.php"; 
-
+include_once "../../config.php";
+include "../../model/local.php";
 class localC{
 
     function afficherLocal()

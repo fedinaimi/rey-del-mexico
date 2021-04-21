@@ -1,5 +1,5 @@
 <?PHP
-	include "../controller/chefC.php";
+	include_once "../../controller/chefC.php";
 
 	$chefC=new chefC();
 	

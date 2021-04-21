@@ -1,4 +1,10 @@
+<?PHP
 
+	include "../../controller/localC.php";
+	$localC = new localC();
+	$listeLocal= $localC->afficherLocal();
+
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -1369,10 +1375,17 @@
                         <p><i class="fa fa-phone"></i> +216 54 125 469</p>
                         <p><i class="fa fa-phone"></i> +216 52 589 661</p>
                         <p><i class="fa fa-envelope-o"></i>rey.delmexico@gmail.com</p>
-                        <p><i class="fa fa-map-marker"></i>Hammamet Sud</p>
-                        <p><i class="fa fa-map-marker"></i>Lac 1</p>
-                        <p><i class="fa fa-map-marker"></i>Gammarth</p>
-                        <p><i class="fa fa-map-marker"></i>Djerba</p>
+                        <?PHP
+foreach($listeLocal as $local){
+?>
+ <p><i class="fa fa-map-marker"></i><?PHP echo $local['adresse']; ?></p>
+
+
+<?PHP
+}
+?>
+                       
+                      
                       </address>
                     </div>
                     <div class="mu-contact-widget">
