@@ -59,7 +59,7 @@ class carteC{
 				die('Erreur: '.$e->getMessage());
 			}
 		}
-		function modifierCarte($Utilisateur, $id_carte){
+	function modifierCarte($Utilisateur, $id_carte){
 			try {
 				$db = config::getConnexion();
 				$query = $db->prepare(

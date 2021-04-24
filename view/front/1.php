@@ -87,7 +87,7 @@
             <li><a href="commander.html">COMMANDER</a></li>  
           </ul>  
           <a href="panier.html"> <img class="right1" src="assets/img/panier.png" width="25" height="25" alt="tab img"></a> 
-          <a href="connexion.html"> <img class="rightT1" src="assets/login.jpg" width="25" height="25" alt="tab img"></a>                
+          <a href="connexion.php"> <img class="rightT1" src="assets/login.jpg" width="25" height="25" alt="tab img"></a>                
                
         </div><!--/.nav-collapse -->       
       </div>          

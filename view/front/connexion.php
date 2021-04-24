@@ -1,3 +1,37 @@
+<?PHP
+include "../../controller/userC.php";
+
+
+if( isset($_POST['login_user']) 
+&& isset($_POST['mdp_user']) 
+
+ ) 
+ { 
+     if( !empty($_POST['login_user']) &&
+     !empty($_POST['mdp_user']) )
+        {
+        $admin= new userC($_POST['login_user'],$_POST['mdp_user']);
+        if($admin->authentification($_POST['login_user'],$_POST['mdp_user']))
+        {
+          echo "ok";
+            header('Location: ../back/index.html');
+          }
+          else
+              {
+          echo '<script> alert(" Mot de passe ou ID incorrect ");
+          </script>';
+          //window.location.assign("index.html");
+              }
+          
+        }
+   else 
+       {
+        echo '<script> alert(" Entrer votre Mdp et votre Login ");
+        </script>';
+       } 
+}
+
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -107,16 +141,16 @@
               
               <div class="col-md-6">
                 <div class="mu-connexion-left">
-                  <form class="mu-connexion-form">
+                  <form action="" method="POST" class="mu-connexion-form">
                     <div class="row">
                       <div class="col-md-12">
                         <div class="form-group">                       
-                          <input type="email" class="form-control" placeholder="Votre adresse Mail">
+                          <input type="text" class="form-control" required name="login_user" id="login_user" placeholder="Votre login">
                         </div>
                     </div>
                       <div class="col-md-12">
                         <div class="form-group">
-                          <input type="password" class="form-control" id="mdp" placeholder="Votre mot de passe">              
+                          <input type="password" class="form-control" required name="mdp_user" id="mdp_user" placeholder="Votre mot de passe">              
                         </div>
                       </div>
                       
