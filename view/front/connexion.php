@@ -104,18 +104,18 @@ if( isset($_POST['login_user'])
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul id="top-menu" class="nav navbar-nav navbar-right mu-main-nav">
-            <li><a href="1.html">ACCUEIL</a></li>
-            <li><a href="1.html#mu-about-us">A PROPOS DE NOUS</a></li>                       
-            <li><a href="1.html#mu-restaurant-menu">MENU</a></li>                       
-            <li><a href="1.html#mu-reservation">RESERVATION</a></li>           
-            <li><a href="1.html#mu-gallery">GALLERY</a></li>
-            <li><a href="1.html#mu-chef">NOS CHEFS</a></li> 
-            <li><a href="1.html#mu-evenement">EVENEMENT</a></li> 
+          <li><a href="1.php">ACCUEIL</a></li>
+            <li><a href="1.php#mu-about-us">A PROPOS DE NOUS</a></li>                       
+            <li><a href="1.php#mu-restaurant-menu">MENU</a></li>                       
+            <li><a href="1.php#mu-reservation">RESERVATION</a></li>           
+            <li><a href="1.php#mu-gallery">GALLERY</a></li>
+            <li><a href="1.php#mu-chef">NOS CHEFS</a></li> 
+            <li><a href="1.php#mu-evenement">EVENEMENT</a></li> 
             <li><a href="ethos.html">ETHOS</a></li>  
-            <li><a href="commander.html">COMMANDER</a></li>  
+            <li><a href="commander.php">COMMANDER</a></li>  
           </ul>  
-          <a href="panier.html"> <img class="right" src="assets/img/panier.png" width="25" height="25" alt="tab img"></a> 
-          <a href="connexion.html"> <img class="rightT" src="assets/login.jpg" width="25" height="25" alt="tab img"></a>                
+          <a href="panier.php"> <img class="right" src="assets/img/panier.png" width="25" height="25" alt="tab img"></a> 
+          <a href="connexion.php"> <img class="rightT" src="assets/login.jpg" width="25" height="25" alt="tab img"></a>                
                
         </div><!--/.nav-collapse -->       
       </div>          
@@ -155,7 +155,7 @@ if( isset($_POST['login_user'])
                       </div>
                       
                       <button type="submit" class="mu-readmore-btn">Se connecter</button>
-                      <a href="inscription.html"> <button type="button" class="mu-readmore-btn">S'inscrire</button> </a>
+                      <a href="inscription.php"> <button type="button" class="mu-readmore-btn">S'inscrire</button> </a>
                     </div>
                   </form>    
                 </div>
