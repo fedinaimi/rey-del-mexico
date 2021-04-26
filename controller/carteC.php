@@ -59,7 +59,11 @@ class carteC{
 				die('Erreur: '.$e->getMessage());
 			}
 		}
+<<<<<<< HEAD
 	function modifierCarte($Utilisateur, $id_carte){
+=======
+		function modifierCarte($Utilisateur, $id_carte){
+>>>>>>> fc201f0 (Signed-off-by: ahmed bahrouni <ahmed.bahrouni@esprit.tn>)
 			try {
 				$db = config::getConnexion();
 				$query = $db->prepare(

@@ -1,39 +1,45 @@
+<?PHP
+	include "../../controller/reservationC.php";
 
+	$reservationC = new reservationC();
+	$listereservation= $reservationC->afficherreservation();
+   
 
+?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <!-- Required meta tags-->
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="au theme template">
-    <meta name="author" content="Hau Nguyen">
-    <meta name="keywords" content="au theme template">
+	<!-- Required meta tags-->
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="au theme template">
+	<meta name="author" content="Hau Nguyen">
+	<meta name="keywords" content="au theme template">
 
-    <!-- Title Page-->
-    <title>ReyDelMéxico | Home</title>
+	<!-- Title Page-->
+	<title>reservation</title>
 
-    <!-- Fontfaces CSS-->
-    <link href="css/font-face.css" rel="stylesheet" media="all">
-    <link href="vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
-    <link href="vendor/font-awesome-5/css/fontawesome-all.min.css" rel="stylesheet" media="all">
-    <link href="vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
+	<!-- Fontfaces CSS-->
+	<link href="css/font-face.css" rel="stylesheet" media="all">
+	<link href="vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
+	<link href="vendor/font-awesome-5/css/fontawesome-all.min.css" rel="stylesheet" media="all">
+	<link href="vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
 
-    <!-- Bootstrap CSS-->
-    <link href="vendor/bootstrap-4.1/bootstrap.min.css" rel="stylesheet" media="all">
+	<!-- Bootstrap CSS-->
+	<link href="vendor/bootstrap-4.1/bootstrap.min.css" rel="stylesheet" media="all">
 
-    <!-- Vendor CSS-->
-    <link href="vendor/animsition/animsition.min.css" rel="stylesheet" media="all">
-    <link href="vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet" media="all">
-    <link href="vendor/wow/animate.css" rel="stylesheet" media="all">
-    <link href="vendor/css-hamburgers/hamburgers.min.css" rel="stylesheet" media="all">
-    <link href="vendor/slick/slick.css" rel="stylesheet" media="all">
-    <link href="vendor/select2/select2.min.css" rel="stylesheet" media="all">
-    <link href="vendor/perfect-scrollbar/perfect-scrollbar.css" rel="stylesheet" media="all">
+	<!-- Vendor CSS-->
+	<link href="vendor/animsition/animsition.min.css" rel="stylesheet" media="all">
+	<link href="vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet" media="all">
+	<link href="vendor/wow/animate.css" rel="stylesheet" media="all">
+	<link href="vendor/css-hamburgers/hamburgers.min.css" rel="stylesheet" media="all">
+	<link href="vendor/slick/slick.css" rel="stylesheet" media="all">
+	<link href="vendor/select2/select2.min.css" rel="stylesheet" media="all">
+	<link href="vendor/perfect-scrollbar/perfect-scrollbar.css" rel="stylesheet" media="all">
 
-    <!-- Main CSS-->
-    <link href="css/theme.css" rel="stylesheet" media="all">
+	<!-- Main CSS-->
+	<link href="css/theme.css" rel="stylesheet" media="all">
 
 </head>
 
@@ -59,63 +65,64 @@
                 <div class="container-fluid">
                     <ul class="navbar-mobile__list list-unstyled">
                         <li class="has-sub">
-                            <a class="js-arrow" href="#">
-                                <i class="fas fa-tachometer-alt"></i>Général</a>
+                            <a class="js-arrow" href="index.html">
+                                <i class="fa fa-bar-chart"></i>Général</a>
                             
                         </li>
                         <li>
-                            <a href="showClientlient.php">
+                            <a href="client.html">
                                 <i class="fas fa-users"></i>Clients</a>
                         </li>
                         <li>
-                            <a href="showCommande.php">
+                            <a href="commande.html">
                                 <i class="fas fa-cart-arrow-down"></i>Commandes</a>
                         </li>
                         <li>
-                            <a href="showProduit.php">
+                            <a href="produit.html">
                                 <i class="fa fa-pie-chart"></i>Produits</a>
                         </li>
                         <li>
-                            <a href="showCategorie.php">
+                            <a href="catégorie.html">
                                 <i class="fa fa-lightbulb-o"></i>Catégories</a>
                         </li>
                         <li>
-                            <a href="showFournisseur.php">
+                            <a href="fournisseur.html">
                                 <i class="fas fa-users"></i>Fournisseurs</a>
                         </li>
                         <li>
-                            <a href="showReclamation.php">
+                            <a href="réclamation.html">
                                 <i class="fas fa-comment-alt"></i>Réclamations</a>
                         </li>
                         <li>
-                            <a href="showReservation.php">
+                            <a href="réservation.php">
                                 <i class="far fa-calendar-plus"></i>Réservations</a>
                         </li>
                         <li>
-                            <a href="showLivraison.php">
+                            <a href="livraison.html">
                                 <i class="fa fa-automobile" ></i>Livraisons</a>
                         </li>
                         <li>
-                            <a href="showCarteFidelite.php">
+                            <a href="carte_fidélité.html">
                                 <i class="fa fa-address-card"></i>Cartes Fidélité</a>
                         </li>
                         <li>
-                            <a href="showChef.php">
+                            <a href="chef.html">
                                 <i class="fas fa-users"></i>Chefs</a>
                         </li>
                         <li>
-                            <a href="showService.php">
+                            <a href="service.html">
                                 <i class="	fas fa-utensils"></i>Services de table</a>
                         </li>
                         <li>
-                            <a href="showLocal.php">
+                            <a href="local.html">
                                 <i class="fas fa-map-marker-alt"></i>Locaux</a>
                         </li>
                         <li>
-                            <a href="showEvenement.php">
+                            <a href="evenement.php">
                                 <i class="fas fa-music"></i>Evénements</a>
                         </li>
-                           
+                      
+                       
                       
                         
                     </ul>
@@ -140,59 +147,61 @@
                                 <i class="fa fa-bar-chart"></i>Général</a>
                             
                         </li>
-                       
                         <li>
-                            <a href="showClientlient.php">
+                            <a href="client.html">
                                 <i class="fas fa-users"></i>Clients</a>
                         </li>
                         <li>
-                            <a href="showCommande.php">
+                            <a href="commande.html">
                                 <i class="fas fa-cart-arrow-down"></i>Commandes</a>
                         </li>
                         <li>
-                            <a href="showProduit.php">
+                            <a href="produit.html">
                                 <i class="fa fa-pie-chart"></i>Produits</a>
                         </li>
                         <li>
-                            <a href="showCategorie.php">
+                            <a href="catégorie.html">
                                 <i class="fa fa-lightbulb-o"></i>Catégories</a>
                         </li>
                         <li>
-                            <a href="showFournisseur.php">
+                            <a href="fournisseur.html">
                                 <i class="fas fa-users"></i>Fournisseurs</a>
                         </li>
                         <li>
-                            <a href="showReclamation.php">
+                            <a href="réclamation.html">
                                 <i class="fas fa-comment-alt"></i>Réclamations</a>
                         </li>
                         <li>
-                            <a href="showReservation.php">
+                            <a href="réservation.php">
                                 <i class="far fa-calendar-plus"></i>Réservations</a>
                         </li>
                         <li>
-                            <a href="showLivraison.php">
+                            <a href="livraison.html">
                                 <i class="fa fa-automobile" ></i>Livraisons</a>
                         </li>
                         <li>
-                            <a href="showCarteFidelite.php">
+                            <a href="carte_fidélité.html">
                                 <i class="fa fa-address-card"></i>Cartes Fidélité</a>
                         </li>
                         <li>
-                            <a href="showChef.php">
+                            <a href="chef.html">
                                 <i class="fas fa-users"></i>Chefs</a>
                         </li>
                         <li>
-                            <a href="showService.php">
+                            <a href="service.html">
                                 <i class="	fas fa-utensils"></i>Services de table</a>
                         </li>
                         <li>
-                            <a href="showLocal.php">
+                            <a href="local.html">
                                 <i class="fas fa-map-marker-alt"></i>Locaux</a>
                         </li>
                         <li>
-                            <a href="showEvenement.php">
+                            <a href="evenement.php">
                                 <i class="fas fa-music"></i>Evénements</a>
                         </li>
+                      
+                      
+                      
                             </ul>
                         </li>
                     </ul>
@@ -201,15 +210,20 @@
         </aside>
         <!-- END MENU SIDEBAR-->
 
-        <!-- PAGE CONTAINER-->
-        <div class="page-container">
-            <!-- HEADER DESKTOP-->
-            <header class="header-desktop">
-                <div class="section__content section__content--p30">
-                    <div class="container-fluid">
-                        <div class="header-wrap">
-                            
-                            <div class="header-button">
+		<!-- PAGE CONTAINER-->
+		<div class="page-container">
+			<!-- HEADER DESKTOP-->
+			<header class="header-desktop">
+				<div class="section__content section__content--p30">
+					<div class="container-fluid">
+						<div class="header-wrap">
+							<form class="form-header" action="" method="POST">
+								<input class="au-input au-input--xl" type="text" name="search" placeholder="Recherche reservation..." />
+								<button class="au-btn--submit" type="submit">
+									<i class="zmdi zmdi-search"></i>
+								</button>
+							</form>
+							<div class="header-button">
                                 <div class="noti-wrap">
                                     <div class="noti__item js-item-menu">
                                         <i class="zmdi zmdi-comment-more"></i>
@@ -356,11 +370,7 @@
                                                 
                                             </div>
                                             <div class="account-dropdown__footer">
-<<<<<<< HEAD
-                                                <a href="logOut.php"> 
-=======
                                                 <a href="1.html"> <!--page officielle0-->
->>>>>>> fc201f0 (Signed-off-by: ahmed bahrouni <ahmed.bahrouni@esprit.tn>)
                                                     <i class="zmdi zmdi-power"></i>Se déconnecter</a>
                                             </div>
                                         </div>
@@ -372,132 +382,113 @@
                 </div>
             </header>
             <!-- HEADER DESKTOP-->
-
-            <!-- MAIN CONTENT-->
-            <div class="main-content">
-                <div class="section__content section__content--p30">
-                    <div class="container-fluid">
-                        <div class="row">
+			<!-- MAIN CONTENT-->
+			<div class="main-content">
+				<div class="section__content section__content--p30">
+					<div class="container-fluid">
+						<div class="row">
                             <div class="col-md-12">
                                 <div class="overview-wrap">
-                                    <h2 class="title-1">Statistiques</h2>
                                     
+                                    <button class="au-btn au-btn-icon au-btn--blue">
+                                        <a href="ajouterreservation.php">  <i class="zmdi zmdi-plus text-center"></i>Ajouter reservation</button></a>
                                 </div>
                             </div>
                         </div>
-                        <div class="row m-t-25">
-                            <div class="col-sm-6 col-lg-3">
-                                <div class="overview-item overview-item--c1">
-                                    <div class="overview__inner">
-                                        <div class="overview-box clearfix">
-                                            <div class="icon">
-                                                <i class="zmdi zmdi-account-o"></i>
-                                            </div>
-                                            <div class="text">
-                                                <h2>N</h2>
-                                                <span>Clients</span>
-                                            </div>
-                                        </div>
-                                        <div class="overview-chart">
-                                            <canvas id="widgetChart1"></canvas>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-6 col-lg-3">
-                                <div class="overview-item overview-item--c2">
-                                    <div class="overview__inner">
-                                        <div class="overview-box clearfix">
-                                            <div class="icon">
-                                                <i class="zmdi zmdi-shopping-cart"></i>
-                                            </div>
-                                            <div class="text">
-                                                <h2>N</h2>
-                                                <span>Produits</span>
-                                            </div>
-                                        </div>
-                                        <div class="overview-chart">
-                                            <canvas id="widgetChart2"></canvas>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-6 col-lg-3">
-                                <div class="overview-item overview-item--c3">
-                                    <div class="overview__inner">
-                                        <div class="overview-box clearfix">
-                                            <div class="icon">
-                                                <i class="zmdi zmdi-calendar-note"></i>
-                                            </div>
-                                            <div class="text">
-                                                <h2>N</h2>
-                                                <span>Cette semaine</span>
-                                            </div>
-                                        </div>
-                                        <div class="overview-chart">
-                                            <canvas id="widgetChart3"></canvas>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-6 col-lg-3">
-                                <div class="overview-item overview-item--c4">
-                                    <div class="overview__inner">
-                                        <div class="overview-box clearfix">
-                                            <div class="icon">
-                                                <i class="zmdi zmdi-money"></i>
-                                            </div>
-                                            <div class="text">
-                                                <h2>$N</h2> <!-- stat athom ba3ed -->
-                                                <span>total des gains</span>
-                                            </div>
-                                        </div>
-                                        <div class="overview-chart">
-                                            <canvas id="widgetChart4"></canvas>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="copyright">
-                                    <p>&copy; Copyright.Tous droits réservés. <a href="1.html">rey del mexico</a>.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- END MAIN CONTENT-->
-            <!-- END PAGE CONTAINER-->
-        </div>
+						<div class="row">
+                            <div class="col-lg-9">
+								<br>
+                                <h2 class="title-1 m-b-25">Informations reservations</h2>
+                                <div class="table-responsive table--no-card m-b-40">
+                                    <table class="table table-borderless table-striped table-earning">
+                                        <thead>
+                                            <tr>
+                                                <th class="text-center">ID</th>
+                                                <th class="text-center">date</th>
+                                                <th class="text-center">nb_perso</th>
+                                                <th class="text-center">message</th>
+                                                <th class="text-center">statut</th>
+                                                <th class="text-center">client</th>
+                                                <th class="text-center">Local</th>
+                                                <th class="text-center"></th>
+                                                <th class="text-right"></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                           
+                                        <?PHP
+foreach($listereservation as $reservation){
+?>
+<tr>
+<td class="text-center"><?PHP echo $reservation['id_reservation']; ?></td>
+<td class="text-center"><?PHP echo $reservation['date']; ?></td>
+<td class="text-center"><?PHP echo $reservation['nb_perso']; ?></td>
+<td class="text-center"><?PHP echo $reservation['message']; ?></td>
+<td class="text-center"><?PHP echo $reservation['statut']; ?></td>
+<td class="text-center"><?PHP echo $reservation['client']; ?></td>
+<td class="text-center"><?PHP echo $reservation['local']; ?></td>
+<td class="text-center"> 
+<form method="POST" action="effacerreservation.php">
+<button type="submit" name="supprimer" class="au-btn au-btn-icon au-btn--blue">
+ <i class="zmdi zmdi"></i>Supprimer</button>
+ <input type="hidden" value=<?PHP echo $reservation['id_reservation']; ?> name="id_reservation">
+ </form>  
+ </td>
 
-    </div>
+ <td class="text-center"> 
+ <button class="au-btn au-btn-icon au-btn--blue">
+ <a href="modifierreservation.php?id=<?PHP echo $reservation['id_reservation']; ?>">
+ <i class="zmdi zmdi"></i>Modifier</button>
+  </a>
+ </td>
+</tr>
+<?PHP
+}
+?>
+                                       
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+						
+						<div class="row">
+								<div class="col-md-12">
+										<div class="copyright">
+												<p>&copy; Copyright.Tous droits réservés. <a href="1.html">Rey Del México</a>.</p>
+										</div>
+								</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- END PAGE CONTAINER-->
 
-    <!-- Jquery JS-->
-    <script src="vendor/jquery-3.2.1.min.js"></script>
-    <!-- Bootstrap JS-->
-    <script src="vendor/bootstrap-4.1/popper.min.js"></script>
-    <script src="vendor/bootstrap-4.1/bootstrap.min.js"></script>
-    <!-- Vendor JS       -->
-    <script src="vendor/slick/slick.min.js">
-    </script>
-    <script src="vendor/wow/wow.min.js"></script>
-    <script src="vendor/animsition/animsition.min.js"></script>
-    <script src="vendor/bootstrap-progressbar/bootstrap-progressbar.min.js">
-    </script>
-    <script src="vendor/counter-up/jquery.waypoints.min.js"></script>
-    <script src="vendor/counter-up/jquery.counterup.min.js">
-    </script>
-    <script src="vendor/circle-progress/circle-progress.min.js"></script>
-    <script src="vendor/perfect-scrollbar/perfect-scrollbar.js"></script>
-    <script src="vendor/chartjs/Chart.bundle.min.js"></script>
-    <script src="vendor/select2/select2.min.js">
-    </script>
+	</div>
 
-    <!-- Main JS-->
-    <script src="js/main.js"></script>
+	<!-- Jquery JS-->
+	<script src="vendor/jquery-3.2.1.min.js"></script>
+	<!-- Bootstrap JS-->
+	<script src="vendor/bootstrap-4.1/popper.min.js"></script>
+	<script src="vendor/bootstrap-4.1/bootstrap.min.js"></script>
+	<!-- Vendor JS       -->
+	<script src="vendor/slick/slick.min.js">
+	</script>
+	<script src="vendor/wow/wow.min.js"></script>
+	<script src="vendor/animsition/animsition.min.js"></script>
+	<script src="vendor/bootstrap-progressbar/bootstrap-progressbar.min.js">
+	</script>
+	<script src="vendor/counter-up/jquery.waypoints.min.js"></script>
+	<script src="vendor/counter-up/jquery.counterup.min.js">
+	</script>
+	<script src="vendor/circle-progress/circle-progress.min.js"></script>
+	<script src="vendor/perfect-scrollbar/perfect-scrollbar.js"></script>
+	<script src="vendor/chartjs/Chart.bundle.min.js"></script>
+	<script src="vendor/select2/select2.min.js">
+	</script>
+
+	<!-- Main JS-->
+	<script src="js/main.js"></script>
 
 </body>
 
