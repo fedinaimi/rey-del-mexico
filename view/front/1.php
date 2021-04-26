@@ -1,4 +1,5 @@
 <?PHP
+<<<<<<< HEAD
 
 	include "../../controller/localC.php";
   include "../../controller/fournisseurC.php";
@@ -7,6 +8,47 @@
   $fournisseurC = new fournisseurC();
 	$listeFournisseur= $fournisseurC->afficherFournisseur();
 
+=======
+  include "../../controller/evenementC.php";
+  include "../../controller/localC.php";
+	include_once '../../controller/reservationC.php';
+  $localC = new localC();
+	$listeLocal= $localC->afficherLocal();
+  $evenementC = new evenementC();
+  $listeevenement= $evenementC->afficherevenement();
+
+  $error = "";
+  $reservation = null;
+  $reservationC = new  reservationC(); 
+  $reservation1C = new reservationC();
+$listeclient= $reservation1C->listeclient();
+  $reservation2C = new reservationC();
+$listeLocal= $reservation2C->listeLocal();
+  if(
+       isset($_POST['date']) 
+      && isset($_POST['nb_perso']) 
+      && isset($_POST['message'])
+      
+       && isset($_POST['statut'])   
+       && isset($_POST['client'])
+       && isset($_POST['local'])) 
+       {
+           if(
+           !empty($_POST['date']) &&
+           !empty($_POST['nb_perso']) &&
+           !empty($_POST['message']) &&
+           !empty($_POST['statut']) &&
+           !empty($_POST['client'])&&
+           !empty($_POST['local']))
+              {
+              $reservation= new reservation($_POST['date'],$_POST['nb_perso'],$_POST['message'] ,$_POST['statut'], $_POST['client'],$_POST['local']);
+              $reservationC->ajouterreservation($reservation);
+              
+          }
+         else 
+              $error =" Missing information";
+      }
+>>>>>>> c90154e1317200ec7147486c5e4ca695399ba806
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -79,6 +121,7 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul id="top-menu" class="nav navbar-nav navbar-right mu-main-nav">
+<<<<<<< HEAD
           <li><a href="1.php">ACCUEIL</a></li>
             <li><a href="1.php#mu-about-us">A PROPOS DE NOUS</a></li>                       
             <li><a href="1.php#mu-restaurant-menu">MENU</a></li>                       
@@ -91,6 +134,20 @@
           </ul>  
           <a href="panier.php"> <img class="right1" src="assets/img/panier.png" width="25" height="25" alt="tab img"></a> 
           <a href="connexion.php"> <img class="rightT1" src="assets/login.jpg" width="25" height="25" alt="tab img"></a>                
+=======
+            <li><a href="1.html">ACCUEIL</a></li>
+            <li><a href="#mu-about-us">A PROPOS DE NOUS</a></li>                       
+            <li><a href="#mu-restaurant-menu">MENU</a></li>                       
+            <li><a href="#mu-reservation">RESERVATION</a></li>           
+            <li><a href="#mu-gallery">GALLERY</a></li>
+            <li><a href="#mu-chef">NOS CHEFS</a></li> 
+            <li><a href="#mu-evenement">EVENEMENT</a></li> 
+            <li><a href="ethos.html">ETHOS</a></li>  
+            <li><a href="commander.html">COMMANDER</a></li>  
+          </ul>  
+          <a href="panier.html"> <img class="right1" src="assets/img/panier.png" width="25" height="25" alt="tab img"></a> 
+          <a href="connexion.html"> <img class="rightT1" src="assets/login.jpg" width="25" height="25" alt="tab img"></a>                
+>>>>>>> fc201f0 (Signed-off-by: ahmed bahrouni <ahmed.bahrouni@esprit.tn>)
                
         </div><!--/.nav-collapse -->       
       </div>          
@@ -824,53 +881,78 @@ foreach($listeFournisseur as $fournisseur){
 
               <div class="col-md-6">
                 <div class="mu-reservation-left">
-                  <form class="mu-reservation-form">
-                    <div class="row">
-                      <div class="col-md-12">
-                        <div class="form-group">                       
-                          <input type="text" class="form-control" placeholder="Nom et Prénom">
-                        </div>
-                      </div>
-                      <div class="col-md-12">
-                        <div class="form-group">                        
-                          <input type="email" class="form-control" placeholder="Email">
-                        </div>
-                      </div>
-                      <div class="col-md-12">
-                        <div class="form-group">                        
-                          <input type="text" class="form-control" placeholder="Numéro téléphone">
-                        </div>
-                      </div>
-                      <div class="col-md-12">
-                        <div class="form-group">
-                          <select class="form-control">
-                            <option value="0">Combien de?</option>
-                            <option value="1 Person">1 Personne</option>
-                            <option value="2 People">2 Personnes</option>
-                            <option value="3 People">3 Personnes</option>
-                            <option value="4 People">4 Personnes</option>
-                            <option value="5 People">5 Personnes</option>
-                            <option value="6 People">6 Personnes</option>
-                            <option value="7 People">7 Personnes</option>
-                            <option value="8 People">8 Personnes</option>
-                            <option value="9 People">9 Personnes</option>
-                            <option value="10 People">10 Personnes</option>
-                          </select>                      
-                        </div>
-                      </div>
-                      <div class="col-md-12">
-                        <div class="form-group">
-                          <input type="text" class="form-control" id="datepicker" placeholder="Date">              
-                        </div>
-                      </div>
-                      <div class="col-md-12">
-                        <div class="form-group">
-                          <textarea class="form-control" cols="30" rows="10" placeholder="Votre message"></textarea>
-                        </div>
-                      </div>
-                      <button type="submit" class="mu-readmore-btn">Faites une réservation</button>
-                    </div>
-                  </form>    
+                <form action="" method="POST">
+                  <table  align="center">
+                  <div class="mu-reservation-content">
+               
+                <tr>
+                    <td><input type="date" name="date" id="date" maxlength="20" placeholder="Date"></td>
+                </tr>
+                 <br>
+                 
+                </div>
+                <div class="mu-reservation-left">
+               
+                <tr>
+                    <td><input type="text" name="nb_perso" id="nb_perso" maxlength="20" placeholder="Votre nombre"></td> 
+                </tr>
+                </div>
+                
+                <tr>
+                    <td> <textarea name="message" id="message" cols="30" rows="10" placeholder="message" ></textarea> </td> 
+                </tr>
+              
+                <tr>
+                    <td><input type="text" name="statut" id="statut" maxlength="20" placeholder="statut"></td> 
+                </tr>
+                 
+                
+                <tr>
+                <td>
+                     <select name="client" id="client">
+                     <option value="select" selected>client</option>
+                        
+               <?php
+                foreach($listeclient as $listeC){
+               ?>
+                <option value ='<?PHP echo $listeC['id_client']; ?>'> <?PHP echo $listeC['nom_client']; ?></option>
+                   <?php
+             }
+                  ?>
+                     </select>   
+                </td> 
+                </tr>
+                
+                <tr>
+                    <td>
+                    <select name="local" id="local">
+                     <option value="select" selected>Local</option>
+                        
+          <?php
+          foreach($listeLocal as $localC){
+           ?>
+           <option value ='<?PHP echo $localC['id_local']; ?>'> <?PHP echo $localC['adresse']; ?></option>
+           <?php
+          }
+          ?>
+          </select>   
+                     
+                    </td> 
+                </tr>
+               
+                <div class="row">
+                            <div class="col-md-12">
+                                <div class="overview-wrap">
+                                <tr> <td>    
+                                <input type="submit" class="au-btn au-btn-icon au-btn--blue" value="réserver une table">
+                                </tr></td>      
+                                </div>
+                            </div>
+               
+                          </div>
+                  </table>
+        </form>                   
+                            
                 </div>
               </div>
 
@@ -1303,30 +1385,47 @@ foreach($listeFournisseur as $fournisseur){
           <div class="mu-title">
             <span class="mu-subtitle">Découvrir</span>
             <br>
-            <h2>Nos événements</h2>
+            <h2>Nos Prochaines Evenements</h2>
             <br>
           </div>
 
           <div class="row">
-            <div class="col-md-6">
-             <div class="mu-about-us-left">     
-              <img src="assets/fonds.png" alt="img" width="600" height="443">           
-              </div>
-            </div>
-            <div class="col-md-6">
-              <h1 class="mu-slider-title text-center">Un événement destiné à collecter des fonds</h1>
-              
-               <div class="mu-about-us-right text-center">
-                 <br>
-                 <br>
-               <p>Chez Rey Del México, <br>Le but principal de cet événement <br>
-                est d'aider les enfants atteints du cancer.<br>
-                 Pour ce faire, nous faisons appel à votre générosité.
-                 <br> Soyez le bienvenue le 17/08/2021.</p> <h2><span>-Mexicaine californienne.</span></h2>                               
-                
-              </div>
-            </div>
-          </div>
+            
+                  
+            <table class="table table-borderless table-striped table-earning">
+                                        <thead>
+                                            <tr>
+                                                
+                                                <th class="text-center">libelle</th>
+                                                <th class="text-center">date</th>
+                                                <th class="text-center">durée d'evenement</th>
+
+                                                <th class="text-center">description</th>
+                                                <th class="text-center">local</th>
+                                                
+                                                <th class="text-center"></th>
+                                                <th class="text-right"></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+            <?PHP
+            foreach($listeevenement as $evenement){
+?>
+<tr>
+
+<td class="text-center"><?PHP echo $evenement['libelle']; ?></td>
+<td class="text-center"><?PHP echo $evenement['date']; ?></td>
+<td class="text-center"><?PHP echo $evenement['duree'],' ','jours'; ?></td>
+<td class="text-center"><?PHP echo $evenement['description']; ?></td>
+<td class="text-center"><?PHP echo $evenement['local']; ?></td>
+<td class="text-center"> 
+</tr>
+<?PHP
+}
+?>
+         </tbody>
+        </table>  
+        </div>
         </div>
       </div>
     </div>

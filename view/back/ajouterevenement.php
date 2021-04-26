@@ -1,8 +1,46 @@
+<?php
+  
+    include_once '../../controller/evenementC.php';
+
+    $error = "";
+    $evenement = null;
+    
+    $evenementC = new evenementC(); 
+    
+	$evenement2C = new evenementC();
+	$listeLocal= $evenement2C->listeLocal();
+    if(
+         isset($_POST['libelle']) 
+        && isset($_POST['date']) 
+        && isset($_POST['duree']) 
+        && isset($_POST['description'])
+        
+         && isset($_POST['local'])) 
+         {
+             if( 
+             !empty($_POST['libelle']) &&
+             !empty($_POST['date']) &&
+             !empty($_POST['duree']) &&
+             !empty($_POST['description']) &&
+             !empty($_POST['local']) )
+                {
+                $evenement= new evenement($_POST['libelle'],$_POST['date'],$_POST['duree'],$_POST['description'] ,$_POST['local'] );
+                $evenementC->ajouterevenement($evenement);
+                header('Location:showEvenement.php');
+            }
+           else 
+                $error =" Missing information";
+        }
+
+    
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-	<!-- Required meta tags-->
+
+    <!-- Required meta tags-->
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<meta name="description" content="au theme template">
@@ -10,7 +48,7 @@
 	<meta name="keywords" content="au theme template">
 
 	<!-- Title Page-->
-	<title>Evénement</title>
+	<title>evenement</title>
 
 	<!-- Fontfaces CSS-->
 	<link href="css/font-face.css" rel="stylesheet" media="all">
@@ -43,7 +81,7 @@
                 <div class="container-fluid">
                     <div class="header-mobile-inner">
                         <a class="logo" href="index.html">
-                            <img src="images/icon/ahmed.png" alt="CoolAdmin" />
+                            <img src="images/icon/ahmed.png" alt="reydelmexico" />
                         </a>
                         <button class="hamburger hamburger--slider" type="button">
                             <span class="hamburger-box">
@@ -86,7 +124,7 @@
                                 <i class="fas fa-comment-alt"></i>Réclamations</a>
                         </li>
                         <li>
-                            <a href="réservation.html">
+                            <a href="showReservation.php">
                                 <i class="far fa-calendar-plus"></i>Réservations</a>
                         </li>
                         <li>
@@ -110,11 +148,11 @@
                                 <i class="fas fa-map-marker-alt"></i>Locaux</a>
                         </li>
                         <li>
-                            <a href="evenement.html">
+                            <a href="showEvenement.php">
                                 <i class="fas fa-music"></i>Evénements</a>
                         </li>
                       
-                     
+                       
                       
                         
                     </ul>
@@ -127,7 +165,7 @@
         <aside class="menu-sidebar d-none d-lg-block">
             <div class="logo">
                 <a href="#">
-                    <img src="images/icon/logo.png" alt="Cool Admin" />
+                    <img src="images/icon/logo.png" alt="reydelmexico" />
                 </a>
             </div>
             <div class="menu-sidebar__content js-scrollbar1">
@@ -156,7 +194,7 @@
                                 <i class="fa fa-lightbulb-o"></i>Catégories</a>
                         </li>
                         <li>
-                            <a href="fournisseur.html">
+                            <a href="fournisseur.php">
                                 <i class="fas fa-users"></i>Fournisseurs</a>
                         </li>
                         <li>
@@ -164,7 +202,7 @@
                                 <i class="fas fa-comment-alt"></i>Réclamations</a>
                         </li>
                         <li>
-                            <a href="réservation.html">
+                            <a href="showReservation.php">
                                 <i class="far fa-calendar-plus"></i>Réservations</a>
                         </li>
                         <li>
@@ -188,11 +226,11 @@
                                 <i class="fas fa-map-marker-alt"></i>Locaux</a>
                         </li>
                         <li>
-                            <a href="evenement.html">
+                            <a href="showEvenement.php">
                                 <i class="fas fa-music"></i>Evénements</a>
                         </li>
                       
-                       
+                      
                       
                             </ul>
                         </li>
@@ -209,12 +247,7 @@
 				<div class="section__content section__content--p30">
 					<div class="container-fluid">
 						<div class="header-wrap">
-							<form class="form-header" action="" method="POST">
-								<input class="au-input au-input--xl" type="text" name="search" placeholder="Recherche événement..." />
-								<button class="au-btn--submit" type="submit">
-									<i class="zmdi zmdi-search"></i>
-								</button>
-							</form>
+							
 							<div class="header-button">
                                 <div class="noti-wrap">
                                     <div class="noti__item js-item-menu">
@@ -236,7 +269,7 @@
                                             </div>
                                             <div class="mess__item">
                                                 <div class="image img-cir img-40">
-                                                    <img src="images/icon/avatar-04.jpg" alt="Diane Myers" />
+                                                    <img src="back/images/icon/avatar-04.jpg" alt="Diane Myers" />
                                                 </div>
                                                 <div class="content">
                                                     <h6>Diane Myers</h6>
@@ -378,90 +411,94 @@
 			<div class="main-content">
 				<div class="section__content section__content--p30">
 					<div class="container-fluid">
-						<div class="row">
-                            <div class="col-md-12">
-                                <div class="overview-wrap">
-                                    
-                                    <button class="au-btn au-btn-icon au-btn--blue">
-                                        <i class="zmdi zmdi-plus"></i>Ajout événement</button>
-                                </div>
-                            </div>
-                        </div>
+						
 						<div class="row">
                             <div class="col-lg-9">
 								<br>
-                                <h2 class="title-1 m-b-25">Informations Evénements</h2>
-                                <div class="table-responsive table--no-card m-b-40">
-                                    <table class="table table-borderless table-striped table-earning">
-                                        <thead>
-                                            <tr>
-                                                <th>date</th>
-                                                <th>order ID</th>
-                                                <th>name</th>
-                                                <th class="text-right">price</th>
-                                                <th class="text-right">quantity</th>
-                                                <th class="text-right">total</th>
-                                                <th class="text-right">Supprimer</th>
-                                                <th class="text-right">Modifier</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>2018-09-29 05:57</td>
-                                                <td>100398</td>
-                                                <td>tacos al pastor</td>
-                                                <td class="text-right">11 dt</td>
-                                                <td class="text-right">1</td>
-                                                <td class="text-right">$999.00</td>
-                                                <td class="text-right"> <button class="au-btn au-btn-icon au-btn--blue">
-                                                    <i class="zmdi zmdi"></i>Supprimer</button></td>
-                                                    <td class="text-right"> <button class="au-btn au-btn-icon au-btn--blue">
-                                                        <i class="zmdi zmdi"></i>Modifier</button></td>
-                                            </tr>
-                                            <tr>
-                                                <td>2018-09-28 01:22</td>
-                                                <td>100397</td>
-                                                <td>buritos</td>
-                                                <td class="text-right">15 dt </td>
-                                                <td class="text-right">1</td>
-                                                <td class="text-right"></td>
-                                                <td class="text-right"> <button class="au-btn au-btn-icon au-btn--blue">
-                                                    <i class="zmdi zmdi"></i>Supprimer</button></td>
-                                                    <td class="text-right"> <button class="au-btn au-btn-icon au-btn--blue">
-                                                        <i class="zmdi zmdi"></i>Modifier</button></td>
-                                            </tr>
-                                            <tr>
-                                                <td>2018-09-27 02:12</td>
-                                                <td>100396</td>
-                                                <td>breakfast</td>
-                                                <td class="text-right">16.5 dt</td>
-                                                <td class="text-right">2</td>
-                                                <td class="text-right">33.00 dt</td>
-                                                <td class="text-right"> <button class="au-btn au-btn-icon au-btn--blue">
-                                                    <i class="zmdi zmdi"></i>Supprimer</button></td>
-                                                    <td class="text-right"> <button class="au-btn au-btn-icon au-btn--blue">
-                                                        <i class="zmdi zmdi"></i>Modifier</button></td>
-                                            </tr>
-                                           
-                                        </tbody>
-                                    </table>
+                                <h2 class="title-1 m-b-25">Ajouter un nouveau evenement</h2>
+                                <div id="error">
+                                    <?php echo $error; ?>
+                                        </div>
+                                <form action="" method="POST" >
+                  <table  align="center">
+                 
+                <tr>
+                    <td><label for="libelle">Libelle: </label>  </td> 
+                </tr> 
+                <tr>
+                    <td><input type="text" name="libelle" id="libelle" maxlength="20"></td>
+                </tr>
+                 
+                
+                <tr>
+                    <td>    <label for="date">Date: </label></td> 
+                </tr> 
+                <tr>
+                    <td><input type="date" name="date" id="date" maxlength="20"></td> 
+                </tr>
+                <tr>
+                    <td>    <label for="duree">durée d'evenement: </label></td> 
+                </tr> 
+                <tr>
+                    <td><input type="text" name="duree" id="duree" maxlength="20"></td> 
+                </tr>
+                
+                
+                <tr>
+                    <td>    <label for="description">Description: </label></td> 
+                </tr> 
+                <tr>
+                    <td><input type="textarea" name="description" id="description" maxlength="100"></td> 
+                </tr>
+                <tr>
+                    <td><label for="local">Local:</label></td> 
+                </tr> 
+                <tr>
+                    <td>
+                    <select name="local" id="local">
+                     <option value="select" selected>Select</option>
+                        
+          <?php
+          foreach($listeLocal as $localC){
+           ?>
+           <option value ='<?PHP echo $localC['id_local']; ?>'> <?PHP echo $localC['adresse']; ?></option>
+           <?php
+          }
+          ?>
+          </select>   
+                     
+                    </td> 
+                </tr>
+               
+                <div class="row">
+                            <div class="col-md-12">
+                                <div class="overview-wrap">
+                                    <input type="submit" class="au-btn au-btn-icon au-btn--blue" value="Envoyer">
+                                        
                                 </div>
                             </div>
+                </div>
+                  </table>
+        </form>                   
+                            
+   </div>
+</div>
 						
-						<div class="row">
+                 	<div class="row">
 								<div class="col-md-12">
 										<div class="copyright">
-												<p>&copy; Copyright.Tous droits réservés. <a href="1.html">Rey Del México</a>.</p>
+												<p>&copy; Copyright.Tous droits réservés. <a href="../view/front/1.html">Rey Del México</a>.</p>
 										</div>
 								</div>
 						</div>
+
 					</div>
 				</div>
 			</div>
-		</div>
+		
 		<!-- END PAGE CONTAINER-->
 
-	</div>
+	
 
 	<!-- Jquery JS-->
 	<script src="vendor/jquery-3.2.1.min.js"></script>
@@ -485,9 +522,17 @@
 	</script>
 
 	<!-- Main JS-->
-	<script src="js/main.js"></script>
+	
+    <script src="js/main.js"></script>
+    
 
 </body>
 
 </html>
 <!-- end document-->
+
+
+
+
+
+
