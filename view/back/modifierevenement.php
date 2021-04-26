@@ -136,7 +136,7 @@
                                 <i class="fas fa-comment-alt"></i>Réclamations</a>
                         </li>
                         <li>
-                            <a href="réservation.php">
+                            <a href="showResrvation.php">
                                 <i class="far fa-calendar-plus"></i>Réservations</a>
                         </li>
                         <li>
@@ -160,7 +160,7 @@
                                 <i class="fas fa-map-marker-alt"></i>Locaux</a>
                         </li>
                         <li>
-                            <a href="evenement.php">
+                            <a href="showEvenement.php">
                                 <i class="fas fa-music"></i>Evénements</a>
                         </li>
                       
@@ -214,7 +214,7 @@
                                 <i class="fas fa-comment-alt"></i>Réclamations</a>
                         </li>
                         <li>
-                            <a href="réservation.php">
+                            <a href="showResrvation.php">
                                 <i class="far fa-calendar-plus"></i>Réservations</a>
                         </li>
                         <li>
@@ -238,7 +238,7 @@
                                 <i class="fas fa-map-marker-alt"></i>Locaux</a>
                         </li>
                         <li>
-                            <a href="evenement.php">
+                            <a href="showEvenement.php">
                                 <i class="fas fa-music"></i>Evénements</a>
                         </li>
                       

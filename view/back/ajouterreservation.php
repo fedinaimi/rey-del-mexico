@@ -203,7 +203,7 @@
                                 <i class="fas fa-comment-alt"></i>Réclamations</a>
                         </li>
                         <li>
-                            <a href="réservation.php">
+                            <a href="showReservation.php">
                                 <i class="far fa-calendar-plus"></i>Réservations</a>
                         </li>
                         <li>
@@ -227,7 +227,7 @@
                                 <i class="fas fa-map-marker-alt"></i>Locaux</a>
                         </li>
                         <li>
-                            <a href="evenement.php">
+                            <a href="showEvenement.php">
                                 <i class="fas fa-music"></i>Evénements</a>
                         </li>
                       
@@ -427,7 +427,7 @@
                     <td><label for="date">date: </label>  </td> 
                 </tr> 
                 <tr>
-                    <td><input type="date" name="date" id="date" maxlength="20"></td>
+                    <td><input type="date" name="date" id="date" maxlength="20" placeholder="Date"></td>
                 </tr>
                  
                 
@@ -435,14 +435,14 @@
                     <td>    <label for="nb_perso">Nb perso: </label></td> 
                 </tr> 
                 <tr>
-                    <td><input type="text" name="nb_perso" id="nb_perso" maxlength="20"></td> 
+                    <td><input type="text" name="nb_perso" id="nb_perso" maxlength="20" placeholder="Votre nombre"></td> 
                 </tr>
                 
                 <tr>
                     <td>    <label for="message">Message: </label></td> 
                 </tr> 
                 <tr>
-                    <td><input type="textarea" name="message" id="message" maxlength="20"></td> 
+                    <td> <textarea name="message" id="message" cols="30" rows="10" placeholder="message" ></textarea> </td> 
                 </tr>
                 <tr>
                     <td>    <label for="statut">Statut: </label></td> 

@@ -39,7 +39,8 @@
 <html lang="en">
 
 <head>
-	<!-- Required meta tags-->
+
+    <!-- Required meta tags-->
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<meta name="description" content="au theme template">
@@ -123,7 +124,7 @@
                                 <i class="fas fa-comment-alt"></i>Réclamations</a>
                         </li>
                         <li>
-                            <a href="réservation.php">
+                            <a href="showReservation.php">
                                 <i class="far fa-calendar-plus"></i>Réservations</a>
                         </li>
                         <li>
@@ -147,7 +148,7 @@
                                 <i class="fas fa-map-marker-alt"></i>Locaux</a>
                         </li>
                         <li>
-                            <a href="evenement.php">
+                            <a href="showEvenement.php">
                                 <i class="fas fa-music"></i>Evénements</a>
                         </li>
                       
@@ -201,7 +202,7 @@
                                 <i class="fas fa-comment-alt"></i>Réclamations</a>
                         </li>
                         <li>
-                            <a href="réservation.php">
+                            <a href="showReservation.php">
                                 <i class="far fa-calendar-plus"></i>Réservations</a>
                         </li>
                         <li>
@@ -225,7 +226,7 @@
                                 <i class="fas fa-map-marker-alt"></i>Locaux</a>
                         </li>
                         <li>
-                            <a href="evenement.php">
+                            <a href="showEvenement.php">
                                 <i class="fas fa-music"></i>Evénements</a>
                         </li>
                       
@@ -418,7 +419,7 @@
                                 <div id="error">
                                     <?php echo $error; ?>
                                         </div>
-                                <form action="" method="POST">
+                                <form action="" method="POST" >
                   <table  align="center">
                  
                 <tr>
@@ -521,7 +522,9 @@
 	</script>
 
 	<!-- Main JS-->
-	<script src="js/main.js"></script>
+	
+    <script src="js/main.js"></script>
+    
 
 </body>
 
