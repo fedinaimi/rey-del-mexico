@@ -1,5 +1,5 @@
 <?php
-include_once "../../config.php";
+require_once "../../config.php";
 include "../../model/local.php";
 class localC{
 
@@ -14,14 +14,30 @@ class localC{
           die('Erreur: ' .$e->getMessage());
       }
     }
+	
+	function afficherElementLocal($id_local)
+    {
+		$sql="SELECT * from local where	id_local=$id_local";
+		$db = config::getConnexion();
+		try{
+			$query=$db->prepare($sql);
+			$query->execute();
+
+			$local=$query->fetch(PDO::FETCH_OBJ);
+			return $local;
+		}
+		catch (Exception $e){
+			die('Erreur: '.$e->getMessage());
+		}
+    }
    
     
 	
     function ajoutLocal($local)
     {
         
-       $sql = "INSERT INTO local (adresse, nbTables, nbChaises, surface, libelle)
-       values(:adresse, :nbTables, :nbChaises, :surface, :libelle)";
+       $sql = "INSERT INTO local (adresse, nbTables, nbChaises, surface, libelle,tel, dateCreation)
+       values(:adresse, :nbTables, :nbChaises, :surface, :libelle, :tel, :dateCreation)";
        $db = config::getConnexion();
        try {
         $query = $db->prepare($sql);
@@ -31,7 +47,8 @@ class localC{
             'nbChaises' => $local->getNbChaises(),
 	         	'surface' => $local->getSurface(),
             'libelle' => $local->getLibelle(),
-	         
+			'tel' => $local->getTel(),
+			'dateCreation' =>$local->getDate()
             
         ]);
         
@@ -64,8 +81,9 @@ class localC{
 						nbTables = :nbTables,
 						nbChaises = :nbChaises,
 						surface = :surface,
-						libelle = :libelle
-                       
+						libelle = :libelle,
+                       tel = :tel,
+					   dateCreation = :dateCreation
 					WHERE id_local = :id_local'
 				);
 				$query->execute([
@@ -74,7 +92,9 @@ class localC{
 					'nbTables' => $local->getNbTables(),
 					'nbChaises' => $local->getNbChaises(),
 						 'surface' => $local->getSurface(),
-					'libelle' => $local->getLibelle()
+					'libelle' => $local->getLibelle(),
+					'tel' => $local->getTel(),
+					'dateCreation' => $local->getDate()
   
 				]);
 				echo $query->rowCount() . " records UPDATED successfully <br>";

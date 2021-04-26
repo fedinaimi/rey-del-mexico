@@ -1,15 +1,16 @@
 <?php
     
     include_once '../../controller/fournisseurC.php';
-
+    include "../../controller/localC.php";
+    include "../../controller/categorieC.php";
    
     $error = "";
     $fournisseur = null;
     $fournisseurC = new fournisseurC(); 
-    $fournisseur1C = new fournisseurC();
-	$listeCategorie= $fournisseur1C->listeCategorie();
-    $fournisseur2C = new fournisseurC();
-	$listeLocal= $fournisseur2C->listeLocal();
+    $localC = new localC();
+	$listeLocal= $localC->afficherLocal();
+    $categorieC = new categorieC();
+	$listeCategorie= $categorieC->afficherCategorie();
  
     //iset verifier si y a eu un evoie
 
@@ -75,6 +76,8 @@
 
 	<!-- Main CSS-->
 	<link href="css/theme.css" rel="stylesheet" media="all">
+    	<!-- JS verif-->
+        <script src="js/script.js"></script>
 
 </head>
 
@@ -424,6 +427,7 @@
                                 <div id="error">
                                     <?php echo $error; ?>
                                         </div>
+                                        <div id="erreur"></div>
                                 <form action="" method="POST">
                   <table  align="center">
                  <tr> 
@@ -431,26 +435,26 @@
                     </td> 
                 </tr>
                  <tr>
-                    <td><input type="text" name="nom" id="nom" required maxlength="20"></td>
+                    <td><input type="text" name="nom" id="nom" required maxlength="50"></td>
                 </tr>
                 <tr>
                     <td><label for="prenom">prenom: </label>  </td> 
                 </tr> 
                 <tr>
-                    <td><input type="text" name="prenom" id="prenom" required maxlength="20"></td>
+                    <td><input type="text" name="prenom" id="prenom" required maxlength="50"></td>
                 </tr>
                 <tr>
                     <td> <label for="email">Email: </label>  </td> 
  
                 </tr> 
                 <tr>
-                    <td><input type="email" name="email" id="email" maxlength="50" required pattern=".+@gmail.com|.+@esprit.tn"></td>
+                    <td><input type="email" name="email" id="email" maxlength="50" required placeholder="VotreEmail@gmail.com" pattern=".+@gmail.com|.+@esprit.tn"></td>
                 </tr>
                 <tr>
                     <td>    <label for="tel">Téléphone: </label></td> 
                 </tr> 
                 <tr>
-                    <td><input type="tel" name="tel" id="tel" placeholder="12-345-678"  pattern="[0-9]{2}-[0-9]{3}-[0-9]{3}"required  maxlength="20"></td> 
+                    <td><input type="tel" name="tel" id="tel" placeholder="12345678"  pattern="[0-9]{2}[0-9]{3}[0-9]{3}"required  maxlength="20"></td> 
                 </tr>
                 
                 <tr>
@@ -459,7 +463,7 @@
                 <tr>
                 <td>
                      <select name="categorie" id="categorie" required >
-                     <option value="0" selected>Select</option>
+                     <option value="select" selected>Select</option>
                         
            <?php
            foreach($listeCategorie as $listeC){
@@ -477,7 +481,7 @@
                 <tr>
                     <td>
                     <select name="local" id="local" required >
-                     <option value="0" selected>Select</option>
+                     <option value="select" selected>Select</option>
                         
           <?php
           foreach($listeLocal as $localC){
@@ -496,8 +500,9 @@
                     <td></td><td> <div class="row">
                             <div class="col-md-12">
                                 <div class="overview-wrap">
-                                    <input type="submit" class="au-btn au-btn-icon au-btn--blue" value="Envoyer">
-                                        
+                                    <input type="submit" class="au-btn au-btn-icon au-btn--blue" value="Envoyer" onclick="verifFournisseur();">
+                                    
+                                    <input type="reset" class="au-btn au-btn-icon au-btn--blue" value="Annuler"> 
                                 </div>
                             </div>
                 </div></td></tr>

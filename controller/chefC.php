@@ -1,6 +1,6 @@
 <?php
-include "../../config.php";
-require_once "../../model/chef.php"; 
+require_once "../../config.php";
+ include "../../model/chef.php"; 
 
 class chefC{
 

@@ -16,6 +16,8 @@
           && isset($_POST['nbChaises']) 
           && isset($_POST['surface'])
           && isset($_POST['libelle'])
+          && isset($_POST['tel'])
+          && isset($_POST['dateCreation'])
            ) 
            { 
               
@@ -23,14 +25,19 @@
                !empty($_POST['nbTables']) &&
                !empty($_POST['nbChaises']) &&
                !empty($_POST['surface']) &&
-               !empty($_POST['libelle']))
+               !empty($_POST['libelle'])&&
+               !empty($_POST['tel']) &&
+               !empty($_POST['dateCreation'])
+               )
                   { 
             $local = new local(
                 $_POST['adresse'],
                 $_POST['nbTables'], 
                 $_POST['nbChaises'],
                 $_POST['surface'],
-                $_POST['libelle']
+                $_POST['libelle'],
+                $_POST['tel'],
+                $_POST['dateCreation']
                
 			);
 			
@@ -76,6 +83,8 @@
 
 	<!-- Main CSS-->
 	<link href="css/theme.css" rel="stylesheet" media="all">
+    <!-- JS verif-->
+    <script src="js/script.js"></script>
 
 </head>
 
@@ -431,7 +440,7 @@
                                     <a href="showLocal.php">  <i class="zmdi zmdi text-center"></i>Retour à la liste</button></a>
                                 </div>
                             </div>
-                        
+                            <div id="erreur"></div>
                                  <hr>
                                  <br>
                                 <h2 class="title-1 m-b-25 text-center">Modifier Le Local</h2>
@@ -450,35 +459,46 @@
                     </td> 
                 </tr>
                  <tr>
-                    <td><input type="text" name="adresse" id="adresse" required value = "<?php echo $local->adresse; ?>" maxlength="20"></td>
+                    <td><input type="text" name="adresse" id="adresse" required cols="30" rows="10" value = "<?php echo $local->adresse; ?>" maxlength="50"></td>
                 </tr>
                 <tr> 
                     <td> <label for="libelle">Libelle: </label>
                     </td> 
                 </tr>
                  <tr>
-                    <td><input type="text" name="libelle" id="libelle" required value = "<?php echo $local->libelle; ?>"maxlength="20"></td>
+                    <td><input type="text" name="libelle" id="libelle" required value = "<?php echo $local->libelle; ?>"maxlength="50"></td>
                 </tr>
                 <tr>
                     <td><label for="nbTables">Nombre de Tables: </label>  </td> 
                 </tr> 
                 <tr>
-                <td><input type="number" name="nbTables" id="nbTables" required value = "<?php echo $local->nbTables; ?>"maxlength="20"></td>
+                <td><input type="number" name="nbTables" id="nbTables" min="0" required value = "<?php echo $local->nbTables; ?>"maxlength="20"></td>
                 </tr>
                 <tr>
                     <td> <label for="nbChaises">Nombre de Chaises: </label>  </td> 
  
                 </tr> 
                 <tr>
-                <td><input type="numer" name="nbChaises" id="nbChaises" required value = "<?php echo $local->nbChaises; ?>" maxlength="20"></td>
+                <td><input type="number" name="nbChaises" id="nbChaises" min="0" required value = "<?php echo $local->nbChaises; ?>" maxlength="20"></td>
                 </tr>
                 <tr>
                     <td>    <label for="surface">Surface: </label></td> 
                 </tr> 
                 <tr>
-                    <td><input type="number" name="surface" id="surface" required value = "<?php echo $local->surface; ?>" maxlength="20"></td> 
+                    <td><input type="number" name="surface" min="100" id="surface" required value = "<?php echo $local->surface; ?>" maxlength="20"></td> 
                 </tr>
-                
+                <tr>
+                    <td>    <label for="tel">Numéro Téléphone: </label></td> 
+                </tr> 
+                <tr>
+                    <td><input type="tel" name="tel" id="tel" required pattern="[0-9]{2}[0-9]{3}[0-9]{3}" value = "<?php echo $local->tel; ?>" maxlength="20"></td> 
+                </tr>
+                <tr>
+                    <td>    <label for="dateCreation">Numéro Téléphone: </label></td> 
+                </tr> 
+                <tr>
+                    <td><input type="date" name="dateCreation" id="dateCreation" required value = "<?php echo $local->dateCreation; ?>" ></td> 
+                </tr>
                
                 <tr></tr>
                 <tr></tr>
@@ -486,7 +506,7 @@
                     <td></td><td> <div class="row">
                             <div class="col-md-12">
                                 <div class="overview-wrap">
-                                    <input type="submit" class="au-btn au-btn-icon au-btn--blue" value="Envoyer">
+                                    <input type="submit" class="au-btn au-btn-icon au-btn--blue" value="Envoyer" onclick="verifLocal();">
                                     <input type="reset" class="au-btn au-btn-icon au-btn--blue" value="Annuler"> 
                                 </div>
                             </div>
@@ -518,6 +538,7 @@
 	
 
 	<!-- Jquery JS-->
+   
 	<script src="vendor/jquery-3.2.1.min.js"></script>
 	<!-- Bootstrap JS-->
 	<script src="vendor/bootstrap-4.1/popper.min.js"></script>
@@ -539,6 +560,7 @@
 	</script>
 
 	<!-- Main JS-->
+   
 	<script src="js/main.js"></script>
 
 </body>

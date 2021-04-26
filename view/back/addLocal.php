@@ -15,6 +15,8 @@
         && isset($_POST['nbChaises']) 
         && isset($_POST['surface'])
         && isset($_POST['libelle'])
+        && isset($_POST['tel'])
+        && isset($_POST['dateCreation'])
          ) 
          { 
             
@@ -22,15 +24,19 @@
              !empty($_POST['nbTables']) &&
              !empty($_POST['nbChaises']) &&
              !empty($_POST['surface']) &&
-             !empty($_POST['libelle']))
+             !empty($_POST['libelle']) &&
+             !empty($_POST['tel']) &&
+             !empty($_POST['dateCreation']) 
+             )
                 {
-                $local= new local($_POST['adresse'],$_POST['nbTables'],$_POST['nbChaises'],$_POST['surface'],$_POST['libelle']);
+                $local= new local($_POST['adresse'],$_POST['nbTables'],$_POST['nbChaises'],$_POST['surface'],$_POST['libelle'],$_POST['tel'],$_POST['dateCreation']);
                 $localC->ajoutLocal($local);
                 header('Location:showLocal.php');
                 }
            else 
                {
-                   $error =" Missing information";
+                echo '<script> alert(" Des informations Manquantes ");
+                </script>';
                } 
         }
 
@@ -71,6 +77,8 @@
 
 	<!-- Main CSS-->
 	<link href="css/theme.css" rel="stylesheet" media="all">
+    	<!-- JS verif-->
+    <script src="js/script.js"></script>
 
 </head>
 
@@ -419,6 +427,7 @@
                                 <div id="error">
                                     <?php echo $error; ?>
                                         </div>
+                                        <div id="erreur"></div>
                                 <form action="" method="POST">
                   <table  align="center">
                  <tr> 
@@ -426,35 +435,46 @@
                     </td> 
                 </tr>
                  <tr>
-                    <td><input type="text" name="adresse" id="adresse" required maxlength="20"></td>
+                    <td><input type="text" name="adresse" id="adresse" required maxlength="20" cols="50" rows="10"></td>
                 </tr>
                 <tr> 
                     <td> <label for="libelle">Libelle: </label>
                     </td> 
                 </tr>
                  <tr>
-                    <td><input type="text" name="libelle" id="libelle" required maxlength="20"></td>
+                    <td><input type="text" name="libelle" id="libelle" required maxlength="30"></td>
                 </tr>
                 <tr>
                     <td><label for="nbTables">Nombre de Tables: </label>  </td> 
                 </tr> 
                 <tr>
-                <td><input type="number" name="nbTables" id="nbTables" required maxlength="20"></td>
+                <td><input type="number" name="nbTables" id="nbTables" min="0" required maxlength="20"></td>
                 </tr>
                 <tr>
                     <td> <label for="nbChaises">Nombre de Chaises: </label>  </td> 
  
                 </tr> 
                 <tr>
-                <td><input type="number" name="nbChaises" id="nbChaises" required maxlength="20"></td>
+                <td><input type="number" name="nbChaises" id="nbChaises" min="0" required maxlength="20"></td>
                 </tr>
                 <tr>
                     <td>    <label for="surface">Surface: </label></td> 
                 </tr> 
                 <tr>
-                    <td><input type="number" name="surface" id="surface" required  maxlength="20"></td> 
+                    <td><input type="number" name="surface" id="surface" min="100" required  maxlength="20"></td> 
                 </tr>
-                
+                <tr>
+                    <td>    <label for="tel">Numéro Téléphone: </label></td> 
+                </tr> 
+                <tr>
+                    <td><input type="tel" name="tel" id="tel" required placeholder="12345678" pattern="[0-9]{2}[0-9]{3}[0-9]{3}" maxlength="8"></td> 
+                </tr>
+                <tr>
+                    <td>    <label for="dateCreation">Numéro Téléphone: </label></td> 
+                </tr> 
+                <tr>
+                    <td><input type="date" name="dateCreation" id="dateCreation" required  ></td> 
+                </tr>
                
                 <tr></tr>
                 <tr></tr>
@@ -462,7 +482,7 @@
                     <td></td><td> <div class="row">
                             <div class="col-md-12">
                                 <div class="overview-wrap">
-                                    <input type="submit" class="au-btn au-btn-icon au-btn--blue" value="Envoyer">
+                                    <input type="submit" class="au-btn au-btn-icon au-btn--blue" value="Envoyer" onclick="verifLocal();">
                                     <input type="reset" class="au-btn au-btn-icon au-btn--blue" value="Annuler"> 
                                 </div>
                             </div>
@@ -512,6 +532,7 @@
 	</script>
 
 	<!-- Main JS-->
+  
 	<script src="js/main.js"></script>
 
 </body>

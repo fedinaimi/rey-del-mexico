@@ -1,17 +1,20 @@
 <?php
-	  include_once "../../controller/fournisseurC.php";
- 
-      
-	
-	$error = "";
-
+	include_once '../../controller/fournisseurC.php';
+    include "../../controller/localC.php";
+    include "../../controller/categorieC.php";
+   
+    $error = "";
+    $fournisseur = null;
     $fournisseurC = new fournisseurC(); 
-    $fournisseur1C = new fournisseurC();
-	$listeCategorie= $fournisseur1C->listeCategorie();
-    $fournisseur2C = new fournisseurC();
-	$listeLocal= $fournisseur2C->listeLocal();
+    $localC = new localC();
+	$listeLocal= $localC->afficherLocal();
+    $categorieC = new categorieC();
+	$listeCategorie= $categorieC->afficherCategorie();
+    $elementC= null;
+    $elementL= null;
+    $localC1 = new localC();
+    $categorieC1 = new categorieC();
 
-	
 	if (
         isset($_POST['nom']) 
         && isset($_POST['prenom']) 
@@ -79,6 +82,8 @@
 
 	<!-- Main CSS-->
 	<link href="css/theme.css" rel="stylesheet" media="all">
+    	<!-- JS verif-->
+        <script src="js/script.js"></script>
 
 </head>
 
@@ -440,6 +445,7 @@
                                 <div id="error">
                                     <?php echo $error; ?>
                                 </div>
+                                <div id="erreur"></div>
 			<?php
 			if (isset($_GET['id']))
 			{
@@ -480,7 +486,7 @@
                 <tr>
                 <td>
                      <select name="categorie" id="categorie" required>
-                     <option value="0" selected>Select</option>
+                     <option value="select" selected>Select</option>
                         
                <?php
                 foreach($listeCategorie as $listeC){
@@ -498,7 +504,7 @@
                 <tr>
                     <td>
                     <select name="local" id="local" required>
-                     <option value="0" selected>Select</option>
+                     <option value="select" selected>Select</option>
                         
           <?php
           foreach($listeLocal as $localC){
@@ -517,7 +523,7 @@
                     <td></td><td> <div class="row">
                             <div class="col-md-12">
                                 <div class="overview-wrap">
-                                    <input type="submit" class="au-btn au-btn-icon au-btn--blue" value="Envoyer">
+                                    <input type="submit" class="au-btn au-btn-icon au-btn--blue" value="Envoyer" onclick="verifFournisseur();">
                                     <td>
                         <input type="reset"  class="au-btn au-btn-icon au-btn--blue" value="Annuler" >
                     </td>   

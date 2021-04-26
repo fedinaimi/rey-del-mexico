@@ -1,8 +1,48 @@
-<?PHP
-	include "../../controller/localC.php";
+<?php
+	  include_once "../../controller/produitC.php";
+ 
+      
+	
+	$error = "";
 
-	$localC = new localC();
-	$listeLocal= $localC->afficherLocal();
+    $produitC = new produitC(); 
+    $produit1C = new produitC();
+	$listeCategorie= $produit1C->listeCategorie();
+    $produit2C = new produitC();
+	$listeFournisseur= $produit2C->listeFournisseur();
+
+	
+	if (
+        isset($_POST['libelle']) 
+        && isset($_POST['nb_calories']) 
+        && isset($_POST['prix']) 
+        && isset($_POST['description'])
+         && isset($_POST['categorie'])
+         && isset($_POST['fournisseur'])
+	){
+		if (
+            !empty($_POST['libelle']) &&
+            !empty($_POST['nb_calories']) &&
+            !empty($_POST['prix']) &&
+            !empty($_POST['description']) &&
+            !empty($_POST['categorie']) &&
+            !empty($_POST['fournisseur'])
+        ) {
+            $produit = new produit(
+                $_POST['libelle'],
+                $_POST['nb_calories'], 
+                $_POST['prix'],
+                $_POST['description'],
+                $_POST['categorie'],
+                $_POST['fournisseur']
+            );
+			
+            $produitC->modifierProduit($produit, $_GET['id']);
+            header('Location:showProduit.php');
+        }
+        else
+            $error = "Missing information";
+	}
 
 ?>
 <!DOCTYPE html>
@@ -17,7 +57,7 @@
 	<meta name="keywords" content="au theme template">
 
 	<!-- Title Page-->
-	<title>Local</title>
+	<title>Modifier Fournisseur</title>
 
 	<!-- Fontfaces CSS-->
 	<link href="css/font-face.css" rel="stylesheet" media="all">
@@ -43,6 +83,8 @@
 </head>
 
 <body class="animsition">
+
+
     <div class="page-wrapper">
         <!-- HEADER MOBILE-->
         <header class="header-mobile d-block d-lg-none">
@@ -50,7 +92,7 @@
                 <div class="container-fluid">
                     <div class="header-mobile-inner">
                         <a class="logo" href="index.html">
-                            <img src="images/icon/ahmed.png" alt="CoolAdmin" />
+                            <img src="images/icon/ahmed.png" alt="reydelmexico" />
                         </a>
                         <button class="hamburger hamburger--slider" type="button">
                             <span class="hamburger-box">
@@ -121,6 +163,8 @@
                                 <i class="fas fa-music"></i>Evénements</a>
                         </li>
                       
+                       
+                      
                         
                     </ul>
                 </div>
@@ -132,14 +176,13 @@
         <aside class="menu-sidebar d-none d-lg-block">
             <div class="logo">
                 <a href="#">
-                    <img src="images/icon/logo.png" alt="Cool Admin" />
+                    <img src="images/icon/logo.png" alt="reydelmexico" />
                 </a>
             </div>
             <div class="menu-sidebar__content js-scrollbar1">
                 <nav class="navbar-sidebar">
                     <ul class="list-unstyled navbar__list">
                         
-                      
                         <li class="has-sub">
                             <a class="js-arrow" href="index.html">
                                 <i class="fa fa-bar-chart"></i>Général</a>
@@ -198,6 +241,7 @@
                                 <i class="fas fa-music"></i>Evénements</a>
                         </li>
                       
+                      
                             </ul>
                         </li>
                     </ul>
@@ -213,12 +257,7 @@
 				<div class="section__content section__content--p30">
 					<div class="container-fluid">
 						<div class="header-wrap">
-							<form class="form-header" action="" method="POST">
-								<input class="au-input au-input--xl" type="text" name="search" placeholder="Recherche local..." />
-								<button class="au-btn--submit" type="submit">
-									<i class="zmdi zmdi-search"></i>
-								</button>
-							</form>
+							
 							<div class="header-button">
                                 <div class="noti-wrap">
                                     <div class="noti__item js-item-menu">
@@ -240,7 +279,7 @@
                                             </div>
                                             <div class="mess__item">
                                                 <div class="image img-cir img-40">
-                                                    <img src="images/icon/avatar-04.jpg" alt="Diane Myers" />
+                                                    <img src="back/images/icon/avatar-04.jpg" alt="Diane Myers" />
                                                 </div>
                                                 <div class="content">
                                                     <h6>Diane Myers</h6>
@@ -382,86 +421,133 @@
 			<div class="main-content">
 				<div class="section__content section__content--p30">
 					<div class="container-fluid">
+						
 						<div class="row">
+                            <div class="col-lg-9">
+								<br>
+                              
                             <div class="col-md-12">
                                 <div class="overview-wrap">
                                     
                                     <button class="au-btn au-btn-icon au-btn--blue">
-                                    <a href="addLocal.php">   <i class="zmdi zmdi-plus">Ajout Local</i></a></button>
+                                    <a href="showProduit.php">  <i class="zmdi zmdi text-center"></i>Retour à la liste</button></a>
                                 </div>
                             </div>
-                        </div>
-						<div class="row">
-                            <div class="col-lg-9">
-								<br>
-                                <h2 class="title-1 m-b-25">Informations Locaux</h2>
-                                <div class="table-responsive table--no-card m-b-40">
-                                    <table class="table table-borderless table-striped table-earning">
-                                        <thead>
-                                            <tr>
-                                            <th class="text-center">ID Local</th>
-                                                <th class="text-center">Libelle</th>
-                                                <th class="text-center">Adresse</th>
-                                                <th class="text-center">Nb de Tables</th>
-                                                <th class="text-center">Nb de Chaises</th>
-                                                <th class="text-center">Surface</th>
-                                                <th class="text-center">Numéro Téléphone</th>
-                                                <th class="text-center"></th>
-                                                <th class="text-right"></th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                           
-                                        <?PHP
-foreach($listeLocal as $local){
-?>
-<tr>
-<td class="text-center"><?PHP echo $local['id_local']; ?></td>
-<td class="text-center"><?PHP echo $local['libelle']; ?></td>
-<td class="text-center"><?PHP echo $local['adresse']; ?></td>
-<td class="text-center"><?PHP echo $local['nbTables']; ?></td>
-<td class="text-center"><?PHP echo $local['nbChaises']; ?></td>
-<td class="text-center"><?PHP echo $local['surface']; ?></td>
-<td class="text-center"><?PHP echo $local['tel']; ?></td>
-
-<td class="text-center"> 
-<form method="POST" action="deleteLocal.php">
-<button type="submit" name="supprimer" class="au-btn au-btn-icon au-btn--blue">
- <i class="zmdi zmdi"></i>Supprimer</button>
- <input type="hidden" value=<?PHP echo $local['id_local']; ?> name="id_local">
- </form>  
- </td>
-
- <td class="text-center"> 
- <button class="au-btn au-btn-icon au-btn--blue">
- <a href="updateLocal.php?id=<?PHP echo $local['id_local']; ?>">
- <i class="zmdi zmdi"></i>Modifier</button>
-  </a>
- </td>
-</tr>
-<?PHP
-}
-?>
-                                           
-                                        </tbody>
-                                    </table>
+                        
+                                 <hr>
+                                 <br>
+                                <h2 class="title-1 m-b-25 text-center">Update Produit</h2>
+                                <div id="error">
+                                    <?php echo $error; ?>
+                                </div>
+			<?php
+			if (isset($_GET['id']))
+			{
+				$produit = $produitC->recupererProduit1($_GET['id']);	
+		       ?>
+                <form action="" method="POST" >
+                  <table  align="center">
+                 <tr> 
+                    <td> <label for="libelle">Libelle: </label>
+                    </td> 
+                </tr>
+                 <tr>
+                    <td><input type="text" name="libelle" id="libelle"  required value = "<?php echo $produit->libelle; ?>"></td>
+                </tr>
+                <tr>
+                    <td><label for="nb_calories">Nb_calories: </label>  </td> 
+                </tr> 
+                <tr>
+                    <td><input type="text" name="nb_calories" id="nb_calories" maxlength="20" required value = "<?php echo $produit->nb_calories; ?>" ></td>
+                </tr>
+                <tr>
+                    <td> <label for="description">Description: </label>  </td> 
+ 
+                </tr> 
+                <tr>
+                    <td><input type="textarea" name="description" id="description" maxlength="100" required value = "<?php echo $produit->description; ?>"></td>
+                </tr>
+                <tr>
+                    <td>    <label for="prix">Prix: </label></td> 
+                </tr> 
+                <tr>
+                    <td><input type="text" name="prix" id="prix" maxlength="8" required value = "<?php echo $produit->prix; ?>"></td> 
+                </tr>
+                
+                <tr>
+                    <td>    <label for="categorie">Categorie: </label></td> 
+                </tr> 
+                <tr>
+                <td>
+                     <select name="categorie" id="categorie" required>
+                     <option value="0" selected>Select</option>
+                        
+               <?php
+                foreach($listeCategorie as $listeC){
+               ?>
+                <option value ='<?PHP echo $listeC['id_categorie']; ?>'> <?PHP echo $listeC['libelle']; ?></option>
+                   <?php
+             }
+                  ?>
+                     </select>   
+                </td> 
+                </tr>
+                <tr>
+                    <td><label for="fournisseur">Fournisseur:</label></td> 
+                </tr> 
+                <tr>
+                    <td>
+                    <select name="fournisseur" id="fournisseur" required>
+                     <option value="0" selected>Select</option>
+                        
+          <?php
+          foreach($listeFournisseur as $fournisseurC){
+           ?>
+           <option value ='<?PHP echo $fournisseurC['id_fournisseur']; ?>'> <?PHP echo $fournisseurC['nom']; ?></option>
+           <?php
+          }
+          ?>
+          </select>   
+                     
+                    </td> 
+                </tr>
+                <tr></tr>
+                <tr></tr>
+                <tr>
+                    <td></td><td> <div class="row">
+                            <div class="col-md-12">
+                                <div class="overview-wrap">
+                                    <input type="submit" class="au-btn au-btn-icon au-btn--blue" value="Envoyer">
+                                    <td>
+                        <input type="reset"  class="au-btn au-btn-icon au-btn--blue" value="Annuler" >
+                    </td>   
                                 </div>
                             </div>
+                </div></td></tr>
+                
+                  </table>
+        </form>                   
+        <?php
+		}
+		?>                      
+   </div>
+</div>
 						
-						<div class="row">
+                 	<div class="row">
 								<div class="col-md-12">
 										<div class="copyright">
-												<p>&copy; Copyright.Tous droits réservés. <a href="1.html">Rey Del México</a>.</p>
+												<p>&copy; Copyright.Tous droits réservés. <a href="front/1.html">Rey Del México</a>.</p>
 										</div>
 								</div>
 						</div>
+
 					</div>
 				</div>
 			</div>
-		</div>
+		
 		<!-- END PAGE CONTAINER-->
 
-	</div>
+	
 
 	<!-- Jquery JS-->
 	<script src="vendor/jquery-3.2.1.min.js"></script>
@@ -491,3 +577,10 @@ foreach($listeLocal as $local){
 
 </html>
 <!-- end document-->
+
+
+
+
+
+
+

@@ -1,9 +1,13 @@
 <?PHP
 	include "../../controller/fournisseurC.php";
-
+    include "../../controller/localC.php";
+    include "../../controller/categorieC.php";
 	$fournisseurC = new fournisseurC();
 	$listefournissseur= $fournisseurC->afficherFournisseur();
-
+    $elementC= null;
+    $elementL= null;
+    $localC = new localC();
+    $categorieC = new categorieC();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -423,8 +427,19 @@ foreach($listefournissseur as $fournisseur){
 <td class="text-center"><?PHP echo $fournisseur['prenom']; ?></td>
 <td class="text-center"><?PHP echo $fournisseur['email']; ?></td>
 <td class="text-center"><?PHP echo $fournisseur['tel']; ?></td>
-<td class="text-center"><?PHP echo $fournisseur['categorie']; ?></td>
-<td class="text-center"><?PHP echo $fournisseur['local']; ?></td>
+<td class="text-center">
+    <?PHP 
+   $elementC= $categorieC->afficherElementCategorie($fournisseur['categorie']);
+   echo $elementC->libelle;
+     ?>
+</td>
+<td class="text-center"> 
+<?PHP
+$elementL= $localC->afficherElementLocal($fournisseur['local']);
+ echo $elementL->adresse;
+?>
+</td>
+
 <td class="text-center"> 
 <form method="POST" action="deleteFournisseur.php">
 <button type="submit" name="supprimer" class="au-btn au-btn-icon au-btn--blue">

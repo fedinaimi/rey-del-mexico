@@ -1,5 +1,3 @@
-
-
 <?PHP
 	include "../../controller/carteC.php";
 
@@ -7,6 +5,7 @@
 	$listeCarte= $carteC->afficherCarte();
 
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -404,7 +403,7 @@
                                             <tr>
                                                 <th class="text-center">ID Carte</th>
                                                 <th class="text-center">Points fidélités</th>
-                                                <th class="text-center">ID Client</th>
+                                            
                                                 <th class="text-center">Statut</th>
                                                 <th class="text-center">Date Création</th>
                                                 <th class="text-right">Supprimer</th>
@@ -418,7 +417,7 @@ foreach($listeCarte as $carte){
 <tr>
 <td class="text-center"><?PHP echo $carte['id_carte']; ?></td>
 <td class="text-center"><?PHP echo $carte['points']; ?></td>
-<td class="text-center"><?PHP echo $carte['client']; ?></td>
+
 <td class="text-center"><?PHP echo $carte['statut']; ?></td>
 <td class="text-center"><?PHP echo $carte['dateCreation']; ?></td>
 

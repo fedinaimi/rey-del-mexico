@@ -6,27 +6,26 @@
 	$error = "";
 
     $carteC = new carteC(); 
-    $carte1C = new carteC();
-	$listeClient= $carte1C->listeClientSansCarte();
+   
     
 	
 	if (
         isset($_POST['points']) 
-        && isset($_POST['client']) 
+       
         && isset($_POST['statut']) 
         && isset($_POST['dateCreation'])
         
 	){
 		if (
             !empty($_POST['points']) &&
-            !empty($_POST['client']) &&
+         
             !empty($_POST['statut']) &&
             !empty($_POST['dateCreation']) 
            
         ) {
             $carte = new carte(
                 $_POST['points'],
-                $_POST['client'], 
+               
                 $_POST['statut'],
                 $_POST['dateCreation']
                
@@ -36,7 +35,8 @@
             header('Location:showCarteFidelite.php');
         }
         else
-            $error = "Missing information";
+        { echo '<script> alert(" Des informations Manquantes ");
+            </script>';}
 	}
 
 ?>
@@ -74,6 +74,8 @@
 
 	<!-- Main CSS-->
 	<link href="css/theme.css" rel="stylesheet" media="all">
+    	<!-- JS verif-->
+        <script src="js/script.js"></script>
 
 </head>
 
@@ -426,7 +428,7 @@
                                 <div class="overview-wrap">
                                     
                                     <button class="au-btn au-btn-icon au-btn--blue">
-                                    <a href="carte_fidélité.php">  <i class="zmdi zmdi text-center"></i>Retour à la liste</button></a>
+                                    <a href="showCarteFidelite.php">  <i class="zmdi zmdi text-center"></i>Retour à la liste</button></a>
                                 </div>
                             </div>
                         
@@ -436,6 +438,7 @@
                                 <div id="error">
                                     <?php echo $error; ?>
                                 </div>
+                                <div id="erreur"></div>
 			<?php
 			if (isset($_GET['id']))
 			{
@@ -448,15 +451,15 @@
                     </td> 
                 </tr>
                  <tr>
-                    <td><input type="text" name="points" id="points"  required value = "<?php echo $carte->points; ?>"></td>
+                    <td><input type="number" name="points" id="points"  required value = "<?php echo $carte->points; ?>"></td>
                 </tr>
                 <tr>
                     <td><label for="statut">Statut: </label>  </td> 
                 </tr> 
                 <tr>
                     <td>
-                        <select name="statut" id="statut">
-                            <option value="0" selected>Select</option>
+                         <select name="statut" id="statut">
+                            <option value="select" selected>Select</option>
                             <option value="1">Libre</option>
                             <option value="2">Utilisée</option>
                         </select>
@@ -467,26 +470,9 @@
  
                 </tr> 
                 <tr>
-                    <td><input type="date" name="dateCreation" id="dateCreation"  value = "<?php echo $carte->date; ?>"></td>
+                    <td><input type="date" name="dateCreation" id="dateCreation" readonly value = "<?php echo $carte->dateCreation; ?>"></td>
                 </tr> 
-                <tr>
-                    <td>    <label for="client">Client: </label></td> 
-                </tr> 
-                <tr>
-                <td>
-                     <select name="client" id="client" required>
-                     <option value="0" selected>Select</option>
-                        
-               <?php
-                foreach($listeClient as $listeC){
-               ?>
-                <option value ='<?PHP echo $listeC['id_client']; ?>'> <?PHP echo $listeC['nom']; ?></option>
-                   <?php
-             }
-                  ?>
-                     </select>   
-                </td> 
-                </tr>
+                
                 
          
                 <tr></tr>
@@ -495,7 +481,7 @@
                     <td></td><td> <div class="row">
                             <div class="col-md-12">
                                 <div class="overview-wrap">
-                                    <input type="submit" class="au-btn au-btn-icon au-btn--blue" value="Envoyer">
+                                    <input type="submit" class="au-btn au-btn-icon au-btn--blue" value="Envoyer" onclick="verifCarte();">
                                     <td>
                         <input type="reset"  class="au-btn au-btn-icon au-btn--blue" value="Annuler" >
                     </td>   

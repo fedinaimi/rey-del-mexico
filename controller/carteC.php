@@ -1,6 +1,6 @@
 <?php
-include "../../config.php";
-require_once "../../model/fournisseur.php"; 
+require_once "../../config.php";
+include "../../model/carte.php"; 
 
 class carteC{
 
@@ -15,30 +15,19 @@ class carteC{
           die('Erreur: ' .$e->getMessage());
       }
     }
-    function listeClientSansCarte()
-    {
-      $sql = " SELECT * FROM client where statutC=0 ";
-      $db = config::getConnexion();
-      try {
-        $liste= $db->query($sql);
-        return $liste;
-      } catch(Exception $e) {
-          die('Erreur: ' .$e->getMessage());
-      }
-    }
+   
    
 	
     function ajoutCarte($carte)
     {
         
-       $sql = "INSERT INTO carte (points, client, statut, dateCreation)
-       values(:points, :client, :statut, :dateCreation)";
+       $sql = "INSERT INTO carte (points, statut, dateCreation)
+       values(:points, :statut, :dateCreation)";
        $db = config::getConnexion();
        try {
         $query = $db->prepare($sql);
         $query->execute([
             'points' => $carte->getPoints(),
-            'client' => $carte->getClient(),
             'statut' => $carte->getStatut(),
 	        'dateCreation' => $carte->getDate()    
         ]);
@@ -65,16 +54,12 @@ class carteC{
 				$query = $db->prepare(
 					'UPDATE carte SET 
 						points = :points, 
-						client = :client,
 						statut = :statut,
 						dateCreation = :dateCreation
-						
-           
 					WHERE id_carte = :id_carte'
 				);
 				$query->execute([
 					'points' => $Utilisateur->getPoints(),
-					'client' => $Utilisateur->getClient(),
 					'statut' => $Utilisateur->getStatut(),
 					'dateCreation' => $Utilisateur->getDate(),
 					'id_carte' => $id_carte
@@ -91,7 +76,6 @@ class carteC{
 			try{
 				$query=$db->prepare($sql);
 				$query->execute();
-
 				$cartee=$query->fetch();
 				return $cartee;
 			}
@@ -106,7 +90,6 @@ class carteC{
 			try{
 				$query=$db->prepare($sql);
 				$query->execute();
-				
 				$cartee = $query->fetch(PDO::FETCH_OBJ);
 				return $cartee;
 			}

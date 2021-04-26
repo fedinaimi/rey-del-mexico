@@ -1,35 +1,22 @@
 <?php
    
-    include_once '../../controller/carteC.php';
-
-    $error1 = "";
+   include_once '../../controller/carteC.php';
     $error = "";
     $carte = null;
     $carteC = new carteC(); 
-    $carte1C = new carteC();
-	$listeClient= $carte1C->listeClientSansCarte();
- 
     //iset verifier si y a eu un evoie
-
-    if( isset($_POST['points']) 
-        && isset($_POST['client']) 
-        && isset($_POST['statut']) 
-        && isset($_POST['dateCreation'])
-         ) 
+    if(isset($_POST['dateCreation']) ) 
          { 
-            
-             if( !empty($_POST['points']) &&
-             !empty($_POST['client']) &&
-             !empty($_POST['statut']) &&
-             !empty($_POST['dateCreation']))
+             if(!empty($_POST['dateCreation']))
                 {
-                $carte= new carte($_POST['points'],$_POST['client'],$_POST['statut'],$_POST['dateCreation']);
+                $carte= new carte(0,0,$_POST['dateCreation']);
                 $carteC->ajoutCarte($carte);
                 header('Location:showCarteFidelite.php');
                 }
            else 
                {
-                   $error =" Missing information";
+                echo '<script> alert(" Des informations Manquantes ");
+                </script>';
                } 
         }
 
@@ -70,6 +57,8 @@
 
 	<!-- Main CSS-->
 	<link href="css/theme.css" rel="stylesheet" media="all">
+    	<!-- JS verif-->
+        <script src="js/script.js"></script>
 
 </head>
 
@@ -418,46 +407,10 @@
                                 <div id="error">
                                     <?php echo $error; ?>
                                         </div>
+                                        <div id="erreur"></div>
                                 <form action="" method="POST">
                   <table  align="center">
-                 <tr> 
-                    <td> <label for="points">Points Fidélités: </label>
-                    </td> 
-                </tr>
-                 <tr>
-                    <td><input type="text" name="points" id="points" required maxlength="20"></td>
-                </tr>
-                <tr>
-                    <td><label for="client">Client: </label>  </td> 
-                </tr> 
-                <tr>
-                    <td>
-                    <select name="client" id="client" required >
-                     <option value="0" selected>Select</option>
-                        
-             <?php
-           foreach($listeClient as $listeC){
-           ?>
-           <option value ='<?PHP echo $listeC['id_client']; ?>'> <?PHP echo $listeC['nom']; echo $listeC['prenom']; ?></option>
-           <?php
-           }
-           ?>
-                     </select>  
-                </td>
-                </tr>
-                <tr>
-                    <td> <label for="statut">Statut: </label>  </td> 
- 
-                </tr> 
-                <tr>
-                    <td>
-                     <select name="statut" id="statut" required>
-                         <option value="0" selected>Select</option>
-                         <option value="1" > Libre</option>
-                         <option value="2" > Effectué </option>
-                     </select>
-                    </td>
-                </tr>
+                
                 <tr>
                     <td>    <label for="dateCreation">Date de création: </label></td> 
                 </tr> 
@@ -472,7 +425,7 @@
                     <td></td><td> <div class="row">
                             <div class="col-md-12">
                                 <div class="overview-wrap">
-                                    <input type="submit" class="au-btn au-btn-icon au-btn--blue" value="Envoyer">
+                                    <input type="submit" class="au-btn au-btn-icon au-btn--blue" value="Envoyer" onclick="verifCarte();">
                                     <input type="reset" class="au-btn au-btn-icon au-btn--blue" value="Annuler"> 
                                 </div>
                             </div>

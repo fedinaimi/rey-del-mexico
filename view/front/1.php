@@ -1,8 +1,11 @@
 <?PHP
 
 	include "../../controller/localC.php";
+  include "../../controller/fournisseurC.php";
 	$localC = new localC();
 	$listeLocal= $localC->afficherLocal();
+  $fournisseurC = new fournisseurC();
+	$listeFournisseur= $fournisseurC->afficherFournisseur();
 
 ?>
 <!DOCTYPE html>
@@ -180,10 +183,18 @@
                    <br>
                    <br>
                  <p>Chez Rey Del México, nous avons pris l'engagement rapide et décontracté <br>
-                    - nous vous servirons des plats frais <br>
-                    et préparés en moins de 2 minutes.<br>
-                    Et nous le ferons avec un menu très ciblé,<br>
-                    servant une cuisine</p> <h2><span>-Mexicaine californienne.</span></h2>                               
+                    - nous vous servirons des plats frais et préparés en moins de 2 minutes.<br>
+                    Et nous le ferons avec un menu très ciblé, servant une cuisine  <span>- Mexicaine californienne.</span></p>  
+                    <h2 clas="text-center"> Nos fournisseurs</h2>
+                    <br>
+                      <address>
+                      <?PHP
+foreach($listeFournisseur as $fournisseur){
+?>
+ <p><i class="fa fa-circle-thin"></i><?PHP echo " "; echo $fournisseur['nom']; echo "  " ; echo $fournisseur['prenom'];  ?></p>
+<?PHP
+}
+?>                            
                   
                 </div>
               </div>
@@ -1372,18 +1383,18 @@
                     <div class="mu-contact-widget">
                       <h3> Adresses</h3>
                       <address>
-                        <p><i class="fa fa-phone"></i> +216 54 125 469</p>
-                        <p><i class="fa fa-phone"></i> +216 52 589 661</p>
-                        <p><i class="fa fa-envelope-o"></i>rey.delmexico@gmail.com</p>
-                        <?PHP
+                      <?PHP
 foreach($listeLocal as $local){
 ?>
  <p><i class="fa fa-map-marker"></i><?PHP echo $local['adresse']; ?></p>
+ <p><i class="fa fa-phone"></i><?PHP echo $local['tel']; ?></p>
 
 
 <?PHP
 }
 ?>
+                        <p><i class="fa fa-envelope-o"></i>rey.delmexico@gmail.com</p>
+                      
                        
                       
                       </address>

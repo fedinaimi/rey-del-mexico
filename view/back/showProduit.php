@@ -1,8 +1,8 @@
 <?PHP
-	include "../../controller/localC.php";
+	include "../../controller/produitC.php";
 
-	$localC = new localC();
-	$listeLocal= $localC->afficherLocal();
+	$produitC = new produitC();
+	$listepproduit= $produitC->afficherProduit();
 
 ?>
 <!DOCTYPE html>
@@ -17,7 +17,7 @@
 	<meta name="keywords" content="au theme template">
 
 	<!-- Title Page-->
-	<title>Local</title>
+	<title>Produit</title>
 
 	<!-- Fontfaces CSS-->
 	<link href="css/font-face.css" rel="stylesheet" media="all">
@@ -121,6 +121,8 @@
                                 <i class="fas fa-music"></i>Evénements</a>
                         </li>
                       
+                       
+                      
                         
                     </ul>
                 </div>
@@ -139,7 +141,6 @@
                 <nav class="navbar-sidebar">
                     <ul class="list-unstyled navbar__list">
                         
-                      
                         <li class="has-sub">
                             <a class="js-arrow" href="index.html">
                                 <i class="fa fa-bar-chart"></i>Général</a>
@@ -198,6 +199,7 @@
                                 <i class="fas fa-music"></i>Evénements</a>
                         </li>
                       
+                      
                             </ul>
                         </li>
                     </ul>
@@ -214,7 +216,7 @@
 					<div class="container-fluid">
 						<div class="header-wrap">
 							<form class="form-header" action="" method="POST">
-								<input class="au-input au-input--xl" type="text" name="search" placeholder="Recherche local..." />
+								<input class="au-input au-input--xl" type="text" name="search" placeholder="Recherche produit..." />
 								<button class="au-btn--submit" type="submit">
 									<i class="zmdi zmdi-search"></i>
 								</button>
@@ -387,25 +389,25 @@
                                 <div class="overview-wrap">
                                     
                                     <button class="au-btn au-btn-icon au-btn--blue">
-                                    <a href="addLocal.php">   <i class="zmdi zmdi-plus">Ajout Local</i></a></button>
+                                        <a href="addProduit.php">  <i class="zmdi zmdi-plus text-center"></i>Ajouter Produit </a></button>
                                 </div>
                             </div>
                         </div>
 						<div class="row">
                             <div class="col-lg-9">
 								<br>
-                                <h2 class="title-1 m-b-25">Informations Locaux</h2>
+                                <h2 class="title-1 m-b-25">Informations Produits</h2>
                                 <div class="table-responsive table--no-card m-b-40">
                                     <table class="table table-borderless table-striped table-earning">
                                         <thead>
                                             <tr>
-                                            <th class="text-center">ID Local</th>
+                                                <th class="text-center">Id</th>
                                                 <th class="text-center">Libelle</th>
-                                                <th class="text-center">Adresse</th>
-                                                <th class="text-center">Nb de Tables</th>
-                                                <th class="text-center">Nb de Chaises</th>
-                                                <th class="text-center">Surface</th>
-                                                <th class="text-center">Numéro Téléphone</th>
+                                                <th class="text-center">Nb_calories</th>
+                                                <th class="text-center">Prix</th>
+                                                <th class="text-center">Description</th>
+                                                <th class="text-center">Categorie</th>
+                                                <th class="text-center">Fournisseur</th>
                                                 <th class="text-center"></th>
                                                 <th class="text-right"></th>
                                             </tr>
@@ -413,28 +415,27 @@
                                         <tbody>
                                            
                                         <?PHP
-foreach($listeLocal as $local){
+foreach($listepproduit as $produit){
 ?>
 <tr>
-<td class="text-center"><?PHP echo $local['id_local']; ?></td>
-<td class="text-center"><?PHP echo $local['libelle']; ?></td>
-<td class="text-center"><?PHP echo $local['adresse']; ?></td>
-<td class="text-center"><?PHP echo $local['nbTables']; ?></td>
-<td class="text-center"><?PHP echo $local['nbChaises']; ?></td>
-<td class="text-center"><?PHP echo $local['surface']; ?></td>
-<td class="text-center"><?PHP echo $local['tel']; ?></td>
-
+<td class="text-center"><?PHP echo $produit['id']; ?></td>
+<td class="text-center"><?PHP echo $produit['libelle']; ?></td>
+<td class="text-center"><?PHP echo $produit['nb_calories']; ?></td>
+<td class="text-center"><?PHP echo $produit['prix']; ?></td>
+<td class="text-center"><?PHP echo $produit['description']; ?></td>
+<td class="text-center"><?PHP echo $produit['categorie']; ?></td>
+<td class="text-center"><?PHP echo $produit['fournisseur']; ?></td>
 <td class="text-center"> 
-<form method="POST" action="deleteLocal.php">
+<form method="POST" action="deleteProduit.php">
 <button type="submit" name="supprimer" class="au-btn au-btn-icon au-btn--blue">
  <i class="zmdi zmdi"></i>Supprimer</button>
- <input type="hidden" value=<?PHP echo $local['id_local']; ?> name="id_local">
+ <input type="hidden" value=<?PHP echo $produit['id']; ?> name="id">
  </form>  
  </td>
 
  <td class="text-center"> 
  <button class="au-btn au-btn-icon au-btn--blue">
- <a href="updateLocal.php?id=<?PHP echo $local['id_local']; ?>">
+ <a href="updateProduit.php?id=<?PHP echo $produit['id']; ?>">
  <i class="zmdi zmdi"></i>Modifier</button>
   </a>
  </td>
@@ -442,7 +443,7 @@ foreach($listeLocal as $local){
 <?PHP
 }
 ?>
-                                           
+                                       
                                         </tbody>
                                     </table>
                                 </div>
