@@ -1,3 +1,9 @@
+<?PHP
+	include "../controller/produitC.php";
+
+	$produitC = new produitC();
+	$listeproduit= $produitC->afficherproduit();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,7 +16,7 @@
 	<meta name="keywords" content="au theme template">
 
 	<!-- Title Page-->
-	<title>Produit</title>
+	<title>produit</title>
 
 	<!-- Fontfaces CSS-->
 	<link href="css/font-face.css" rel="stylesheet" media="all">
@@ -70,7 +76,7 @@
                                 <i class="fas fa-cart-arrow-down"></i>Commandes</a>
                         </li>
                         <li>
-                            <a href="produit.html">
+                            <a href="produit.php">
                                 <i class="fa fa-pie-chart"></i>Produits</a>
                         </li>
                         <li>
@@ -86,7 +92,7 @@
                                 <i class="fas fa-comment-alt"></i>Réclamations</a>
                         </li>
                         <li>
-                            <a href="réservation.html">
+                            <a href="réservation.php">
                                 <i class="far fa-calendar-plus"></i>Réservations</a>
                         </li>
                         <li>
@@ -110,7 +116,7 @@
                                 <i class="fas fa-map-marker-alt"></i>Locaux</a>
                         </li>
                         <li>
-                            <a href="evenement.html">
+                            <a href="evenement.php">
                                 <i class="fas fa-music"></i>Evénements</a>
                         </li>
                       
@@ -148,7 +154,7 @@
                                 <i class="fas fa-cart-arrow-down"></i>Commandes</a>
                         </li>
                         <li>
-                            <a href="produit.html">
+                            <a href="produit.php">
                                 <i class="fa fa-pie-chart"></i>Produits</a>
                         </li>
                         <li>
@@ -164,7 +170,7 @@
                                 <i class="fas fa-comment-alt"></i>Réclamations</a>
                         </li>
                         <li>
-                            <a href="réservation.html">
+                            <a href="réservation.php">
                                 <i class="far fa-calendar-plus"></i>Réservations</a>
                         </li>
                         <li>
@@ -188,7 +194,7 @@
                                 <i class="fas fa-map-marker-alt"></i>Locaux</a>
                         </li>
                         <li>
-                            <a href="evenement.html">
+                            <a href="evenement.php">
                                 <i class="fas fa-music"></i>Evénements</a>
                         </li>
                       
@@ -210,7 +216,7 @@
 					<div class="container-fluid">
 						<div class="header-wrap">
 							<form class="form-header" action="" method="POST">
-								<input class="au-input au-input--xl" type="text" name="search" placeholder="Recherche produit..." />
+								<input class="au-input au-input--xl" type="text" name="search" placeholder="Recherche evenement..." />
 								<button class="au-btn--submit" type="submit">
 									<i class="zmdi zmdi-search"></i>
 								</button>
@@ -383,72 +389,66 @@
                                 <div class="overview-wrap">
                                     
                                     <button class="au-btn au-btn-icon au-btn--blue">
-                                        <i class="zmdi zmdi-plus"></i>Ajout Produit</button>
+                                        <a href="ajouterproduit.php">  <i class="zmdi zmdi-plus text-center"></i>Ajouter produit</button></a>
                                 </div>
                             </div>
                         </div>
 						<div class="row">
                             <div class="col-lg-9">
 								<br>
-                                <h2 class="title-1 m-b-25">Informations Produits</h2>
+                                <h2 class="title-1 m-b-25">Informations produit</h2>
                                 <div class="table-responsive table--no-card m-b-40">
                                     <table class="table table-borderless table-striped table-earning">
                                         <thead>
                                             <tr>
-                                                <th>date</th>
-                                                <th>order ID</th>
-                                                <th>name</th>
-                                                <th class="text-right">price</th>
-                                                <th class="text-right">quantity</th>
-                                                <th class="text-right">total</th>
-                                                <th class="text-right">Supprimer</th>
-                                                <th class="text-right">Modifier</th>
+                                                <th class="text-center">ID</th>
+                                                <th class="text-center">Libelle</th>
+                                                <th class="text-center">Prix</th>
+                                                <th class="text-center">Description</th>
+                                                <th class="text-center">NB_calories</th>
+                                                <th class="text-center">Categorie</th>
+                                                <th class="text-right">Fournisseur</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>2018-09-29 05:57</td>
-                                                <td>100398</td>
-                                                <td>tacos al pastor</td>
-                                                <td class="text-right">11 dt</td>
-                                                <td class="text-right">1</td>
-                                                <td class="text-right">$999.00</td>
-                                                <td class="text-right"> <button class="au-btn au-btn-icon au-btn--blue">
-                                                    <i class="zmdi zmdi"></i>Supprimer</button></td>
-                                                    <td class="text-right"> <button class="au-btn au-btn-icon au-btn--blue">
-                                                        <i class="zmdi zmdi"></i>Modifier</button></td>
-                                            </tr>
-                                            <tr>
-                                                <td>2018-09-28 01:22</td>
-                                                <td>100397</td>
-                                                <td>buritos</td>
-                                                <td class="text-right">15 dt </td>
-                                                <td class="text-right">1</td>
-                                                <td class="text-right"></td>
-                                                <td class="text-right"> <button class="au-btn au-btn-icon au-btn--blue">
-                                                    <i class="zmdi zmdi"></i>Supprimer</button></td>
-                                                    <td class="text-right"> <button class="au-btn au-btn-icon au-btn--blue">
-                                                        <i class="zmdi zmdi"></i>Modifier</button></td>
-                                            </tr>
-                                            <tr>
-                                                <td>2018-09-27 02:12</td>
-                                                <td>100396</td>
-                                                <td>breakfast</td>
-                                                <td class="text-right">16.5 dt</td>
-                                                <td class="text-right">2</td>
-                                                <td class="text-right">33.00 dt</td>
-                                                <td class="text-right"> <button class="au-btn au-btn-icon au-btn--blue">
-                                                    <i class="zmdi zmdi"></i>Supprimer</button></td>
-                                                    <td class="text-right"> <button class="au-btn au-btn-icon au-btn--blue">
-                                                        <i class="zmdi zmdi"></i>Modifier</button></td>
-                                            </tr>
                                            
+                                        <?PHP
+foreach($listeproduit as $produit){
+?>
+<tr>
+<td class="text-center"><?PHP echo $produit['id']; ?></td>
+<td class="text-center"><?PHP echo $produit['libelle']; ?></td>
+<td class="text-center"><?PHP echo $produit['prix']; ?></td>
+<td class="text-center"><?PHP echo $produit['description']; ?></td>
+<td class="text-center"><?PHP echo $produit['nb_calories']; ?></td>
+<td class="text-center"><?PHP echo $produit['categorie']; ?></td>
+<td class="text-center"><?PHP echo $produit['fournisseur']; ?></td>
+</tr>
+
+
+<?PHP
+}
+?>
+                                       
                                         </tbody>
                                     </table>
                                 </div>
                             </div>
-						
-						<div class="row">
+                            <div class="overview-wrap">
+                                    
+                                    <button class="au-btn au-btn-icon au-btn--blue">
+                                        <a href="effacerproduit.php">  <i class="zmdi zmdi-plus text-center"></i>effacer produit</button></a>
+                                </div>
+						<br>
+                        <div class="overview-wrap">
+                                    
+                                    <button class="au-btn au-btn-icon au-btn--blue">
+                                        <a href="modifierproduit.php">  <i class="zmdi zmdi-plus text-center"></i>modifier produit</button></a>
+                                </div>   
+                                <br>
+                                <br>
+                                <br>
+                        <div class="row">
 								<div class="col-md-12">
 										<div class="copyright">
 												<p>&copy; Copyright.Tous droits réservés. <a href="1.html">Rey Del México</a>.</p>

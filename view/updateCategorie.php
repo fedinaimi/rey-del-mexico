@@ -1,41 +1,72 @@
+<?php
+	  require_once '../model/categorie.php';
+      require_once '../controller/categorieC.php';
+    
+	$error = "";
+    $error1 = "";
+    $categorieC = new categorieC(); 
+    $categorie1C = new categorieC();
+    
+	
+	if (
+        isset($_POST['libelle']) 
+        
+	){
+		if (!empty($_POST['libelle']) 
+           
+        ) {
+            $categorie= new categorie(
+                $_POST['libelle']
+               
+			);
+			
+            $categorieC->modifierCategorie($categorie, $_GET['id']);
+            header('Location:showCategorie.php');
+        }
+        else
+            $error = "Missing information";
+	}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <!-- Required meta tags-->
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="au theme template">
-    <meta name="author" content="Hau Nguyen">
-    <meta name="keywords" content="au theme template">
+	<!-- Required meta tags-->
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="au theme template">
+	<meta name="author" content="Hau Nguyen">
+	<meta name="keywords" content="au theme template">
 
-    <!-- Title Page-->
-    <title>ReyDelMéxico | Home</title>
+	<!-- Title Page-->
+	<title>Modifier Categorie</title>
 
-    <!-- Fontfaces CSS-->
-    <link href="css/font-face.css" rel="stylesheet" media="all">
-    <link href="vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
-    <link href="vendor/font-awesome-5/css/fontawesome-all.min.css" rel="stylesheet" media="all">
-    <link href="vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
+	<!-- Fontfaces CSS-->
+	<link href="css/font-face.css" rel="stylesheet" media="all">
+	<link href="vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
+	<link href="vendor/font-awesome-5/css/fontawesome-all.min.css" rel="stylesheet" media="all">
+	<link href="vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
 
-    <!-- Bootstrap CSS-->
-    <link href="vendor/bootstrap-4.1/bootstrap.min.css" rel="stylesheet" media="all">
+	<!-- Bootstrap CSS-->
+	<link href="vendor/bootstrap-4.1/bootstrap.min.css" rel="stylesheet" media="all">
 
-    <!-- Vendor CSS-->
-    <link href="vendor/animsition/animsition.min.css" rel="stylesheet" media="all">
-    <link href="vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet" media="all">
-    <link href="vendor/wow/animate.css" rel="stylesheet" media="all">
-    <link href="vendor/css-hamburgers/hamburgers.min.css" rel="stylesheet" media="all">
-    <link href="vendor/slick/slick.css" rel="stylesheet" media="all">
-    <link href="vendor/select2/select2.min.css" rel="stylesheet" media="all">
-    <link href="vendor/perfect-scrollbar/perfect-scrollbar.css" rel="stylesheet" media="all">
+	<!-- Vendor CSS-->
+	<link href="vendor/animsition/animsition.min.css" rel="stylesheet" media="all">
+	<link href="vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet" media="all">
+	<link href="vendor/wow/animate.css" rel="stylesheet" media="all">
+	<link href="vendor/css-hamburgers/hamburgers.min.css" rel="stylesheet" media="all">
+	<link href="vendor/slick/slick.css" rel="stylesheet" media="all">
+	<link href="vendor/select2/select2.min.css" rel="stylesheet" media="all">
+	<link href="vendor/perfect-scrollbar/perfect-scrollbar.css" rel="stylesheet" media="all">
 
-    <!-- Main CSS-->
-    <link href="css/theme.css" rel="stylesheet" media="all">
+	<!-- Main CSS-->
+	<link href="css/theme.css" rel="stylesheet" media="all">
 
 </head>
 
 <body class="animsition">
+
+
     <div class="page-wrapper">
         <!-- HEADER MOBILE-->
         <header class="header-mobile d-block d-lg-none">
@@ -43,7 +74,7 @@
                 <div class="container-fluid">
                     <div class="header-mobile-inner">
                         <a class="logo" href="index.html">
-                            <img src="images/icon/ahmed.png" alt="CoolAdmin" />
+                            <img src="images/icon/ahmed.png" alt="reydelmexico" />
                         </a>
                         <button class="hamburger hamburger--slider" type="button">
                             <span class="hamburger-box">
@@ -57,62 +88,64 @@
                 <div class="container-fluid">
                     <ul class="navbar-mobile__list list-unstyled">
                         <li class="has-sub">
-                            <a class="js-arrow" href="#">
-                                <i class="fas fa-tachometer-alt"></i>Général</a>
+                            <a class="js-arrow" href="index.html">
+                                <i class="fa fa-bar-chart"></i>Général</a>
                             
                         </li>
                         <li>
-                            <a href="client.html">
-                                <i class="fas fa-chart-bar"></i>Clients</a>
+                            <a href="showClientlient.php">
+                                <i class="fas fa-users"></i>Clients</a>
                         </li>
                         <li>
-                            <a href="commande.html">
-                                <i class="fas fa-table"></i>Commandes</a>
+                            <a href="showCommande.php">
+                                <i class="fas fa-cart-arrow-down"></i>Commandes</a>
                         </li>
                         <li>
-                            <a href="produit.html">
-                                <i class="far fa-check-square"></i>Produits</a>
+                            <a href="showProduit.php">
+                                <i class="fa fa-pie-chart"></i>Produits</a>
                         </li>
                         <li>
                             <a href="showCategorie.php">
-                                <i class="fas fa-calendar-alt"></i>Catégories</a>
+                                <i class="fa fa-lightbulb-o"></i>Catégories</a>
                         </li>
                         <li>
-                            <a href="fournisseur.php">
-                                <i class="fas fa-map-marker-alt"></i>Fournisseurs</a>
+                            <a href="showFournisseur.php">
+                                <i class="fas fa-users"></i>Fournisseurs</a>
                         </li>
                         <li>
-                            <a href="réclamation.html">
-                                <i class="fas fa-map-marker-alt"></i>Réclamations</a>
+                            <a href="showReclamation.php">
+                                <i class="fas fa-comment-alt"></i>Réclamations</a>
                         </li>
                         <li>
-                            <a href="réservation.html">
+                            <a href="showReservation.php">
                                 <i class="far fa-calendar-plus"></i>Réservations</a>
                         </li>
                         <li>
-                            <a href="livraison.html">
-                                <i class="fas fa-car-alt"></i>Livraisons</a>
+                            <a href="showLivraison.php">
+                                <i class="fa fa-automobile" ></i>Livraisons</a>
                         </li>
                         <li>
-                            <a href="carte_fidélité.html">
-                                <i class="fas fa-map-marker-alt"></i>Cartes Fidélité</a>
+                            <a href="showCarteFidelite.php">
+                                <i class="fa fa-address-card"></i>Cartes Fidélité</a>
                         </li>
                         <li>
-                            <a href="chef.html">
-                                <i class="fas fa-map-marker-alt"></i>Chefs</a>
+                            <a href="showChef.php">
+                                <i class="fas fa-users"></i>Chefs</a>
                         </li>
                         <li>
-                            <a href="service.html">
-                                <i class="fas fa-map-marker-alt"></i>Services de table</a>
+                            <a href="showService.php">
+                                <i class="	fas fa-utensils"></i>Services de table</a>
                         </li>
                         <li>
-                            <a href="local.html">
+                            <a href="showLocal.php">
                                 <i class="fas fa-map-marker-alt"></i>Locaux</a>
                         </li>
                         <li>
-                            <a href="evenement.html">
-                                <i class="fas fa-map-marker-alt"></i>Evénements</a>
+                            <a href="showEvenement.php">
+                                <i class="fas fa-music"></i>Evénements</a>
                         </li>
+                      
+                       
                       
                         
                     </ul>
@@ -125,7 +158,7 @@
         <aside class="menu-sidebar d-none d-lg-block">
             <div class="logo">
                 <a href="#">
-                    <img src="images/icon/logo.png" alt="Cool Admin" />
+                    <img src="images/icon/logo.png" alt="reydelmexico" />
                 </a>
             </div>
             <div class="menu-sidebar__content js-scrollbar1">
@@ -138,15 +171,15 @@
                             
                         </li>
                         <li>
-                            <a href="client.html">
+                            <a href="showClientlient.php">
                                 <i class="fas fa-users"></i>Clients</a>
                         </li>
                         <li>
-                            <a href="commande.html">
+                            <a href="showCommande.php">
                                 <i class="fas fa-cart-arrow-down"></i>Commandes</a>
                         </li>
                         <li>
-                            <a href="produit.html">
+                            <a href="showProduit.php">
                                 <i class="fa fa-pie-chart"></i>Produits</a>
                         </li>
                         <li>
@@ -154,41 +187,43 @@
                                 <i class="fa fa-lightbulb-o"></i>Catégories</a>
                         </li>
                         <li>
-                            <a href="fournisseur.php">
+                            <a href="showFournisseur.php">
                                 <i class="fas fa-users"></i>Fournisseurs</a>
                         </li>
                         <li>
-                            <a href="réclamation.html">
+                            <a href="showReclamation.php">
                                 <i class="fas fa-comment-alt"></i>Réclamations</a>
                         </li>
                         <li>
-                            <a href="réservation.html">
+                            <a href="showReservation.php">
                                 <i class="far fa-calendar-plus"></i>Réservations</a>
                         </li>
                         <li>
-                            <a href="livraison.html">
+                            <a href="showLivraison.php">
                                 <i class="fa fa-automobile" ></i>Livraisons</a>
                         </li>
                         <li>
-                            <a href="carte_fidélité.html">
+                            <a href="showCarteFidelite.php">
                                 <i class="fa fa-address-card"></i>Cartes Fidélité</a>
                         </li>
                         <li>
-                            <a href="chef.html">
+                            <a href="showChef.php">
                                 <i class="fas fa-users"></i>Chefs</a>
                         </li>
                         <li>
-                            <a href="service.html">
+                            <a href="showService.php">
                                 <i class="	fas fa-utensils"></i>Services de table</a>
                         </li>
                         <li>
-                            <a href="local.html">
+                            <a href="showLocal.php">
                                 <i class="fas fa-map-marker-alt"></i>Locaux</a>
                         </li>
                         <li>
-                            <a href="evenement.html">
+                            <a href="showEvenement.php">
                                 <i class="fas fa-music"></i>Evénements</a>
                         </li>
+                      
+                      
                       
                             </ul>
                         </li>
@@ -198,15 +233,15 @@
         </aside>
         <!-- END MENU SIDEBAR-->
 
-        <!-- PAGE CONTAINER-->
-        <div class="page-container">
-            <!-- HEADER DESKTOP-->
-            <header class="header-desktop">
-                <div class="section__content section__content--p30">
-                    <div class="container-fluid">
-                        <div class="header-wrap">
-                            
-                            <div class="header-button">
+		<!-- PAGE CONTAINER-->
+		<div class="page-container">
+			<!-- HEADER DESKTOP-->
+			<header class="header-desktop">
+				<div class="section__content section__content--p30">
+					<div class="container-fluid">
+						<div class="header-wrap">
+							
+							<div class="header-button">
                                 <div class="noti-wrap">
                                     <div class="noti__item js-item-menu">
                                         <i class="zmdi zmdi-comment-more"></i>
@@ -227,7 +262,7 @@
                                             </div>
                                             <div class="mess__item">
                                                 <div class="image img-cir img-40">
-                                                    <img src="images/icon/avatar-04.jpg" alt="Diane Myers" />
+                                                    <img src="back/images/icon/avatar-04.jpg" alt="Diane Myers" />
                                                 </div>
                                                 <div class="content">
                                                     <h6>Diane Myers</h6>
@@ -365,134 +400,116 @@
                 </div>
             </header>
             <!-- HEADER DESKTOP-->
-
-            <!-- MAIN CONTENT-->
-            <div class="main-content">
-                <div class="section__content section__content--p30">
-                    <div class="container-fluid">
-                        <div class="row">
+			<!-- MAIN CONTENT-->
+			<div class="main-content">
+				<div class="section__content section__content--p30">
+					<div class="container-fluid">
+						
+						<div class="row">
+                            <div class="col-lg-9">
+								<br>
+                              
                             <div class="col-md-12">
                                 <div class="overview-wrap">
-                                    <h2 class="title-1">Statistiques</h2>
                                     
+                                    <button class="au-btn au-btn-icon au-btn--blue">
+                                    <a href="showCategorie.php">  <i class="zmdi zmdi text-center"></i>Retour à la liste</button></a>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row m-t-25">
-                            <div class="col-sm-6 col-lg-3">
-                                <div class="overview-item overview-item--c1">
-                                    <div class="overview__inner">
-                                        <div class="overview-box clearfix">
-                                            <div class="icon">
-                                                <i class="zmdi zmdi-account-o"></i>
-                                            </div>
-                                            <div class="text">
-                                                <h2>N</h2>
-                                                <span>Clients</span>
-                                            </div>
-                                        </div>
-                                        <div class="overview-chart">
-                                            <canvas id="widgetChart1"></canvas>
-                                        </div>
-                                    </div>
+                        
+                                 <hr>
+                                 <br>
+                                <h2 class="title-1 m-b-25 text-center">Modifier La Categorie</h2>
+                                <div id="error">
+                                    <?php echo $error; ?>
                                 </div>
-                            </div>
-                            <div class="col-sm-6 col-lg-3">
-                                <div class="overview-item overview-item--c2">
-                                    <div class="overview__inner">
-                                        <div class="overview-box clearfix">
-                                            <div class="icon">
-                                                <i class="zmdi zmdi-shopping-cart"></i>
-                                            </div>
-                                            <div class="text">
-                                                <h2>N</h2>
-                                                <span>Produits</span>
-                                            </div>
-                                        </div>
-                                        <div class="overview-chart">
-                                            <canvas id="widgetChart2"></canvas>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-6 col-lg-3">
-                                <div class="overview-item overview-item--c3">
-                                    <div class="overview__inner">
-                                        <div class="overview-box clearfix">
-                                            <div class="icon">
-                                                <i class="zmdi zmdi-calendar-note"></i>
-                                            </div>
-                                            <div class="text">
-                                                <h2>N</h2>
-                                                <span>Cette semaine</span>
-                                            </div>
-                                        </div>
-                                        <div class="overview-chart">
-                                            <canvas id="widgetChart3"></canvas>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-6 col-lg-3">
-                                <div class="overview-item overview-item--c4">
-                                    <div class="overview__inner">
-                                        <div class="overview-box clearfix">
-                                            <div class="icon">
-                                                <i class="zmdi zmdi-money"></i>
-                                            </div>
-                                            <div class="text">
-                                                <h2>$N</h2> <!-- stat athom ba3ed -->
-                                                <span>total des gains</span>
-                                            </div>
-                                        </div>
-                                        <div class="overview-chart">
-                                            <canvas id="widgetChart4"></canvas>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
+			<?php
+			if (isset($_GET['id']))
+			{
+				$categorie = $categorieC->recupererCategorie1($_GET['id']);	
+		       ?>
+                <form action="" method="POST" >
+                  <table  align="center">
+                 <tr> 
+                    <td> <label for="libelle">Libelle: </label>
+                    </td> 
+                </tr>
+                 <tr>
+                    <td><input type="text" name="libelle" id="libelle"  required value = "<?php echo $categorie->libelle; ?>"></td>
+                </tr> 
+               
+                
+         
+                <tr></tr>
+                <tr></tr>
+                <tr>
+                    <td></td><td> <div class="row">
                             <div class="col-md-12">
-                                <div class="copyright">
-                                    <p>&copy; Copyright.Tous droits réservés. <a href="1.html">rey del mexico</a>.</p>
+                                <div class="overview-wrap">
+                                    <input type="submit" class="au-btn au-btn-icon au-btn--blue" value="Envoyer">
+                                    <td>
+                        <input type="reset"  class="au-btn au-btn-icon au-btn--blue" value="Annuler" >
+                    </td>   
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- END MAIN CONTENT-->
-            <!-- END PAGE CONTAINER-->
-        </div>
+                </div></td></tr>
+                
+                  </table>
+        </form>                   
+        <?php
+		}
+		?>                      
+   </div>
+</div>
+						
+                 	<div class="row">
+								<div class="col-md-12">
+										<div class="copyright">
+												<p>&copy; Copyright.Tous droits réservés. <a href="front/1.html">Rey Del México</a>.</p>
+										</div>
+								</div>
+						</div>
 
-    </div>
+					</div>
+				</div>
+			</div>
+		
+		<!-- END PAGE CONTAINER-->
 
-    <!-- Jquery JS-->
-    <script src="vendor/jquery-3.2.1.min.js"></script>
-    <!-- Bootstrap JS-->
-    <script src="vendor/bootstrap-4.1/popper.min.js"></script>
-    <script src="vendor/bootstrap-4.1/bootstrap.min.js"></script>
-    <!-- Vendor JS       -->
-    <script src="vendor/slick/slick.min.js">
-    </script>
-    <script src="vendor/wow/wow.min.js"></script>
-    <script src="vendor/animsition/animsition.min.js"></script>
-    <script src="vendor/bootstrap-progressbar/bootstrap-progressbar.min.js">
-    </script>
-    <script src="vendor/counter-up/jquery.waypoints.min.js"></script>
-    <script src="vendor/counter-up/jquery.counterup.min.js">
-    </script>
-    <script src="vendor/circle-progress/circle-progress.min.js"></script>
-    <script src="vendor/perfect-scrollbar/perfect-scrollbar.js"></script>
-    <script src="vendor/chartjs/Chart.bundle.min.js"></script>
-    <script src="vendor/select2/select2.min.js">
-    </script>
+	
 
-    <!-- Main JS-->
-    <script src="js/main.js"></script>
+	<!-- Jquery JS-->
+	<script src="vendor/jquery-3.2.1.min.js"></script>
+	<!-- Bootstrap JS-->
+	<script src="vendor/bootstrap-4.1/popper.min.js"></script>
+	<script src="vendor/bootstrap-4.1/bootstrap.min.js"></script>
+	<!-- Vendor JS       -->
+	<script src="vendor/slick/slick.min.js">
+	</script>
+	<script src="vendor/wow/wow.min.js"></script>
+	<script src="vendor/animsition/animsition.min.js"></script>
+	<script src="vendor/bootstrap-progressbar/bootstrap-progressbar.min.js">
+	</script>
+	<script src="vendor/counter-up/jquery.waypoints.min.js"></script>
+	<script src="vendor/counter-up/jquery.counterup.min.js">
+	</script>
+	<script src="vendor/circle-progress/circle-progress.min.js"></script>
+	<script src="vendor/perfect-scrollbar/perfect-scrollbar.js"></script>
+	<script src="vendor/chartjs/Chart.bundle.min.js"></script>
+	<script src="vendor/select2/select2.min.js">
+	</script>
+
+	<!-- Main JS-->
+	<script src="js/main.js"></script>
 
 </body>
 
 </html>
 <!-- end document-->
+
+
+
+
+
+
+
