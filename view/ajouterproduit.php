@@ -1,4 +1,7 @@
 <?php
+
+
+
     include_once '../model/produit.php';
     include_once '../controller/produitC.php';
 
