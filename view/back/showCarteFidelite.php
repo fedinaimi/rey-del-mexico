@@ -3,6 +3,7 @@
 
 	$carteC = new carteC();
 	$listeCarte= $carteC->afficherCarte();
+    $listeCarte= $carteC->triCarteDate();
 
 ?>
 

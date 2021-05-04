@@ -77,7 +77,7 @@
 	<!-- Main CSS-->
 	<link href="css/theme.css" rel="stylesheet" media="all">
     	<!-- JS verif-->
-        <script src="js/script.js"></script>
+        <script src="js/fournisseur.js"></script>
 
 </head>
 
@@ -428,7 +428,7 @@
                                     <?php echo $error; ?>
                                         </div>
                                         <div id="erreur"></div>
-                                <form action="" method="POST">
+                                <form action="" name="fournisseur" id="fournisseur" method="POST" onclick=" return verifFournisseur()">
                   <table  align="center">
                  <tr> 
                     <td> <label for="nom">Nom: </label>

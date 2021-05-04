@@ -15,24 +15,12 @@ class chefC{
           die('Erreur: ' .$e->getMessage());
       }
     }
-    function listeLocal1()
-    {
-      $sql = " SELECT * FROM local";
-      $db = config::getConnexion();
-      try {
-        $liste= $db->query($sql);
-        return $liste;
-      } catch(Exception $e) {
-          die('Erreur: ' .$e->getMessage());
-      }
-    }
-    
-	
+
     function ajoutChef($chef)
     {
         
-       $sql = "INSERT INTO chef (nom, prenom, email, adresse, dateNais, categories, local)
-       values(:nom, :prenom, :email, :adresse, :dateNais, :categories, :local)";
+       $sql = "INSERT INTO chef (nom, prenom, email, adresse, dateNais, categories, local, img , fb)
+       values(:nom, :prenom, :email, :adresse, :dateNais, :categories, :local, :img , :fb)";
        $db = config::getConnexion();
        try {
         $query = $db->prepare($sql);
@@ -43,7 +31,9 @@ class chefC{
 	         	'adresse' => $chef->getAdresse(),
             'dateNais' => $chef->getDateNais(),
 	         	'categories' => $chef->getCategories(),
-				 'local' => $chef->getLocal()
+				 'local' => $chef->getLocal(),
+				 'img' => $chef->getImg(),
+				 'fb' => $chef->getFb()
             
         ]);
         
@@ -75,6 +65,8 @@ class chefC{
 						dateNais = :dateNais,
                         categories = :categories,
 						local = :local
+						img = :img,
+						fb = :fb
 					WHERE id = :id'
 				);
 				$query->execute([
@@ -85,6 +77,8 @@ class chefC{
 					'dateNais' => $chef->getDateNais(),
 						 'categories' => $chef->getCategories(),
 						 'local' => $chef->getLocal(),
+						 'img' => $chef->getImg(),
+						 'fb' => $chef->getFb(),
 					     'id' => $id
                   
 				]);

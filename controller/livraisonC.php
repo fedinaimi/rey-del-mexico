@@ -58,7 +58,7 @@ class livraisonC{
 				
 					
 				
-    function modifierLocal($livraison, $id){
+    function modifierLivraison($livraison, $id){
 			try {
 				$db = config::getConnexion();
 				$query = $db->prepare(
@@ -102,7 +102,7 @@ class livraisonC{
 			}
 		}
 
-		function recupererLocal1($id){
+		function recupererLivraison1($id){
 			$sql="SELECT * from livraison where	id=$id";
 			$db = config::getConnexion();
 			try{

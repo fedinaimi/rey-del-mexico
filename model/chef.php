@@ -9,7 +9,9 @@
 		private ?string $dateNais = null;	
 		private ?string $categories = null;	
 		private ?int $local = null;	
-		function __construct( string $nom, string $prenom, string $email,string $adresse, string $dateNais ,string $categories,int $local)
+		private ?string $img = null;	
+		private ?string $fb = null;	
+		function __construct( string $nom, string $prenom, string $email,string $adresse, string $dateNais ,string $categories,int $local, string $img , string $fb)
         {
 			$this->nom=$nom;
 			$this->prenom=$prenom;
@@ -18,6 +20,8 @@
 			$this->dateNais=$dateNais;
 			$this->categories=$categories;
 			$this->local=$local;
+			$this->img=$img;
+			$this->fb=$fb;
 		}
 		function getIdChef(): int{
 			return $this->id;
@@ -28,6 +32,13 @@
 		function getPrenom(): string{
 			return $this->prenom;
 		}
+		function getImg(): string{
+			return $this->img;
+		}
+		function getFb(): string{
+			return $this->fb;
+		}
+
 		function getEmail(): string{
 			return $this->email;
 		}
@@ -50,6 +61,14 @@
 		function setPrenom(string $prenom): void
         {
 			$this->prenom=$prenom;
+		}
+		function setImg(string $img): void
+        {
+			$this->img=$img;
+		}
+		function setFb(string $fb): void
+        {
+			$this->fb=$fb;
 		}
 		function setEmail(string $email): void
         {

@@ -6,7 +6,7 @@ class carteC{
 
     function afficherCarte()
     {
-      $sql = " SELECT * FROM carte";
+      $sql = " SELECT * FROM carte ORDER by points DESC";
       $db = config::getConnexion();
       try {
         $liste= $db->query($sql);
@@ -15,7 +15,18 @@ class carteC{
           die('Erreur: ' .$e->getMessage());
       }
     }
-   
+	function triCarteDate()
+	{
+		$sql="SELECT * from carte ORDER by dateCreation ASC";
+		$db = config::getConnexion();
+		try{
+		$listeCarte=$db->query($sql);
+		return $listeCarte;
+		}
+		catch (Exception $e){
+			die('Erreur: '.$e->getMessage());
+		}	
+	}
    
 	
     function ajoutCarte($carte)
@@ -48,11 +59,9 @@ class carteC{
 				die('Erreur: '.$e->getMessage());
 			}
 		}
-<<<<<<< HEAD
+
 	function modifierCarte($Utilisateur, $id_carte){
-=======
-		function modifierCarte($Utilisateur, $id_carte){
->>>>>>> fc201f0 (Signed-off-by: ahmed bahrouni <ahmed.bahrouni@esprit.tn>)
+
 			try {
 				$db = config::getConnexion();
 				$query = $db->prepare(

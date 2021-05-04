@@ -17,7 +17,9 @@
         && isset($_POST['description']) 
         && isset($_POST['prix'])
          && isset($_POST["categorie"])
-         && isset($_POST["fournisseur"])) 
+         && isset($_POST["fournisseur"])
+         && isset($_POST["img"])
+         ) 
          { 
             
              if( !empty($_POST['libelle']) &&
@@ -25,9 +27,11 @@
              !empty($_POST['description']) &&
              !empty($_POST['prix']) &&
              !empty($_POST['categorie']) &&
-             !empty($_POST["fournisseur"]) )
+             !empty($_POST["fournisseur"]) &&
+             !empty($_POST["img"]) 
+             )
                 {
-                $produit= new produit($_POST['libelle'],$_POST['nb_calories'],$_POST['prix'],$_POST['description'],$_POST['categorie'] ,$_POST['fournisseur'] );
+                $produit= new produit($_POST['libelle'],$_POST['nb_calories'],$_POST['prix'],$_POST['description'],$_POST['categorie'] ,$_POST['fournisseur'],$_POST['img'] );
                 $produitC->ajoutProduit($produit);
                 header('Location:showProduit.php');
                 }
@@ -488,6 +492,19 @@
           </select>   
                      
                     </td> 
+                </tr>
+                <tr>
+                    <td>    <label for="img">Image Produit: </label></td> 
+                </tr> 
+                <tr>
+
+                <td>
+<form enctype="multipart/form-data" method="post" autocomplete="on" action="upload/">     
+
+    <p> <input type="file" id="img" name="img"  required /></p>
+    
+ </form>
+ </td>
                 </tr>
                 <tr></tr>
                 <tr></tr>

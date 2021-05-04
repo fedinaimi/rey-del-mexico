@@ -1,6 +1,8 @@
 <?PHP
 	include "../../controller/chefC.php";
-
+    include "../../controller/localC.php";
+    $elementL= null;
+    $localC = new localC();
 	$chefC = new chefC();
 	$listeChef= $chefC->afficherChef();
 
@@ -19,7 +21,7 @@
 	<meta name="keywords" content="au theme template">
 
 	<!-- Title Page-->
-	<title>Commande</title>
+	<title>Chef</title>
 
 	<!-- Fontfaces CSS-->
 	<link href="css/font-face.css" rel="stylesheet" media="all">
@@ -404,6 +406,7 @@
                                         <thead>
                                             <tr>
                                             <th class="text-center">ID</th>
+                                            <th class="text-center">Image</th>
                                                 <th class="text-center">NOM</th>
                                                 <th class="text-center">Prénom</th>
                                                 <th class="text-center">Email</th>
@@ -411,6 +414,7 @@
                                                 <th class="text-center">Date de Naissance</th>
                                                 <th class="text-center">Catégorie</th>
                                                 <th class="text-center">Local</th>
+                                                <th class="text-center">Fb</th>
                                                 <th class="text-center"></th>
                                                 <th class="text-right"></th>
                                             </tr>
@@ -424,13 +428,21 @@ foreach($listeChef as $chef){
 ?>
 <tr>
 <td class="text-center"><?PHP echo $chef['id']; ?></td>
+<td><img src="../front/assets/img/chef/<?php echo $chef["img"]; ?>" length="25" height="25" alt="image produit "/></td>
+
 <td class="text-center"><?PHP echo $chef['nom']; ?></td>
 <td class="text-center"><?PHP echo $chef['prenom']; ?></td>
 <td class="text-center"><?PHP echo $chef['email']; ?></td>
 <td class="text-center"><?PHP echo $chef['adresse']; ?></td>
 <td class="text-center"><?PHP echo $chef['dateNais']; ?></td>
 <td class="text-center"><?PHP echo $chef['categories']; ?></td>
-<td class="text-center"><?PHP echo $chef['local']; ?></td>
+<td class="text-center">
+<?PHP
+$elementL= $localC->afficherElementLocal($chef['local']);
+ echo $elementL->adresse;
+?>
+</td>
+<td class="text-center"><?PHP echo $chef['fb']; ?></td>
 <td class="text-center"> 
 <form method="POST" action="deleteChef.php">
 <button type="submit" name="supprimer" class="au-btn au-btn-icon au-btn--blue">

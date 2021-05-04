@@ -401,13 +401,15 @@
                                     <table class="table table-borderless table-striped table-earning">
                                         <thead>
                                             <tr>
-                                                <th class="text-center">Id</th>
+                                                <th class="text-center">ID</th>
+                                                <th class="text-center">Image</th>
                                                 <th class="text-center">Libelle</th>
-                                                <th class="text-center">Nb_calories</th>
+                                                <th class="text-center">Nb Calories</th>
                                                 <th class="text-center">Prix</th>
                                                 <th class="text-center">Description</th>
-                                                <th class="text-center">Categorie</th>
+                                                <th class="text-center">Catégorie</th>
                                                 <th class="text-center">Fournisseur</th>
+                                                
                                                 <th class="text-center"></th>
                                                 <th class="text-right"></th>
                                             </tr>
@@ -419,6 +421,7 @@ foreach($listepproduit as $produit){
 ?>
 <tr>
 <td class="text-center"><?PHP echo $produit['id']; ?></td>
+<td><img src="../front/assets/img/menu/<?php echo $produit["img"]; ?>" length="25" height="25" alt="image produit "/></td>
 <td class="text-center"><?PHP echo $produit['libelle']; ?></td>
 <td class="text-center"><?PHP echo $produit['nb_calories']; ?></td>
 <td class="text-center"><?PHP echo $produit['prix']; ?></td>

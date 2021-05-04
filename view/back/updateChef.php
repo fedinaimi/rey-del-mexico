@@ -1,6 +1,6 @@
 <?php
 	  include_once "../../controller/chefC.php";
-    
+      include "../../controller/localC.php";
 
 	
       $error1 = "";
@@ -8,8 +8,8 @@
       $chef = null;
       $chefC = new chefC(); 
       $chef1C = new chefC();
-      $listeLocal= $chef1C->listeLocal1();
-   
+      $localC = new localC();
+      $listeLocal= $localC->afficherLocal();
     
   
       if( isset($_POST['nom']) 
@@ -18,7 +18,11 @@
           && isset($_POST['adresse'])
           && isset($_POST['dateNais'])
            && isset($_POST["categories"])
-           && isset($_POST["local"])) 
+           && isset($_POST["local"])
+           && isset($_POST["img"])
+           && isset($_POST["fb"])
+           
+           ) 
            { 
               
                if( !empty($_POST['nom']) &&
@@ -27,7 +31,10 @@
                !empty($_POST['adresse']) &&
                !empty($_POST['dateNais']) &&
                !empty($_POST["categories"]) &&
-               !empty($_POST["local"]) ) 
+               !empty($_POST["local"]) &&
+               !empty($_POST["img"]) &&
+               !empty($_POST["fb"])
+                ) 
                {
             $chef = new chef(
                 $_POST['nom'],
@@ -36,7 +43,9 @@
                 $_POST['adresse'],
                 $_POST['dateNais'], 
                 $_POST['categories'],
-                $_POST['local']
+                $_POST['local'],
+                $_POST['img'],
+                $_POST['fb']
                
 			);
 			
@@ -460,39 +469,39 @@
                     </td> 
                 </tr>
                  <tr>
-                    <td><input type="text" name="nom" id="nom" required maxlength="20"></td>
+                    <td><input type="text" name="nom" id="nom" required value = "<?php echo $chef->nom; ?>" maxlength="40"></td>
                 </tr>
                 <tr>
                     <td><label for="prenom">prenom: </label>  </td> 
                 </tr> 
                 <tr>
-                    <td><input type="text" name="prenom" id="prenom" required maxlength="20"></td>
+                    <td><input type="text" name="prenom" id="prenom" value = "<?php echo $chef->prenom; ?>" required maxlength="40"></td>
                 </tr>
                 <tr>
                     <td> <label for="email">Email: </label>  </td> 
  
                 </tr> 
                 <tr>
-                    <td><input type="email" name="email" id="email" maxlength="50" required pattern=".+@gmail.com|.+@esprit.tn"></td>
+                    <td><input type="email" name="email" id="email" maxlength="50" value = "<?php echo $chef->email; ?>" required pattern=".+@gmail.com|.+@esprit.tn"></td>
                 </tr>
                 <tr>
                     <td>    <label for="adresse">Adresse: </label></td> 
                 </tr> 
                 <tr>
-                    <td><input type="text" name="adresse" id="adresse"  required  maxlength="200"></td> 
+                    <td><input type="text" name="adresse" id="adresse" value = "<?php echo $chef->adresse; ?>" required  maxlength="200"></td> 
                 </tr>
                 <tr>
                     <td>    <label for="dateNais">Date de Naissance: </label></td> 
                 </tr> 
                 <tr>
-                    <td><input type="date" name="dateNais" id="dateNais"  required  maxlength="200"></td> 
+                    <td><input type="date" name="dateNais" id="dateNais" value = "<?php echo $chef->dateNais; ?>"" readonly  maxlength="200"></td> 
                 </tr>
                 
                 <tr>
                     <td>    <label for="categories">Categorie: </label></td> 
                 </tr> 
                 <tr>
-                <td><input type="text" name="categories" id="categories"  required  maxlength="200"></td>
+                <td><input type="text" name="categories" id="categories"  value = "<?php echo $chef->categories; ?>" required  maxlength="200"></td>
                 </tr>
                 <tr>
                     <td><label for="local">Local:</label></td> 
@@ -512,6 +521,26 @@
           </select>   
                      
                     </td> 
+                </tr>
+                <tr>
+                    <td>    <label for="img">Image Chef: </label></td> 
+                </tr> 
+                <tr>
+
+                <td>
+<form enctype="multipart/form-data" method="post" autocomplete="on" action="upload/">     
+
+    <p> <input type="file" id="img" name="img"  required /></p>
+    
+ </form>
+ </td>
+                </tr>
+                <tr> 
+                    <td> <label for="fb">Facebook: </label>
+                    </td> 
+                </tr>
+                 <tr>
+                    <td><input type="text" name="fb" id="fb" required value = "<?php echo $chef->fb; ?>"maxlength="200"></td>
                 </tr>
                 <tr></tr>
                 <tr></tr>

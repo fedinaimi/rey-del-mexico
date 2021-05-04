@@ -1,5 +1,5 @@
 <?php
-	  
+	  session_start();
       include_once '../../controller/localC.php';
 
 	
@@ -42,10 +42,13 @@
 			);
 			
             $localC->modifierLocal($local, $_GET['id']);
+            echo '<script> alert(" update avec succès ");
+            </script>';
             header('Location:showLocal.php');
         }
         else
-            $error = "Missing information";
+           {  echo '<script> alert(" Des informations Manquantes ");
+            </script>';}
 	}
 
 ?>
@@ -84,7 +87,7 @@
 	<!-- Main CSS-->
 	<link href="css/theme.css" rel="stylesheet" media="all">
     <!-- JS verif-->
-    <script src="js/script.js"></script>
+    <script src="js/local.js"></script>
 
 </head>
 
@@ -224,7 +227,7 @@
                         </li>
                         <li>
                             <a href="showLivraison.php">
-                                <i class="fa fa-automobile" ></i>Livraisons</a>
+                                <i cl   ass="fa fa-automobile" ></i>Livraisons</a>
                         </li>
                         <li>
                             <a href="showCarteFidelite.php">
@@ -452,7 +455,7 @@
 			{
 				$local = $localC->recupererLocal1($_GET['id']);	
 		 ?>
-                <form action="" method="POST" >
+                <form action="" name="local" id="local" method="POST" onclick=" return verifLocal()">
                   <table  align="center">
                   <tr> 
                     <td> <label for="adresse">Adresse: </label>
@@ -497,7 +500,7 @@
                     <td>    <label for="dateCreation">Numéro Téléphone: </label></td> 
                 </tr> 
                 <tr>
-                    <td><input type="date" name="dateCreation" id="dateCreation" required value = "<?php echo $local->dateCreation; ?>" ></td> 
+                    <td><input type="date" name="dateCreation" id="dateCreation" readonly value = "<?php echo $local->dateCreation; ?>" ></td> 
                 </tr>
                
                 <tr></tr>

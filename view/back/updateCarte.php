@@ -25,12 +25,12 @@
         ) {
             $carte = new carte(
                 $_POST['points'],
-               
                 $_POST['statut'],
                 $_POST['dateCreation']
                
 			);
-			
+            echo '<script> alert(" modification avec succès ");
+            </script>';
             $carteC->modifierCarte($carte, $_GET['id']);
             header('Location:showCarteFidelite.php');
         }
@@ -75,7 +75,7 @@
 	<!-- Main CSS-->
 	<link href="css/theme.css" rel="stylesheet" media="all">
     	<!-- JS verif-->
-        <script src="js/script.js"></script>
+        <script src="js/carte.js"></script>
 
 </head>
 
@@ -444,7 +444,7 @@
 			{
 				$carte = $carteC->recupererCarte1($_GET['id']);	
 		       ?>
-                <form action="" method="POST" >
+                <form action="" name="carte" id="carte" method="POST" onclick=" return verifCarteUpdate()">
                   <table  align="center">
                  <tr> 
                     <td> <label for="points">Points: </label>

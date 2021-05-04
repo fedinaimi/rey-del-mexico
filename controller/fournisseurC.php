@@ -6,7 +6,7 @@ class fournisseurC{
 
     function afficherFournisseur()
     {
-      $sql = " SELECT * FROM fournisseur";
+      $sql = " SELECT * FROM fournisseur ORDER by id_fournisseur DESC";
       $db = config::getConnexion();
       try {
         $liste= $db->query($sql);
@@ -15,7 +15,7 @@ class fournisseurC{
           die('Erreur: ' .$e->getMessage());
       }
     }
-  
+	
 	
     function ajoutFournisseur($fourni)
     {

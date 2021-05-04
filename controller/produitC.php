@@ -44,8 +44,8 @@ class produitC{
     function ajoutProduit($produit)
     {
         
-       $sql = "INSERT INTO produit ( libelle, nb_calories,prix, description, categorie, fournisseur)
-       values(:libelle, :nb_calories, :prix, :description, :categorie, :fournisseur)";
+       $sql = "INSERT INTO produit ( libelle, nb_calories,prix, description, categorie, fournisseur, img)
+       values(:libelle, :nb_calories, :prix, :description, :categorie, :fournisseur, :img)";
        $db = config::getConnexion();
        try {
         $query = $db->prepare($sql);
@@ -55,7 +55,8 @@ class produitC{
 	         	'prix' => $produit->getPrix(),
             'description' => $produit->getDescription(),
 	         	'categorie' => $produit->getCategorie(),
-		    'fournisseur' => $produit->getFournisseur()
+		    'fournisseur' => $produit->getFournisseur(),
+			'img' => $produit->getImg()
             
         ]);
         
@@ -85,7 +86,8 @@ class produitC{
 						prix = :prix,
 						description = :description,
 						categorie = :categorie,
-                        fournisseur = :fournisseur
+                        fournisseur = :fournisseur,
+						img = :img
 					WHERE id = :id'
 				);
 				$query->execute([
@@ -95,7 +97,9 @@ class produitC{
 						 'description' => $produit->getDescription(),
 					'categorie' => $produit->getCategorie(),
 						 'fournisseur' => $produit->getFournisseur(),
-				    'id' => $id      ]);
+				    'id' => $id  , 
+					'img' => $produit->getImg()
+					 ]);
 
 				echo $query->rowCount() . " records UPDATED successfully <br>";
 			} catch (PDOException $e) {

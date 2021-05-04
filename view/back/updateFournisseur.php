@@ -451,7 +451,7 @@
 			{
 				$fournisseur = $fournisseurC->recupererFournisseur1($_GET['id']);	
 		       ?>
-                <form action="" method="POST" >
+                <form action="" name="fournisseur" id="fournisseur" method="POST" onclick=" return verifFournisseur()" >
                   <table  align="center">
                  <tr> 
                     <td> <label for="nom">Nom: </label>

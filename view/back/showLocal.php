@@ -1,8 +1,13 @@
+
 <?PHP
+session_start();
 	include "../../controller/localC.php";
 
 	$localC = new localC();
-	$listeLocal= $localC->afficherLocal();
+	
+   $listeLocal= $localC->afficherLocal();
+   $listeLocal= $localC->triLocal();
+   $listeLocal= $localC->triLocalDate();
 
 ?>
 <!DOCTYPE html>
@@ -21,6 +26,7 @@
 
 	<!-- Fontfaces CSS-->
 	<link href="css/font-face.css" rel="stylesheet" media="all">
+ 
 	<link href="vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
 	<link href="vendor/font-awesome-5/css/fontawesome-all.min.css" rel="stylesheet" media="all">
 	<link href="vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
@@ -213,12 +219,8 @@
 				<div class="section__content section__content--p30">
 					<div class="container-fluid">
 						<div class="header-wrap">
-							<form class="form-header" action="" method="POST">
-								<input class="au-input au-input--xl" type="text" name="search" placeholder="Recherche local..." />
-								<button class="au-btn--submit" type="submit">
-									<i class="zmdi zmdi-search"></i>
-								</button>
-							</form>
+                        <button class="au-btn au-btn-icon au-btn--blue">
+                                    <a href="findLocal.php">   <i class="zmdi zmdi">recherche Local</i></a></button>
 							<div class="header-button">
                                 <div class="noti-wrap">
                                     <div class="noti__item js-item-menu">
@@ -394,7 +396,17 @@
 						<div class="row">
                             <div class="col-lg-9">
 								<br>
+                                <div id="google_translate_element"></div>
+         <script type="text/javascript">
+             function googleTranslateElementInit() {
+                 new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
+             }
+         </script>
+
+         <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit">
+         </script> </div>
                                 <h2 class="title-1 m-b-25">Informations Locaux</h2>
+                              
                                 <div class="table-responsive table--no-card m-b-40">
                                     <table class="table table-borderless table-striped table-earning">
                                         <thead>
@@ -402,11 +414,13 @@
                                             <th class="text-center">ID Local</th>
                                                 <th class="text-center">Libelle</th>
                                                 <th class="text-center">Adresse</th>
+                                                <th class="text-center">Date de Création</th>
                                                 <th class="text-center">Nb de Tables</th>
                                                 <th class="text-center">Nb de Chaises</th>
                                                 <th class="text-center">Surface</th>
                                                 <th class="text-center">Numéro Téléphone</th>
                                                 <th class="text-center"></th>
+                                                <th class="text-right"></th>
                                                 <th class="text-right"></th>
                                             </tr>
                                         </thead>
@@ -419,6 +433,7 @@ foreach($listeLocal as $local){
 <td class="text-center"><?PHP echo $local['id_local']; ?></td>
 <td class="text-center"><?PHP echo $local['libelle']; ?></td>
 <td class="text-center"><?PHP echo $local['adresse']; ?></td>
+<td class="text-center"><?PHP echo $local['dateCreation']; ?></td>
 <td class="text-center"><?PHP echo $local['nbTables']; ?></td>
 <td class="text-center"><?PHP echo $local['nbChaises']; ?></td>
 <td class="text-center"><?PHP echo $local['surface']; ?></td>
@@ -431,6 +446,21 @@ foreach($listeLocal as $local){
  <input type="hidden" value=<?PHP echo $local['id_local']; ?> name="id_local">
  </form>  
  </td>
+ <td class="text-center"> 
+<form action="imprimeLocal.php" method="get">
+<button type="submit" name="imprime" id="imprime" class="au-btn au-btn-icon au-btn--blue">
+ <i class="zmdi zmdi"></i>Imprimer</button>
+ <input type="hidden" value=<?PHP echo $local['id_local']; ?> id="id_local" name="id_local">
+ <input type="hidden" value=<?PHP echo $local['libelle']; ?> id="libelle" name="libelle">
+ <input type="hidden" value=<?PHP echo $local['adresse']; ?> id="adresse" name="adresse">
+ <input type="hidden" value=<?PHP echo $local['dateCreation']; ?> id="dateCreation" name="dateCreation">
+ <input type="hidden" value=<?PHP echo $local['nbTables']; ?> id="nbTables" name="nbTables">
+ <input type="hidden" value=<?PHP echo $local['nbChaises']; ?> id="nbChaises" name="nbChaises">
+ <input type="hidden" value=<?PHP echo $local['surface']; ?> id="surface" name="surface">
+ <input type="hidden" value=<?PHP echo $local['tel']; ?> id="tel" name="tel">
+ </form>  
+ </td>
+
 
  <td class="text-center"> 
  <button class="au-btn au-btn-icon au-btn--blue">
@@ -443,7 +473,7 @@ foreach($listeLocal as $local){
 }
 ?>
                                            
-                                        </tbody>
+                                           </tbody>
                                     </table>
                                 </div>
                             </div>
@@ -462,6 +492,7 @@ foreach($listeLocal as $local){
 		<!-- END PAGE CONTAINER-->
 
 	</div>
+
 
 	<!-- Jquery JS-->
 	<script src="vendor/jquery-3.2.1.min.js"></script>
@@ -483,7 +514,7 @@ foreach($listeLocal as $local){
 	<script src="vendor/chartjs/Chart.bundle.min.js"></script>
 	<script src="vendor/select2/select2.min.js">
 	</script>
-
+   
 	<!-- Main JS-->
 	<script src="js/main.js"></script>
 

@@ -1,13 +1,15 @@
 <?php
    
     include_once '../../controller/chefC.php';
-
+    include "../../controller/localC.php";
     $error1 = "";
     $error = "";
     $chef = null;
     $chefC = new chefC(); 
     $chef1C = new chefC();
-	$listeLocal= $chef1C->listeLocal1();
+	
+    $localC = new localC();
+	$listeLocal= $localC->afficherLocal();
  
   
 
@@ -17,7 +19,10 @@
         && isset($_POST['adresse'])
         && isset($_POST['dateNais'])
          && isset($_POST["categories"])
-         && isset($_POST["local"])) 
+         && isset($_POST["local"])
+         && isset($_POST["img"])
+         && isset($_POST["fb"])
+         ) 
          { 
             
              if( !empty($_POST['nom']) &&
@@ -26,9 +31,14 @@
              !empty($_POST['adresse']) &&
              !empty($_POST['dateNais']) &&
              !empty($_POST["categories"]) &&
-             !empty($_POST["local"]) )
+             !empty($_POST["local"]) &&
+             !empty($_POST["img"]) &&
+             !empty($_POST["fb"])
+             )
                 {
-                $chef= new chef($_POST['nom'],$_POST['prenom'],$_POST['email'],$_POST['adresse'],$_POST['dateNais'],$_POST['categories'] ,$_POST['local'] );
+                $chef= new chef($_POST['nom'],$_POST['prenom'],$_POST['email'],
+                $_POST['adresse'],$_POST['dateNais'],$_POST['categories'] ,
+                $_POST['local'],$_POST['img'] ,$_POST['fb'] );
                 $chefC->ajoutChef($chef);
                 header('Location:showChef.php');
                 }
@@ -483,6 +493,27 @@
           </select>   
                      
                     </td> 
+
+                </tr>
+                <tr>
+                    <td>    <label for="img">Image Chef: </label></td> 
+                </tr> 
+                <tr>
+
+                <td>
+<form enctype="multipart/form-data" method="post" autocomplete="on" action="upload/">     
+
+    <p> <input type="file" id="img" name="img"  required /></p>
+    
+ </form>
+ </td>
+                </tr>
+                <tr> 
+                    <td> <label for="fb">Facebook: </label>
+                    </td> 
+                </tr>
+                 <tr>
+                    <td><input type="text" name="fb" id="fb" required maxlength="200"></td>
                 </tr>
                 <tr></tr>
                 <tr></tr>

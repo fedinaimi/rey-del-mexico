@@ -11,6 +11,8 @@
                 {
                 $carte= new carte(0,0,$_POST['dateCreation']);
                 $carteC->ajoutCarte($carte);
+                echo '<script> alert(" ajout avec succès ");
+                </script>';
                 header('Location:showCarteFidelite.php');
                 }
            else 
@@ -58,7 +60,7 @@
 	<!-- Main CSS-->
 	<link href="css/theme.css" rel="stylesheet" media="all">
     	<!-- JS verif-->
-        <script src="js/script.js"></script>
+        <script src="js/carte.js"></script>
 
 </head>
 
@@ -408,7 +410,7 @@
                                     <?php echo $error; ?>
                                         </div>
                                         <div id="erreur"></div>
-                                <form action="" method="POST">
+                                <form action="" name="carte" id="carte" method="POST" onclick=" return verifCarteAdd()">
                   <table  align="center">
                 
                 <tr>
@@ -425,7 +427,7 @@
                     <td></td><td> <div class="row">
                             <div class="col-md-12">
                                 <div class="overview-wrap">
-                                    <input type="submit" class="au-btn au-btn-icon au-btn--blue" value="Envoyer" onclick="verifCarte();">
+                                    <input type="submit" class="au-btn au-btn-icon au-btn--blue" value="Envoyer" >
                                     <input type="reset" class="au-btn au-btn-icon au-btn--blue" value="Annuler"> 
                                 </div>
                             </div>

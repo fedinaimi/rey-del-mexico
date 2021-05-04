@@ -1,5 +1,5 @@
 <?php
-   
+   session_start();
     include_once '../../controller/localC.php';
 
     $error1 = "";
@@ -19,7 +19,6 @@
         && isset($_POST['dateCreation'])
          ) 
          { 
-            
              if( !empty($_POST['adresse']) &&
              !empty($_POST['nbTables']) &&
              !empty($_POST['nbChaises']) &&
@@ -28,9 +27,13 @@
              !empty($_POST['tel']) &&
              !empty($_POST['dateCreation']) 
              )
-                {
-                $local= new local($_POST['adresse'],$_POST['nbTables'],$_POST['nbChaises'],$_POST['surface'],$_POST['libelle'],$_POST['tel'],$_POST['dateCreation']);
+                { 
+                $local= new local($_POST['adresse'],$_POST['nbTables'],
+                $_POST['nbChaises'],$_POST['surface'],$_POST['libelle'],
+                $_POST['tel'],$_POST['dateCreation']);
                 $localC->ajoutLocal($local);
+                echo '<script> alert(" ajout avec succès ");
+                </script>';
                 header('Location:showLocal.php');
                 }
            else 
@@ -38,9 +41,8 @@
                 echo '<script> alert(" Des informations Manquantes ");
                 </script>';
                } 
-        }
-
-    
+         }
+ 
 ?>
 
 <!DOCTYPE html>
@@ -78,11 +80,11 @@
 	<!-- Main CSS-->
 	<link href="css/theme.css" rel="stylesheet" media="all">
     	<!-- JS verif-->
-    <script src="js/script.js"></script>
+        <script src="js/local.js"></script>
 
 </head>
 
-<body class="animsition">
+<body   class="animsition">
     <div class="page-wrapper">
         <!-- HEADER MOBILE-->
         <header class="header-mobile d-block d-lg-none">
@@ -428,7 +430,7 @@
                                     <?php echo $error; ?>
                                         </div>
                                         <div id="erreur"></div>
-                                <form action="" method="POST">
+                  <form action="" name="local" id="local" method="POST" onclick=" return verifLocal()" >
                   <table  align="center">
                  <tr> 
                     <td> <label for="adresse">Adresse: </label>
@@ -470,10 +472,10 @@
                     <td><input type="tel" name="tel" id="tel" required placeholder="12345678" pattern="[0-9]{2}[0-9]{3}[0-9]{3}" maxlength="8"></td> 
                 </tr>
                 <tr>
-                    <td>    <label for="dateCreation">Numéro Téléphone: </label></td> 
+                    <td>    <label for="dateCreation">Date création: </label></td> 
                 </tr> 
                 <tr>
-                    <td><input type="date" name="dateCreation" id="dateCreation" required  ></td> 
+                    <td><input type="date" name="dateCreation" id="dateCreation" required maxlength="20" ></td> 
                 </tr>
                
                 <tr></tr>
@@ -482,15 +484,13 @@
                     <td></td><td> <div class="row">
                             <div class="col-md-12">
                                 <div class="overview-wrap">
-                                    <input type="submit" class="au-btn au-btn-icon au-btn--blue" value="Envoyer" onclick="verifLocal();">
+                                    <input type="submit" class="au-btn au-btn-icon au-btn--blue" value="Envoyer">
                                     <input type="reset" class="au-btn au-btn-icon au-btn--blue" value="Annuler"> 
                                 </div>
                             </div>
                 </div></td></tr>
-                
                   </table>
-        </form>                   
-                            
+        </form>                                     
    </div>
 </div>
 						
@@ -500,7 +500,7 @@
 												<p>&copy; Copyright.Tous droits réservés. <a href="../view/front/1.html">Rey Del México</a>.</p>
 										</div>
 								</div>
-						</div>
+					</div>
 
 					</div>
 				</div>
