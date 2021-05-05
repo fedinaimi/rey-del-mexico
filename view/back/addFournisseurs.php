@@ -1,5 +1,5 @@
 <?php
-    
+    include 'sendemail.php'; 
     include_once '../../controller/fournisseurC.php';
     include "../../controller/localC.php";
     include "../../controller/categorieC.php";
@@ -31,6 +31,7 @@
                 {
                 $fournisseur= new fournisseur($_POST['nom'],$_POST['prenom'],$_POST['email'],$_POST['tel'],$_POST['categorie'] ,$_POST['local'] );
                 $fournisseurC->ajoutFournisseur($fournisseur);
+               
                 header('Location:showFournisseur.php');
                 }
            else 
@@ -424,6 +425,7 @@
                             <div class="col-lg-9">
 								<br>
                                 <h2 class="title-1 m-b-25">Ajouter un nouveau fournisseur</h2>
+                                <?php echo $alert; ?>
                                 <div id="error">
                                     <?php echo $error; ?>
                                         </div>
@@ -500,7 +502,7 @@
                     <td></td><td> <div class="row">
                             <div class="col-md-12">
                                 <div class="overview-wrap">
-                                    <input type="submit" class="au-btn au-btn-icon au-btn--blue" value="Envoyer" onclick="verifFournisseur();">
+                                    <input type="submit" name="submit" id="submit" class="au-btn au-btn-icon au-btn--blue" value="Envoyer" onclick="verifFournisseur();">
                                     
                                     <input type="reset" class="au-btn au-btn-icon au-btn--blue" value="Annuler"> 
                                 </div>
@@ -552,6 +554,12 @@
 
 	<!-- Main JS-->
 	<script src="js/main.js"></script>
+
+    <script type="text/javascript">
+    if(window.history.replaceState){
+      window.history.replaceState(null, null, window.location.href);
+    }
+    </script>
 
 </body>
 
