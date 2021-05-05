@@ -8,7 +8,8 @@
 		private ?float $prix = null;
 		private ?int   $categorie = null;	
 		private ?int $fournisseur = null;	
-		function __construct( string $libelle, float $nb_calories, float $prix,string $description,int $categorie,int $fournisseur)
+		private ?string $img = null;	
+		function __construct( string $libelle, float $nb_calories, float $prix,string $description,int $categorie,int $fournisseur, string $img)
         {
 			$this->libelle=$libelle;
 			$this->nb_calories=$nb_calories;
@@ -16,9 +17,13 @@
 			$this->prix=$prix;
 			$this->categorie=$categorie;
 			$this->fournisseur=$fournisseur;
+			$this->img=$img;
 		}
 		function getId(): int{
 			return $this->id;
+		}
+		function getImg(): string{
+			return $this->img;
 		}
 		function getLibelle(): string{
 			return $this->libelle;
@@ -41,6 +46,10 @@
 		function setlibelle(string $libelle): void
         {
 			$this->libelle=$libelle;
+		}
+		function setImg(string $img): void
+        {
+			$this->img=$img;
 		}
 		function setNb_calories(float $nb_calories): void
         {

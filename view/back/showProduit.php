@@ -390,24 +390,40 @@
                                     
                                     <button class="au-btn au-btn-icon au-btn--blue">
                                         <a href="addProduit.php">  <i class="zmdi zmdi-plus text-center"></i>Ajouter Produit </a></button>
+                                        
                                 </div>
+                                
                             </div>
+
                         </div>
+                        
 						<div class="row">
                             <div class="col-lg-9">
 								<br>
                                 <h2 class="title-1 m-b-25">Informations Produits</h2>
+                                <div id="google_translate_element"></div>
+         <script type="text/javascript">
+             function googleTranslateElementInit() {
+                 new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
+             }
+         </script>
+
+         <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
                                 <div class="table-responsive table--no-card m-b-40">
-                                    <table class="table table-borderless table-striped table-earning">
+                                    <table id="dataTable" class="table table-borderless table-striped table-earning" >
+                                    <input type="text" id="myInput" onkeyup="myFunction()" placeholder="rechercher" title="type in a name"
+			<tr>
                                         <thead>
                                             <tr>
-                                                <th class="text-center">Id</th>
+                                                <th class="text-center">ID</th>
+                                                <th class="text-center">Image</th>
                                                 <th class="text-center">Libelle</th>
-                                                <th class="text-center">Nb_calories</th>
+                                                <th class="text-center">Nb Calories</th>
                                                 <th class="text-center">Prix</th>
                                                 <th class="text-center">Description</th>
-                                                <th class="text-center">Categorie</th>
+                                                <th class="text-center">Catégorie</th>
                                                 <th class="text-center">Fournisseur</th>
+                                                
                                                 <th class="text-center"></th>
                                                 <th class="text-right"></th>
                                             </tr>
@@ -419,6 +435,7 @@ foreach($listepproduit as $produit){
 ?>
 <tr>
 <td class="text-center"><?PHP echo $produit['id']; ?></td>
+<td><img src="../front/assets/img/menu/<?php echo $produit["img"]; ?>" length="25" height="25" alt="image produit "/></td>
 <td class="text-center"><?PHP echo $produit['libelle']; ?></td>
 <td class="text-center"><?PHP echo $produit['nb_calories']; ?></td>
 <td class="text-center"><?PHP echo $produit['prix']; ?></td>
@@ -446,7 +463,11 @@ foreach($listepproduit as $produit){
                                        
                                         </tbody>
                                     </table>
+                                    <a href="imprimerProduit.php?id=<?PHP echo $produit['id']; ?>">
+ <i class="zmdi zmdi"></i>imprimer</button>
+  </a>
                                 </div>
+
                             </div>
 						
 						<div class="row">
@@ -484,6 +505,26 @@ foreach($listepproduit as $produit){
 	<script src="vendor/chartjs/Chart.bundle.min.js"></script>
 	<script src="vendor/select2/select2.min.js">
 	</script>
+    <script>
+    function myFunction() {
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("myInput");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("dataTable");
+        tr = table.getElementsByTagName("tr");
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[0];
+            if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+</script>
 
 	<!-- Main JS-->
 	<script src="js/main.js"></script>

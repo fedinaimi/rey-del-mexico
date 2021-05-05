@@ -1,54 +1,21 @@
 <?PHP
-<<<<<<< HEAD
 
-	include "../../controller/localC.php";
-  include "../../controller/fournisseurC.php";
-	$localC = new localC();
-	$listeLocal= $localC->afficherLocal();
-  $fournisseurC = new fournisseurC();
-	$listeFournisseur= $fournisseurC->afficherFournisseur();
 
-=======
-  include "../../controller/evenementC.php";
-  include "../../controller/localC.php";
-	include_once '../../controller/reservationC.php';
-  $localC = new localC();
-	$listeLocal= $localC->afficherLocal();
-  $evenementC = new evenementC();
-  $listeevenement= $evenementC->afficherevenement();
+include "../../controller/produitC.php";
+include "../../controller/localC.php";
+include "../../controller/fournisseurC.php";
+include "../../controller/categorieC.php";
+include "../../controller/chefC.php";
+$produitC = new produitC();
+$listeProduit= $produitC->afficherProduit();
+$categorieC= new categorieC();
+$localC = new localC();
+$listeLocal= $localC->afficherLocal();
+$chefC = new chefC();
+$listeChef= $chefC->afficherChef();
 
-  $error = "";
-  $reservation = null;
-  $reservationC = new  reservationC(); 
-  $reservation1C = new reservationC();
-$listeclient= $reservation1C->listeclient();
-  $reservation2C = new reservationC();
-$listeLocal= $reservation2C->listeLocal();
-  if(
-       isset($_POST['date']) 
-      && isset($_POST['nb_perso']) 
-      && isset($_POST['message'])
-      
-       && isset($_POST['statut'])   
-       && isset($_POST['client'])
-       && isset($_POST['local'])) 
-       {
-           if(
-           !empty($_POST['date']) &&
-           !empty($_POST['nb_perso']) &&
-           !empty($_POST['message']) &&
-           !empty($_POST['statut']) &&
-           !empty($_POST['client'])&&
-           !empty($_POST['local']))
-              {
-              $reservation= new reservation($_POST['date'],$_POST['nb_perso'],$_POST['message'] ,$_POST['statut'], $_POST['client'],$_POST['local']);
-              $reservationC->ajouterreservation($reservation);
-              
-          }
-         else 
-              $error =" Missing information";
-      }
->>>>>>> c90154e1317200ec7147486c5e4ca695399ba806
+$fournisseurC = new fournisseurC();
+$listeFournisseur= $fournisseurC->afficherFournisseur();    
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -121,7 +88,7 @@ $listeLocal= $reservation2C->listeLocal();
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul id="top-menu" class="nav navbar-nav navbar-right mu-main-nav">
-<<<<<<< HEAD
+
           <li><a href="1.php">ACCUEIL</a></li>
             <li><a href="1.php#mu-about-us">A PROPOS DE NOUS</a></li>                       
             <li><a href="1.php#mu-restaurant-menu">MENU</a></li>                       
@@ -134,20 +101,7 @@ $listeLocal= $reservation2C->listeLocal();
           </ul>  
           <a href="panier.php"> <img class="right1" src="assets/img/panier.png" width="25" height="25" alt="tab img"></a> 
           <a href="connexion.php"> <img class="rightT1" src="assets/login.jpg" width="25" height="25" alt="tab img"></a>                
-=======
-            <li><a href="1.html">ACCUEIL</a></li>
-            <li><a href="#mu-about-us">A PROPOS DE NOUS</a></li>                       
-            <li><a href="#mu-restaurant-menu">MENU</a></li>                       
-            <li><a href="#mu-reservation">RESERVATION</a></li>           
-            <li><a href="#mu-gallery">GALLERY</a></li>
-            <li><a href="#mu-chef">NOS CHEFS</a></li> 
-            <li><a href="#mu-evenement">EVENEMENT</a></li> 
-            <li><a href="ethos.html">ETHOS</a></li>  
-            <li><a href="commander.html">COMMANDER</a></li>  
-          </ul>  
-          <a href="panier.html"> <img class="right1" src="assets/img/panier.png" width="25" height="25" alt="tab img"></a> 
-          <a href="connexion.html"> <img class="rightT1" src="assets/login.jpg" width="25" height="25" alt="tab img"></a>                
->>>>>>> fc201f0 (Signed-off-by: ahmed bahrouni <ahmed.bahrouni@esprit.tn>)
+
                
         </div><!--/.nav-collapse -->       
       </div>          
@@ -342,104 +296,65 @@ foreach($listeFournisseur as $fournisseur){
                   <div class="mu-tab-content-area">
                     <div class="row">
 
-                      <div class="col-md-6">
-                        <div class="mu-tab-content-left">
-                          <ul class="mu-menu-item-nav">
+                      
+
+                          <?PHP
+                          $i=0;
+foreach($listeProduit as $produit){
+  
+  $elementP= $categorieC->afficherElementCategorie($produit['categorie']);
+  if($elementP->libelle === "tacos")
+  {
+             if($i<3){
+?>                          <div class="col-md-6">
+                             <div class="mu-tab-content-left">
+                    <ul class="mu-menu-item-nav">
                             <li>
                               <div class="media">
                                 <div class="media-left">
                                   <a href="#">
-                                    <img class="media-object" src="assets/img/menu/1.jpg" alt="img">
+                                    <img class="media-object" src="assets/img/menu/<?php echo $produit["img"]; ?>" length="25" height="25" alt="img">
                                   </a>
                                 </div>
                                 <div class="media-body">
-                                  <h4 class="media-heading"><a href="#">Al pastor</a></h4>
-                                  <span class="mu-menu-price">11.000  dt</span>
-                                  <p>Chawarma. Il est le plus souvent accompagné d'ananas, d'oignon et de coriandre.</p>
+                                  <h4 class="media-heading"><a href="#"><?PHP echo $produit['libelle']; ?></a></h4>
+                                  <span class="mu-menu-price"><?PHP echo $produit['prix']; ?>  dt</span>
+                                  <p><?PHP echo $produit['description']; ?></p>
                                 </div>
                               </div>
-                            </li>
-                             <li>
-                              <div class="media">
-                                <div class="media-left">
-                                  <a href="#">
-                                    <img class="media-object" src="assets/img/menu/2.jpg" alt="img">
-                                  </a>
-                                </div>
-                                <div class="media-body">
-                                  <h4 class="media-heading"><a href="#">Al biria</a></h4>
-                                  <span class="mu-menu-price">11.500 dt</span>
-                                  <p>La viande de birria est cuite lentement dans le bouillon, ce qui la rend toujours moelleuse et tendre.</p>
-                                </div>
-                              </div>
-                            </li>
-                             <li>
-                              <div class="media">
-                                <div class="media-left">
-                                  <a href="#">
-                                    <img class="media-object" src="assets/img/menu/3.jpg" alt="img">
-                                  </a>
-                                </div>
-                                <div class="media-body">
-                                  <h4 class="media-heading"><a href="#">Barbaco</a></h4>
-                                  <span class="mu-menu-price">12.500 dt</span>
-                                  <p> Avec de la viande de chèvre ou de mouton.</p>
-                                </div>
-                              </div>
-                            </li>
-                          </ul>   
+                              </li>
+                              </ul>   
                         </div>
                       </div>
-
-                     <div class="col-md-6">
-                       <div class="mu-tab-content-right">
-                          <ul class="mu-menu-item-nav">
-                            <li>
-                              <div class="media">
-                                <div class="media-left">
-                                  <a href="#">
-                                    <img class="media-object" src="assets/img/menu/4.jpg" alt="img">
-                                  </a>
-                                </div>
-                                <div class="media-body">
-                                  <h4 class="media-heading"><a href="#">Carnitas</a></h4>
-                                  <span class="mu-menu-price">13.500 dt</span>
-                                  <p>Ce taco est composé d'épaule de porc râpée et un certain nombre d'herbes et d'épices différentes</p>
-                                </div>
-                              </div>
-                            </li>
-                             <li>
-                              <div class="media">
-                                <div class="media-left">
-                                  <a href="#">
-                                    <img class="media-object" src="assets/img/menu/5.jpg" alt="img">
-                                  </a>
-                                </div>
-                                <div class="media-body">
-                                  <h4 class="media-heading"><a href="#">Lengua Taco</a></h4>
-                                  <span class="mu-menu-price">11.950  dt </span>
-                                  <p>La viande de langue de bœuf est généralement cuite lentement, ce qui donne une texture très douce et lisse.</p>
-                                </div>
-                              </div>
-                            </li>
-                             <li>
-                              <div class="media">
-                                <div class="media-left">
-                                  <a href="#">
-                                    <img class="media-object" src="assets/img/menu/6.jpg" alt="img">
-                                  </a>
-                                </div>
-                                <div class="media-body">
-                                  <h4 class="media-heading"><a href="#">Tinga</a></h4>
-                                  <span class="mu-menu-price">14.500 dt</span>
-                                  <p> Les piments chipotle fumés sont au cœur de la délicieuse saveur des tacos au poulet tinga.</p>
-                                </div>
-                              </div>
-                            </li>
-                          </ul>   
+                              <?PHP
+                              $i++; 
+              }
+              else{ ?>
+                <div class="col-md-6">
+                <div class="mu-tab-content-right">
+                   <ul class="mu-menu-item-nav">
+                     <li>
+                       <div class="media">
+                         <div class="media-left">
+                           <a href="#">
+                             <img class="media-object" src="assets/img/menu/<?php echo $produit["img"]; ?>"" alt="img">
+                           </a>
+                         </div>
+                         <div class="media-body">
+                           <h4 class="media-heading"><a href="#"><?PHP echo $produit['libelle']; ?></a></h4>
+                           <span class="mu-menu-price"><?PHP echo $produit['prix']; ?>  dt</span>
+                           <p><?PHP echo $produit['description']; ?></p>
+                         </div>
                        </div>
-                     </div>
-
+                     </li>
+                     </ul>   
+                        </div>
+                      </div>
+                      <?PHP
+              }
+            }}
+  ?>
+                           
                    </div>
                  </div>
                 </div>
@@ -448,210 +363,127 @@ foreach($listeFournisseur as $fournisseur){
                   <div class="mu-tab-content-area">
                     <div class="row">
 
-                      <div class="col-md-6">
-                        <div class="mu-tab-content-left">
-                          <ul class="mu-menu-item-nav">
+                    <?PHP
+                          $i=0;
+foreach($listeProduit as $produit){
+  
+  $elementP= $categorieC->afficherElementCategorie($produit['categorie']);
+  if($elementP->libelle === "burrito")
+  {
+             if($i<3){
+?>                          <div class="col-md-6">
+                             <div class="mu-tab-content-left">
+                    <ul class="mu-menu-item-nav">
                             <li>
                               <div class="media">
                                 <div class="media-left">
                                   <a href="#">
-                                    <img class="media-object" src="assets/img/menu/7.png" alt="img">
+                                    <img class="media-object" src="assets/img/menu/<?php echo $produit["img"]; ?>" length="25" height="25" alt="img">
                                   </a>
                                 </div>
                                 <div class="media-body">
-                                  <h4 class="media-heading"><a href="#"> Breakfast</a></h4>
-                                  <span class="mu-menu-price">16.500 dt</span>
-                                  <p>Le burrito se compose une tortilla farcie d'ingrédients tels que des œufs, du bacon et des pommes de terre.</p>
+                                  <h4 class="media-heading"><a href="#"><?PHP echo $produit['libelle']; ?></a></h4>
+                                  <span class="mu-menu-price"><?PHP echo $produit['prix']; ?>  dt</span>
+                                  <p><?PHP echo $produit['description']; ?></p>
                                 </div>
                               </div>
-                            </li>
-                             <li>
-                              <div class="media">
-                                <div class="media-left">
-                                  <a href="#">
-                                    <img class="media-object" src="assets/img/menu/8.png" alt="img">
-                                  </a>
-                                </div>
-                                <div class="media-body">
-                                  <h4 class="media-heading"><a href="#">California</a></h4>
-                                  <span class="mu-menu-price">11.500 dt</span>
-                                  <p>Le burrito se compose généralement d'une tortilla de farine farcie de carne asada, de grandes quantités de fromage, de frites, de crème sure et de guacamole.</p>
-                                </div>
-                              </div>
-                            </li>
-                             <li>
-                              <div class="media">
-                                <div class="media-left">
-                                  <a href="#">
-                                    <img class="media-object" src="assets/img/menu/9.png" alt="img">
-                                  </a>
-                                </div>
-                                <div class="media-body">
-                                  <h4 class="media-heading"><a href="#">Carne asada</a></h4>
-                                  <span class="mu-menu-price">16.500 dt</span>
-                                  <p> Le plat se compose d'une grande tortilla de farine garnie de viande de carne asada, de pico de gallo et de guacamole.</p>
-                                </div>
-                              </div>
-                            </li>
-                          </ul>   
+                              </li>
+                              </ul>   
                         </div>
                       </div>
-
-                     <div class="col-md-6">
-                       <div class="mu-tab-content-right">
-                          <ul class="mu-menu-item-nav">
-                            <li>
-                              <div class="media">
-                                <div class="media-left">
-                                  <a href="#">
-                                    <img class="media-object" src="assets/img/menu/10.jpg" alt="img">
-                                  </a>
-                                </div>
-                                <div class="media-body">
-                                  <h4 class="media-heading"><a href="#">Mission</a></h4>
-                                  <span class="mu-menu-price">15.900 dt</span>
-                                  <p> Le burrito est assez gros et consiste en une tortilla cuite à la vapeur, rempli de haricots au lard, de riz et de laitue râpée.</p>
-                                </div>
-                              </div>
-                            </li>
-                             <li>
-                              <div class="media">
-                                <div class="media-left">
-                                  <a href="#">
-                                    <img class="media-object" src="assets/img/menu/11.jpg" alt="img">
-                                  </a>
-                                </div>
-                                <div class="media-body">
-                                  <h4 class="media-heading"><a href="#">SpicyBeef</a></h4>
-                                  <span class="mu-menu-price">11.950 dt</span>
-                                  <p>Ce taco combine des haricots frits et du bœuf haché assaisonné avec des poivrons frais.</p>
-                                </div>
-                              </div>
-                            </li>
-                             <li>
-                              <div class="media">
-                                <div class="media-left">
-                                  <a href="#">
-                                    <img class="media-object" src="assets/img/menu/12.jpg" alt="img">
-                                  </a>
-                                </div>
-                                <div class="media-body">
-                                  <h4 class="media-heading"><a href="#">Wet</a></h4>
-                                  <span class="mu-menu-price">14.500 dt</span>
-                                  <p> Le burrito humide est recouvert de sauce au chili rouge et de tas de fromage fondu. Il peut être rempli du bœuf râpé aux haricots et au riz.</p>
-                                </div>
-                              </div>
-                            </li>
-                          </ul>   
+                              <?PHP
+                              $i++; 
+              }
+              else{ ?>
+                <div class="col-md-6">
+                <div class="mu-tab-content-right">
+                   <ul class="mu-menu-item-nav">
+                     <li>
+                       <div class="media">
+                         <div class="media-left">
+                           <a href="#">
+                             <img class="media-object" src="assets/img/menu/<?php echo $produit["img"]; ?>"" alt="img">
+                           </a>
+                         </div>
+                         <div class="media-body">
+                           <h4 class="media-heading"><a href="#"><?PHP echo $produit['libelle']; ?></a></h4>
+                           <span class="mu-menu-price"><?PHP echo $produit['prix']; ?>  dt</span>
+                           <p><?PHP echo $produit['description']; ?></p>
+                         </div>
                        </div>
-                     </div>
-
+                     </li>
+                     </ul>   
+                        </div>
+                      </div>
+                      <?PHP
+              }
+            }}
+  ?>
+                           
                    </div>
                  </div>
                 </div>
-
                 <div class="tab-pane fade" id="cali">
                   <div class="mu-tab-content-area">
                     <div class="row">
 
-                      <div class="col-md-6">
-                        <div class="mu-tab-content-left">
-                          <ul class="mu-menu-item-nav">
+                    <?PHP
+                          $i=0;
+foreach($listeProduit as $produit){
+  
+  $elementP= $categorieC->afficherElementCategorie($produit['categorie']);
+  if($elementP->libelle === "cali quasdilla")
+  {
+             if($i<3){
+?>                          <div class="col-md-6">
+                             <div class="mu-tab-content-left">
+                    <ul class="mu-menu-item-nav">
                             <li>
                               <div class="media">
                                 <div class="media-left">
                                   <a href="#">
-                                    <img class="media-object" src="assets/img/menu/13.jpg" alt="img">
+                                    <img class="media-object" src="assets/img/menu/<?php echo $produit["img"]; ?>" length="25" height="25" alt="img">
                                   </a>
                                 </div>
                                 <div class="media-body">
-                                  <h4 class="media-heading"><a href="#">Borocli</a></h4>
-                                  <span class="mu-menu-price">15.500 dt</span>
-                                  <p>Le brocoli et l'ail sautés, le fromage cheddar fort, l'avocat écrasé et l'aneth frais en font une quesadilla moyenne.</p>
+                                  <h4 class="media-heading"><a href="#"><?PHP echo $produit['libelle']; ?></a></h4>
+                                  <span class="mu-menu-price"><?PHP echo $produit['prix']; ?>  dt</span>
+                                  <p><?PHP echo $produit['description']; ?></p>
                                 </div>
                               </div>
-                            </li>
-                             <li>
-                              <div class="media">
-                                <div class="media-left">
-                                  <a href="#">
-                                    <img class="media-object" src="assets/img/menu/14.jpg" alt="img">
-                                  </a>
-                                </div>
-                                <div class="media-body">
-                                  <h4 class="media-heading"><a href="#">Caprese</a></h4>
-                                  <span class="mu-menu-price">12.500 dt</span>
-                                  <p> Un déjeuner délicieux et facile qui se prépare rapidement et ne contient que cinq ingrédients!</p>
-                                </div>
-                              </div>
-                            </li>
-                             <li>
-                              <div class="media">
-                                <div class="media-left">
-                                  <a href="#">
-                                    <img class="media-object" src="assets/img/menu/15.jpg" alt="img">
-                                  </a>
-                                </div>
-                                <div class="media-body">
-                                  <h4 class="media-heading"><a href="#">Greek</a></h4>
-                                  <span class="mu-menu-price">16.500 dt</span>
-                                  <p>Grecque-mex plus légère, servie avec un côté traditionnel de sauce tzatziki fraîche et acidulée</p>
-                                </div>
-                              </div>
-                            </li>
-                          </ul>   
+                              </li>
+                              </ul>   
                         </div>
                       </div>
-
-                     <div class="col-md-6">
-                       <div class="mu-tab-content-right">
-                          <ul class="mu-menu-item-nav">
-                            <li>
-                              <div class="media">
-                                <div class="media-left">
-                                  <a href="#">
-                                    <img class="media-object" src="assets/img/menu/16.jpg" alt="img">
-                                  </a>
-                                </div>
-                                <div class="media-body">
-                                  <h4 class="media-heading"><a href="#">Guacamole</a></h4>
-                                  <span class="mu-menu-price">13.500 dt</span>
-                                  <p>Les tièdes de la poêle, fraîchement grillés et suintants avec du guacamole chaud emballé à l'avocat.</p>
-                                </div>
-                              </div>
-                            </li>
-                             <li>
-                              <div class="media">
-                                <div class="media-left">
-                                  <a href="#">
-                                    <img class="media-object" src="assets/img/menu/17.jpg" alt="img">
-                                  </a>
-                                </div>
-                                <div class="media-body">
-                                  <h4 class="media-heading"><a href="#">Potato</a></h4>
-                                  <span class="mu-menu-price">11.500 dt</span>
-                                  <p>Les patates douces sont cuites dans un mélange de chipotles, de jus de citron vert et de miel, ce qui en fait la combinaison épicée.</p>
-                                </div>
-                              </div>
-                            </li>
-                             <li>
-                              <div class="media">
-                                <div class="media-left">
-                                  <a href="#">
-                                    <img class="media-object" src="assets/img/menu/18.jpg" alt="img">
-                                  </a>
-                                </div>
-                                <div class="media-body">
-                                  <h4 class="media-heading"><a href="#">Tomato Quesadilla</a></h4>
-                                  <span class="mu-menu-price">13.500 dt</span>
-                                  <p>Quesadillas aux épinards et aux tomates. Il regorge de vitamines K et A, B2 et B6, C, de calcium et de potassium.</p>
-                                </div>
-                              </div>
-                            </li>
-                          </ul>   
+                              <?PHP
+                              $i++; 
+              }
+              else{ ?>
+                <div class="col-md-6">
+                <div class="mu-tab-content-right">
+                   <ul class="mu-menu-item-nav">
+                     <li>
+                       <div class="media">
+                         <div class="media-left">
+                           <a href="#">
+                             <img class="media-object" src="assets/img/menu/<?php echo $produit["img"]; ?>"" alt="img">
+                           </a>
+                         </div>
+                         <div class="media-body">
+                           <h4 class="media-heading"><a href="#"><?PHP echo $produit['libelle']; ?></a></h4>
+                           <span class="mu-menu-price"><?PHP echo $produit['prix']; ?>  dt</span>
+                           <p><?PHP echo $produit['description']; ?></p>
+                         </div>
                        </div>
-                     </div>
-
+                     </li>
+                     </ul>   
+                        </div>
+                      </div>
+                      <?PHP
+              }
+            }}
+  ?>
+                           
                    </div>
                  </div>
                 </div>
@@ -660,98 +492,63 @@ foreach($listeFournisseur as $fournisseur){
                   <div class="mu-tab-content-area">
                     <div class="row">
 
-                      <div class="col-md-6">
-                        <div class="mu-tab-content-left">
-                          <ul class="mu-menu-item-nav">
+                    <?PHP
+                          $i=0;
+foreach($listeProduit as $produit){
+  
+  $elementP= $categorieC->afficherElementCategorie($produit['categorie']);
+  if($elementP->libelle === "accompagnements")
+  {
+             if($i<3){
+?>                          <div class="col-md-6">
+                             <div class="mu-tab-content-left">
+                    <ul class="mu-menu-item-nav">
                             <li>
                               <div class="media">
                                 <div class="media-left">
                                   <a href="#">
-                                    <img class="media-object" src="assets/img/menu/19.jpg" alt="img">
+                                    <img class="media-object" src="assets/img/menu/<?php echo $produit["img"]; ?>" length="25" height="25" alt="img">
                                   </a>
                                 </div>
                                 <div class="media-body">
-                                  <h4 class="media-heading"><a href="#">Chilly Frites</a></h4>
-                                  <span class="mu-menu-price">6.000 dt</span>
+                                  <h4 class="media-heading"><a href="#"><?PHP echo $produit['libelle']; ?></a></h4>
+                                  <span class="mu-menu-price"><?PHP echo $produit['prix']; ?>  dt</span>
+                                  <p><?PHP echo $produit['description']; ?></p>
                                 </div>
                               </div>
-                            </li>
-                             <li>
-                              <div class="media">
-                                <div class="media-left">
-                                  <a href="#">
-                                    <img class="media-object" src="assets/img/menu/20.jpg" alt="img">
-                                  </a>
-                                </div>
-                                <div class="media-body">
-                                  <h4 class="media-heading"><a href="#">Curved Frites</a></h4>
-                                  <span class="mu-menu-price">9.000 dt</span>
-                                </div>
-                              </div>
-                            </li>
-                             <li>
-                              <div class="media">
-                                <div class="media-left">
-                                  <a href="#">
-                                    <img class="media-object" src="assets/img/menu/21.jpg" alt="img">
-                                  </a>
-                                </div>
-                                <div class="media-body">
-                                  <h4 class="media-heading"><a href="#">Hard Bard</a></h4>
-                                  <span class="mu-menu-price">5.000 dt</span>
-                                </div>
-                              </div>
-                            </li>
-                          </ul>   
+                              </li>
+                              </ul>   
                         </div>
                       </div>
-
-                     <div class="col-md-6">
-                       <div class="mu-tab-content-right">
-                          <ul class="mu-menu-item-nav">
-                            <li>
-                              <div class="media">
-                                <div class="media-left">
-                                  <a href="#">
-                                    <img class="media-object" src="assets/img/menu/22.jpg" alt="img">
-                                  </a>
-                                </div>
-                                <div class="media-body">
-                                  <h4 class="media-heading"><a href="#">Ohoboho</a></h4>
-                                  <span class="mu-menu-price">6.000 dt</span>
-                                </div>
-                              </div>
-                            </li>
-                             <li>
-                              <div class="media">
-                                <div class="media-left">
-                                  <a href="#">
-                                    <img class="media-object" src="assets/img/menu/23.jpg" alt="img">
-                                  </a>
-                                </div>
-                                <div class="media-body">
-                                  <h4 class="media-heading"><a href="#">Poutine</a></h4>
-                                  <span class="mu-menu-price">9.000 dt</span>
-                                </div>
-                              </div>
-                            </li>
-                             <li>
-                              <div class="media">
-                                <div class="media-left">
-                                  <a href="#">
-                                    <img class="media-object" src="assets/img/menu/24.jpg" alt="img">
-                                  </a>
-                                </div>
-                                <div class="media-body">
-                                  <h4 class="media-heading"><a href="#">Saucy</a></h4>
-                                  <span class="mu-menu-price">8.500 dt</span>
-                                </div>
-                              </div>
-                            </li>
-                          </ul>   
+                              <?PHP
+                              $i++; 
+              }
+              else{ ?>
+                <div class="col-md-6">
+                <div class="mu-tab-content-right">
+                   <ul class="mu-menu-item-nav">
+                     <li>
+                       <div class="media">
+                         <div class="media-left">
+                           <a href="#">
+                             <img class="media-object" src="assets/img/menu/<?php echo $produit["img"]; ?>"" alt="img">
+                           </a>
+                         </div>
+                         <div class="media-body">
+                           <h4 class="media-heading"><a href="#"><?PHP echo $produit['libelle']; ?></a></h4>
+                           <span class="mu-menu-price"><?PHP echo $produit['prix']; ?>  dt</span>
+                           <p><?PHP echo $produit['description']; ?></p>
+                         </div>
                        </div>
-                     </div>
-
+                     </li>
+                     </ul>   
+                        </div>
+                      </div>
+                      <?PHP
+              }
+            }}
+  ?>
+                           
                    </div>
                  </div>
                 </div>
@@ -760,98 +557,67 @@ foreach($listeFournisseur as $fournisseur){
                   <div class="mu-tab-content-area">
                     <div class="row">
 
-                      <div class="col-md-6">
-                        <div class="mu-tab-content-left">
-                          <ul class="mu-menu-item-nav">
-                            <li>
+                    
+
+                    
+
+                    <?PHP
+                          $i=0;
+foreach($listeProduit as $produit){
+  
+  $elementP= $categorieC->afficherElementCategorie($produit['categorie']);
+  if($elementP->libelle === "desserts")
+  {
+             if($i<3){
+?>                          <div class="col-md-6">
+                             <div class="mu-tab-content-left">
+                               <ul class="mu-menu-item-nav">
+                              <li>
                               <div class="media">
                                 <div class="media-left">
                                   <a href="#">
-                                    <img class="media-object" src="assets/img/menu/25.jpg" alt="img">
+                                    <img class="media-object" src="assets/img/menu/<?php echo $produit["img"]; ?>" length="25" height="25" alt="img">
                                   </a>
                                 </div>
                                 <div class="media-body">
-                                  <h4 class="media-heading"><a href="#">Flan</a></h4>
-                                  <span class="mu-menu-price">8.500 dt</span>
+                                  <h4 class="media-heading"><a href="#"><?PHP echo $produit['libelle']; ?></a></h4>
+                                  <span class="mu-menu-price"><?PHP echo $produit['prix']; ?>  dt</span>
+                                  <p><?PHP echo $produit['description']; ?></p>
                                 </div>
                               </div>
-                            </li>
-                             <li>
-                              <div class="media">
-                                <div class="media-left">
-                                  <a href="#">
-                                    <img class="media-object" src="assets/img/menu/26.jpg" alt="img">
-                                  </a>
-                                </div>
-                                <div class="media-body">
-                                  <h4 class="media-heading"><a href="#">Churros</a></h4>
-                                  <span class="mu-menu-price">7.500 dt</span>
-                                </div>
-                              </div>
-                            </li>
-                             <li>
-                              <div class="media">
-                                <div class="media-left">
-                                  <a href="#">
-                                    <img class="media-object" src="assets/img/menu/27.jpg" alt="img">
-                                  </a>
-                                </div>
-                                <div class="media-body">
-                                  <h4 class="media-heading"><a href="#">Orangina</a></h4>
-                                  <span class="mu-menu-price">4.500 dt</span>
-                                </div>
-                              </div>
-                            </li>
-                          </ul>   
+                              </li>
+                              </ul>   
                         </div>
                       </div>
-
-                     <div class="col-md-6">
-                       <div class="mu-tab-content-right">
-                          <ul class="mu-menu-item-nav">
-                            <li>
-                              <div class="media">
-                                <div class="media-left">
-                                  <a href="#">
-                                    <img class="media-object" src="assets/img/menu/28.jpg" alt="img">
-                                  </a>
-                                </div>
-                                <div class="media-body">
-                                  <h4 class="media-heading"><a href="#">Chocolata</a></h4>
-                                  <span class="mu-menu-price">6.500 dt</span>
-                                </div>
-                              </div>
-                            </li>
-                             <li>
-                              <div class="media">
-                                <div class="media-left">
-                                  <a href="#">
-                                    <img class="media-object" src="assets/img/menu/29.jpg" alt="img">
-                                  </a>
-                                </div>
-                                <div class="media-body">
-                                  <h4 class="media-heading"><a href="#">Don taco</a></h4>
-                                  <span class="mu-menu-price">9.500 dt</span>
-                                </div>
-                              </div>
-                            </li>
-                             <li>
-                              <div class="media">
-                                <div class="media-left">
-                                  <a href="#">
-                                    <img class="media-object" src="assets/img/menu/30.jpg" alt="img">
-                                  </a>
-                                </div>
-                                <div class="media-body">
-                                  <h4 class="media-heading"><a href="#">Peki</a></h4>
-                                  <span class="mu-menu-price">8.500 dt</span>
-                                </div>
-                              </div>
-                            </li>
-                          </ul>   
+                              <?PHP
+                              $i++; 
+              }
+              else{ ?>
+                <div class="col-md-6">
+                <div class="mu-tab-content-right">
+                   <ul class="mu-menu-item-nav">
+                     <li>
+                       <div class="media">
+                         <div class="media-left">
+                           <a href="#">
+                             <img class="media-object" src="assets/img/menu/<?php echo $produit["img"]; ?>"" alt="img">
+                           </a>
+                         </div>
+                         <div class="media-body">
+                           <h4 class="media-heading"><a href="#"><?PHP echo $produit['libelle']; ?></a></h4>
+                           <span class="mu-menu-price"><?PHP echo $produit['prix']; ?>  dt</span>
+                           <p><?PHP echo $produit['description']; ?></p>
+                         </div>
                        </div>
-                     </div>
-
+                     </li>
+                     </ul>   
+                        </div>
+                      </div>
+                      <?PHP
+              }
+            }}
+  ?>
+                           
                    </div>
                  </div>
                 </div>
@@ -902,49 +668,15 @@ foreach($listeFournisseur as $fournisseur){
                     <td> <textarea name="message" id="message" cols="30" rows="10" placeholder="message" ></textarea> </td> 
                 </tr>
               
-                <tr>
-                    <td><input type="text" name="statut" id="statut" maxlength="20" placeholder="statut"></td> 
-                </tr>
+                
                  
-                
-                <tr>
-                <td>
-                     <select name="client" id="client">
-                     <option value="select" selected>client</option>
-                        
-               <?php
-                foreach($listeclient as $listeC){
-               ?>
-                <option value ='<?PHP echo $listeC['id_client']; ?>'> <?PHP echo $listeC['nom_client']; ?></option>
-                   <?php
-             }
-                  ?>
-                     </select>   
-                </td> 
-                </tr>
-                
-                <tr>
-                    <td>
-                    <select name="local" id="local">
-                     <option value="select" selected>Local</option>
-                        
-          <?php
-          foreach($listeLocal as $localC){
-           ?>
-           <option value ='<?PHP echo $localC['id_local']; ?>'> <?PHP echo $localC['adresse']; ?></option>
-           <?php
-          }
-          ?>
-          </select>   
-                     
-                    </td> 
-                </tr>
+               
                
                 <div class="row">
                             <div class="col-md-12">
                                 <div class="overview-wrap">
                                 <tr> <td>    
-                                <input type="submit" class="au-btn au-btn-icon au-btn--blue" value="réserver une table">
+                                <input type="submit" class="au-btn au-btn-icon au-btn--blue" value="server une table">
                                 </tr></td>      
                                 </div>
                             </div>
@@ -1223,149 +955,36 @@ foreach($listeFournisseur as $fournisseur){
 
             <div class="mu-chef-content">
               <ul class="mu-chef-nav">
-                <li>
+               
+              <?PHP
+foreach($listeChef as $chef){
+?>
+ <li>
                   <div class="mu-single-chef">
                     <figure class="mu-single-chef-img">
-                      <img src="assets/img/chef/4.png" alt="chef img">
+                      <img src="assets/img/chef/<?php echo $chef["img"]; ?>" length="100" height="180" alt="chef img">
                     </figure>
                     <div class="mu-single-chef-info">
-                      <h4>Ahmed Bahrouni</h4>
-                      <span>Chef de cuisine</span>
+                      <h4></i><?PHP echo $chef['nom']; echo " "; echo $chef['prenom']; ?></h4>
+                      <span></i><?PHP echo $chef['categories']; ?></span>
                     </div>
                     <div class="mu-single-chef-social">
-                      <a href="https://www.facebook.com/ahmed.bahrouni.96"><i class="fa fa-facebook"></i></a>
+                      <a href="<?PHP echo $chef['fb']; ?>"><i class="fa fa-facebook"></i></a>
                       <a href="https://twitter.com/login?lang=fr"><i class="fa fa-twitter"></i></a>
                       <a href="https://www.google.com/"><i class="fa fa-google-plus"></i></a>
                       <a href="https://www.linkedin.com/login/fr"><i class="fa fa-linkedin"></i></a>
                     </div>
                   </div>
                 </li>
+ 
 
-                <li>
-                  <div class="mu-single-chef">
-                    <figure class="mu-single-chef-img">
-                      <img src="assets/img/chef/3.png" alt="chef img">
-                    </figure>
-                    <div class="mu-single-chef-info">
-                      <h4>Achref Bouselama</h4>
-                      <span>Chef de Tacos</span>
-                    </div>
-                    <div class="mu-single-chef-social">
-                        <a href="https://www.facebook.com/profile.php?id=100004907642469"><i class="fa fa-facebook"></i></a>
-                        <a href="https://twitter.com/login?lang=fr"><i class="fa fa-twitter"></i></a>
-                        <a href="https://www.google.com/"><i class="fa fa-google-plus"></i></a>
-                        <a href="https://www.linkedin.com/login/fr"><i class="fa fa-linkedin"></i></a>
-                    </div>
-                  </div>
-                </li>
 
-                <li>
-                  <div class="mu-single-chef">
-                    <figure class="mu-single-chef-img">
-                      <img src="assets/img/chef/2.png" alt="chef img">
-                    </figure>
-                    <div class="mu-single-chef-info">
-                      <h4>Abdelkader Daghrour</h4>
-                      <span>Chef de Burrito</span>
-                    </div>
-                    <div class="mu-single-chef-social">
-                        <a href="https://www.facebook.com/profile.php?id=100008911682926"><i class="fa fa-facebook"></i></a>
-                        <a href="https://twitter.com/login?lang=fr"><i class="fa fa-twitter"></i></a>
-                        <a href="https://www.google.com/"><i class="fa fa-google-plus"></i></a>
-                        <a href="https://www.linkedin.com/login/fr"><i class="fa fa-linkedin"></i></a>
-                    </div>
-                  </div>
-                </li>
-
-                <li>
-                  <div class="mu-single-chef">
-                    <figure class="mu-single-chef-img">
-                      <img src="assets/img/chef/1.png" alt="chef img">
-                    </figure>
-                    <div class="mu-single-chef-info">
-                      <h4>Myriam Ddaghrour</h4>
-                      <span>Chef de Cali Quasdilla</span>
-                    </div>
-                    <div class="mu-single-chef-social">
-                        <a href="https://www.facebook.com/myriam.daghrour.9/"><i class="fa fa-facebook"></i></a>
-                        <a href="https://twitter.com/login?lang=fr"><i class="fa fa-twitter"></i></a>
-                        <a href="https://www.google.com/"><i class="fa fa-google-plus"></i></a>
-                        <a href="https://www.linkedin.com/login/fr"><i class="fa fa-linkedin"></i></a>
-                    </div>
-                  </div>
-                </li>  
-
-                <li>
-                    <div class="mu-single-chef">
-                      <figure class="mu-single-chef-img">
-                        <img src="assets/img/chef/4.png" alt="chef img">
-                      </figure>
-                      <div class="mu-single-chef-info">
-                        <h4>Ahmed Bahrouni</h4>
-                        <span>Chef de cuisine</span>
-                      </div>
-                      <div class="mu-single-chef-social">
-                        <a href="https://www.facebook.com/ahmed.bahrouni.96"><i class="fa fa-facebook"></i></a>
-                        <a href="https://twitter.com/login?lang=fr"><i class="fa fa-twitter"></i></a>
-                        <a href="https://www.google.com/"><i class="fa fa-google-plus"></i></a>
-                        <a href="https://www.linkedin.com/login/fr"><i class="fa fa-linkedin"></i></a>
-                      </div>
-                    </div>
-                  </li>
-  
-                  <li>
-                    <div class="mu-single-chef">
-                      <figure class="mu-single-chef-img">
-                        <img src="assets/img/chef/3.png" alt="chef img">
-                      </figure>
-                      <div class="mu-single-chef-info">
-                        <h4>Achref Bouselama</h4>
-                        <span>Chef de Tacos</span>
-                      </div>
-                      <div class="mu-single-chef-social">
-                          <a href="https://www.facebook.com/profile.php?id=100004907642469"><i class="fa fa-facebook"></i></a>
-                          <a href="https://twitter.com/login?lang=fr"><i class="fa fa-twitter"></i></a>
-                          <a href="https://www.google.com/"><i class="fa fa-google-plus"></i></a>
-                          <a href="https://www.linkedin.com/login/fr"><i class="fa fa-linkedin"></i></a>
-                      </div>
-                    </div>
-                  </li>
-
-                  <li>
-                    <div class="mu-single-chef">
-                      <figure class="mu-single-chef-img">
-                        <img src="assets/img/chef/2.png" alt="chef img">
-                      </figure>
-                      <div class="mu-single-chef-info">
-                        <h4>Abdelkader Daghrour</h4>
-                        <span>Chef de Burrito</span>
-                      </div>
-                      <div class="mu-single-chef-social">
-                          <a href="https://www.facebook.com/profile.php?id=100008911682926"><i class="fa fa-facebook"></i></a>
-                          <a href="https://twitter.com/login?lang=fr"><i class="fa fa-twitter"></i></a>
-                          <a href="https://www.google.com/"><i class="fa fa-google-plus"></i></a>
-                          <a href="https://www.linkedin.com/login/fr"><i class="fa fa-linkedin"></i></a>
-                      </div>
-                    </div>
-                  </li>
-  
-                  <li>
-                    <div class="mu-single-chef">
-                      <figure class="mu-single-chef-img">
-                        <img src="assets/img/chef/1.png" alt="chef img">
-                      </figure>
-                      <div class="mu-single-chef-info">
-                        <h4>Myriam Daghrour</h4>
-                        <span>Chef de Cali Quasdilla</span>
-                      </div>
-                      <div class="mu-single-chef-social">
-                          <a href="https://www.facebook.com/myriam.daghrour.9/"><i class="fa fa-facebook"></i></a>
-                          <a href="https://twitter.com/login?lang=fr"><i class="fa fa-twitter"></i></a>
-                          <a href="https://www.google.com/"><i class="fa fa-google-plus"></i></a>
-                          <a href="https://www.linkedin.com/login/fr"><i class="fa fa-linkedin"></i></a>
-                      </div>
-                    </div>
-                  </li>             
+<?PHP
+}
+?>
+               
+      
+                 
               </ul>
             </div>
           </div>
@@ -1408,21 +1027,7 @@ foreach($listeFournisseur as $fournisseur){
                                             </tr>
                                         </thead>
                                         <tbody>
-            <?PHP
-            foreach($listeevenement as $evenement){
-?>
-<tr>
-
-<td class="text-center"><?PHP echo $evenement['libelle']; ?></td>
-<td class="text-center"><?PHP echo $evenement['date']; ?></td>
-<td class="text-center"><?PHP echo $evenement['duree'],' ','jours'; ?></td>
-<td class="text-center"><?PHP echo $evenement['description']; ?></td>
-<td class="text-center"><?PHP echo $evenement['local']; ?></td>
-<td class="text-center"> 
-</tr>
-<?PHP
-}
-?>
+ 
          </tbody>
         </table>  
         </div>

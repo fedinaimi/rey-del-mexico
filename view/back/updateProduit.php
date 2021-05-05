@@ -19,6 +19,7 @@
         && isset($_POST['description'])
          && isset($_POST['categorie'])
          && isset($_POST['fournisseur'])
+         && isset($_POST['img'])
 	){
 		if (
             !empty($_POST['libelle']) &&
@@ -26,7 +27,8 @@
             !empty($_POST['prix']) &&
             !empty($_POST['description']) &&
             !empty($_POST['categorie']) &&
-            !empty($_POST['fournisseur'])
+            !empty($_POST['fournisseur']) &&
+            !empty($_POST['img'])
         ) {
             $produit = new produit(
                 $_POST['libelle'],
@@ -34,7 +36,8 @@
                 $_POST['prix'],
                 $_POST['description'],
                 $_POST['categorie'],
-                $_POST['fournisseur']
+                $_POST['fournisseur'],
+                $_POST['img']
             );
 			
             $produitC->modifierProduit($produit, $_GET['id']);
@@ -510,6 +513,19 @@
           </select>   
                      
                     </td> 
+                </tr>
+                <tr>
+                    <td>    <label for="img">Image Produit: </label></td> 
+                </tr> 
+                <tr>
+
+                <td>
+<form enctype="multipart/form-data" method="post" autocomplete="on" action="upload/">     
+
+    <p> <input type="file" id="img" name="img"  value = "<?php echo $produit->img; ?>" required /></p>
+    
+ </form>
+ </td>
                 </tr>
                 <tr></tr>
                 <tr></tr>
