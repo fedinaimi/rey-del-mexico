@@ -1,0 +1,23 @@
+couldn't open "C:/xampp/htdocs/WEB-2A/.git/HEAD": no such file or directory
+couldn't open "C:/xampp/htdocs/WEB-2A/.git/HEAD": no such file or directory
+    while executing
+"open [gitdir HEAD] r"
+    (procedure "load_current_branch" line 4)
+    invoked from within
+"load_current_branch"
+    (procedure "repository_state" line 7)
+    invoked from within
+"repository_state newType newHEAD newMERGE_HEAD"
+    (procedure "rescan" line 9)
+    invoked from within
+"rescan {force_first_diff ui_ready}"
+    (procedure "ui_do_rescan" line 2)
+    invoked from within
+"ui_do_rescan"
+    invoked from within
+".vpane.lower.commarea.buttons.rescan invoke "
+    invoked from within
+".vpane.lower.commarea.buttons.rescan instate !disabled { .vpane.lower.commarea.buttons.rescan invoke } "
+    invoked from within
+".vpane.lower.commarea.buttons.rescan instate pressed { .vpane.lower.commarea.buttons.rescan state !pressed; .vpane.lower.commarea.buttons.rescan insta..."
+    (command bound to event)
