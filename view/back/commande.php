@@ -5,6 +5,7 @@ include "../../controller/commandeC.php";
  $commandeC=new commandeC();
  
     $listcommande=$commandeC->affichercommande();
+    
 
 ?>
 <!DOCTYPE html>
@@ -216,7 +217,8 @@ include "../../controller/commandeC.php";
 					<div class="container-fluid">
 						<div class="header-wrap">
 							<form class="form-header" action="" method="POST">
-								<input class="au-input au-input--xl" type="text" name="search" placeholder="Recherche commande..." />
+								<input class="au-input au-input--xl" type="text" id="myInput" onkeyup="myFunction()" placeholder="rechercher commande" title="type in a name" />
+                                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 								<button class="au-btn--submit" type="submit">
 									<i class="zmdi zmdi-search"></i>
 								</button>
@@ -384,15 +386,7 @@ include "../../controller/commandeC.php";
 			<div class="main-content">
 				<div class="section__content section__content--p30">
 					<div class="container-fluid">
-						<div class="row">
-                            <div class="col-md-12">
-                                <div class="overview-wrap">
-                                    
-                                    <button class="au-btn au-btn-icon au-btn--blue">
-                                        <i class="zmdi zmdi-plus"></i>Ajout Commande</button>
-                                </div>
-                            </div>
-                        </div>
+						
 						<div class="row">
                             <div class="col-lg-9">
 								<br>
@@ -405,10 +399,12 @@ include "../../controller/commandeC.php";
          </script>
 
          <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-
+        
+         <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+         
                                 <div class="table-responsive table--no-card m-b-40">
                                 <table id="dataTable" class="table table-borderless table-striped table-earning" >
-                                    <input type="text" id="myInput" onkeyup="myFunction()" placeholder="rechercher" title="type in a name"
+                                   
 
                                     <thead class="thead-dark">
     <tr>
@@ -417,9 +413,17 @@ include "../../controller/commandeC.php";
         
         <th scope="col">etat</th>
          <th scope="col">client</th>
-        <th scope="col">total</th>
+       
+        <th <li>
+                            <a href="affichercommandetri.php">
+                                total</a>
+                        </li></th>
       <th scope="col">supression</th>
-      <th scope="col">IMPRESSION</th>
+      <th <li>
+                            <a href="imprimercommande.php">
+                               impression</a>
+                        </li></th>
+        
        
         
 
@@ -475,12 +479,18 @@ foreach ($listcommande as $row)
                    
                   <button  class="btn btn-danger" type="submit" ><i class="fa fa-trash-o" aria-hidden="true"></i></button>   </form></center>
                  
+                  
+              
 
-
-                  <td <center> <form action="imprimercommande.php" method="get">
+                  <td <center> <form action="imprimercommande1.php" method="get">
+                  <input type="hidden" id="id_commande" name="id_commande" value="<?php echo $row["id_commande"] ?>">
+                  <input type="hidden" id="client" name="client" value="<?php echo $row["client"] ?>">
+                  <input type="hidden" id="nomproduit" name="nomproduit" value="<?php echo $row["nomproduit"] ?>">
+                  <input type="hidden" id="qte" name="qte" value="<?php echo $row["qte"] ?>">
+                  <input type="hidden" id="prix_tot" name="prix_tot" value="<?php echo $row["prix_tot"] ?>">
+                  <input type="hidden" id="etat" name="etat" value="<?php echo $row["etat"] ?>">
                    <button  class="btn btn-light" type="submit" ><span class="fa fa-print fa-2x"></span></button></td>
                 </form></center>
-           
  
          
             
@@ -499,7 +509,10 @@ foreach ($listcommande as $row)
                                     </table>
                                 </div>
                             </div>
-						
+						    <li>
+                            <a href="graphData.php">
+                                <i class="fa fa-pie-chart"></i>consommation par client</a>
+                        </li>
 						<div class="row">
 								<div class="col-md-12">
 										<div class="copyright">
@@ -537,13 +550,15 @@ foreach ($listcommande as $row)
 	</script>
     <script>
     function myFunction() {
-        var input, filter, table, tr, td, i, txtValue;
+        var input, filter, table, tr, td,tp, i, txtValue,j;
         input = document.getElementById("myInput");
         filter = input.value.toUpperCase();
         table = document.getElementById("dataTable");
         tr = table.getElementsByTagName("tr");
         for (i = 0; i < tr.length; i++) {
+           
             td = tr[i].getElementsByTagName("td")[0];
+            
             if (td) {
                 txtValue = td.textContent || td.innerText;
                 if (txtValue.toUpperCase().indexOf(filter) > -1) {
@@ -555,6 +570,81 @@ foreach ($listcommande as $row)
         }
     }
 </script>
+
+<script type="text/javascript">
+ google.load("visualization", "1", {packages:["corechart"]});
+ google.setOnLoadCallback(drawChart);
+ function drawChart() {
+ var data = google.visualization.arrayToDataTable([
+
+ ['client','qte'],
+ <?php 
+			$query = "SELECT * from commande ";
+
+			 $exec = mysqli_query($con,$query);
+			 while($row = mysqli_fetch_array($exec)){
+
+			 echo "['".$row['client']."',".$row['qte']."],";
+			 }
+			 ?> 
+ 
+ ]);
+
+ var options = {
+ title: 'consommation par client',
+  pieHole: 0.5,
+          pieSliceTextStyle: {
+            color: 'black',
+          },
+          legend: 'none'
+ };
+ var chart = new google.visualization.PieChart(document.getElementById("columnchart12"));
+ chart.draw(data,options);
+ }
+	
+    </script>
+
+
+
+
+<script type = "text/javascript">
+    $(document).ready(function(){
+        load_data();
+        function load_data(str)
+        {
+            $.ajax({
+                url:"search.php",
+                method:"post",
+                data:{str:str},
+                success:function(data)
+                {
+                    $('#tableau').html(data);
+                }
+            });
+        }
+
+        $('#rech').keyup(function(){
+            var recherche = $(this).val();
+            if(recherche != '')
+            {
+                load_data(recherche);
+            }
+            else
+            {
+                load_data();
+            }
+        });
+    });
+</script>
+
+}
+
+?>
+
+
+
+
+
 
 	<!-- Main JS-->
 	<script src="js/main.js"></script>

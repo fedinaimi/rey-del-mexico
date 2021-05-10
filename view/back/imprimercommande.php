@@ -1,16 +1,56 @@
+<?PHP
+    include "../../controller/commandeC.php";
+    require_once "../../config.php";
+	$commandeC = new commandeC();
+	$listecommande=$commandeC->affichercommande();
+	
+?>
 
+<!DOCTYPE html>
 <html>
-<body onload="window.print()">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <a class="logo" href="commande.php">
+        <img src="images/icon/logo.png" alt="Cool Admin">
+        </a>
+        
+		<title> Afficher la liste des Commandes </title>
+    </head>
+    <body onload="window.print()">
 
-</br>
-</br>
-<h1 style="font-size: 50px">Numero de commande : <?php echo $_GET['id_commande'] ;?></h1>
-<h5 style="font-size: 25px">etat <?php echo $_GET['etat'] ;?></h5>
-<h2 style="font-size: 40px">Les Articles :</h2>
+		<hr>
+		<table border=1 align = 'center'>
+			<tr>
+                <th>client</th>
+                <th>id commande</th>
+				<th>etat</th>
+                <th>nom du produit</th>
+                <th>quantite</th>
+                <th>prix total</th>
+			
+               
+                
+				
+			</tr>
 
-<h2 style="font-size: 30px">Prix total : <?php echo $_GET['prix_tot'] ;?> TND</h2>
-
-
-
-</body>
+			<?PHP
+				foreach ($listecommande as $commande){
+			?>
+            		<tr>
+                    <td><?PHP echo $commande['client']; ?></td>
+					<td><?PHP echo $commande['id_commande']; ?></td>
+					<td><?PHP echo $commande['etat']; ?></td>
+                    <td><?PHP echo $commande['nomproduit']; ?></td>
+                    <td><?PHP echo $commande['qte']; ?></td>
+                    <td><?PHP echo $commande['prix_tot']; ?></td>
+              
+					
+					
+				</tr>
+			<?PHP
+				}
+			?>
+		</table>
+	</body>
 </html>

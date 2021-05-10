@@ -138,6 +138,8 @@ include "../../controller/commandeC.php";
             <th scope="col"style="font-weight: 1000;font-size: 15px"><center>total</center></th>
             <th scope="col"style="font-weight: 1000;font-size: 15px"><center>etat</center></th>
             <th scope="col"style="font-weight: 1000;font-size: 15px"><center>annuler la commande</center></th>
+        
+
          
 
 
@@ -192,7 +194,6 @@ foreach ($listcommande as $row)
           
                
                  
-
 
             
            

@@ -68,12 +68,29 @@ class commandeC
             die('Erreur: '.$e->getMessage());
         }
     }
-       
- 
-     function affichercommandetri($tri)
+    function affichercommande1()
     {
 
-        $sql="select * from commande order by $tri desc";
+        $sql="SELECT * FROM commande  ";
+
+        $db = config::getConnexion();
+        try
+        {
+            $list=$db->query($sql);
+            return $list;
+        }
+        catch (Exception $e)
+        {
+            die('Erreur: '.$e->getMessage());
+        }
+    }
+       
+       
+ 
+     function affichercommandetri()
+    {
+
+        $sql="select * from commande ORDER BY prix_tot  desc";
 
         $db = config::getConnexion();
         try
@@ -113,7 +130,17 @@ function modifiercommande($id_commande,$etat)
             die('Erreur: '.$e->getMessage());
         }
     }
-
+    function recherchercommande($str){
+        $sql="SELECT * FROM commande WHERE id_commande like '".$str."%' or etat like '".$str."%' or client like '".$str."%' ";
+        $db = config::getConnexion();
+        try{
+            $liste=$db->query($sql);
+            return $liste;
+        }
+        catch (Exception $e){
+            return $e->getMessage();
+        }
+    }
 
    
 

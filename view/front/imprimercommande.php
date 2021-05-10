@@ -1,3 +1,15 @@
+<?php
+include "../../controller/commandeC.php";
+
+
+$id_commande=$_POST["id_commande"];
+$etat=$_POST["etat"];
+
+
+$commandeC=new commandeC();
+$commandeC->imprimercommande1();
+
+?>
 
 <html>
 <body onload="window.print()">

@@ -265,9 +265,31 @@ foreach ($listpanier as $row)
                    
           <input type="hidden" id="client" name="client" value="<?php echo  $row["client"] ?>s ">
           
-                    <input type="hidden" id="etat" name="etat" value="<?php echo  $row["etat"] ?>s">
+                    <input type="hidden" id="etat" name="etat" value="en cours de traitement">
                   
                     <button style="position: relative;left: 918px ;bottom: 25px" class="btn btn-info">PASSER COMMANDE</button>
+                </form></center>
+                
+</tr>
+<br> <br>
+<tr>
+
+<form action="ajouterlivraison.php"  action="supprimertout.php" method="post">
+                    
+                   
+<input type="hidden" id="id" name="id" value=" ">
+                    <input type="hidden" id="frais_livraison" name="frais_livraison" value="<?php echo $S1 ?>">
+              
+                   
+                    <input type="hidden" id="local" name="local" value="<?php echo  $row["local"] ?>s ">
+
+                   
+          <input type="hidden" id="client" name="client" value="<?php echo  $row["client"] ?>s ">
+          
+                    <input type="hidden" id="etat" name="etat" value="en cours de traitement">
+                 
+                  
+                    <button style="position: relative;left: 918px ;bottom: 30px" class="btn btn-info">PASSER LIVRAISON</button>
                 </form></center>
                 
 </tr>
