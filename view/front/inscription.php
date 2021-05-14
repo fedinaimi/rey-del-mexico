@@ -1,4 +1,43 @@
 
+<?php
+
+include_once '../../controller/clientC.php';
+
+
+$error="";
+$client = null;
+$clientC = new clientC(); 
+$client1C = new clientC();
+
+
+if ( isset($_POST['nom']) 
+  && isset($_POST['prenom']) 
+  && isset($_POST['dateNais']) 
+   && isset($_POST["cin"]) 
+   && isset($_POST["email"]) 
+   && isset($_POST["mdp"]) 
+)
+{
+if( !empty($_POST['nom']) &&
+             !empty($_POST['prenom']) &&
+             !empty($_POST['dateNais']) &&
+             !empty($_POST['cin']) &&
+             !empty($_POST["email"]) &&
+             !empty($_POST["mdp"]) 
+             )
+                {
+                $client= new client($_POST['nom'],$_POST['prenom'],$_POST['dateNais'],$_POST['cin'],$_POST['email'] ,
+                $_POST['mdp'],0 ,7);
+                $clientC->ajoutClient($client);
+                header('Location:index.php');
+                }
+                else 
+               {
+                $error =" Missing information";
+               } 
+        }
+                         
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -61,7 +100,7 @@
           <!-- LOGO -->       
 
            <!--  Text based logo  -->
-          <a class="navbar-brand" href="1.html">Rey Del<br>Méx<span>I</span>co</a> 
+          <a class="navbar-brand" href="index.php">Rey Del<br>Méx<span>I</span>co</a> 
 
 		      <!--  Image based logo  -->
           <!-- <a class="navbar-brand" href="index.html"><img src="assets/img/logo.png" alt="Logo img"></a>  -->
@@ -96,11 +135,19 @@
       <div class="row">
         <div class="col-md-1202">
           <div class="mu-connexion-area">
-
             <div class="mu-title">
                 <br><br><br>
                 <span class="mu-subtitle">Rey Del México  </span>
                 <br><br>
+                <div id="google_translate_element"> </div>
+            <script type="text/javascript">
+             function googleTranslateElementInit() {
+                 new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
+             }
+               </script>
+
+         <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+         <br>
                 <h2>Vous souhaite le bienvenue et vous gâte avec la vraie nourriture méxicaine</h2>
               </div>
   
@@ -109,41 +156,49 @@
               
               <div class="col-md-5 col-md-offset-4">
                 <div class="mu-connexion-left">
-                  <form class="mu-connexion-form">
+                  <form class="mu-connexion-form" method="POST" action="<?php $_SERVER['PHP_SELF'] ?>">
                     <div class="row">
                       <div class="col-md-10">
                         <div class="form-group">                       
-                          <input type="text" class="form-control" id="nom" placeholder="Votre Nom">
+                          <input type="text" name="nom" class="form-control" id="nom" placeholder="Votre Nom" >
                         </div>
                     </div>
                       <div class="col-md-10">
                         <div class="form-group">
-                          <input type="text" class="form-control" id="prenom" placeholder="Votre prénom">              
+                          <input type="text" name="prenom" class="form-control" id="prenom" placeholder="Votre prénom">              
                         </div>
                       </div>
-                      <div class="row">
+                     
                         <div class="col-md-10">
                           <div class="form-group">                       
-                            <input type="date" class="form-control" id="dateNais">
+                            <input type="date" name="dateNais" class="form-control" id="dateNais">
                           </div>
+                      </div>
+                      <div class="col-md-10">
+                        <div class="form-group">
+                          <input type="text" name="cin" class="form-control" id="cin" placeholder="Votre CIN">              
+                        </div>
                       </div>
                         <div class="col-md-10">
                           <div class="form-group">
-                            <input type="email" class="form-control" id="email" placeholder="Votre adresse mail">              
+                            <input type="email" name="email" class="form-control" id="email" placeholder="Votre adresse mail">              
                           </div>
                         </div>
+                      
                         <div class="col-md-10">
                             <div class="form-group">
-                              <input type="password" class="form-control" id="mdp" placeholder="Votre mot de passe">              
+                              <input type="password" name="mdp" class="form-control" id="mdp" placeholder="Votre mot de passe">              
                             </div>
                         </div>
-                        
-                      <div class=" col-md-offset-2">
-                           <button type="submit" class="mu-readmore-btn">Se connecter</button>
+                       
+                      <div class=" col-md-offset-1">
+                           <button type="submit" name="ajouter" value="Ajouter" class="mu-readmore-btn">S'inscrire</button>
+                           <button type="reset" name="annuler" value="annuler" class="mu-readmore-btn">Annuler</button>
                         </div>
-                     
+                      
                     </div>
-                  </form>    
+                  </form>
+        
                 </div>
               </div>
 
@@ -153,6 +208,8 @@
         </div>
       </div>
     </div>
+
+
     <div class="col-md-6 col-md-offset-3 ">
         <div class="mu-inscription-right">
           <div class="mu-opening-hour">

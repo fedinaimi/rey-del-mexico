@@ -20,6 +20,7 @@
 #GALLERY SECTION
 #TESTIMONIAL SECTION
 #CHEF SECTION
+#FOURNISSEUR SECTION
 #CONTACT SECTION
 #MAP SECTION
 #FOOTER SECTION
@@ -1465,6 +1466,148 @@ RESERVATION SECTION
   display: none;
 }
 
+/*==================
+  fournisseur SECTION
+====================*/
+
+
+#mu-fournisseur {
+  display: inline;
+  float: left;
+  padding: 100px 0;
+  width: 100%;
+}
+
+.mu-fournisseur-area {
+  display: inline;
+  float: left;
+  width: 100%;
+}
+
+.mu-fournisseur-content {
+  display: inline;
+  float: left;
+  margin-top: 30px;
+  padding-bottom: 60px;
+  width: 100%;
+}
+
+.mu-fournisseur-nav {
+  display: inline;
+  float: left;
+  text-align: center;
+  width: 100%;
+}
+
+.mu-fournisseur-nav .slick-list li {
+  background-color: #f8f8f8;
+  display: inline-block;
+  margin: 0 5px;
+  width: 22%;
+  overflow: hidden;
+}
+
+.mu-fournisseur-nav .slick-list li:first-child {
+  margin-left: 0;
+}
+
+.mu-fournisseur-nav .slick-list li:last-child {
+  margin-right: 0;
+}
+
+.mu-fournisseur-nav .slick-list li .mu-single-fournisseur {
+  display: inline;
+  float: left;
+  width: 100%;
+  position: relative;
+}
+
+.mu-fournisseur-nav .slick-list li .mu-single-fournisseur:hover .mu-single-fournisseur-social {
+  bottom: 0;
+  opacity: 1;
+}
+
+.mu-fournisseur-nav .slick-list li .mu-single-fournisseur .mu-single-fournisseur-img {
+  display: inline;
+  float: left;
+  width: 100%;
+}
+
+.mu-fournisseur-nav .slick-list li .mu-single-fournisseur .mu-single-fournisseur-img img {
+  width: 100%;
+}
+
+.mu-fournisseur-nav .slick-list li .mu-single-fournisseur .mu-single-fournisseur-info {
+  display: inline;
+  float: left;
+  padding: 10px 10px 20px;
+  width: 100%;
+}
+
+.mu-fournisseur-nav .slick-list li .mu-single-fournisseur .mu-single-fournisseur-info h4 {
+  margin-bottom: 5px;
+}
+
+.mu-fournisseur-nav .slick-list li .mu-single-fournisseur .mu-single-fournisseur-info span {
+  font-size: 14px;
+  letter-spacing: 0.5px;
+}
+
+.mu-fournisseur-nav .slick-list li .mu-single-fournisseur .mu-single-fournisseur-social {
+  background-color: #000;
+  position: absolute;
+  bottom: -100%;
+  left: 0;
+  right: 0;
+  padding: 23px 20px;
+  text-align: center;
+  opacity: 0;
+  -webkit-transition: all 0.5s;
+  -moz-transition: all 0.5s;
+  -ms-transition: all 0.5s;
+  -o-transition: all 0.5s;
+  transition: all 0.5s;
+}
+
+.mu-fournisseur-nav .slick-list li .mu-single-fournisseur .mu-single-fournisseur-social a {
+  display: inline-block;
+  margin: 0 5px;
+  padding: 5px;
+  text-align: center;
+  width: 35px;
+  -webkit-transition: all 0.5s;
+  -moz-transition: all 0.5s;
+  -ms-transition: all 0.5s;
+  -o-transition: all 0.5s;
+  transition: all 0.5s;
+}
+
+.mu-fournisseur-nav .slick-list li .mu-single-fournisseur .mu-single-fournisseur-social a:hover, 
+.mu-fournisseur-nav .slick-list li .mu-single-fournisseur .mu-single-fournisseur-social a:focus {
+  color: #fff;
+}
+
+.mu-fournisseur-nav .slick-dots {
+  text-align: center;
+  margin-bottom: -30px;
+}
+
+.mu-fournisseur-nav .slick-dots li {
+  border-radius: 50%;
+  width: 20px;
+  display: inline-block;
+  float: none;
+  -webkit-transition: all 0.5s;
+  -moz-transition: all 0.5s;
+  -ms-transition: all 0.5s;
+  -o-transition: all 0.5s;
+  transition: all 0.5s;
+}
+
+.mu-fournisseur-nav .slick-dots li button {
+  display: none;
+}
+
 
 
 /*==================
@@ -1724,6 +1867,9 @@ RESERVATION SECTION
   .mu-chef-nav .slick-list li .mu-single-chef .mu-single-chef-social {
     padding: 23px 5px;
   }
+  .mu-fournisseur-nav .slick-list li .mu-single-fournisseur .mu-single-fournisseur-social {
+    padding: 23px 5px;
+  }
 
   .mu-single-gallery .mu-single-gallery-item .mu-single-gallery-info {
   padding-top: 26%;
@@ -1857,6 +2003,12 @@ RESERVATION SECTION
   }
 
   #mu-chef .mu-chef-area .mu-chef-content .mu-chef-nav .slick-list li .mu-single-chef .mu-single-chef-social a {
+    margin: 0 3px;
+    padding: 3px 0;
+    width: 30px;
+  }
+
+  #mu-fournisseur .mu-fournisseur-area .mu-fournisseur-content .mu-fournisseur-nav .slick-list li .mu-single-fournisseur .mu-single-fournisseur-social a {
     margin: 0 3px;
     padding: 3px 0;
     width: 30px;

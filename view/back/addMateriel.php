@@ -1,35 +1,38 @@
 <?php
   
-    include_once '../../controller/evenementC.php';
+    include_once '../../controller/materielC.php';
+    include_once '../../controller/localC.php';
 
+    $error1 = "";
     $error = "";
-    $evenement = null;
-    
-    $evenementC = new evenementC(); 
-    
-	$evenement2C = new evenementC();
-	$listeLocal= $evenement2C->listeLocal();
-    if(
-         isset($_POST['libelle']) 
-        && isset($_POST['date']) 
-        && isset($_POST['duree']) 
-        && isset($_POST['description'])
-        
-         && isset($_POST['local'])) 
-         {
-             if( 
-             !empty($_POST['libelle']) &&
-             !empty($_POST['date']) &&
-             !empty($_POST['duree']) &&
-             !empty($_POST['description']) &&
-             !empty($_POST['local']) )
+    $materiel = null;
+    $materielC = new materielC(); 
+    $localC = new localC();
+   $listeLocal= $localC->afficherLocal();
+ 
+  
+
+    if( isset($_POST['libelle']) 
+        && isset($_POST['date_achat']) 
+         && isset($_POST["local"])
+         && isset($_POST["nbPieces"])
+         ) 
+         { 
+            
+             if( !empty($_POST['libelle']) &&
+             !empty($_POST['date_achat']) &&
+             !empty($_POST["local"]) &&
+             !empty($_POST["nbPieces"]) 
+             )
                 {
-                $evenement= new evenement($_POST['libelle'],$_POST['date'],$_POST['duree'],$_POST['description'] ,$_POST['local'] );
-                $evenementC->ajouterevenement($evenement);
-                header('Location:showEvenement.php');
-            }
+                $materiel= new materiel($_POST['libelle'],$_POST['date_achat'], $_POST['local'], $_POST['nbPieces'] );
+                $materielC->ajoutMateriel($materiel);
+                header('Location:showService.php');
+                }
            else 
-                $error =" Missing information";
+               {
+                   $error =" Missing information";
+               } 
         }
 
     
@@ -39,8 +42,7 @@
 <html lang="en">
 
 <head>
-
-    <!-- Required meta tags-->
+	<!-- Required meta tags-->
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<meta name="description" content="au theme template">
@@ -48,7 +50,7 @@
 	<meta name="keywords" content="au theme template">
 
 	<!-- Title Page-->
-	<title>evenement</title>
+	<title>Ajout materiel</title>
 
 	<!-- Fontfaces CSS-->
 	<link href="css/font-face.css" rel="stylesheet" media="all">
@@ -70,6 +72,7 @@
 
 	<!-- Main CSS-->
 	<link href="css/theme.css" rel="stylesheet" media="all">
+    <script src="js/materiel.js"> </script>
 
 </head>
 
@@ -80,7 +83,7 @@
             <div class="header-mobile__bar">
                 <div class="container-fluid">
                     <div class="header-mobile-inner">
-                        <a class="logo" href="index.html">
+                        <a class="logo" href="index.php">
                             <img src="images/icon/ahmed.png" alt="reydelmexico" />
                         </a>
                         <button class="hamburger hamburger--slider" type="button">
@@ -95,7 +98,7 @@
                 <div class="container-fluid">
                     <ul class="navbar-mobile__list list-unstyled">
                         <li class="has-sub">
-                            <a class="js-arrow" href="index.html">
+                            <a class="js-arrow" href="index.php">
                                 <i class="fa fa-bar-chart"></i>Général</a>
                             
                         </li>
@@ -140,7 +143,7 @@
                                 <i class="fas fa-users"></i>Chefs</a>
                         </li>
                         <li>
-                            <a href="showService.php">
+                            <a href="showMateriel.php">
                                 <i class="	fas fa-utensils"></i>Services de table</a>
                         </li>
                         <li>
@@ -151,8 +154,11 @@
                             <a href="showEvenement.php">
                                 <i class="fas fa-music"></i>Evénements</a>
                         </li>
-                       
-                       
+                      
+                        <li>
+                            <a href="showCategorieChef.php">
+                                <i class="fa fa-lightbulb-o"></i>Catégories Chefs</a>
+                        </li>
                       
                         
                     </ul>
@@ -173,7 +179,7 @@
                     <ul class="list-unstyled navbar__list">
                         
                         <li class="has-sub">
-                            <a class="js-arrow" href="index.html">
+                            <a class="js-arrow" href="index.php">
                                 <i class="fa fa-bar-chart"></i>Général</a>
                             
                         </li>
@@ -218,7 +224,7 @@
                                 <i class="fas fa-users"></i>Chefs</a>
                         </li>
                         <li>
-                            <a href="showService.php">
+                            <a href="showMateriel.php">
                                 <i class="	fas fa-utensils"></i>Services de table</a>
                         </li>
                         <li>
@@ -229,8 +235,10 @@
                             <a href="showEvenement.php">
                                 <i class="fas fa-music"></i>Evénements</a>
                         </li>
-                       
-                      
+                        <li>
+                            <a href="showCategorieChef.php">
+                                <i class="fa fa-lightbulb-o"></i>Catégories Chefs</a>
+                        </li>
                       
                       
                             </ul>
@@ -416,47 +424,39 @@
 						<div class="row">
                             <div class="col-lg-9">
 								<br>
-                                <h2 class="title-1 m-b-25">Ajouter un nouveau evenement</h2>
+                                <h2 class="title-1 m-b-25">Ajouter un nouveau materiel</h2>
                                 <div id="error">
                                     <?php echo $error; ?>
                                         </div>
-                                <form action="" method="POST" >
+                                        <div id="erreur"></div>
+                                <form action="" name="materiel" id="materiel" method="POST" onclick=" return verifMateriel();">
                   <table  align="center">
-                 
-                <tr>
-                    <td><label for="libelle">Libelle: </label>  </td> 
-                </tr> 
-                <tr>
-                    <td><input type="text" name="libelle" id="libelle" maxlength="20"></td>
+                 <tr> 
+                    <td> <label for="libelle">Libelle: </label>
+                    </td> 
                 </tr>
-                 
-                
-                <tr>
-                    <td>    <label for="date">Date: </label></td> 
-                </tr> 
-                <tr>
-                    <td><input type="date" name="date" id="date" maxlength="20"></td> 
+                 <tr>
+                    <td><input type="text" name="libelle" id="libelle" required maxlength="20"></td>
                 </tr>
                 <tr>
-                    <td>    <label for="duree">durée d'evenement: </label></td> 
+                    <td><label for="date_achat">Date Achat: </label>  </td> 
                 </tr> 
                 <tr>
-                    <td><input type="text" name="duree" id="duree" maxlength="20"></td> 
+                    <td><input type="date" name="date_achat" id="date_achat" required maxlength="20"></td>
                 </tr>
-                
-                
                 <tr>
-                    <td>    <label for="description">Description: </label></td> 
+                    <td><label for="nbPieces">Nombre des pieces: </label>  </td> 
                 </tr> 
                 <tr>
-                    <td><input type="textarea" name="description" id="description" maxlength="100"></td> 
+                    <td><input type="number" name="nbPieces" id="nbPieces" required min="0" maxlength="20"></td>
                 </tr>
+               
                 <tr>
                     <td><label for="local">Local:</label></td> 
                 </tr> 
                 <tr>
                     <td>
-                    <select name="local" id="local">
+                    <select name="local" id="local" required >
                      <option value="select" selected>Select</option>
                         
           <?php
@@ -470,15 +470,18 @@
                      
                     </td> 
                 </tr>
-               
-                <div class="row">
+                <tr></tr>
+                <tr></tr>
+                <tr>
+                    <td></td><td> <div class="row">
                             <div class="col-md-12">
                                 <div class="overview-wrap">
                                     <input type="submit" class="au-btn au-btn-icon au-btn--blue" value="Envoyer">
-                                        
+                                    <input type="reset" class="au-btn au-btn-icon au-btn--blue" value="Annuler">
                                 </div>
                             </div>
-                </div>
+                </div></td></tr>
+                
                   </table>
         </form>                   
                             
@@ -523,9 +526,7 @@
 	</script>
 
 	<!-- Main JS-->
-	
-    <script src="js/main.js"></script>
-    
+	<script src="js/main.js"></script>
 
 </body>
 

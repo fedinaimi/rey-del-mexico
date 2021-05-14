@@ -24,11 +24,11 @@ if(isset($_POST['submit'])){
     $mail->Port = '587';
 
     $mail->setFrom('meryemdagh94@gmail.com'); // Gmail address which you used as SMTP server
-    $mail->addAddress('meryemdagh94@gmail.com'); // Email address where you want to receive emails (you can use any of your gmail address including the gmail address which you used as SMTP server)
-
+    $mail->addAddress($email ); // Email address where you want to receive emails (you can use any of your gmail address including the gmail address which you used as SMTP server)
+    
     $mail->isHTML(true);
-    $mail->Subject = 'Mail recu (Contact Page)';
-    $mail->Body = "<h3>Name : $name <br>Email: $email <br>Message : $message</h3>";
+    $mail->Subject = 'Bienvenue';
+    $mail->Body = "<h3>Name : $name <br>Email: $email <br>Message : $message <br> Cordialement.</h3> ";
 
     $mail->send();
     $alert = '<div class="alert-success">

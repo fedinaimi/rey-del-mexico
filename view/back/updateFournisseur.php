@@ -7,9 +7,12 @@
     $fournisseur = null;
     $fournisseurC = new fournisseurC(); 
     $localC = new localC();
+    $local1C = new localC();
 	$listeLocal= $localC->afficherLocal();
     $categorieC = new categorieC();
 	$listeCategorie= $categorieC->afficherCategorie();
+    $categorie1C = new categorieC();
+    
     $elementC= null;
     $elementL= null;
     $localC1 = new localC();
@@ -22,6 +25,7 @@
         && isset($_POST['tel'])
          && isset($_POST['categorie'])
          && isset($_POST['local'])
+         && isset($_POST['img'])
 	){
 		if (
             !empty($_POST['nom']) &&
@@ -29,7 +33,8 @@
             !empty($_POST['email']) &&
             !empty($_POST['tel']) &&
             !empty($_POST['categorie']) &&
-            !empty($_POST['local'])
+            !empty($_POST['local']) &&
+            !empty($_POST['img'])
         ) {
             $fournisseur = new fournisseur(
                 $_POST['nom'],
@@ -37,7 +42,8 @@
                 $_POST['email'],
                 $_POST['tel'],
                 $_POST['categorie'],
-                $_POST['local']
+                $_POST['local'],
+                $_POST['img']
 			);
 			
             $fournisseurC->modifierFournisseur($fournisseur, $_GET['id']);
@@ -96,7 +102,7 @@
             <div class="header-mobile__bar">
                 <div class="container-fluid">
                     <div class="header-mobile-inner">
-                        <a class="logo" href="index.html">
+                        <a class="logo" href="index.php">
                             <img src="images/icon/ahmed.png" alt="reydelmexico" />
                         </a>
                         <button class="hamburger hamburger--slider" type="button">
@@ -111,7 +117,7 @@
                 <div class="container-fluid">
                     <ul class="navbar-mobile__list list-unstyled">
                         <li class="has-sub">
-                            <a class="js-arrow" href="index.html">
+                            <a class="js-arrow" href="index.php">
                                 <i class="fa fa-bar-chart"></i>Général</a>
                             
                         </li>
@@ -168,7 +174,10 @@
                                 <i class="fas fa-music"></i>Evénements</a>
                         </li>
                       
-                       
+                        <li>
+                            <a href="showCategorieChef.php">
+                                <i class="fa fa-lightbulb-o"></i>Catégories Chefs</a>
+                        </li>
                       
                         
                     </ul>
@@ -189,7 +198,7 @@
                     <ul class="list-unstyled navbar__list">
                         
                         <li class="has-sub">
-                            <a class="js-arrow" href="index.html">
+                            <a class="js-arrow" href="index.php">
                                 <i class="fa fa-bar-chart"></i>Général</a>
                             
                         </li>
@@ -245,7 +254,10 @@
                             <a href="showEvenement.php">
                                 <i class="fas fa-music"></i>Evénements</a>
                         </li>
-                      
+                        <li>
+                            <a href="showCategorieChef.php">
+                                <i class="fa fa-lightbulb-o"></i>Catégories Chefs</a>
+                        </li>
                       
                             </ul>
                         </li>
@@ -485,8 +497,9 @@
                 </tr> 
                 <tr>
                 <td>
+              <?php  $elementCat = $categorie1C->afficherElementCategorie($fournisseur->categorie); ?>
                      <select name="categorie" id="categorie" required>
-                     <option value="select" selected>Select</option>
+                     <option value="<?php echo $fournisseur->categorie; ?>" selected> <?php echo $elementCat->libelle; ?> </option>
                         
                <?php
                 foreach($listeCategorie as $listeC){
@@ -503,8 +516,12 @@
                 </tr> 
                 <tr>
                     <td>
+                    <?php  $elementLocal = $local1C->afficherElementLocal($fournisseur->local); ?>
                     <select name="local" id="local" required>
                      <option value="select" selected>Select</option>
+                     <option value="<?php echo $fournisseur->local; ?>" selected> <?php echo $elementLocal->adresse; ?> </option>
+
+
                         
           <?php
           foreach($listeLocal as $localC){
@@ -516,6 +533,19 @@
           </select>   
                      
                     </td> 
+                </tr>
+                <tr>
+                    <td>    <label for="img">Image Fournisseur: </label></td> 
+                </tr> 
+                <tr>
+
+                <td>
+<form enctype="multipart/form-data" method="post" autocomplete="on" action="upload/">     
+
+    <p> <input type="file" id="img" name="img"  required value = "<?php echo $fournisseur->img; ?>" /></p>
+    
+ </form>
+ </td>
                 </tr>
                 <tr></tr>
                 <tr></tr>

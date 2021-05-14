@@ -6,7 +6,7 @@ class chefC{
 
     function afficherChef()
     {
-      $sql = " SELECT * FROM chef";
+      $sql = " SELECT * FROM chef order by dateNais DESC";
       $db = config::getConnexion();
       try {
         $liste= $db->query($sql);
@@ -19,8 +19,8 @@ class chefC{
     function ajoutChef($chef)
     {
         
-       $sql = "INSERT INTO chef (nom, prenom, email, adresse, dateNais, categories, local, img , fb)
-       values(:nom, :prenom, :email, :adresse, :dateNais, :categories, :local, :img , :fb)";
+       $sql = "INSERT INTO chef (nom, prenom, email, adresse, dateNais, categorie, local, img , fb)
+       values(:nom, :prenom, :email, :adresse, :dateNais, :categorie, :local, :img , :fb)";
        $db = config::getConnexion();
        try {
         $query = $db->prepare($sql);
@@ -30,7 +30,7 @@ class chefC{
             'email' => $chef->getEmail(),
 	         	'adresse' => $chef->getAdresse(),
             'dateNais' => $chef->getDateNais(),
-	         	'categories' => $chef->getCategories(),
+	         	'categorie' => $chef->getCategories(),
 				 'local' => $chef->getLocal(),
 				 'img' => $chef->getImg(),
 				 'fb' => $chef->getFb()
@@ -63,7 +63,7 @@ class chefC{
 						email = :email,
 						adresse = :adresse,
 						dateNais = :dateNais,
-                        categories = :categories,
+                        categorie = :categorie,
 						local = :local
 						img = :img,
 						fb = :fb
@@ -75,7 +75,7 @@ class chefC{
 					'email' => $chef->getEmail(),
 						 'adresse' => $chef->getAdresse(),
 					'dateNais' => $chef->getDateNais(),
-						 'categories' => $chef->getCategories(),
+						 'categorie' => $chef->getCategories(),
 						 'local' => $chef->getLocal(),
 						 'img' => $chef->getImg(),
 						 'fb' => $chef->getFb(),

@@ -20,8 +20,8 @@ class fournisseurC{
     function ajoutFournisseur($fourni)
     {
         
-       $sql = "INSERT INTO fournisseur (nom, prenom, email, tel, categorie, local)
-       values(:nom, :prenom, :email, :tel, :categorie, :local)";
+       $sql = "INSERT INTO fournisseur (nom, prenom, email, tel, categorie, local, img)
+       values(:nom, :prenom, :email, :tel, :categorie, :local, :img)";
        $db = config::getConnexion();
        try {
         $query = $db->prepare($sql);
@@ -31,14 +31,17 @@ class fournisseurC{
             'email' => $fourni->getEmail(),
 	         	'tel' => $fourni->getTel(),
             'categorie' => $fourni->getCategorie(),
+			'img' => $fourni->getImg(),
 	         	'local' => $fourni->getLocal()
-            
-        ]);
+				
+             ]);
         
       } catch(Exception $e) {
           die('Erreur: ' .$e->getMessage());
       }
     }
+
+
     function supprimerFournisseur($id_fournisseur){
 			$sql="DELETE FROM fournisseur WHERE id_fournisseur= :id_fournisseur";
 			$db = config::getConnexion();
@@ -61,7 +64,8 @@ class fournisseurC{
 						email = :email,
 						tel = :tel,
 						categorie = :categorie,
-            local = :local
+                        local = :local,
+			            img = :img
 					WHERE id_fournisseur = :id_fournisseur'
 				);
 				$query->execute([
@@ -72,6 +76,7 @@ class fournisseurC{
 					'categorie' => $Utilisateur->getCategorie(),
 					'id_fournisseur' => $id_fournisseur,
           'local' => $Utilisateur->getLocal(),
+		  'img' => $Utilisateur->getImg(),
 				]);
 				echo $query->rowCount() . " records UPDATED successfully <br>";
 			} catch (PDOException $e) {

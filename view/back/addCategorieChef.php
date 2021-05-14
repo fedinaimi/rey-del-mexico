@@ -1,11 +1,33 @@
-<?PHP
-	include "../../controller/reservationC.php";
-
-	$reservationC = new reservationC();
-	$listereservation= $reservationC->afficherreservation();
+<?php
    
+	 require_once '../../controller/categorieChefC.php';
+    $error1 = "";
+    $error = "";
+    $categorie = null;
+    $categorieChefC = new categorieChefC(); 
+    $categorieChef1C = new categorieChefC();
+	
+ 
+    //iset verifier si y a eu un evoie
 
+    if( isset($_POST['libelle']) 
+         ) 
+         {     
+             if( !empty($_POST['libelle']) )
+                {
+                $categorieChef= new categorieChef($_POST['libelle']);
+                $categorieChefC->ajoutCategorieChef($categorieChef);
+                header('Location:showCategorieChef.php');
+                }
+           else 
+               {
+                   $error =" Missing information";
+               } 
+        }
+
+    
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -18,7 +40,7 @@
 	<meta name="keywords" content="au theme template">
 
 	<!-- Title Page-->
-	<title>reservation</title>
+	<title>Ajout categorie Chef</title>
 
 	<!-- Fontfaces CSS-->
 	<link href="css/font-face.css" rel="stylesheet" media="all">
@@ -50,8 +72,8 @@
             <div class="header-mobile__bar">
                 <div class="container-fluid">
                     <div class="header-mobile-inner">
-                        <a class="logo" href="index.html">
-                            <img src="images/icon/ahmed.png" alt="CoolAdmin" />
+                        <a class="logo" href="index.php">
+                            <img src="images/icon/ahmed.png" alt="reydelmexico" />
                         </a>
                         <button class="hamburger hamburger--slider" type="button">
                             <span class="hamburger-box">
@@ -65,7 +87,7 @@
                 <div class="container-fluid">
                     <ul class="navbar-mobile__list list-unstyled">
                         <li class="has-sub">
-                            <a class="js-arrow" href="index.html">
+                            <a class="js-arrow" href="index.php">
                                 <i class="fa fa-bar-chart"></i>Général</a>
                             
                         </li>
@@ -122,8 +144,10 @@
                                 <i class="fas fa-music"></i>Evénements</a>
                         </li>
                        
-                       
-                      
+                        <li>
+                            <a href="showCategorieChef.php">
+                                <i class="fa fa-lightbulb-o"></i>Catégories Chefs</a>
+                        </li>
                         
                     </ul>
                 </div>
@@ -135,7 +159,7 @@
         <aside class="menu-sidebar d-none d-lg-block">
             <div class="logo">
                 <a href="#">
-                    <img src="images/icon/logo.png" alt="Cool Admin" />
+                    <img src="images/icon/logo.png" alt="reydelmexico" />
                 </a>
             </div>
             <div class="menu-sidebar__content js-scrollbar1">
@@ -143,7 +167,7 @@
                     <ul class="list-unstyled navbar__list">
                         
                         <li class="has-sub">
-                            <a class="js-arrow" href="index.html">
+                            <a class="js-arrow" href="index.php">
                                 <i class="fa fa-bar-chart"></i>Général</a>
                             
                         </li>
@@ -199,9 +223,11 @@
                             <a href="showEvenement.php">
                                 <i class="fas fa-music"></i>Evénements</a>
                         </li>
-                       
                       
-                      
+                        <li>
+                            <a href="showCategorieChef.php">
+                                <i class="fa fa-lightbulb-o"></i>Catégories Chefs</a>
+                        </li>
                       
                             </ul>
                         </li>
@@ -218,12 +244,7 @@
 				<div class="section__content section__content--p30">
 					<div class="container-fluid">
 						<div class="header-wrap">
-							<form class="form-header" action="" method="POST">
-								<input class="au-input au-input--xl" type="text" name="search" placeholder="Recherche reservation..." />
-								<button class="au-btn--submit" type="submit">
-									<i class="zmdi zmdi-search"></i>
-								</button>
-							</form>
+							
 							<div class="header-button">
                                 <div class="noti-wrap">
                                     <div class="noti__item js-item-menu">
@@ -245,7 +266,7 @@
                                             </div>
                                             <div class="mess__item">
                                                 <div class="image img-cir img-40">
-                                                    <img src="images/icon/avatar-04.jpg" alt="Diane Myers" />
+                                                    <img src="back/images/icon/avatar-04.jpg" alt="Diane Myers" />
                                                 </div>
                                                 <div class="content">
                                                     <h6>Diane Myers</h6>
@@ -387,85 +408,58 @@
 			<div class="main-content">
 				<div class="section__content section__content--p30">
 					<div class="container-fluid">
-						<div class="row">
-                            <div class="col-md-12">
-                                <div class="overview-wrap">
-                                    
-                                    <button class="au-btn au-btn-icon au-btn--blue">
-                                        <a href="ajouterreservation.php">  <i class="zmdi zmdi-plus text-center"></i>Ajouter reservation</button></a>
-                                </div>
-                            </div>
-                        </div>
+						
 						<div class="row">
                             <div class="col-lg-9">
 								<br>
-                                <h2 class="title-1 m-b-25">Informations reservations</h2>
-                                <div class="table-responsive table--no-card m-b-40">
-                                    <table class="table table-borderless table-striped table-earning">
-                                        <thead>
-                                            <tr>
-                                                <th class="text-center">ID</th>
-                                                <th class="text-center">date</th>
-                                                <th class="text-center">nb_perso</th>
-                                                <th class="text-center">message</th>
-                                                <th class="text-center">statut</th>
-                                                <th class="text-center">client</th>
-                                                <th class="text-center">Local</th>
-                                                <th class="text-center"></th>
-                                                <th class="text-right"></th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                           
-                                        <?PHP
-foreach($listereservation as $reservation){
-?>
-<tr>
-<td class="text-center"><?PHP echo $reservation['id_reservation']; ?></td>
-<td class="text-center"><?PHP echo $reservation['date']; ?></td>
-<td class="text-center"><?PHP echo $reservation['nb_perso']; ?></td>
-<td class="text-center"><?PHP echo $reservation['message']; ?></td>
-<td class="text-center"><?PHP echo $reservation['statut']; ?></td>
-<td class="text-center"><?PHP echo $reservation['client']; ?></td>
-<td class="text-center"><?PHP echo $reservation['local']; ?></td>
-<td class="text-center"> 
-<form method="POST" action="effacerreservation.php">
-<button type="submit" name="supprimer" class="au-btn au-btn-icon au-btn--blue">
- <i class="zmdi zmdi"></i>Supprimer</button>
- <input type="hidden" value=<?PHP echo $reservation['id_reservation']; ?> name="id_reservation">
- </form>  
- </td>
-
- <td class="text-center"> 
- <button class="au-btn au-btn-icon au-btn--blue">
- <a href="modifierreservation.php?id=<?PHP echo $reservation['id_reservation']; ?>">
- <i class="zmdi zmdi"></i>Modifier</button>
-  </a>
- </td>
-</tr>
-<?PHP
-}
-?>
-                                       
-                                        </tbody>
-                                    </table>
+                                <h2 class="title-1 m-b-25">Ajouter une nouvelle Categorie Chef</h2>
+                                <div id="error">
+                                    <?php echo $error; ?>
+                                        </div>
+                                <form action="" method="POST">
+                  <table  align="center">
+                 <tr> 
+                    <td> <label for="libelle">LIBELLE: </label>
+                    </td> 
+                </tr>
+                 <tr>
+                    <td><input type="text" name="libelle" id="libelle" required maxlength="20"></td>
+                </tr>
+                
+               
+                <tr></tr>
+                <tr></tr>
+                <tr>
+                    <td></td><td> <div class="row">
+                            <div class="col-md-12">
+                                <div class="overview-wrap">
+                                    <input type="submit" class="au-btn au-btn-icon au-btn--blue" value="Envoyer">
+                                    <input type="reset" class="au-btn au-btn-icon au-btn--blue" value="Annuler"> 
                                 </div>
                             </div>
+                </div></td></tr>
+                
+                  </table>
+        </form>                   
+                            
+   </div>
+</div>
 						
-						<div class="row">
+                 	<div class="row">
 								<div class="col-md-12">
 										<div class="copyright">
-												<p>&copy; Copyright.Tous droits réservés. <a href="1.html">Rey Del México</a>.</p>
+												<p>&copy; Copyright.Tous droits réservés. <a href="../view/front/1.html">Rey Del México</a>.</p>
 										</div>
 								</div>
 						</div>
+
 					</div>
 				</div>
 			</div>
-		</div>
+		
 		<!-- END PAGE CONTAINER-->
 
-	</div>
+	
 
 	<!-- Jquery JS-->
 	<script src="vendor/jquery-3.2.1.min.js"></script>
@@ -495,3 +489,9 @@ foreach($listereservation as $reservation){
 
 </html>
 <!-- end document-->
+
+
+
+
+
+

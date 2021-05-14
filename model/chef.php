@@ -7,18 +7,18 @@
 		private ?string $email = null;
 		private ?string $adresse = null;
 		private ?string $dateNais = null;	
-		private ?string $categories = null;	
+		private ?int $categorie = null;	
 		private ?int $local = null;	
 		private ?string $img = null;	
 		private ?string $fb = null;	
-		function __construct( string $nom, string $prenom, string $email,string $adresse, string $dateNais ,string $categories,int $local, string $img , string $fb)
+		function __construct( string $nom, string $prenom, string $email,string $adresse, string $dateNais ,int $categorie,int $local, string $img , string $fb)
         {
 			$this->nom=$nom;
 			$this->prenom=$prenom;
 			$this->email=$email;
 			$this->adresse=$adresse;
 			$this->dateNais=$dateNais;
-			$this->categories=$categories;
+			$this->categorie=$categorie;
 			$this->local=$local;
 			$this->img=$img;
 			$this->fb=$fb;
@@ -48,8 +48,8 @@
 		function getDateNais(): string{
 			return $this->dateNais;
 		}
-		function getCategories(): string{
-			return $this->categories;
+		function getCategories(): int{
+			return $this->categorie;
 		}
 		function getLocal(): int{
 			return $this->local;
@@ -82,9 +82,9 @@
         {
 			$this->dateNais=$dateNais;
 		}
-		function setCategories(string $categories): void
+		function setCategories(int $categorie): void
         {
-			$this->categories=$categories;
+			$this->categorie=$categorie;
 		}
 		function setLocal(int $local): void
         {

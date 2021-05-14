@@ -1,45 +1,47 @@
 <?php
-	  
-	 
-      include_once "../../controller/evenementC.php";
+	include_once '../../controller/clientC.php';
+    include_once '../../model/client.php';
+   
+    
+    $error = "";
+    $client = null;
+    $clientC = new clientC(); 
+    $client1C = new clientC();
     
 
-	
-	$error = "";
-
-    $evenementC = new evenementC(); 
-    
-	$evenement2C = new evenementC();
-	$listeLocal= $evenement2C->listeLocal();
-
-	
 	if (
-       
-         isset($_POST['libelle']) 
-        && isset($_POST['date']) 
-        && isset($_POST['duree'])
-        && isset($_POST['description'])
-        && isset($_POST['local'])
+        isset($_POST['nom']) 
+        && isset($_POST['prenom']) 
+        && isset($_POST['dateNais']) 
+        && isset($_POST['cin'])
+         && isset($_POST['email'])
+         && isset($_POST['mdp'])
+         && isset($_POST['reduction'])
+         && isset($_POST['carte'])
 	){
 		if (
-            
-            !empty($_POST['libelle']) &&
-            !empty($_POST['date']) &&
-            !empty($_POST['duree']) &&
-            !empty($_POST['description']) &&
-            !empty($_POST['local'])
+            !empty($_POST['nom']) &&
+            !empty($_POST['prenom']) &&
+            !empty($_POST['dateNais']) &&
+            !empty($_POST['cin']) &&
+            !empty($_POST['email']) &&
+            !empty($_POST['mdp']) &&
+            !empty($_POST['reduction']) &&
+            !empty($_POST['carte']) 
         ) {
-            $evenement = new evenement(
-                
-                $_POST['libelle'], 
-                $_POST['date'],
-                $_POST['duree'],
-                $_POST['description'],
-                $_POST['local']
+            $client = new client(
+                $_POST['nom'],
+                $_POST['prenom'], 
+                $_POST['dateNais'],
+                $_POST['cin'],
+                $_POST['email'],
+                $_POST['mdp'],
+                $_POST['reduction'],
+                $_POST['carte']
 			);
 			
-            $evenementC->modifierevenement($evenement, $_GET['id']);
-            header('Location:showEvenement.php');
+            $clientC->modifierClient($client, $_GET['id']);
+            header('Location:showClient.php');
         }
         else
             $error = "Missing information";
@@ -58,7 +60,7 @@
 	<meta name="keywords" content="au theme template">
 
 	<!-- Title Page-->
-	<title>Modifier evenement</title>
+	<title>Modifier Client</title>
 
 	<!-- Fontfaces CSS-->
 	<link href="css/font-face.css" rel="stylesheet" media="all">
@@ -80,6 +82,8 @@
 
 	<!-- Main CSS-->
 	<link href="css/theme.css" rel="stylesheet" media="all">
+    	<!-- JS verif-->
+        <script src="js/script.js"></script>
 
 </head>
 
@@ -112,7 +116,7 @@
                             
                         </li>
                         <li>
-                            <a href="showClientlient.php">
+                            <a href="showClient.php">
                                 <i class="fas fa-users"></i>Clients</a>
                         </li>
                         <li>
@@ -163,7 +167,6 @@
                             <a href="showEvenement.php">
                                 <i class="fas fa-music"></i>Evénements</a>
                         </li>
-                       
                       
                        
                       
@@ -191,7 +194,7 @@
                             
                         </li>
                         <li>
-                            <a href="showClientlient.php">
+                            <a href="showClient.php">
                                 <i class="fas fa-users"></i>Clients</a>
                         </li>
                         <li>
@@ -242,8 +245,6 @@
                             <a href="showEvenement.php">
                                 <i class="fas fa-music"></i>Evénements</a>
                         </li>
-                       
-                      
                       
                       
                             </ul>
@@ -434,69 +435,74 @@
                                 <div class="overview-wrap">
                                     
                                     <button class="au-btn au-btn-icon au-btn--blue">
-                                    <a href="fournisseur.php">  <i class="zmdi zmdi text-center"></i>Retour à la liste</button></a>
+                                    <a href="showClient.php">  <i class="zmdi zmdi text-center"></i>Retour à la liste</button></a>
                                 </div>
                             </div>
                         
                                  <hr>
                                  <br>
-                                <h2 class="title-1 m-b-25 text-center">Update</h2>
+                                <h2 class="title-1 m-b-25 text-center">Modifier Client</h2>
                                 <div id="error">
                                     <?php echo $error; ?>
                                 </div>
-			<?php
+                                <div id="erreur"></div>
+                                <?php
 			if (isset($_GET['id']))
 			{
-				$evenement = $evenementC->recupererevenement($_GET['id']);	
-		       ?>
+				$client = $clientC->recupererClient1($_GET['id']);	
+		 ?>
                 <form action="" method="POST" >
                   <table  align="center">
-                 
-                <tr>
-                    <td><label for="libelle">libelle: </label>  </td> 
-                </tr> 
-                <tr>
-                    <td><input type="text" name="libelle" id="libelle" maxlength="20" ></td>
-                </tr>
-                <tr>
-                    <td> <label for="date">date: </label>  </td> 
- 
-                </tr> 
-                <tr>
-                    <td><input type="date" name="date" id="date" maxlength="100" ></td>
-                </tr>
-                <tr>
-                    <td> <label for="duree">durée d'evenement: </label>  </td> 
- 
-                </tr> 
-                <tr>
-                    <td><input type="text" name="duree" id="duree" maxlength="100" ></td>
-                </tr>
-                <tr>
-                    <td>    <label for="description">description: </label></td> 
-                </tr> 
-                <tr>
-                    <td><input type="text" name="description" id="description" maxlength="8" ></td> 
-                </tr>
-                
-                <tr>
-                    <td><label for="local">Local:</label></td> 
-                </tr> 
-                <tr>
-                    <td>
-                    <select name="local" id="local">
-                     <option value="select" selected>Select</option>
-                        
-          <?php
-          foreach($listeLocal as $localC){
-           ?>
-           <option value ='<?PHP echo $localC['id_local']; ?>'> <?PHP echo $localC['adresse']; ?></option>
-           <?php
-          }
-          ?>
-          </select>   
-                     
+                  <tr> 
+                    <td> <label for="nom">Nom: </label>
                     </td> 
+                </tr>
+                 <tr>
+                    <td><input type="text" name="nom" id="nom"  required value = "<?php echo $client->nom; ?>"></td>
+                </tr>
+                <tr> 
+                    <td> <label for="prenom">Prenom: </label>
+                    </td> 
+                </tr>
+                 <tr>
+                    <td><input type="text" name="prenom" id="prenom"  required value = "<?php echo $client->prenom; ?>"></td>
+                </tr>
+                <tr>
+                    <td><label for="dateNais">Date De Naissance: </label>  </td> 
+                </tr> 
+                <tr>
+                <td><input type="date" name="dateNais" id="dateNais" required value = "<?php echo $client->dateNais; ?>"maxlength="20"></td>
+                </tr>
+                <tr>
+                    <td> <label for="cin">Carte D Identité: </label>  </td> 
+ 
+                </tr> 
+                <tr>
+                <td><input type="text" name="cin" id="cin" required value = "<?php echo $client->cin; ?>" maxlength="20"></td>
+                </tr>
+                <tr>
+                    <td>    <label for="surface">Adresse Mail: </label></td> 
+                </tr> 
+                <tr>
+                    <td><input type="email" name="email" id="email" required value = "<?php echo $client->email; ?>" maxlength="20"></td> 
+                </tr>
+                <tr>
+                    <td>    <label for="mdp">Mot De Passe: </label></td> 
+                </tr> 
+                <tr>
+                    <td><input type="password" name="mdp" id="mdp" required value = "<?php echo $client->mdp; ?>" maxlength="20"></td> 
+                </tr>
+                <tr>
+                    <td>    <label for="reduction">Reduction: </label></td> 
+                </tr> 
+                <tr>
+                    <td><input type="text" name="reduction" id="reduction" required value = "<?php echo $client->reduction; ?>" ></td> 
+                </tr>
+                <tr>
+                    <td>    <label for="carte">Carte: </label></td> 
+                </tr> 
+                <tr>
+                    <td><input type="text" name="carte" id="carte" required value = "<?php echo $client->carte; ?>" ></td> 
                 </tr>
                
                 <tr></tr>
@@ -505,26 +511,25 @@
                     <td></td><td> <div class="row">
                             <div class="col-md-12">
                                 <div class="overview-wrap">
-                                    <input type="submit" class="au-btn au-btn-icon au-btn--blue" value="Envoyer">
-                                    <td>
-                        <input type="reset"  class="au-btn au-btn-icon au-btn--blue" value="Annuler" >
-                    </td>   
+                                    <input type="submit" class="au-btn au-btn-icon au-btn--blue" value="Envoyer" onclick="verifLocal();">
+                                    <input type="reset" class="au-btn au-btn-icon au-btn--blue" value="Annuler"> 
                                 </div>
                             </div>
                 </div></td></tr>
+                
                 
                   </table>
         </form>                   
         <?php
 		}
-		?>                      
+		?>                                                         
    </div>
 </div>
 						
                  	<div class="row">
 								<div class="col-md-12">
 										<div class="copyright">
-												<p>&copy; Copyright.Tous droits réservés. <a href="front/1.html">Rey Del México</a>.</p>
+												<p>&copy; Copyright.Tous droits réservés. <a href="../../../view/front/1.php">Rey Del México</a>.</p>
 										</div>
 								</div>
 						</div>

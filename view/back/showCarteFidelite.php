@@ -52,7 +52,7 @@
             <div class="header-mobile__bar">
                 <div class="container-fluid">
                     <div class="header-mobile-inner">
-                        <a class="logo" href="index.html">
+                        <a class="logo" href="index.php">
                             <img src="images/icon/ahmed.png" alt="admin" />
                         </a>
                         <button class="hamburger hamburger--slider" type="button">
@@ -67,7 +67,7 @@
                 <div class="container-fluid">
                     <ul class="navbar-mobile__list list-unstyled">
                         <li class="has-sub">
-                            <a class="js-arrow" href="index.html">
+                            <a class="js-arrow" href="index.php">
                                 <i class="fas fa-tachometer-alt"></i>Général</a>
                             
                         </li>
@@ -123,7 +123,10 @@
                             <a href="showEvenement.php">
                                 <i class="fas fa-music"></i>Evénements</a>
                         </li>
-                        
+                        <li>
+                            <a href="showCategorieChef.php">
+                                <i class="fa fa-lightbulb-o"></i>Catégories Chefs</a>
+                        </li>
                     </ul>
                 </div>
             </nav>
@@ -142,7 +145,7 @@
                     <ul class="list-unstyled navbar__list">
                         
                         <li class="has-sub">
-                            <a class="js-arrow" href="index.html">
+                            <a class="js-arrow" href="index.php">
                                 <i class="fa fa-bar-chart"></i>Général</a>
                             
                         </li>
@@ -198,7 +201,10 @@
                             <a href="showEvenement.php">
                                 <i class="fas fa-music"></i>Evénements</a>
                         </li>
-                      
+                        <li>
+                            <a href="showCategorieChef.php">
+                                <i class="fa fa-lightbulb-o"></i>Catégories Chefs</a>
+                        </li>
                     
                       
                             </ul>
@@ -216,12 +222,7 @@
 				<div class="section__content section__content--p30">
 					<div class="container-fluid">
 						<div class="header-wrap">
-							<form class="form-header" action="" method="POST">
-								<input class="au-input au-input--xl" type="text" name="search" placeholder="Recherche carte..." />
-								<button class="au-btn--submit" type="submit">
-									<i class="zmdi zmdi-search"></i>
-								</button>
-							</form>
+                        <a href="findCarte.php">   <i class="zmdi zmdi">recherche Carte</i></a></button>
 							<div class="header-button">
                                 <div class="noti-wrap">
                                     <div class="noti__item js-item-menu">
@@ -388,7 +389,7 @@
 						<div class="row">
                             <div class="col-md-12">
                                 <div class="overview-wrap">
-                                    
+                                    <br>
                                     <button class="au-btn au-btn-icon au-btn--blue">
                                     <a href="addCarte.php">   <i class="zmdi zmdi-plus">Ajout Carte</i></a></button>
                                 </div>
@@ -407,8 +408,8 @@
                                             
                                                 <th class="text-center">Statut</th>
                                                 <th class="text-center">Date Création</th>
-                                                <th class="text-right">Supprimer</th>
-                                                <th class="text-right">Modifier</th>
+                                                <th class="text-right"></th>
+                                                <th class="text-right"></th>
                                             </tr>
                                         </thead>
                                         <tbody>

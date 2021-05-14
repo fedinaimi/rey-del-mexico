@@ -1,21 +1,28 @@
 <?PHP
 
-
+session_start();
 include "../../controller/produitC.php";
 include "../../controller/localC.php";
 include "../../controller/fournisseurC.php";
 include "../../controller/categorieC.php";
 include "../../controller/chefC.php";
+include "../../controller/categorieChefC.php";
+
 $produitC = new produitC();
 $listeProduit= $produitC->afficherProduit();
+
 $categorieC= new categorieC();
 $localC = new localC();
 $listeLocal= $localC->afficherLocal();
+
 $chefC = new chefC();
 $listeChef= $chefC->afficherChef();
 
 $fournisseurC = new fournisseurC();
-$listeFournisseur= $fournisseurC->afficherFournisseur();    
+$listeFournisseur= $fournisseurC->afficherFournisseur();  
+
+$categorieChefC = new categorieChefC();
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -79,7 +86,7 @@ $listeFournisseur= $fournisseurC->afficherFournisseur();
           <!-- LOGO -->       
 
            <!--  Text based logo  -->
-          <a class="navbar-brand" href="1.html">Rey Del<br>Méx<span>I</span>co</a> 
+          <a class="navbar-brand" href="index.php">Rey Del<br>Méx<span>I</span>co</a> 
 
 		      <!--  Image based logo  -->
           <!-- <a class="navbar-brand" href="index.html"><img src="assets/img/logo.png" alt="Logo img"></a>  -->
@@ -89,13 +96,13 @@ $listeFournisseur= $fournisseurC->afficherFournisseur();
         <div id="navbar" class="navbar-collapse collapse">
           <ul id="top-menu" class="nav navbar-nav navbar-right mu-main-nav">
 
-          <li><a href="1.php">ACCUEIL</a></li>
-            <li><a href="1.php#mu-about-us">A PROPOS DE NOUS</a></li>                       
-            <li><a href="1.php#mu-restaurant-menu">MENU</a></li>                       
-            <li><a href="1.php#mu-reservation">RESERVATION</a></li>           
-            <li><a href="1.php#mu-gallery">GALLERY</a></li>
-            <li><a href="1.php#mu-chef">NOS CHEFS</a></li> 
-            <li><a href="1.php#mu-evenement">EVENEMENT</a></li> 
+          <li><a href="index.php">ACCUEIL</a></li>
+            <li><a href="index.php#mu-about-us">A PROPOS DE NOUS</a></li>                     
+            <li><a href="index.php#mu-restaurant-menu">MENU</a></li>                       
+            <li><a href="index.php#mu-reservation">RESERVATION</a></li>           
+            <li><a href="index.php#mu-gallery">GALLERY</a></li>
+            <li><a href="index.php#mu-chef">NOS CHEFS</a></li> 
+            <li><a href="index.php#mu-evenement">EVENEMENT</a></li> 
             <li><a href="ethos.html">ETHOS</a></li>  
             <li><a href="commander.php">COMMANDER</a></li>  
           </ul>  
@@ -196,16 +203,7 @@ $listeFournisseur= $fournisseurC->afficherFournisseur();
                  <p>Chez Rey Del México, nous avons pris l'engagement rapide et décontracté <br>
                     - nous vous servirons des plats frais et préparés en moins de 2 minutes.<br>
                     Et nous le ferons avec un menu très ciblé, servant une cuisine  <span>- Mexicaine californienne.</span></p>  
-                    <h2 clas="text-center"> Nos fournisseurs</h2>
-                    <br>
-                      <address>
-                      <?PHP
-foreach($listeFournisseur as $fournisseur){
-?>
- <p><i class="fa fa-circle-thin"></i><?PHP echo " "; echo $fournisseur['nom']; echo "  " ; echo $fournisseur['prenom'];  ?></p>
-<?PHP
-}
-?>                            
+                                    
                   
                 </div>
               </div>
@@ -216,7 +214,84 @@ foreach($listeFournisseur as $fournisseur){
     </div>
   </section>
   <!-- End About us -->
+ <!-- Start Counter Fournisseur -->
 
+
+  <!-- Start Chef Section -->
+  <section id="mu-chef">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="mu-chef-area">
+
+            <div class="mu-title">
+              <span class="mu-subtitle">NOS FOURNISSEURS </span>
+              <br>
+              <br><h2>THE BEST OF THE BEST</h2>
+            </div>
+
+            <div class="mu-chef-content">
+              <ul class="mu-chef-nav">
+               
+              <?PHP
+foreach($listeFournisseur as $fournisseur){
+?>
+ <li>
+                  <div class="mu-single-chef">
+                    <figure class="mu-single-chef-img">
+                      <img src="assets/img/fournisseur/<?php echo $fournisseur["img"]; ?>" length="100" height="180" alt="chef img">
+                    </figure>
+                    <div class="mu-single-chef-info">
+                      <h4></i><?PHP echo $fournisseur['nom']; echo " "; echo $fournisseur['prenom']; ?></h4>
+
+                      <?PHP $elementL= $localC->afficherElementLocal($fournisseur['local']);  ?>
+                      <?PHP $elementC= $categorieC->afficherElementCategorie($fournisseur['categorie']);  ?>
+    
+                      <span></i><?PHP    echo $elementL->adresse; ?></span>
+                      <span></i><?PHP    echo $elementC->libelle; ?></span>
+                    </div>
+                    <div class="mu-single-chef-social">
+                     
+                      <a href="https://twitter.com/login?lang=fr"><i class="fa fa-twitter"></i></a>
+                      <a href="https://www.google.com/"><i class="fa fa-google-plus"></i></a>
+                      <a href="https://www.linkedin.com/login/fr"><i class="fa fa-linkedin"></i></a>
+                    </div>
+                  </div>
+                </li>
+ 
+
+
+<?PHP
+}
+?>
+               
+      
+                 
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- End Chef Section -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <!-- End Fournisseur -->
   <!-- Start Counter Section -->
   <section id="mu-counter">
     <div class="mu-counter-overlay">
@@ -959,14 +1034,15 @@ foreach($listeProduit as $produit){
               <?PHP
 foreach($listeChef as $chef){
 ?>
- <li>
+<li>
                   <div class="mu-single-chef">
                     <figure class="mu-single-chef-img">
                       <img src="assets/img/chef/<?php echo $chef["img"]; ?>" length="100" height="180" alt="chef img">
                     </figure>
                     <div class="mu-single-chef-info">
                       <h4></i><?PHP echo $chef['nom']; echo " "; echo $chef['prenom']; ?></h4>
-                      <span></i><?PHP echo $chef['categories']; ?></span>
+                      <span></i><?PHP  $elementL= $categorieChefC->afficherElementCategorieChef($chef['categorie']);
+                      echo $elementL->libelle; ?></span>
                     </div>
                     <div class="mu-single-chef-social">
                       <a href="<?PHP echo $chef['fb']; ?>"><i class="fa fa-facebook"></i></a>
@@ -982,9 +1058,7 @@ foreach($listeChef as $chef){
 <?PHP
 }
 ?>
-               
-      
-                 
+   
               </ul>
             </div>
           </div>
@@ -1018,10 +1092,8 @@ foreach($listeChef as $chef){
                                                 <th class="text-center">libelle</th>
                                                 <th class="text-center">date</th>
                                                 <th class="text-center">durée d'evenement</th>
-
                                                 <th class="text-center">description</th>
                                                 <th class="text-center">local</th>
-                                                
                                                 <th class="text-center"></th>
                                                 <th class="text-right"></th>
                                             </tr>

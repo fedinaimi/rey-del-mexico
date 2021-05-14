@@ -31,7 +31,9 @@
              !empty($_POST["img"]) 
              )
                 {
-                $produit= new produit($_POST['libelle'],$_POST['nb_calories'],$_POST['prix'],$_POST['description'],$_POST['categorie'] ,$_POST['fournisseur'],$_POST['img'] );
+                $produit= new produit($_POST['libelle'],$_POST['nb_calories'],
+                $_POST['prix'],$_POST['description'],$_POST['categorie'] ,
+                $_POST['fournisseur'],$_POST['img'] );
                 $produitC->ajoutProduit($produit);
                 header('Location:showProduit.php');
                 }
@@ -89,7 +91,7 @@
             <div class="header-mobile__bar">
                 <div class="container-fluid">
                     <div class="header-mobile-inner">
-                        <a class="logo" href="index.html">
+                        <a class="logo" href="index.php">
                             <img src="images/icon/ahmed.png" alt="reydelmexico" />
                         </a>
                         <button class="hamburger hamburger--slider" type="button">
@@ -104,7 +106,7 @@
                 <div class="container-fluid">
                     <ul class="navbar-mobile__list list-unstyled">
                         <li class="has-sub">
-                            <a class="js-arrow" href="index.html">
+                            <a class="js-arrow" href="index.php">
                                 <i class="fa fa-bar-chart"></i>Général</a>
                             
                         </li>
@@ -161,7 +163,10 @@
                                 <i class="fas fa-music"></i>Evénements</a>
                         </li>
                       
-                       
+                        <li>
+                            <a href="showCategorieChef.php">
+                                <i class="fa fa-lightbulb-o"></i>Catégories Chefs</a>
+                        </li>
                       
                         
                     </ul>
@@ -182,7 +187,7 @@
                     <ul class="list-unstyled navbar__list">
                         
                         <li class="has-sub">
-                            <a class="js-arrow" href="index.html">
+                            <a class="js-arrow" href="index.php">
                                 <i class="fa fa-bar-chart"></i>Général</a>
                             
                         </li>
@@ -239,7 +244,10 @@
                                 <i class="fas fa-music"></i>Evénements</a>
                         </li>
                       
-                      
+                        <li>
+                            <a href="showCategorieChef.php">
+                                <i class="fa fa-lightbulb-o"></i>Catégories Chefs</a>
+                        </li>
                       
                             </ul>
                         </li>

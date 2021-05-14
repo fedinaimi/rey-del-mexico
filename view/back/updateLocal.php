@@ -100,7 +100,7 @@
             <div class="header-mobile__bar">
                 <div class="container-fluid">
                     <div class="header-mobile-inner">
-                        <a class="logo" href="index.html">
+                        <a class="logo" href="index.php">
                             <img src="images/icon/ahmed.png" alt="reydelmexico" />
                         </a>
                         <button class="hamburger hamburger--slider" type="button">
@@ -115,7 +115,7 @@
                 <div class="container-fluid">
                     <ul class="navbar-mobile__list list-unstyled">
                         <li class="has-sub">
-                            <a class="js-arrow" href="index.html">
+                            <a class="js-arrow" href="index.php">
                                 <i class="fa fa-bar-chart"></i>Général</a>
                             
                         </li>
@@ -172,7 +172,10 @@
                                 <i class="fas fa-music"></i>Evénements</a>
                         </li>
                       
-                       
+                        <li>
+                            <a href="showCategorieChef.php">
+                                <i class="fa fa-lightbulb-o"></i>Catégories Chefs</a>
+                        </li>
                       
                         
                     </ul>
@@ -193,7 +196,7 @@
                     <ul class="list-unstyled navbar__list">
                         
                         <li class="has-sub">
-                            <a class="js-arrow" href="index.html">
+                            <a class="js-arrow" href="index.php">
                                 <i class="fa fa-bar-chart"></i>Général</a>
                             
                         </li>
@@ -249,7 +252,10 @@
                             <a href="showEvenement.php">
                                 <i class="fas fa-music"></i>Evénements</a>
                         </li>
-                      
+                        <li>
+                            <a href="showCategorieChef.php">
+                                <i class="fa fa-lightbulb-o"></i>Catégories Chefs</a>
+                        </li>
                       
                       
                             </ul>
@@ -497,10 +503,10 @@
                     <td><input type="tel" name="tel" id="tel" required pattern="[0-9]{2}[0-9]{3}[0-9]{3}" value = "<?php echo $local->tel; ?>" maxlength="20"></td> 
                 </tr>
                 <tr>
-                    <td>    <label for="dateCreation">Numéro Téléphone: </label></td> 
+                    <td>    <label for="dateCreation">Date  de Création: </label></td> 
                 </tr> 
                 <tr>
-                    <td><input type="date" name="dateCreation" id="dateCreation" readonly value = "<?php echo $local->dateCreation; ?>" ></td> 
+                    <td><input type="text" name="dateCreation" id="dateCreation" readonly value = "<?php echo $local->dateCreation; ?>" ></td> 
                 </tr>
                
                 <tr></tr>

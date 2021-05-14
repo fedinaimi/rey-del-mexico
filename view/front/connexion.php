@@ -1,7 +1,13 @@
 <?PHP
+
 include "../../controller/userC.php";
-
-
+include "../../controller/clientC.php";
+session_start();
+if($_SESSION['login_user']== "meryemdagh")
+{
+  header('Location: ../back/index.php');
+  exit;
+}else{
 if( isset($_POST['login_user']) 
 && isset($_POST['mdp_user']) 
 
@@ -11,17 +17,41 @@ if( isset($_POST['login_user'])
      !empty($_POST['mdp_user']) )
         {
         $admin= new userC($_POST['login_user'],$_POST['mdp_user']);
+      
         if($admin->authentification($_POST['login_user'],$_POST['mdp_user']))
         {
-          echo "ok";
-            header('Location: ../back/index.html');
+          $admin1= $admin->authentification($_POST['login_user'],$_POST['mdp_user']);
+          $_SESSION['login_user'] =  $admin1['login_user'];
+          $_SESSION['cin'] = $admin1['cin'];
+         // $_SESSION['mdp_user'] = $admin['mdp_user'];
+        // echo $_SESSION['login_user'] ;
+          echo '<script> alert(" ok ");
+          </script>';
+            header('Location: ../back/index.php');
+            exit;
           }
           else
               {
-          echo '<script> alert(" Mot de passe ou ID incorrect ");
-          </script>';
-          //window.location.assign("index.html");
+                $client = new clientC($_POST['login_user'],$_POST['mdp_user']);
+                if($client->authentificationClient($_POST['login_user'],$_POST['mdp_user']))
+                {
+                  $client1= $client->authentificationClient($_POST['login_user'],$_POST['mdp_user']);
+                  $_SESSION['login_user'] =  $client1['email'];
+                  $_SESSION['cin'] = $client1['cin'];
+                
+                 // echo $_SESSION['login_user'];
+                  echo '<script> alert(" ok ");
+                  </script>';
+                    header('Location: index.php');
+                    exit;
+                  }
+                  else {
+                     echo '<script> alert(" votre ID ou  votre mot de passe ne correspondent pas ");
+                        </script>';}
+ 
               }
+
+
           
         }
    else 
@@ -29,6 +59,7 @@ if( isset($_POST['login_user'])
         echo '<script> alert(" Entrer votre Mdp et votre Login ");
         </script>';
        } 
+}
 }
 
 ?>

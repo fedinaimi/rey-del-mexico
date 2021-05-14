@@ -53,7 +53,7 @@
             <div class="header-mobile__bar">
                 <div class="container-fluid">
                     <div class="header-mobile-inner">
-                        <a class="logo" href="index.html">
+                        <a class="logo" href="index.php">
                             <img src="images/icon/ahmed.png" alt="CoolAdmin" />
                         </a>
                         <button class="hamburger hamburger--slider" type="button">
@@ -68,7 +68,7 @@
                 <div class="container-fluid">
                     <ul class="navbar-mobile__list list-unstyled">
                         <li class="has-sub">
-                            <a class="js-arrow" href="index.html">
+                            <a class="js-arrow" href="index.php">
                                 <i class="fa fa-bar-chart"></i>Général</a>
                             
                         </li>
@@ -100,10 +100,7 @@
                             <a href="showReservation.php">
                                 <i class="far fa-calendar-plus"></i>Réservations</a>
                         </li>
-                        <li>
-                            <a href="showLivraison.php">
-                                <i class="fa fa-automobile" ></i>Livraisons</a>
-                        </li>
+                       
                         <li>
                             <a href="showCarteFidelite.php">
                                 <i class="fa fa-address-card"></i>Cartes Fidélité</a>
@@ -124,7 +121,10 @@
                             <a href="showEvenement.php">
                                 <i class="fas fa-music"></i>Evénements</a>
                         </li>
-                      
+                        <li>
+                            <a href="showCategorieChef.php">
+                                <i class="fa fa-lightbulb-o"></i>Catégories Chefs</a>
+                        </li>
                        
                       
                         
@@ -146,7 +146,7 @@
                     <ul class="list-unstyled navbar__list">
                         
                         <li class="has-sub">
-                            <a class="js-arrow" href="index.html">
+                            <a class="js-arrow" href="index.php">
                                 <i class="fa fa-bar-chart"></i>Général</a>
                             
                         </li>
@@ -178,10 +178,7 @@
                             <a href="showReservation.php">
                                 <i class="far fa-calendar-plus"></i>Réservations</a>
                         </li>
-                        <li>
-                            <a href="showLivraison.php">
-                                <i class="fa fa-automobile" ></i>Livraisons</a>
-                        </li>
+                      
                         <li>
                             <a href="showCarteFidelite.php">
                                 <i class="fa fa-address-card"></i>Cartes Fidélité</a>
@@ -203,7 +200,10 @@
                                 <i class="fas fa-music"></i>Evénements</a>
                         </li>
                       
-                      
+                        <li>
+                            <a href="showCategorieChef.php">
+                                <i class="fa fa-lightbulb-o"></i>Catégories Chefs</a>
+                        </li>
                             </ul>
                         </li>
                     </ul>
@@ -219,12 +219,8 @@
 				<div class="section__content section__content--p30">
 					<div class="container-fluid">
 						<div class="header-wrap">
-							<form class="form-header" action="" method="POST">
-								<input class="au-input au-input--xl" type="text" name="search" placeholder="Recherche fournisseur..." />
-								<button class="au-btn--submit" type="submit">
-									<i class="zmdi zmdi-search"></i>
-								</button>
-							</form>
+                        <button class="au-btn au-btn-icon au-btn--blue">
+                                    <a href="findFourni.php">   <i class="zmdi zmdi">recherche Fournisseur</i></a></button>
 							<div class="header-button">
                                 <div class="noti-wrap">
                                     <div class="noti__item js-item-menu">
@@ -391,8 +387,9 @@
 						<div class="row">
                             <div class="col-md-12">
                                 <div class="overview-wrap">
-                                    
+                                <br>
                                     <button class="au-btn au-btn-icon au-btn--blue">
+                                    
                                         <a href="addFournisseurs.php">  <i class="zmdi zmdi-plus text-center"></i>Ajouter Fournisseur </a></button>
                                 </div>
                             </div>
@@ -406,6 +403,7 @@
                                         <thead>
                                             <tr>
                                                 <th class="text-center">ID</th>
+                                                <th class="text-center">IMG</th>
                                                 <th class="text-center">NOM</th>
                                                 <th class="text-center">Prénom</th>
                                                 <th class="text-center">Email</th>
@@ -414,6 +412,7 @@
                                                 <th class="text-center">Local</th>
                                                 <th class="text-center"></th>
                                                 <th class="text-right"></th>
+                                                <th class="text-center"></th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -423,6 +422,7 @@ foreach($listefournissseur as $fournisseur){
 ?>
 <tr>
 <td class="text-center"><?PHP echo $fournisseur['id_fournisseur']; ?></td>
+<td><img src="../front/assets/img/fournisseur/<?php echo $fournisseur["img"]; ?>" length="25" height="25" alt="image fourni "/></td>
 <td class="text-center"><?PHP echo $fournisseur['nom']; ?></td>
 <td class="text-center"><?PHP echo $fournisseur['prenom']; ?></td>
 <td class="text-center"><?PHP echo $fournisseur['email']; ?></td>
@@ -447,27 +447,50 @@ $elementL= $localC->afficherElementLocal($fournisseur['local']);
  <input type="hidden" value=<?PHP echo $fournisseur['id_fournisseur']; ?> name="id_fournisseur">
  </form>  
  </td>
+ <!-- Impression  !-->
+ <td class="text-center"> 
+<form action="imprimeFourni.php" method="get">
+<button type="submit" name="imprime" id="imprime" class="au-btn au-btn-icon au-btn--blue">
+ <i class="zmdi zmdi"></i>Imprimer</button>
+ <input type="hidden" value=<?PHP $fournisseur['id_fournisseur'];  ?> id="id_fourni" name="id_fourni">
+ <input type="hidden" value=<?PHP echo $fournisseur['img'];  ?> id="img" name="img">
+ <input type="hidden" value=<?PHP echo $fournisseur['prenom'];   ?> id="prenom" name="prenom">
+ <input type="hidden" value=<?PHP echo $fournisseur['nom'];  ?> id="nom" name="nom">
+ <input type="hidden" value=<?PHP echo $fournisseur['email'];  ?> id="email" name="email">
+ <input type="hidden" value=<?PHP echo $fournisseur['tel'];  ?> id="tel" name="tel">
 
+ </form>  
+ </td>
  <td class="text-center"> 
  <button class="au-btn au-btn-icon au-btn--blue">
  <a href="updateFournisseur.php?id=<?PHP echo $fournisseur['id_fournisseur']; ?>">
  <i class="zmdi zmdi"></i>Modifier</button>
   </a>
  </td>
+ 
 </tr>
 <?PHP
 }
 ?>
+
                                        
                                         </tbody>
                                     </table>
                                 </div>
                             </div>
+                            <div class="row">
+								<div class="col-md-12">
+                                <form action="imprimeFournisseur.php" method="get">
+<button type="submit" name="imprime" id="imprime" class="au-btn au-btn-icon au-btn--blue">
+ <i class="zmdi zmdi"></i>Imprimer</button>
+ </form> 
+								</div>
+						</div>
 						
 						<div class="row">
 								<div class="col-md-12">
 										<div class="copyright">
-												<p>&copy; Copyright.Tous droits réservés. <a href="1.html">Rey Del México</a>.</p>
+												<p>&copy; Copyright.Tous droits réservés. <a href="../front/index.php">Rey Del México</a>.</p>
 										</div>
 								</div>
 						</div>

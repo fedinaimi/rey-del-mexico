@@ -1,10 +1,14 @@
 <?PHP
 	include "../../controller/chefC.php";
     include "../../controller/localC.php";
+    include "../../controller/categorieChefC.php";
     $elementL= null;
     $localC = new localC();
 	$chefC = new chefC();
-	$listeChef= $chefC->afficherChef();
+	
+    $categorieChefC = new categorieChefC();
+    $listeChef= $chefC->afficherChef();
+
 
 ?>
 
@@ -53,7 +57,7 @@
             <div class="header-mobile__bar">
                 <div class="container-fluid">
                     <div class="header-mobile-inner">
-                        <a class="logo" href="index.html">
+                        <a class="logo" href="index.php">
                             <img src="images/icon/ahmed.png" alt="CoolAdmin" />
                         </a>
                         <button class="hamburger hamburger--slider" type="button">
@@ -68,7 +72,7 @@
                 <div class="container-fluid">
                     <ul class="navbar-mobile__list list-unstyled">
                         <li class="has-sub">
-                            <a class="js-arrow" href="index.html">
+                            <a class="js-arrow" href="index.php">
                                 <i class="fa fa-bar-chart"></i>Général</a>
                             
                         </li>
@@ -125,7 +129,10 @@
                                 <i class="fas fa-music"></i>Evénements</a>
                         </li>
                       
-                      
+                        <li>
+                            <a href="showCategorieChef.php">
+                                <i class="fa fa-lightbulb-o"></i>Catégories Chefs</a>
+                        </li>
                         
                     </ul>
                 </div>
@@ -145,7 +152,7 @@
                     <ul class="list-unstyled navbar__list">
                         
                         <li class="has-sub">
-                            <a class="js-arrow" href="index.html">
+                            <a class="js-arrow" href="index.php">
                                 <i class="fa fa-bar-chart"></i>Général</a>
                             
                         </li>
@@ -203,7 +210,10 @@
                                 <i class="fas fa-music"></i>Evénements</a>
                         </li>
                       
-                      
+                        <li>
+                            <a href="showCategorieChef.php">
+                                <i class="fa fa-lightbulb-o"></i>Catégories Chefs</a>
+                        </li>
                             </ul>
                         </li>
                     </ul>
@@ -219,12 +229,8 @@
 				<div class="section__content section__content--p30">
 					<div class="container-fluid">
 						<div class="header-wrap">
-							<form class="form-header" action="" method="POST">
-								<input class="au-input au-input--xl" type="text" name="search" placeholder="Recherche chef..." />
-								<button class="au-btn--submit" type="submit">
-									<i class="zmdi zmdi-search"></i>
-								</button>
-							</form>
+                        <button class="au-btn au-btn-icon au-btn--blue">
+                                    <a href="findChef.php">   <i class="zmdi zmdi">recherche Chef</i></a></button>
 							<div class="header-button">
                                 <div class="noti-wrap">
                                     <div class="noti__item js-item-menu">
@@ -416,6 +422,7 @@
                                                 <th class="text-center">Local</th>
                                                 <th class="text-center">Fb</th>
                                                 <th class="text-center"></th>
+                                                <th class="text-center"></th>
                                                 <th class="text-right"></th>
                                             </tr>
                                         </thead>
@@ -428,14 +435,18 @@ foreach($listeChef as $chef){
 ?>
 <tr>
 <td class="text-center"><?PHP echo $chef['id']; ?></td>
-<td><img src="../front/assets/img/chef/<?php echo $chef["img"]; ?>" length="25" height="25" alt="image produit "/></td>
+<td><img src="../front/assets/img/chef/<?php echo $chef["img"]; ?>" length="25" height="25" alt="image Chef"/></td>
 
 <td class="text-center"><?PHP echo $chef['nom']; ?></td>
 <td class="text-center"><?PHP echo $chef['prenom']; ?></td>
 <td class="text-center"><?PHP echo $chef['email']; ?></td>
 <td class="text-center"><?PHP echo $chef['adresse']; ?></td>
 <td class="text-center"><?PHP echo $chef['dateNais']; ?></td>
-<td class="text-center"><?PHP echo $chef['categories']; ?></td>
+<td class="text-center">
+ <?php $elementL= $categorieChefC->afficherElementCategorieChef($chef['categorie']);
+ echo $elementL->libelle; ?>
+ </td>
+
 <td class="text-center">
 <?PHP
 $elementL= $localC->afficherElementLocal($chef['local']);
@@ -450,7 +461,20 @@ $elementL= $localC->afficherElementLocal($chef['local']);
  <input type="hidden" value=<?PHP echo $chef['id']; ?> name="id">
  </form>  
  </td>
-
+ <td class="text-center"> 
+<form action="imprimeChef.php" method="get">
+<button type="submit" name="imprime" id="imprime" class="au-btn au-btn-icon au-btn--blue">
+ <i class="zmdi zmdi"></i>Imprimer</button>
+ <input type="hidden" value=<?PHP echo $chef['img']; ?> id="img" name="img">
+ <input type="hidden" value=<?PHP echo $chef['nom']; ?> id="nom" name="nom">
+ <input type="hidden" value=<?PHP echo $chef['prenom']; ?> id="prenom" name="prenom">
+ <input type="hidden" value=<?PHP echo $chef['email']; ?> id="email" name="email">
+ <input type="hidden" value=<?PHP echo $chef['adresse']; ?> id="adresse" name="adresse">
+ <input type="hidden" value=<?PHP echo $chef['dateNais']; ?> id="dateNais" name="dateNais">
+ <input type="hidden" value=<?PHP echo $chef['categorie']; ?> id="categorie" name="categorie">
+ <input type="hidden" value=<?PHP echo $chef['local']; ?> id="local" name="local">
+ </form>  
+ </td>
  <td class="text-center"> 
  <button class="au-btn au-btn-icon au-btn--blue">
  <a href="updateChef.php?id=<?PHP echo $chef['id']; ?>">

@@ -1,12 +1,10 @@
 <?PHP
+	include "../../controller/categorieChefC.php";
 
-   include_once '../../controller/livraisonC.php' ;
+	$categorieChefC = new categorieChefC();
+	$listeCategorieChef= $categorieChefC->afficherCategorieChef();
 
-	$livraisonC= new livraisonC();
-	$listeLivraison= $livraisonC->afficherLivraison();
-    
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -19,7 +17,7 @@
 	<meta name="keywords" content="au theme template">
 
 	<!-- Title Page-->
-	<title>Livraison</title>
+	<title>categorie Chef</title>
 
 	<!-- Fontfaces CSS-->
 	<link href="css/font-face.css" rel="stylesheet" media="all">
@@ -51,7 +49,7 @@
             <div class="header-mobile__bar">
                 <div class="container-fluid">
                     <div class="header-mobile-inner">
-                        <a class="logo" href="index.html">
+                        <a class="logo" href="index.php">
                             <img src="images/icon/ahmed.png" alt="CoolAdmin" />
                         </a>
                         <button class="hamburger hamburger--slider" type="button">
@@ -65,9 +63,8 @@
             <nav class="navbar-mobile">
                 <div class="container-fluid">
                     <ul class="navbar-mobile__list list-unstyled">
-                      
                         <li class="has-sub">
-                            <a class="js-arrow" href="index.html">
+                            <a class="js-arrow" href="index.php">
                                 <i class="fa fa-bar-chart"></i>Général</a>
                             
                         </li>
@@ -124,6 +121,10 @@
                                 <i class="fas fa-music"></i>Evénements</a>
                         </li>
                       
+                        <li>
+                            <a href="showCategorieChef.php">
+                                <i class="fa fa-lightbulb-o"></i>Catégories Chefs</a>
+                        </li>
                       
                         
                     </ul>
@@ -144,7 +145,7 @@
                     <ul class="list-unstyled navbar__list">
                         
                         <li class="has-sub">
-                            <a class="js-arrow" href="index.html">
+                            <a class="js-arrow" href="index.php">
                                 <i class="fa fa-bar-chart"></i>Général</a>
                             
                         </li>
@@ -200,8 +201,11 @@
                             <a href="showEvenement.php">
                                 <i class="fas fa-music"></i>Evénements</a>
                         </li>
-                        
                       
+                        <li>
+                            <a href="showCategorieChef.php">
+                                <i class="fa fa-lightbulb-o"></i>Catégories Chefs</a>
+                        </li>
                             </ul>
                         </li>
                     </ul>
@@ -218,7 +222,7 @@
 					<div class="container-fluid">
 						<div class="header-wrap">
 							<form class="form-header" action="" method="POST">
-								<input class="au-input au-input--xl" type="text" name="search" placeholder="Recherche livraison..." />
+								<input class="au-input au-input--xl" type="text" name="search" placeholder="Recherche categorie Chef..." />
 								<button class="au-btn--submit" type="submit">
 									<i class="zmdi zmdi-search"></i>
 								</button>
@@ -389,60 +393,51 @@
 						<div class="row">
                             <div class="col-md-12">
                                 <div class="overview-wrap">
-            
+                                    
+                                    <button class="au-btn au-btn-icon au-btn--blue">
+                                        <a href="addCategorieChef.php">  <i class="zmdi zmdi-plus text-center"></i>Ajouter Categorie Chef</button></a>
                                 </div>
                             </div>
                         </div>
 						<div class="row">
                             <div class="col-lg-9">
 								<br>
-                                <h2 class="title-1 m-b-25">Informations Livraisons</h2>
+                                <h2 class="title-1 m-b-25">Informations Categories</h2>
                                 <div class="table-responsive table--no-card m-b-40">
                                     <table class="table table-borderless table-striped table-earning">
                                         <thead>
                                             <tr>
                                                 <th class="text-center">ID </th>
                                                 <th class="text-center">Libelle</th>
-                                                <th class="text-center">Frais Livraisons</th>
-                                                <th class="text-center">Statut</th>
-                                                <th class="text-center">Local</th>
-                                                <th class="text-center">Commande</th>
-                                                <th class="text-center">Client</th>
                                                 <th class="text-center"></th>
                                                 <th class="text-right"></th>
                                             </tr>
                                         </thead>
                                         <tbody>
+                                           
                                         <?PHP
-foreach($listeLivraison as $livraison){
+foreach($listeCategorieChef as $categorie){
 ?>
 <tr>
-<td class="text-center"><?PHP echo $livraison['id']; ?></td>
-<td class="text-center"><?PHP echo $livraison['libelle']; ?></td>
-<td class="text-center"><?PHP echo $livraison['frais_livraison']; ?></td>
-<td class="text-center"><?PHP echo $livraison['statut']; ?></td>
-<td class="text-center"><?PHP echo $livraison['local']; ?></td>
-<td class="text-center"><?PHP echo $livraison['commande']; ?></td>
-<td class="text-center"><?PHP echo $livraison['client']; ?></td>
-
+<td class="text-center"><?PHP echo $categorie['id']; ?></td>
+<td class="text-center"><?PHP echo $categorie['libelle']; ?></td>
 <td class="text-center"> 
-<form method="POST" action="deleteLivraison.php">
+<form method="POST" action="deleteCategorieChef.php">
 <button type="submit" name="supprimer" class="au-btn au-btn-icon au-btn--blue">
  <i class="zmdi zmdi"></i>Supprimer</button>
- <input type="hidden" value=<?PHP echo $livraison['id']; ?> name="id">
+ <input type="hidden" value=<?PHP echo $categorie['id']; ?> name="id">
  </form>  
  </td>
- <td class="text-center"> 
- <button class="au-btn au-btn-icon au-btn--blue">
- <a href="updateLivraison.php?id=<?PHP echo $livraison['id']; ?>">
+
+ <td class="text-center"> <button class="au-btn au-btn-icon au-btn--blue">
+ <a href="updateCategorieChef.php?id=<?PHP echo $categorie['id']; ?>">
  <i class="zmdi zmdi"></i>Modifier</button>
-  </a>
- </td>
+  </a></td>
 </tr>
 <?PHP
 }
 ?>
-                                           
+                                       
                                         </tbody>
                                     </table>
                                 </div>

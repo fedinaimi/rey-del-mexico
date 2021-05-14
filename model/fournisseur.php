@@ -8,7 +8,8 @@
 		private ?int $tel = null;	
 		private ?int $categorie = null;	
 		private ?int $local = null;	
-		function __construct( string $nom, string $prenom, string $email,int $tel,int $categorie,int $local)
+		private ?string $img= null;
+		function __construct( string $nom, string $prenom, string $email,int $tel,int $categorie,int $local, string $img)
         {
 			$this->nom=$nom;
 			$this->prenom=$prenom;
@@ -16,12 +17,16 @@
 			$this->tel=$tel;
 			$this->categorie=$categorie;
 			$this->local=$local;
+			$this->img=$img;
 		}
 		function getIdFournisseur(): int{
 			return $this->id_fournisseur;
 		}
 		function getNom(): string{
 			return $this->nom;
+		}
+		function getImg(): string{
+			return $this->img;
 		}
 		function getPrenom(): string{
 			return $this->prenom;

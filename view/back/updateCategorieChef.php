@@ -1,10 +1,28 @@
-<?PHP
-	include "../../controller/evenementC.php";
-
-	$evenementC = new evenementC();
-	$listeevenement= $evenementC->afficherevenement();
-   
-
+<?php
+	  
+      require_once '../../controller/categorieC.php';
+    
+	$error = "";
+    $error1 = "";
+    $categorieC = new categorieC(); 
+	if (
+        isset($_POST['libelle']) 
+        
+	){
+		if (!empty($_POST['libelle']) 
+           
+        ) {
+            $categorie= new categorie(
+                $_POST['libelle']
+               
+			);
+			
+            $categorieC->modifierCategorie($categorie, $_GET['id']);
+            header('Location:showCategorie.php');
+        }
+        else
+            $error = "Missing information";
+	}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -18,7 +36,7 @@
 	<meta name="keywords" content="au theme template">
 
 	<!-- Title Page-->
-	<title>Evenement</title>
+	<title>Modifier Categorie</title>
 
 	<!-- Fontfaces CSS-->
 	<link href="css/font-face.css" rel="stylesheet" media="all">
@@ -44,14 +62,16 @@
 </head>
 
 <body class="animsition">
+
+
     <div class="page-wrapper">
         <!-- HEADER MOBILE-->
         <header class="header-mobile d-block d-lg-none">
             <div class="header-mobile__bar">
                 <div class="container-fluid">
                     <div class="header-mobile-inner">
-                        <a class="logo" href="index.html">
-                            <img src="images/icon/ahmed.png" alt="CoolAdmin" />
+                        <a class="logo" href="index.php">
+                            <img src="images/icon/ahmed.png" alt="reydelmexico" />
                         </a>
                         <button class="hamburger hamburger--slider" type="button">
                             <span class="hamburger-box">
@@ -65,7 +85,7 @@
                 <div class="container-fluid">
                     <ul class="navbar-mobile__list list-unstyled">
                         <li class="has-sub">
-                            <a class="js-arrow" href="index.html">
+                            <a class="js-arrow" href="index.php">
                                 <i class="fa fa-bar-chart"></i>Général</a>
                             
                         </li>
@@ -120,6 +140,10 @@
                         <li>
                             <a href="showEvenement.php">
                                 <i class="fas fa-music"></i>Evénements</a>
+                        </li>
+                        <li>
+                            <a href="showCategorieChef.php">
+                                <i class="fa fa-lightbulb-o"></i>Catégories Chefs</a>
                         </li>
                        
                       
@@ -134,7 +158,7 @@
         <aside class="menu-sidebar d-none d-lg-block">
             <div class="logo">
                 <a href="#">
-                    <img src="images/icon/logo.png" alt="Cool Admin" />
+                    <img src="images/icon/logo.png" alt="reydelmexico" />
                 </a>
             </div>
             <div class="menu-sidebar__content js-scrollbar1">
@@ -142,7 +166,7 @@
                     <ul class="list-unstyled navbar__list">
                         
                         <li class="has-sub">
-                            <a class="js-arrow" href="index.html">
+                            <a class="js-arrow" href="index.php">
                                 <i class="fa fa-bar-chart"></i>Général</a>
                             
                         </li>
@@ -198,7 +222,12 @@
                             <a href="showEvenement.php">
                                 <i class="fas fa-music"></i>Evénements</a>
                         </li>
-                       
+                      
+                        <li>
+                            <a href="showCategorieChef.php">
+                                <i class="fa fa-lightbulb-o"></i>Catégories Chefs</a>
+                        </li>
+                      
                             </ul>
                         </li>
                     </ul>
@@ -214,12 +243,7 @@
 				<div class="section__content section__content--p30">
 					<div class="container-fluid">
 						<div class="header-wrap">
-							<form class="form-header" action="" method="POST">
-								<input class="au-input au-input--xl" type="text" name="search" placeholder="Recherche evenement..." />
-								<button class="au-btn--submit" type="submit">
-									<i class="zmdi zmdi-search"></i>
-								</button>
-							</form>
+							
 							<div class="header-button">
                                 <div class="noti-wrap">
                                     <div class="noti__item js-item-menu">
@@ -241,7 +265,7 @@
                                             </div>
                                             <div class="mess__item">
                                                 <div class="image img-cir img-40">
-                                                    <img src="images/icon/avatar-04.jpg" alt="Diane Myers" />
+                                                    <img src="back/images/icon/avatar-04.jpg" alt="Diane Myers" />
                                                 </div>
                                                 <div class="content">
                                                     <h6>Diane Myers</h6>
@@ -380,88 +404,82 @@
             </header>
             <!-- HEADER DESKTOP-->
 			<!-- MAIN CONTENT-->
-            <div class="main-content">
+			<div class="main-content">
 				<div class="section__content section__content--p30">
 					<div class="container-fluid">
+						
 						<div class="row">
+                            <div class="col-lg-9">
+								<br>
+                              
                             <div class="col-md-12">
                                 <div class="overview-wrap">
                                     
                                     <button class="au-btn au-btn-icon au-btn--blue">
-                                        <a href="ajouterevenement.php">  <i class="zmdi zmdi-plus text-center"></i>Ajouter evenement</button></a>
+                                    <a href="showCategorie.php">  <i class="zmdi zmdi text-center"></i>Retour à la liste</button></a>
                                 </div>
                             </div>
-                        </div>
-						<div class="row">
-                            <div class="col-lg-9">
-								<br>
-                                <h2 class="title-1 m-b-25">Informations evenements</h2>
-                                <div class="table-responsive table--no-card m-b-40">
-                                    <table class="table table-borderless table-striped table-earning">
-                                        <thead>
-                                            <tr>
-                                                <th class="text-center">ID</th>
-                                                <th class="text-center">libelle</th>
-                                                <th class="text-center">date</th>
-                                                <th class="text-center">durée d'evenement</th>
-
-                                                <th class="text-center">description</th>
-                                                <th class="text-center">local</th>
-                                                
-                                                <th class="text-center"></th>
-                                                <th class="text-right"></th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                           
-                                        <?PHP
-foreach($listeevenement as $evenement){
-?>
-<tr>
-<td class="text-center"><?PHP echo $evenement['id']; ?></td>
-<td class="text-center"><?PHP echo $evenement['libelle']; ?></td>
-<td class="text-center"><?PHP echo $evenement['date']; ?></td>
-<td class="text-center"><?PHP echo $evenement['duree']; ?></td>
-<td class="text-center"><?PHP echo $evenement['description']; ?></td>
-<td class="text-center"><?PHP echo $evenement['local']; ?></td>
-<td class="text-center"> 
-<form method="POST" action="effacerevenement.php">
-<button type="submit" name="effacer" class="au-btn au-btn-icon au-btn--blue">
- <i class="zmdi zmdi"></i>supprimer</button>
- <input type="hidden" value=<?PHP echo $evenement['id']; ?> name="id">
- </form>  
- </td>
-
- <td class="text-center"> 
- <button class="au-btn au-btn-icon au-btn--blue">
- <a href="modifierevenement.php?id=<?PHP echo $evenement['id']; ?>">
- <i class="zmdi zmdi"></i>Modifier</button>
-  </a>
- </td>
-</tr>
-<?PHP
-}
-?>
-                                       
-                                        </tbody>
-                                    </table>
+                        
+                                 <hr>
+                                 <br>
+                                <h2 class="title-1 m-b-25 text-center">Modifier La Categorie</h2>
+                                <div id="error">
+                                    <?php echo $error; ?>
+                                </div>
+			<?php
+			if (isset($_GET['id']))
+			{
+				$categorie = $categorieC->recupererCategorie1($_GET['id']);	
+		       ?>
+                <form action="" method="POST" >
+                  <table  align="center">
+                 <tr> 
+                    <td> <label for="libelle">Libelle: </label>
+                    </td> 
+                </tr>
+                 <tr>
+                    <td><input type="text" name="libelle" id="libelle"  required value = "<?php echo $categorie->libelle; ?>"></td>
+                </tr> 
+               
+                
+         
+                <tr></tr>
+                <tr></tr>
+                <tr>
+                    <td></td><td> <div class="row">
+                            <div class="col-md-12">
+                                <div class="overview-wrap">
+                                    <input type="submit" class="au-btn au-btn-icon au-btn--blue" value="Envoyer">
+                                    <td>
+                        <input type="reset"  class="au-btn au-btn-icon au-btn--blue" value="Annuler" >
+                    </td>   
                                 </div>
                             </div>
+                </div></td></tr>
+                
+                  </table>
+        </form>                   
+        <?php
+		}
+		?>                      
+   </div>
+</div>
 						
-						<div class="row">
+                 	<div class="row">
 								<div class="col-md-12">
 										<div class="copyright">
-												<p>&copy; Copyright.Tous droits réservés. <a href="1.html">Rey Del México</a>.</p>
+												<p>&copy; Copyright.Tous droits réservés. <a href="front/1.html">Rey Del México</a>.</p>
 										</div>
 								</div>
 						</div>
+
 					</div>
 				</div>
 			</div>
-		</div>
+		
 		<!-- END PAGE CONTAINER-->
 
-	</div>
+	
 
 	<!-- Jquery JS-->
 	<script src="vendor/jquery-3.2.1.min.js"></script>
@@ -491,3 +509,10 @@ foreach($listeevenement as $evenement){
 
 </html>
 <!-- end document-->
+
+
+
+
+
+
+

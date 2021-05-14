@@ -59,6 +59,7 @@
 
 	<!-- Main CSS-->
 	<link href="css/theme.css" rel="stylesheet" media="all">
+    <link href="cssScript.css" rel="stylesheet" media="all">
     	<!-- JS verif-->
         <script src="js/carte.js"></script>
 
@@ -71,7 +72,7 @@
             <div class="header-mobile__bar">
                 <div class="container-fluid">
                     <div class="header-mobile-inner">
-                        <a class="logo" href="index.html">
+                        <a class="logo" href="index.php">
                             <img src="images/icon/ahmed.png" alt="reydelmexico" />
                         </a>
                         <button class="hamburger hamburger--slider" type="button">
@@ -86,7 +87,7 @@
                 <div class="container-fluid">
                     <ul class="navbar-mobile__list list-unstyled">
                         <li class="has-sub">
-                            <a class="js-arrow" href="index.html">
+                            <a class="js-arrow" href="index.php">
                                 <i class="fa fa-bar-chart"></i>Général</a>
                             
                         </li>
@@ -143,7 +144,10 @@
                                 <i class="fas fa-music"></i>Evénements</a>
                         </li>
                        
-                      
+                        <li>
+                            <a href="showCategorieChef.php">
+                                <i class="fa fa-lightbulb-o"></i>Catégories Chefs</a>
+                        </li>
                         
                     </ul>
                 </div>
@@ -163,7 +167,7 @@
                     <ul class="list-unstyled navbar__list">
                         
                         <li class="has-sub">
-                            <a class="js-arrow" href="index.html">
+                            <a class="js-arrow" href="index.php">
                                 <i class="fa fa-bar-chart"></i>Général</a>
                             
                         </li>
@@ -219,7 +223,10 @@
                             <a href="showEvenement.php">
                                 <i class="fas fa-music"></i>Evénements</a>
                         </li>
-                      
+                        <li>
+                            <a href="showCategorieChef.php">
+                                <i class="fa fa-lightbulb-o"></i>Catégories Chefs</a>
+                        </li>
                       
                       
                             </ul>
@@ -410,14 +417,26 @@
                                     <?php echo $error; ?>
                                         </div>
                                         <div id="erreur"></div>
-                                <form action="" name="carte" id="carte" method="POST" onclick=" return verifCarteAdd()">
+                                <form action="" name="carte" id="carte" method="POST" oncopy="return false" onpaste="return false" oncut="return false" onclick=" return verifCarteAdd()" > 
                   <table  align="center">
                 
                 <tr>
-                    <td>    <label for="dateCreation">Date de création: </label></td> 
+                    <td>    <label for="dateCreation" class="label">Date de création: </label></td> 
                 </tr> 
                 <tr>
-                    <td><input type="date" name="dateCreation" id="dateCreation" required  maxlength="20"></td> 
+                <?php
+  // Définir le nouveau fuseau horaire
+  date_default_timezone_set('Europe/Paris');
+  $date = date('d-m-y');
+  
+?>
+                  <td><input type="text" class="controle" name="dateCreation" id="dateCreation" value="<?php echo $date; ?>" required  >  
+                  <!-- <td><input type="date" class="controle" name="dateCreation" id="dateCreation" required ></td> !-->
+                         <!--  <script>
+                            $('#dateCreation').val(new Date().toJSON().slice(0,10));
+                      </script> !-->
+                    </td>
+                    <span class="resultat"></span>
                 </tr>
                 
                

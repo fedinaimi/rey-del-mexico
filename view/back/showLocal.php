@@ -55,7 +55,7 @@ session_start();
             <div class="header-mobile__bar">
                 <div class="container-fluid">
                     <div class="header-mobile-inner">
-                        <a class="logo" href="index.html">
+                        <a class="logo" href="index.php">
                             <img src="images/icon/ahmed.png" alt="CoolAdmin" />
                         </a>
                         <button class="hamburger hamburger--slider" type="button">
@@ -70,7 +70,7 @@ session_start();
                 <div class="container-fluid">
                     <ul class="navbar-mobile__list list-unstyled">
                         <li class="has-sub">
-                            <a class="js-arrow" href="index.html">
+                            <a class="js-arrow" href="index.php">
                                 <i class="fa fa-bar-chart"></i>Général</a>
                             
                         </li>
@@ -102,10 +102,7 @@ session_start();
                             <a href="showReservation.php">
                                 <i class="far fa-calendar-plus"></i>Réservations</a>
                         </li>
-                        <li>
-                            <a href="showLivraison.php">
-                                <i class="fa fa-automobile" ></i>Livraisons</a>
-                        </li>
+                       
                         <li>
                             <a href="showCarteFidelite.php">
                                 <i class="fa fa-address-card"></i>Cartes Fidélité</a>
@@ -126,7 +123,10 @@ session_start();
                             <a href="showEvenement.php">
                                 <i class="fas fa-music"></i>Evénements</a>
                         </li>
-                      
+                        <li>
+                            <a href="showCategorieChef.php">
+                                <i class="fa fa-lightbulb-o"></i>Catégories Chefs</a>
+                        </li>
                         
                     </ul>
                 </div>
@@ -147,7 +147,7 @@ session_start();
                         
                       
                         <li class="has-sub">
-                            <a class="js-arrow" href="index.html">
+                            <a class="js-arrow" href="index.php">
                                 <i class="fa fa-bar-chart"></i>Général</a>
                             
                         </li>
@@ -179,10 +179,7 @@ session_start();
                             <a href="showReservation.php">
                                 <i class="far fa-calendar-plus"></i>Réservations</a>
                         </li>
-                        <li>
-                            <a href="showLivraison.php">
-                                <i class="fa fa-automobile" ></i>Livraisons</a>
-                        </li>
+                       
                         <li>
                             <a href="showCarteFidelite.php">
                                 <i class="fa fa-address-card"></i>Cartes Fidélité</a>
@@ -203,7 +200,10 @@ session_start();
                             <a href="showEvenement.php">
                                 <i class="fas fa-music"></i>Evénements</a>
                         </li>
-                      
+                        <li>
+                            <a href="showCategorieChef.php">
+                                <i class="fa fa-lightbulb-o"></i>Catégories Chefs</a>
+                        </li>
                             </ul>
                         </li>
                     </ul>
@@ -481,7 +481,7 @@ foreach($listeLocal as $local){
 						<div class="row">
 								<div class="col-md-12">
 										<div class="copyright">
-												<p>&copy; Copyright.Tous droits réservés. <a href="1.html">Rey Del México</a>.</p>
+												<p>&copy; Copyright.Tous droits réservés. <a href="../front/index.php">Rey Del México</a>.</p>
 										</div>
 								</div>
 						</div>

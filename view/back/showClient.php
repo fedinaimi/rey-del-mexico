@@ -1,55 +1,9 @@
-<?php
-	  
-	  
-      include_once "../../controller/reservationC.php";
+<?PHP
+	include "../../controller/clientC.php";
     
-
-      $error = "";
-      
-      $reservationC = new  reservationC(); 
-      $reservation1C = new reservationC();
-      $listeclient= $reservation1C->listeclient();
-      $reservation2C = new reservationC();
-      $listeLocal= $reservation2C->listeLocal();
-
-	
-	if (
-       
-        isset($_POST['date']) 
-        && isset($_POST['nb_perso']) 
-        && isset($_POST['message'])
-        
-         && isset($_POST['statut'])   
-         && isset($_POST['client'])
-         && isset($_POST['local'])) 
-	{
-		if (
-            
-            !empty($_POST['date']) &&
-            !empty($_POST['nb_perso']) &&
-            !empty($_POST['message']) &&
-            !empty($_POST['statut']) &&
-            !empty($_POST['client'])&&
-            !empty($_POST['local']))
-         {
-            $reservation = new reservation(
-                
-                $_POST['date'], 
-                $_POST['nb_perso'],
-                $_POST['message'],
-                $_POST['statut'],
-                $_POST['client'],
-                $_POST['local']
-
-			);
-			
-            $reservationC->modifierreservation($reservation,$_GET['id']);
-            header('Location:showReservation.php');
-        }
-        else
-            $error = "Missing information";
-	}
-
+	$clientC = new clientC();
+	$listeclient= $clientC->afficherClient();
+    
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -63,7 +17,7 @@
 	<meta name="keywords" content="au theme template">
 
 	<!-- Title Page-->
-	<title>Modifier reservation</title>
+	<title>Client</title>
 
 	<!-- Fontfaces CSS-->
 	<link href="css/font-face.css" rel="stylesheet" media="all">
@@ -89,8 +43,6 @@
 </head>
 
 <body class="animsition">
-
-
     <div class="page-wrapper">
         <!-- HEADER MOBILE-->
         <header class="header-mobile d-block d-lg-none">
@@ -98,7 +50,7 @@
                 <div class="container-fluid">
                     <div class="header-mobile-inner">
                         <a class="logo" href="index.html">
-                            <img src="images/icon/ahmed.png" alt="reydelmexico" />
+                            <img src="images/icon/ahmed.png" alt="CoolAdmin" />
                         </a>
                         <button class="hamburger hamburger--slider" type="button">
                             <span class="hamburger-box">
@@ -117,11 +69,7 @@
                             
                         </li>
                         <li>
-                            <a href="client.html">
-                                <i class="fas fa-users"></i>Clients</a>
-                        </li>
-                        <li>
-                            <a href="showClientlient.php">
+                            <a href="showClient.php">
                                 <i class="fas fa-users"></i>Clients</a>
                         </li>
                         <li>
@@ -172,7 +120,7 @@
                             <a href="showEvenement.php">
                                 <i class="fas fa-music"></i>Evénements</a>
                         </li>
-                       
+                      
                        
                       
                         
@@ -186,7 +134,7 @@
         <aside class="menu-sidebar d-none d-lg-block">
             <div class="logo">
                 <a href="#">
-                    <img src="images/icon/logo.png" alt="reydelmexico" />
+                    <img src="images/icon/logo.png" alt="Cool Admin" />
                 </a>
             </div>
             <div class="menu-sidebar__content js-scrollbar1">
@@ -199,7 +147,7 @@
                             
                         </li>
                         <li>
-                            <a href="showClientlient.php">
+                            <a href="showClient.php">
                                 <i class="fas fa-users"></i>Clients</a>
                         </li>
                         <li>
@@ -250,7 +198,6 @@
                             <a href="showEvenement.php">
                                 <i class="fas fa-music"></i>Evénements</a>
                         </li>
-                       
                       
                       
                             </ul>
@@ -268,7 +215,15 @@
 				<div class="section__content section__content--p30">
 					<div class="container-fluid">
 						<div class="header-wrap">
-							
+							<form class="form-header" action="" method="POST">
+                           
+								<input class="au-input au-input--xl" type="text" name="search" placeholder="Recherche client..." />
+								<button class="au-btn--submit" type="submit">
+                            
+									<i class="zmdi zmdi-search"></i>
+								</button>
+                                
+							</form>
 							<div class="header-button">
                                 <div class="noti-wrap">
                                     <div class="noti__item js-item-menu">
@@ -290,7 +245,7 @@
                                             </div>
                                             <div class="mess__item">
                                                 <div class="image img-cir img-40">
-                                                    <img src="back/images/icon/avatar-04.jpg" alt="Diane Myers" />
+                                                    <img src="images/icon/avatar-04.jpg" alt="Diane Myers" />
                                                 </div>
                                                 <div class="content">
                                                     <h6>Diane Myers</h6>
@@ -432,134 +387,85 @@
 			<div class="main-content">
 				<div class="section__content section__content--p30">
 					<div class="container-fluid">
-						
+						<div class="row">
+                            <div class="col-md-12">
+                                
+                            </div>
+                        </div>
 						<div class="row">
                             <div class="col-lg-9">
 								<br>
-                              
-                            <div class="col-md-12">
-                                <div class="overview-wrap">
-                                    
-                                    <button class="au-btn au-btn-icon au-btn--blue">
-                                    <a href="reservation.php">  <i class="zmdi zmdi text-center"></i>Retour à la liste</button></a>
+                                <h2 class="title-1 m-b-25">Informations Clients</h2>
+                                <div class="table-responsive table--no-card m-b-40">
+                                    <table class="table table-borderless table-striped table-earning">
+                                        <thead>
+                                            <tr>
+                                                <th class="text-center">ID</th>
+                                                <th class="text-center">NOM</th>
+                                                <th class="text-center">Prénom</th>
+                                                <th class="text-center">Date De Naissance</th>
+                                                <th class="text-center">Carte D Identité</th>
+                                                <th class="text-center">Adresse Mail</th>
+                                                <th class="text-center">Mot De Passe</th>
+                                                <th class="text-center">Reduction</th>
+                                                <th class="text-center">Carte</th>
+                                                <th class="text-center"></th>
+                                                <th class="text-right"></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                           
+                                        <?PHP
+foreach($listeclient as $client){
+?>
+<tr>
+<td class="text-center"><?PHP echo $client['id_client']; ?></td>
+<td class="text-center"><?PHP echo $client['nom']; ?></td>
+<td class="text-center"><?PHP echo $client['prenom']; ?></td>
+<td class="text-center"><?PHP echo $client['dateNais']; ?></td>
+<td class="text-center"><?PHP echo $client['cin']; ?></td>
+<td class="text-center"><?PHP echo $client['email']; ?></td>
+<td class="text-center"><?PHP echo $client['mdp']; ?></td>
+<td class="text-center"><?PHP echo $client['reduction']; ?></td>
+<td class="text-center"><?PHP echo $client['carte']; ?></td>
+<td class="text-center">
+<form method="POST" action="deleteClient.php">
+<button type="submit" name="supprimer" class="au-btn au-btn-icon au-btn--blue">
+ <i class="zmdi zmdi"></i>Supprimer</button>
+ <input type="hidden" value=<?PHP echo $client['id_client']; ?> name="id_client">
+ </form>  
+ </td>
+
+ <td class="text-center"> 
+ <button class="au-btn au-btn-icon au-btn--blue">
+ <a href="updateClient.php?id=<?PHP echo $client['id_client']; ?>">
+ <i class="zmdi zmdi"></i>Modifier</button>
+  </a>
+ </td>
+</tr>
+<?PHP
+}
+?>
+                                       
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
-                        
-                                 <hr>
-                                 <br>
-                                <h2 class="title-1 m-b-25 text-center">Update</h2>
-                                <div id="error">
-                                    <?php echo $error; ?>
-                                </div>
-			<?php
-			if (isset($_GET['id']))
-			{
-				$reservation = $reservationC->recupererreservation1($_GET['id']);	
-		       ?>
-                <form action="" method="POST" >
-                  <table align="center" >
-                
-                <tr>
-                    <td><label for="date">date: </label>  </td> 
-                </tr> 
-                <tr>
-             <td><input type="date" name="date" id="date" maxlength="20"></td>
-            </tr>
-                 <tr>
-                    <td>    <label for="nb_perso">Nb perso: </label></td> 
-                </tr> 
-                <tr>
-                    <td><input type="text" name="nb_perso" id="nb_perso" maxlength="20"></td> 
-                </tr>
-                
-                <tr>
-                    <td>    <label for="message">Message: </label></td> 
-                </tr> 
-                <tr>
-                    <td><input type="textarea" name="message" id="message" maxlength="20"></td> 
-                </tr>
-                <tr>
-                    <td>    <label for="statut">Statut: </label></td> 
-                </tr> 
-                <tr>
-                    <td><input type="text" name="statut" id="statut" maxlength="20"></td> 
-                </tr>
-                <tr>
-                    <td>    <label for="client">Client: </label></td> 
-                </tr> 
-                
-                <tr>
-                <td>
-                     <select name="client" id="client">
-                     <option value="select" selected>Select</option>
-                        
-               <?php
-                foreach($listeclient as $listeC){
-               ?>
-                <option value ='<?PHP echo $listeC['id_client']; ?>'> <?PHP echo $listeC['nom_client']; ?></option>
-                   <?php
-             }
-                  ?>
-                     </select>   
-                </td> 
-                </tr>
-                <tr>
-                    <td><label for="local">Local:</label></td> 
-                </tr> 
-                <tr>
-                    <td>
-                    <select name="local" id="local">
-                     <option value="select" selected>Select</option>
-                        
-          <?php
-          foreach($listeLocal as $localC){
-           ?>
-           <option value ='<?PHP echo $localC['id_local']; ?>'> <?PHP echo $localC['adresse']; ?></option>
-           <?php
-          }
-          ?>
-          </select>   
-                     
-          </td> 
-                </tr>    
-               
-                <tr></tr>
-                <tr></tr>
-                <tr>
-                    <td></td><td> <div class="row">
-                            <div class="col-md-12">
-                                <div class="overview-wrap">
-                                    <input type="submit" class="au-btn au-btn-icon au-btn--blue" value="Envoyer">
-                                    <td>
-                        <input type="reset"  class="au-btn au-btn-icon au-btn--blue" value="Annuler" >
-                    </td>   
-                                </div>
-                            </div>
-                </div></td></tr>
-                
-                  </table>
-        </form>                   
-        <?php
-		}
-		?>                      
-   </div>
-</div>
 						
-                 	<div class="row">
+						<div class="row">
 								<div class="col-md-12">
 										<div class="copyright">
-												<p>&copy; Copyright.Tous droits réservés. <a href="front/1.html">Rey Del México</a>.</p>
+												<p>&copy; Copyright.Tous droits réservés. <a href="1.html">Rey Del México</a>.</p>
 										</div>
 								</div>
 						</div>
-
 					</div>
 				</div>
 			</div>
-		
+		</div>
 		<!-- END PAGE CONTAINER-->
 
-	
+	</div>
 
 	<!-- Jquery JS-->
 	<script src="vendor/jquery-3.2.1.min.js"></script>
@@ -589,10 +495,3 @@
 
 </html>
 <!-- end document-->
-
-
-
-
-
-
-

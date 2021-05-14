@@ -1,43 +1,44 @@
 <?php
-	  
-      include_once '../../controller/livraisonC.php';
+	    include_once '../../controller/materielC.php';
+
+        include_once '../../controller/localC.php';
+      $error1 = "";
+      $error = "";
+      $materiel = null;
+      $materielC = new materielC(); 
+      $localC = new localC();
+      $listeLocal= $localC->afficherLocal();
+   
     
-	$error = "";
-    $error1 = "";
-    $livraisonC = new livraisonC(); 
-	if (
-        isset($_POST['libelle']) &&
-        isset($_POST['frais_livraison']) &&
-        isset($_POST['statut']) &&
-        isset($_POST['local']) &&
-        isset($_POST['commande']) &&
-        isset($_POST['client']) 
-        
-	){
-		if (!empty($_POST['libelle']) 
-            && !empty($_POST['frais_livraison']) 
-            && !empty($_POST['statut']) 
-            && !empty($_POST['local']) 
-            && !empty($_POST['commande']) 
-            && !empty($_POST['client']) 
-           
-        ) {
-            $livraison= new livraison(
+  
+      if( isset($_POST['libelle']) 
+          && isset($_POST['date_achat'])  
+           && isset($_POST["local"])
+           && isset($_POST["nbPieces"])
+           ) 
+           { 
+              
+               if( !empty($_POST['libelle']) &&
+               !empty($_POST['date_achat']) &&
+               !empty($_POST["local"]) &&
+               !empty($_POST["nbPieces"])
+                ) 
+               {
+            $materiel = new materiel(
                 $_POST['libelle'],
-                $_POST['frais_livraison'],
-                $_POST['statut'],
+                $_POST['date_achat'], 
                 $_POST['local'],
-                $_POST['commande'],
-                $_POST['client'],
+                $_POST['nbPieces']
                
 			);
 			
-            $livraisonC->modifierLivraison($livraison, $_GET['id']);
-            header('Location:showLivraison.php');
+            $materielC->modifierMateriel($materiel, $_GET['id']);
+            header('Location:showService.php');
         }
         else
             $error = "Missing information";
 	}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -51,7 +52,7 @@
 	<meta name="keywords" content="au theme template">
 
 	<!-- Title Page-->
-	<title>Modifier Livraison</title>
+	<title>Modifier Materiel</title>
 
 	<!-- Fontfaces CSS-->
 	<link href="css/font-face.css" rel="stylesheet" media="all">
@@ -85,7 +86,7 @@
             <div class="header-mobile__bar">
                 <div class="container-fluid">
                     <div class="header-mobile-inner">
-                        <a class="logo" href="index.html">
+                        <a class="logo" href="index.php">
                             <img src="images/icon/ahmed.png" alt="reydelmexico" />
                         </a>
                         <button class="hamburger hamburger--slider" type="button">
@@ -100,7 +101,7 @@
                 <div class="container-fluid">
                     <ul class="navbar-mobile__list list-unstyled">
                         <li class="has-sub">
-                            <a class="js-arrow" href="index.html">
+                            <a class="js-arrow" href="index.php">
                                 <i class="fa fa-bar-chart"></i>Général</a>
                             
                         </li>
@@ -145,7 +146,7 @@
                                 <i class="fas fa-users"></i>Chefs</a>
                         </li>
                         <li>
-                            <a href="showService.php">
+                            <a href="showMateriel.php">
                                 <i class="	fas fa-utensils"></i>Services de table</a>
                         </li>
                         <li>
@@ -155,6 +156,10 @@
                         <li>
                             <a href="showEvenement.php">
                                 <i class="fas fa-music"></i>Evénements</a>
+                        </li>
+                        <li>
+                            <a href="showCategorieChef.php">
+                                <i class="fa fa-lightbulb-o"></i>Catégories Chefs</a>
                         </li>
                       
                        
@@ -178,10 +183,11 @@
                     <ul class="list-unstyled navbar__list">
                         
                         <li class="has-sub">
-                            <a class="js-arrow" href="index.html">
+                            <a class="js-arrow" href="index.php">
                                 <i class="fa fa-bar-chart"></i>Général</a>
                             
                         </li>
+                       
                         <li>
                             <a href="showClientlient.php">
                                 <i class="fas fa-users"></i>Clients</a>
@@ -223,7 +229,7 @@
                                 <i class="fas fa-users"></i>Chefs</a>
                         </li>
                         <li>
-                            <a href="showService.php">
+                            <a href="showMateriel.php">
                                 <i class="	fas fa-utensils"></i>Services de table</a>
                         </li>
                         <li>
@@ -233,6 +239,10 @@
                         <li>
                             <a href="showEvenement.php">
                                 <i class="fas fa-music"></i>Evénements</a>
+                        </li>
+                        <li>
+                            <a href="showCategorieChef.php">
+                                <i class="fa fa-lightbulb-o"></i>Catégories Chefs</a>
                         </li>
                       
                       
@@ -425,67 +435,64 @@
                                 <div class="overview-wrap">
                                     
                                     <button class="au-btn au-btn-icon au-btn--blue">
-                                    <a href="showCategorie.php">  <i class="zmdi zmdi text-center"></i>Retour à la liste</button></a>
+                                    <a href="showMateriel.php">  <i class="zmdi zmdi text-center"></i>Retour à la liste</button></a>
                                 </div>
                             </div>
                         
                                  <hr>
                                  <br>
-                                <h2 class="title-1 m-b-25 text-center">Modifier Livraison</h2>
+                                <h2 class="title-1 m-b-25 text-center">Modifier Materiel</h2>
                                 <div id="error">
                                     <?php echo $error; ?>
                                 </div>
 			<?php
 			if (isset($_GET['id']))
 			{
-				$livraison = $livraisonC->recupererLivraison1($_GET['id']);	
-		       ?>
+				$materiel = $materielC->recupererMateriel1($_GET['id']);	
+		     ?>
+
                 <form action="" method="POST" >
                   <table  align="center">
-                 <tr> 
+                
+                  <tr> 
                     <td> <label for="libelle">Libelle: </label>
                     </td> 
                 </tr>
                  <tr>
-                    <td><input type="text" name="libelle" id="libelle"  required ></td>
-                </tr> 
-                <tr> 
-                    <td> <label for="frais_livraison">Frais Livraison: </label>
-                    </td> 
+                    <td><input type="text" name="libelle" id="libelle" value = "<?php echo $materiel->libelle; ?>" required maxlength="20"></td>
                 </tr>
-                 <tr>
-                    <td><input type="text" name="frais_livraison" id="frais_livraison"  required ></td>
+                <tr>
+                    <td><label for="date_achat">date_achat: </label>  </td> 
                 </tr> 
-                <tr> 
-                    <td> <label for="statut">Statut: </label>
-                    </td> 
+                <tr>
+                    <td><input type="date" name="date_achat" id="date_achat" value = "<?php echo $materiel->date_achat; ?>" required maxlength="20"></td>
                 </tr>
-                 <tr>
-                    <td><input type="number" min="0" max="1" name="statut" id="statut"  required ></td>
+                <tr>
+                    <td><label for="nbPieces">Nombre des pieces: </label>  </td> 
                 </tr> 
-                <tr> 
-                    <td> <label for="client">Client: </label>
-                    </td> 
+                <tr>
+                    <td><input type="number" min="0" name="nbPieces" id="nbPieces" value = "<?php echo $materiel->nbPieces; ?>" required maxlength="20"></td>
                 </tr>
-                 <tr>
-                    <td><input type="text" name="client" id="client"  readonly ></td>
-                </tr> 
-                <tr> 
-                    <td> <label for="commande">Commande: </label>
-                    </td> 
-                </tr>
-                 <tr>
-                    <td><input type="text" name="commande" id="commande"  readonly ></td>
-                </tr> 
-                <tr> 
-                    <td> <label for="local">Local: </label>
-                    </td> 
-                </tr>
-                 <tr>
-                    <td><input type="text" name="local" id="local"  readonly ></td>
-                </tr> 
                
-             
+                <tr>
+                    <td><label for="local">Local:</label></td> 
+                </tr> 
+                <tr>
+                    <td>
+                    <select name="local" id="local" required >
+                     <option value="0" selected>Select</option>
+                        
+          <?php
+          foreach($listeLocal as $localC){
+           ?>
+           <option value ='<?PHP echo $localC['id_local']; ?>'> <?PHP echo $localC['adresse']; ?></option>
+           <?php
+          }
+          ?>
+          </select>   
+                     
+                    </td> 
+                </tr>
                 <tr></tr>
                 <tr></tr>
                 <tr>
@@ -493,9 +500,7 @@
                             <div class="col-md-12">
                                 <div class="overview-wrap">
                                     <input type="submit" class="au-btn au-btn-icon au-btn--blue" value="Envoyer">
-                                    <td>
-                        <input type="reset"  class="au-btn au-btn-icon au-btn--blue" value="Annuler" >
-                    </td>   
+                                    <input type="reset" class="au-btn au-btn-icon au-btn--blue" value="Annuler">
                                 </div>
                             </div>
                 </div></td></tr>

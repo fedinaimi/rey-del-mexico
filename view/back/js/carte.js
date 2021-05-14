@@ -2,19 +2,24 @@ function verifCarteAdd() {
 
     var errors = "<ul>";
    
-    var dateCre = document.querySelector('#dateCreation').value;
+    var dateCreation = document.querySelector('#dateCreation').value;
    
 
   
    
-    if (dateCre === "") {
+    if (dateCreation === "") {
         errors += "<li>La date est obligatoire </li>";
+        document.querySelector('#dateCreation').style.border = "thick solid #FF0000";
     }
     else {
         var today = new Date();
-        dateCre = new Date(dateCre);
-        if (today.getFullYear() - dateCre.getFullYear() < 0) {
+        dateCreation = new Date(dateCreation);
+        if (today.getFullYear() - dateCreation.getFullYear() < 0) {
             errors += "<li>La date est erronée </li>";
+            document.querySelector('#dateCreation').style.border = "thick solid #FF0000";
+        }
+        else{
+            document.querySelector('#dateCreation').style.border = "thick solid #008000";
         }
     }
 
@@ -43,9 +48,19 @@ function verifCarteUpdate() {
 
     if (statut === 'select') {
         errors += "<li>Veuillez indiquer l'état de la carte </li>";
+        document.querySelector('#statut').style.border = "thick solid #FF0000";
+    }
+    else
+    {
+        document.querySelector('#statut').style.border = "thick solid #008000";
     }
     if (points == 0) {
         errors += "<li>Veuillez indiquer les points de fidélité </li>";
+        document.querySelector('#points').style.border = "thick solid #FF0000";
+    }
+    else
+    {
+        document.querySelector('#points').style.border = "thick solid #008000";
     }
     if (errors !== "<ul>") {
         document.querySelector('#erreur').style.color = 'black';

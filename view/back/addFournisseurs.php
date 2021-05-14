@@ -19,7 +19,9 @@
         && isset($_POST['email']) 
         && isset($_POST['tel'])
          && isset($_POST["categorie"])
-         && isset($_POST["local"])) 
+         && isset($_POST["local"])
+         && isset($_POST["img"])
+         ) 
          { 
             
              if( !empty($_POST['nom']) &&
@@ -27,9 +29,11 @@
              !empty($_POST['email']) &&
              !empty($_POST['tel']) &&
              !empty($_POST["categorie"]) &&
-             !empty($_POST["local"]) )
+             !empty($_POST["local"]) &&
+             !empty($_POST["img"])
+             )
                 {
-                $fournisseur= new fournisseur($_POST['nom'],$_POST['prenom'],$_POST['email'],$_POST['tel'],$_POST['categorie'] ,$_POST['local'] );
+                $fournisseur= new fournisseur($_POST['nom'],$_POST['prenom'],$_POST['email'],$_POST['tel'],$_POST['categorie'] ,$_POST['local'],$_POST['img'] );
                 $fournisseurC->ajoutFournisseur($fournisseur);
                
                 header('Location:showFournisseur.php');
@@ -62,6 +66,7 @@
 	<link href="vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
 	<link href="vendor/font-awesome-5/css/fontawesome-all.min.css" rel="stylesheet" media="all">
 	<link href="vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
+   
 
 	<!-- Bootstrap CSS-->
 	<link href="vendor/bootstrap-4.1/bootstrap.min.css" rel="stylesheet" media="all">
@@ -77,8 +82,45 @@
 
 	<!-- Main CSS-->
 	<link href="css/theme.css" rel="stylesheet" media="all">
+    <link href="css1.css" rel="stylesheet" media="all">
     	<!-- JS verif-->
         <script src="js/fournisseur.js"></script>
+       <style>  
+       input.controle {
+    outline:0;
+    font-size:14px;
+    width:250px;
+  }	
+  label.label {
+    display:inline-block;
+    width:200px;
+    text-align: right;
+    font-style: italic;
+    margin-right:5px;
+  }
+  input.controle:valid {
+    border:3px solid #0a0;
+  }
+  input.controle:invalid {
+    border:3px solid #a00;
+  }
+  input.controle:valid + span:before  {
+    content: "\f00c";
+    font-family: "FontAwesome";
+    color:#0a0;
+    font-size: 1.5em;
+  }	
+  input.controle:invalid + span:before  {
+    content: "\f00d";
+    font-family: "FontAwesome";
+    color:#a00;
+    font-size: 1.5em;
+  }
+       
+       
+       
+       
+       </style>
 
 </head>
 
@@ -89,7 +131,7 @@
             <div class="header-mobile__bar">
                 <div class="container-fluid">
                     <div class="header-mobile-inner">
-                        <a class="logo" href="index.html">
+                        <a class="logo" href="index.php">
                             <img src="images/icon/ahmed.png" alt="reydelmexico" />
                         </a>
                         <button class="hamburger hamburger--slider" type="button">
@@ -104,7 +146,7 @@
                 <div class="container-fluid">
                     <ul class="navbar-mobile__list list-unstyled">
                         <li class="has-sub">
-                            <a class="js-arrow" href="index.html">
+                            <a class="js-arrow" href="index.php">
                                 <i class="fa fa-bar-chart"></i>Général</a>
                             
                         </li>
@@ -160,7 +202,10 @@
                             <a href="showEvenement.php">
                                 <i class="fas fa-music"></i>Evénements</a>
                         </li>
-                      
+                        <li>
+                            <a href="showCategorieChef.php">
+                                <i class="fa fa-lightbulb-o"></i>Catégories Chefs</a>
+                        </li>
                        
                       
                         
@@ -182,7 +227,7 @@
                     <ul class="list-unstyled navbar__list">
                         
                         <li class="has-sub">
-                            <a class="js-arrow" href="index.html">
+                            <a class="js-arrow" href="index.php">
                                 <i class="fa fa-bar-chart"></i>Général</a>
                             
                         </li>
@@ -238,7 +283,10 @@
                             <a href="showEvenement.php">
                                 <i class="fas fa-music"></i>Evénements</a>
                         </li>
-                      
+                        <li>
+                            <a href="showCategorieChef.php">
+                                <i class="fa fa-lightbulb-o"></i>Catégories Chefs</a>
+                        </li>
                       
                       
                             </ul>
@@ -430,33 +478,37 @@
                                     <?php echo $error; ?>
                                         </div>
                                         <div id="erreur"></div>
-                                <form action="" name="fournisseur" id="fournisseur" method="POST" onclick=" return verifFournisseur()">
-                  <table  align="center">
+ <form action="" name="fournisseur" id="fournisseur" method="POST" oncopy="return false" onpaste="return false" oncut="return false" onclick=" return verifFournisseur()" >
+                  <table align="center">
                  <tr> 
                     <td> <label for="nom">Nom: </label>
                     </td> 
                 </tr>
                  <tr>
-                    <td><input type="text" name="nom" id="nom" required maxlength="50"></td>
+                    <td><input type="text" class="controle" name="nom" id="nom"  placeholder="VOTRE NOM" required maxlength="50"></td>
+                    <span class="resultat"></span>
                 </tr>
                 <tr>
-                    <td><label for="prenom">prenom: </label>  </td> 
+                    <td><label for="prenom">Prénom: </label>  </td> 
                 </tr> 
                 <tr>
-                    <td><input type="text" name="prenom" id="prenom" required maxlength="50"></td>
+                    <td><input type="text" class="controle" name="prenom" id="prenom"  placeholder="VOTRE PRENOM" required maxlength="50"></td>
+                    <span class="resultat"></span>
                 </tr>
                 <tr>
                     <td> <label for="email">Email: </label>  </td> 
  
                 </tr> 
                 <tr>
-                    <td><input type="email" name="email" id="email" maxlength="50" required placeholder="VotreEmail@gmail.com" pattern=".+@gmail.com|.+@esprit.tn"></td>
+                    <td><input type="email"  class="controle" name="email" id="email" maxlength="50" required placeholder="Email GMAL OU ESPRIT" pattern=".+@gmail.com|.+@esprit.tn"></td>
+                    <span class="resultat"></span>
                 </tr>
                 <tr>
                     <td>    <label for="tel">Téléphone: </label></td> 
                 </tr> 
                 <tr>
-                    <td><input type="tel" name="tel" id="tel" placeholder="12345678"  pattern="[0-9]{2}[0-9]{3}[0-9]{3}"required  maxlength="20"></td> 
+                    <td><input type="tel" class="controle" name="tel" id="tel"   placeholder="12345678"  pattern="[0-9]{2}[0-9]{3}[0-9]{3}"required  maxlength="20"></td> 
+                    <span class="resultat"></span>
                 </tr>
                 
                 <tr>
@@ -464,7 +516,7 @@
                 </tr> 
                 <tr>
                 <td>
-                     <select name="categorie" id="categorie" required >
+                     <select name="categorie" id="categorie"  required > 
                      <option value="select" selected>Select</option>
                         
            <?php
@@ -482,7 +534,8 @@
                 </tr> 
                 <tr>
                     <td>
-                    <select name="local" id="local" required >
+                    <select name="local" id="local"  required >
+                 
                      <option value="select" selected>Select</option>
                         
           <?php
@@ -496,13 +549,28 @@
                      
                     </td> 
                 </tr>
+                <tr>
+                    <td>    <label for="img">Image Fournisseur: </label></td> 
+                </tr> 
+                <tr>
+
+                <td>
+<form enctype="multipart/form-data" method="post"  autocomplete="on" action="upload/">     
+
+    <p> <input type="file" class="controle" id="img" name="img"  required /></p>
+    <span class="resultat"></span>
+
+    
+ </form>
+ </td>
+                </tr>
                 <tr></tr>
                 <tr></tr>
                 <tr>
                     <td></td><td> <div class="row">
                             <div class="col-md-12">
                                 <div class="overview-wrap">
-                                    <input type="submit" name="submit" id="submit" class="au-btn au-btn-icon au-btn--blue" value="Envoyer" onclick="verifFournisseur();">
+                                    <input type="submit" class="au-btn au-btn-icon au-btn--blue" value="Envoyer" >
                                     
                                     <input type="reset" class="au-btn au-btn-icon au-btn--blue" value="Annuler"> 
                                 </div>
@@ -518,7 +586,7 @@
                  	<div class="row">
 								<div class="col-md-12">
 										<div class="copyright">
-												<p>&copy; Copyright.Tous droits réservés. <a href="../view/front/1.html">Rey Del México</a>.</p>
+												<p>&copy; Copyright.Tous droits réservés. <a href="../front/index.php">Rey Del México</a>.</p>
 										</div>
 								</div>
 						</div>
@@ -533,6 +601,7 @@
 
 	<!-- Jquery JS-->
 	<script src="vendor/jquery-3.2.1.min.js"></script>
+    <link href="css1.css" rel="stylesheet" media="all">
 	<!-- Bootstrap JS-->
 	<script src="vendor/bootstrap-4.1/popper.min.js"></script>
 	<script src="vendor/bootstrap-4.1/bootstrap.min.js"></script>
