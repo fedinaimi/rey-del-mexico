@@ -83,11 +83,9 @@ function modifierreservation($uti,$id_reservation){
             'message' => $uti->getmessage(),
             'statut' =>$uti->getstatut(),
             'client' =>$uti->getclient(),
-           
-            'local' =>$uti->getlocal(),
+           'local' =>$uti->getlocal(),
             'id_reservation' => $id_reservation,
-           
-        ]);
+           ]);
         echo $query->rowCount() . " records UPDATED successfully <br>";
     } catch (PDOException $e) {
         $e->getMessage();

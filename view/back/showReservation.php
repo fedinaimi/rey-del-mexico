@@ -1,7 +1,9 @@
 <?PHP
 	include "../../controller/reservationC.php";
     include "../../controller/localC.php";
-   
+    session_start(); 
+    include  "statreservation.php";
+    
     
 
 	$localC = new localC();
@@ -398,7 +400,24 @@
                                
                             </div>
                         </div>
-						<div class="row">
+                        <div class="main-content">
+                <div class="section__content section__content--p30">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="overview-wrap">
+                                    <h2 class="title-1 center" class="center">Statistiques</h2>
+                                    <br>
+                                    <hr>
+                                    <br>
+                                </div>
+                            </div>
+                        </div> 
+                        <hr>
+                        <div  id="chart_div" style="width: 80%;  height: 500px;">
+                    <br>
+                </div>
+                        <div class="row">
                             <div class="col-lg-9">
 								<br>
                                 <h2 class="title-1 m-b-25">Informations reservations</h2>
@@ -416,6 +435,7 @@
                                                 <th class="text-center">client</th>
                                                 <th class="text-center">Local</th>
                                                 <th class="text-center"></th>
+                                                <th class="text-right"></th>
                                                 <th class="text-right"></th>
                                             </tr>
                                         </thead>

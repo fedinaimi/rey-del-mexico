@@ -11,7 +11,8 @@ include "../../controller/categorieChefC.php";
 include_once "../../controller/evenementC.php";
 include_once "../../controller/localC.php";
 include_once '../../controller/reservationC.php';
- $localC = new localC();
+$id=$_GET['idc'] ;
+$localC = new localC();
  $localC1 = new localC();
 $listeLocal= $localC->afficherLocal();
  $evenementC = new evenementC();
@@ -30,7 +31,7 @@ $listeLocal= $reservation2C->listeLocal();
      && isset($_POST['message'])
      
       
-      && isset($_POST['client'])
+      
       && isset($_POST['local'])) 
       {
           if(
@@ -38,10 +39,10 @@ $listeLocal= $reservation2C->listeLocal();
           !empty($_POST['nb_perso']) &&
           !empty($_POST['message']) &&
         
-          !empty($_POST['client'])&&
+          
           !empty($_POST['local']))
              {
-             $reservation= new reservation($_POST['date'],$_POST['nb_perso'],$_POST['message'] ,0, $_POST['client'],$_POST['local']);
+             $reservation= new reservation($_POST['date'],$_POST['nb_perso'],$_POST['message'] ,0, $_SESSION['idc'],$_POST['local']);
              $reservationC->ajouterreservation($reservation);
              echo '<script> alert("ajout avec succées en attente la confirmation de resto"); </script>';
            
@@ -819,25 +820,7 @@ foreach($listeProduit as $produit){
                      
                     </td> 
                 </tr>
-                <tr>
-                    <td>    <label for="client">Client: </label></td> 
-                </tr> 
                 
-                <tr>
-                <td>
-                     <select name="client" id="client">
-                     <option value="select" selected>Select</option>
-                        
-               <?php
-                foreach($listeclient as $listeC){
-               ?>
-                <option value ='<?PHP echo $listeC['id_client']; ?>'> <?PHP echo $listeC['nom']; ?></option>
-                   <?php
-             }
-                  ?>
-                     </select>   
-                </td> 
-                </tr>
                
                 <div class="row">
                             <div class="col-md-12">

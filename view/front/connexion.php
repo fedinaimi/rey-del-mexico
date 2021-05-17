@@ -38,6 +38,7 @@ if( isset($_POST['login_user'])
                   $client1= $client->authentificationClient($_POST['login_user'],$_POST['mdp_user']);
                   $_SESSION['login_user'] =  $client1['email'];
                   $_SESSION['cin'] = $client1['cin'];
+                  $_SESSION['idc'] = $client1['id_client'];
                 
                  // echo $_SESSION['login_user'];
                   echo '<script> alert(" ok ");
