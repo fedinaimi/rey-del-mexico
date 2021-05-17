@@ -403,7 +403,7 @@
                                     <table class="table table-borderless table-striped table-earning">
                                         <thead>
                                             <tr>
-                                                <th class="text-center">ID Carte</th>
+                                             
                                                 <th class="text-center">Points fidélités</th>
                                             
                                                 <th class="text-center">Statut</th>
@@ -417,7 +417,7 @@
 foreach($listeCarte as $carte){
 ?>
 <tr>
-<td class="text-center"><?PHP echo $carte['id_carte']; ?></td>
+
 <td class="text-center"><?PHP echo $carte['points']; ?></td>
 
 <td class="text-center"><?PHP echo $carte['statut']; ?></td>

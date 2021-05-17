@@ -85,42 +85,7 @@
     <link href="css1.css" rel="stylesheet" media="all">
     	<!-- JS verif-->
         <script src="js/fournisseur.js"></script>
-       <style>  
-       input.controle {
-    outline:0;
-    font-size:14px;
-    width:250px;
-  }	
-  label.label {
-    display:inline-block;
-    width:200px;
-    text-align: right;
-    font-style: italic;
-    margin-right:5px;
-  }
-  input.controle:valid {
-    border:3px solid #0a0;
-  }
-  input.controle:invalid {
-    border:3px solid #a00;
-  }
-  input.controle:valid + span:before  {
-    content: "\f00c";
-    font-family: "FontAwesome";
-    color:#0a0;
-    font-size: 1.5em;
-  }	
-  input.controle:invalid + span:before  {
-    content: "\f00d";
-    font-family: "FontAwesome";
-    color:#a00;
-    font-size: 1.5em;
-  }
-       
-       
-       
-       
-       </style>
+      
 
 </head>
 
@@ -570,8 +535,7 @@
                     <td></td><td> <div class="row">
                             <div class="col-md-12">
                                 <div class="overview-wrap">
-                                    <input type="submit" class="au-btn au-btn-icon au-btn--blue" value="Envoyer" >
-                                    
+                                    <input type="submit" id="submit" name="submit" class="au-btn au-btn-icon au-btn--blue" value="Envoyer" > 
                                     <input type="reset" class="au-btn au-btn-icon au-btn--blue" value="Annuler"> 
                                 </div>
                             </div>

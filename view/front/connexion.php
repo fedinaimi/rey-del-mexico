@@ -23,6 +23,7 @@ if( isset($_POST['login_user'])
           $admin1= $admin->authentification($_POST['login_user'],$_POST['mdp_user']);
           $_SESSION['login_user'] =  $admin1['login_user'];
           $_SESSION['cin'] = $admin1['cin'];
+         
          // $_SESSION['mdp_user'] = $admin['mdp_user'];
         // echo $_SESSION['login_user'] ;
           echo '<script> alert(" ok ");
@@ -38,7 +39,7 @@ if( isset($_POST['login_user'])
                   $client1= $client->authentificationClient($_POST['login_user'],$_POST['mdp_user']);
                   $_SESSION['login_user'] =  $client1['email'];
                   $_SESSION['cin'] = $client1['cin'];
-                
+                  $_SESSION['idc'] = $client1['id_client'];
                  // echo $_SESSION['login_user'];
                   echo '<script> alert(" ok ");
                   </script>';

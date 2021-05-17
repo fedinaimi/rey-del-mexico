@@ -430,7 +430,7 @@
   $date = date('d-m-y');
   
 ?>
-                  <td><input type="text" class="controle" name="dateCreation" id="dateCreation" value="<?php echo $date; ?>" required  >  
+                  <td><input type="text" class="controle" readonly name="dateCreation" id="dateCreation" value="<?php echo $date; ?>" required  >  
                   <!-- <td><input type="date" class="controle" name="dateCreation" id="dateCreation" required ></td> !-->
                          <!--  <script>
                             $('#dateCreation').val(new Date().toJSON().slice(0,10));

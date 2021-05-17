@@ -9,15 +9,15 @@
                             <img src="logo.jpg" alt="logo" />
                         </a>
                         
-<h1 style="font-size: 50px">Image : 
+<h4 style="font-size: 30px">Image : 
 <br>
 <img src="../front/assets/img/fournisseur/<?php echo $_GET['img'] ;?>" length="250" height="250" alt="image fourni "/>
 
-</h1>
-<h5 style="font-size: 25px">Nom : <?php echo $_GET['nom'] ;?></h5>
-<h2 style="font-size: 40px">Prenom : <?php echo $_GET['prenom'];?></h2>
-<h2 style="font-size: 40px">Tel : <?php echo $_GET['tel'];?></h2>
-<h2 style="font-size: 25px">Email: <?php echo $_GET['email'];?> </h2>
+</h4>
+<h4 style="font-size: 25px">Nom : <?php echo $_GET['nom'] ;?></h4>
+<h4 style="font-size: 25px">Prenom : <?php echo $_GET['prenom'];?></h4>
+<h4 style="font-size: 25px">Tel : <?php echo $_GET['tel'];?></h4>
+<h4 style="font-size: 25px">Email: <?php echo $_GET['email'];?> </h4>
 
 
 

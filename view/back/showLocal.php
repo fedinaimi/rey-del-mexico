@@ -411,7 +411,7 @@ session_start();
                                     <table class="table table-borderless table-striped table-earning">
                                         <thead>
                                             <tr>
-                                            <th class="text-center">ID Local</th>
+                                           
                                                 <th class="text-center">Libelle</th>
                                                 <th class="text-center">Adresse</th>
                                                 <th class="text-center">Date de Création</th>
@@ -430,7 +430,7 @@ session_start();
 foreach($listeLocal as $local){
 ?>
 <tr>
-<td class="text-center"><?PHP echo $local['id_local']; ?></td>
+
 <td class="text-center"><?PHP echo $local['libelle']; ?></td>
 <td class="text-center"><?PHP echo $local['adresse']; ?></td>
 <td class="text-center"><?PHP echo $local['dateCreation']; ?></td>

@@ -1,30 +1,45 @@
-<?PHP
-	include "../../controller/fournisseurC.php";
-    include "../../controller/localC.php";
-    include "../../controller/categorieC.php";
-	$fournisseurC = new fournisseurC();
-	$listefournissseur= $fournisseurC->afficherFournisseur();
-    $elementC= null;
-    $elementL= null;
-    $localC = new localC();
-    $categorieC = new categorieC();
+<?php 
+   include "../../controller/fournisseurC.php";
+   include "../../controller/localC.php";
+   include "../../controller/categorieC.php";
+   $fournisseurC = new fournisseurC();
+   $listefournissseur= $fournisseurC->afficherFournisseur();
+   $elementC= null;
+   $elementL= null;
+   $localC = new localC();
+   $categorieC = new categorieC();
+   $db= config::getConnexion();
 ?>
-<!DOCTYPE html>
-<html lang="en">
+   
+    
+
+
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="">
+<!--<![endif]-->
 
 <head>
-	<!-- Required meta tags-->
-	<meta charset="UTF-8">
+<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<meta name="description" content="au theme template">
 	<meta name="author" content="Hau Nguyen">
 	<meta name="keywords" content="au theme template">
 
-	<!-- Title Page-->
-	<title>Fournisseur</title>
 
-	<!-- Fontfaces CSS-->
-	<link href="css/font-face.css" rel="stylesheet" media="all">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.0/normalize.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lykmapipo/themify-icons@0.1.2/css/themify-icons.css">
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/pixeden-stroke-7-icon@1.2.3/pe-icon-7-stroke/dist/pe-icon-7-stroke.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.0/css/flag-icon.min.css">
+    <link rel="stylesheet" href="assets/css/cs-skin-elastic.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link href="css/font-face.css" rel="stylesheet" media="all">
 	<link href="vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
 	<link href="vendor/font-awesome-5/css/fontawesome-all.min.css" rel="stylesheet" media="all">
 	<link href="vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
@@ -43,11 +58,18 @@
 
 	<!-- Main CSS-->
 	<link href="css/theme.css" rel="stylesheet" media="all">
+     <!-- Tweaks for older IEs--><!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
+
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
+
+    <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
 
 </head>
 
-<body class="animsition">
-    <div class="page-wrapper">
+<body>
+<div class="page-wrapper">
         <!-- HEADER MOBILE-->
         <header class="header-mobile d-block d-lg-none">
             <div class="header-mobile__bar">
@@ -379,58 +401,82 @@
                     </div>
                 </div>
             </header>
-            <!-- HEADER DESKTOP-->
-			<!-- MAIN CONTENT-->
-			<div class="main-content">
-				<div class="section__content section__content--p30">
-					<div class="container-fluid">
-						<div class="row">
-                            <div class="col-md-12">
-                                <div class="overview-wrap">
-                                <br>
-                                    <button class="au-btn au-btn-icon au-btn--blue">
-                                    
-                                        <a href="addFournisseurs.php">  <i class="zmdi zmdi-plus text-center"></i>Ajouter Fournisseur </a></button>
-                                     
-                                </div>
-                                <div class="overview-wrap">
-                                <br>
-                                  
-                                        <button class="au-btn au-btn-icon au-btn--blue">
-                                    
-                                    <a href="triFournisseur.php">  <i class="zmdi zmdi-plus text-center"></i>Trier Fournisseur </a></button>
-                                </div>
-                            </div>
+
+   
+        
+
+                <div class="col-lg-1000">
+            <div class="card">
+                        <div class="card-header">
+                        <br>
+                        <br><br>
+                            <strong class="card-title">  <h2 class="title-1 m-b-25">Informations Fournisseurs</h2></strong>
                         </div>
-						<div class="row">
-                            <div class="col-lg-9">
-								<br>
-                                <h2 class="title-1 m-b-25">Informations Fournisseurs</h2>
-                                <div class="table-responsive table--no-card m-b-40">
-                                    <table class="table table-borderless table-striped table-earning">
-                                        <thead>
-                                            <tr>
-                                             
-                                                <th class="text-center">IMG</th>
+                        <table> 
+                        <tr>
+                        <td></td>
+                        
+                       
+        
+                        <form method="get" action="triFournisseur.php">
+                            <p>
+                            <td>
+                                <label for="tri"><h1> Trier  :</h4> </label><br>
+    
+                                    <select name="tri" id="tri" >
+                                    <option value="id_fournisseur" selected>ID</option>
+                                       <option value="nom" >Nom</option>
+                                       <option value="prenom">Prénom</option>
+                                       <option value="tel">Tel</option>
+                                      
+                                    </select>
+                                    <input type="submit" value="Trier" class="au-btn au-btn-icon au-btn--blue" /> 
+                              </p>
+                              <br>
+                              
+                               
+                                 </td>
+                             </form>
+                            
+                             </tr>
+                        </table>
+                       
+        
+        <hr>
+                      <div class="card-body">
+                      <div class="col-lg-1000">
+            <div class="table-responsive">
+           
+            <div class="col-lg-100">
+                <table class="table   table-bordered" width:"100%" height:"100%">
+                <div class="col-lg-1000">
+                    <thead>
+                        <tr>
+                                               <th class="text-center">ID</th>
                                                 <th class="text-center">NOM</th>
                                                 <th class="text-center">Prénom</th>
                                                 <th class="text-center">Email</th>
                                                 <th class="text-center">Tel</th>
                                                 <th class="text-center">Catégorie</th>
                                                 <th class="text-center">Local</th>
-                                                <th class="text-center"></th>
-                                                <th class="text-right"></th>
-                                                <th class="text-center"></th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                           
-                                        <?PHP
-foreach($listefournissseur as $fournisseur){
-?>
+                                                <th class="text-center">IMG</th>
+                                               
+                        </tr>
+    </thead>
+    <tbody>
+    <?php
+         $tri = isset($_GET['tri']) ? $_GET['tri'] : 'id_fournisseur';
+         try
+ {
+    $sql = $db->query('SELECT * FROM fournisseur ORDER BY '.$tri.'') or die(print_r($bdd->errorInfo()));  
+          
+                while($fournisseur = $sql->fetch())
+                {
+   
+                    ?>
 <tr>
-
-<td><img src="../front/assets/img/fournisseur/<?php echo $fournisseur["img"]; ?>" length="100" height="100" alt="image fourni "/></td>
+<td class="text-center"><?PHP echo $fournisseur['id_fournisseur']; ?></td>
+<td><img src="../front/assets/img/fournisseur/<?php echo $fournisseur["img"]; ?>" length="25" height="25" alt="image fourni "/></td>
 <td class="text-center"><?PHP echo $fournisseur['nom']; ?></td>
 <td class="text-center"><?PHP echo $fournisseur['prenom']; ?></td>
 <td class="text-center"><?PHP echo $fournisseur['email']; ?></td>
@@ -446,63 +492,35 @@ foreach($listefournissseur as $fournisseur){
 $elementL= $localC->afficherElementLocal($fournisseur['local']);
  echo $elementL->adresse;
 ?>
-</td>
-
-<td class="text-center"> 
-<form method="POST" action="deleteFournisseur.php">
-<button type="submit" name="supprimer" class="au-btn au-btn-icon au-btn--blue">
- <i class="zmdi zmdi"></i>Supprimer</button>
- <input type="hidden" value=<?PHP echo $fournisseur['id_fournisseur']; ?> name="id_fournisseur">
- </form>  
- </td>
- <!-- Impression  !-->
- <td class="text-center"> 
-<form action="imprimeFourni.php" method="get">
-<button type="submit" name="imprime" id="imprime" class="au-btn au-btn-icon au-btn--blue">
- <i class="zmdi zmdi"></i>Imprimer</button>
- <input type="hidden" value=<?PHP echo $fournisseur['id_fournisseur'];  ?> id="id_fourni" name="id_fourni">
- <input type="hidden" value=<?PHP echo $fournisseur['img'];  ?> id="img" name="img">
- <input type="hidden" value=<?PHP echo $fournisseur['prenom'];   ?> id="prenom" name="prenom">
- <input type="hidden" value=<?PHP echo $fournisseur['nom'];  ?> id="nom" name="nom">
- <input type="hidden" value=<?PHP echo $fournisseur['email'];  ?> id="email" name="email">
- <input type="hidden" value=<?PHP echo $fournisseur['tel'];  ?> id="tel" name="tel">
-
- </form>  
- </td>
- <td class="text-center"> 
- <button class="au-btn au-btn-icon au-btn--blue">
- <a href="updateFournisseur.php?id=<?PHP echo $fournisseur['id_fournisseur']; ?>">
- <i class="zmdi zmdi"></i>Modifier</button>
-  </a>
- </td>
- 
-</tr>
-<?PHP
+</td> </tr>
+        
+        
+  <?php
+                  }
+             
+$sql->closeCursor();
+}
+catch(Exception $e)
+{
+die('Erreur : '.$e->getMessage());
 }
 ?>
-
-                                       
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                            <div class="row">
-								<div class="col-md-12">
-                                <form action="imprimeFournisseur.php" method="get">
-<button type="submit" name="imprime" id="imprime" class="au-btn au-btn-icon au-btn--blue">
- <i class="zmdi zmdi"></i>Imprimer</button>
- </form> 
-								</div>
-						</div>
-						
-						<div class="row">
+</table>
+</div>                 
+                     
+                      </div>
+                      </div>
+                      <div class="row">
 								<div class="col-md-12">
 										<div class="copyright">
 												<p>&copy; Copyright.Tous droits réservés. <a href="../front/index.php">Rey Del México</a>.</p>
 										</div>
 								</div>
 						</div>
-					</div>
+
+
+
+                        </div>
 				</div>
 			</div>
 		</div>
@@ -510,7 +528,12 @@ $elementL= $localC->afficherElementLocal($fournisseur['local']);
 
 	</div>
 
-	<!-- Jquery JS-->
+    <!-- Right Panel -->
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
 	<script src="vendor/jquery-3.2.1.min.js"></script>
 	<!-- Bootstrap JS-->
 	<script src="vendor/bootstrap-4.1/popper.min.js"></script>
@@ -534,7 +557,8 @@ $elementL= $localC->afficherElementLocal($fournisseur['local']);
 	<!-- Main JS-->
 	<script src="js/main.js"></script>
 
+
+
 </body>
 
 </html>
-<!-- end document-->

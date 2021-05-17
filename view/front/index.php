@@ -7,7 +7,25 @@ include "../../controller/fournisseurC.php";
 include "../../controller/categorieC.php";
 include "../../controller/chefC.php";
 include "../../controller/categorieChefC.php";
+include "../../controller/reclamationC.php";
 
+
+$reclamation = null;
+ $reclamationC = new  reclamationC();
+ if (isset($_POST['subject']) && isset($_POST['msg']))
+  {
+      if(!empty($_POST['subject']) && !empty($_POST['msg']))
+        {
+         $reclamation= new reclamation($_POST['msg'],$_POST['subject'],0, $_SESSION['idc']);
+         $reclamationC->ajoutReclamation($reclamation);
+           header('Location:index.php');
+          echo '<script>  alert("succes") </script>';
+           }
+           else 
+                 {
+                  $error =" Missing information";
+                 } 
+    }
 $produitC = new produitC();
 $listeProduit= $produitC->afficherProduit();
 
@@ -239,7 +257,7 @@ foreach($listeFournisseur as $fournisseur){
  <li>
                   <div class="mu-single-chef">
                     <figure class="mu-single-chef-img">
-                      <img src="assets/img/fournisseur/<?php echo $fournisseur["img"]; ?>" length="100" height="180" alt="chef img">
+                      <img src="assets/img/fournisseur/<?php echo $fournisseur["img"]; ?>" length="80" height="210" alt="chef img">
                     </figure>
                     <div class="mu-single-chef-info">
                       <h4></i><?PHP echo $fournisseur['nom']; echo " "; echo $fournisseur['prenom']; ?></h4>
@@ -247,7 +265,7 @@ foreach($listeFournisseur as $fournisseur){
                       <?PHP $elementL= $localC->afficherElementLocal($fournisseur['local']);  ?>
                       <?PHP $elementC= $categorieC->afficherElementCategorie($fournisseur['categorie']);  ?>
     
-                      <span></i><?PHP    echo $elementL->adresse; ?></span>
+                      <span></i><?PHP    echo $elementL->adresse; ?></span><br>
                       <span></i><?PHP    echo $elementC->libelle; ?></span>
                     </div>
                     <div class="mu-single-chef-social">
@@ -1130,24 +1148,18 @@ foreach($listeChef as $chef){
                 <div class="col-md-6">
                   <div class="mu-contact-left">
                     <!-- Email message div -->
-                    <div id="form-messages"></div>
+                  
                     <!-- Start contact form -->
-                    <form id="ajax-contact" method="post" action="mailer.php" class="mu-contact-form">
-                      <div class="form-group">
-                        <label for="name">Nom et Prénom</label>
-                        <input type="text" class="form-control" id="name" name="name" placeholder="Nom et Prénom" required>
-                      </div>
-                      <div class="form-group">
-                        <label for="email">Adresse Email</label>
-                        <input type="email" class="form-control" id="email" name="email" placeholder="Email" required>
-                      </div>                      
+                    <form id="ajax-contact" method="post" action="" class="mu-contact-form">
+                    
+                                         
                       <div class="form-group">
                         <label for="subject">Sujet</label>
                         <input type="text" class="form-control" id="subject" name="subject" placeholder="Sujet" required>
                       </div>
                       <div class="form-group">
-                        <label for="message">Message</label>                        
-                        <textarea class="form-control" id="message" name="message"  cols="30" rows="10" placeholder="Votre message" required></textarea>
+                        <label for="msg">Message</label>                        
+                        <textarea class="form-control" id="msg" name="msg"  cols="30" rows="10" placeholder="Votre message" required></textarea>
                       </div>                      
                       <button type="submit" class="mu-send-btn">Envoyer le message</button>
                     </form>
