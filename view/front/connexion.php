@@ -26,7 +26,7 @@ if( isset($_POST['login_user'])
          
          // $_SESSION['mdp_user'] = $admin['mdp_user'];
         // echo $_SESSION['login_user'] ;
-          echo '<script> alert(" ok ");
+          echo '<script> alert(" Vous êtes connectés ");
           </script>';
             header('Location: ../back/index.php');
             exit;
@@ -41,7 +41,7 @@ if( isset($_POST['login_user'])
                   $_SESSION['cin'] = $client1['cin'];
                   $_SESSION['idc'] = $client1['id_client'];
                  // echo $_SESSION['login_user'];
-                  echo '<script> alert(" ok ");
+                  echo '<script> alert(" Vous êtes connectés ");
                   </script>';
                     header('Location: index.php');
                     exit;
