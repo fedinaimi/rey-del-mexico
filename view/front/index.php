@@ -8,28 +8,40 @@ include "../../controller/categorieC.php";
 include "../../controller/chefC.php";
 include "../../controller/categorieChefC.php";
 include "../../controller/reclamationC.php";
+include "../../controller/evenementC.php";
+include '../../controller/reservationC.php';
 
 
 $reclamation = null;
  $reclamationC = new  reclamationC();
- if (isset($_POST['subject']) && isset($_POST['msg']))
+ 
+ 
+ if (isset($_POST['sujet']) && isset($_POST['msg']))
   {
-      if(!empty($_POST['subject']) && !empty($_POST['msg']))
-        {
-         $reclamation= new reclamation($_POST['msg'],$_POST['subject'],0, $_SESSION['idc']);
+    
+      if(!empty($_POST['sujet']) && !empty($_POST['msg']))
+        { 
+          if(!isset($_SESSION['idc'])){   header('Location:connexion.php'); } 
+    
+          else{
+         $reclamation= new reclamation($_POST['msg'],$_POST['sujet'],0, $_SESSION['idc']);
          $reclamationC->ajoutReclamation($reclamation);
            header('Location:index.php');
-          echo '<script>  alert("succes") </script>';
-           }
-           else 
-                 {
+          echo '<script>  alert("succes") </script>';}}
+           
+          
+        
+         else 
+         {
                   $error =" Missing information";
-                 } 
+         } 
     }
 $produitC = new produitC();
 $listeProduit= $produitC->afficherProduit();
-
+$localC1= new localC();
 $categorieC= new categorieC();
+$listeCategorie= $categorieC->afficherCategorie();
+$listeCategorie1= $categorieC->afficherCategorie();
 $localC = new localC();
 $listeLocal= $localC->afficherLocal();
 
@@ -40,6 +52,43 @@ $fournisseurC = new fournisseurC();
 $listeFournisseur= $fournisseurC->afficherFournisseur();  
 
 $categorieChefC = new categorieChefC();
+$error="";
+$evenementC = new evenementC();
+ $listeEvenement= $evenementC->afficherevenement();
+ $reservation = null;
+ $reservationC = new  reservationC(); 
+ $reservation1C = new reservationC();
+ $reservation2C = new reservationC();
+$listeclient= $reservation1C->listeclient();
+ $reservation2C = new reservationC();
+ $listeLocalM= $localC->afficherLocal();
+$listeLocal= $reservation2C->listeLocal();
+
+if(
+  isset($_POST['date']) 
+ && isset($_POST['nb_perso']) 
+ && isset($_POST['message'])
+  && isset($_POST['local'])) 
+  {
+      if(
+      !empty($_POST['date']) &&
+      !empty($_POST['nb_perso']) &&
+      !empty($_POST['message']) &&
+    
+      !empty($_POST['local']))
+         {  if(!isset($_SESSION['idc'])){   header('Location:connexion.php'); } 
+    
+         else{
+         $reservation= new reservation($_POST['date'],$_POST['nb_perso'],$_POST['message'] ,0, $_SESSION['idc'],$_POST['local']);
+         $reservationC->ajouterreservation($reservation);
+         echo '<script> alert("ajout avec succées en attente la confirmation de resto"); </script>';}
+       
+     }
+     else 
+     {    
+     echo '<script> alert("des informations manquantes"); </script>';
+     }
+    }
 
 ?>
 <!DOCTYPE html>
@@ -115,17 +164,18 @@ $categorieChefC = new categorieChefC();
           <ul id="top-menu" class="nav navbar-nav navbar-right mu-main-nav">
 
           <li><a href="index.php">ACCUEIL</a></li>
-            <li><a href="index.php#mu-about-us">A PROPOS DE NOUS</a></li>                     
-            <li><a href="index.php#mu-restaurant-menu">MENU</a></li>                       
+            <li><a href="index.php#mu-about-us">A PROPOS DE NOUS</a></li>                                          
             <li><a href="index.php#mu-reservation">RESERVATION</a></li>           
             <li><a href="index.php#mu-gallery">GALLERY</a></li>
             <li><a href="index.php#mu-chef">NOS CHEFS</a></li> 
             <li><a href="index.php#mu-evenement">EVENEMENT</a></li> 
             <li><a href="ethos.html">ETHOS</a></li>  
-            <li><a href="commander.php">COMMANDER</a></li>  
+            <li><a href="menu.php">MENU</a></li>  
           </ul>  
-          <a href="panier.php"> <img class="right1" src="assets/img/panier.png" width="25" height="25" alt="tab img"></a> 
-          <a href="connexion.php"> <img class="rightT1" src="assets/login.jpg" width="25" height="25" alt="tab img"></a>                
+         
+          <a href="panier.php"> <img style="position: absolute ;left: 1300px ;bottom: 5px"  src="assets/img/panier.png" width="25" height="25" alt="tab img"></a>   
+          <a href="connexion.php"> <img style="position: absolute ;left: 1250px ;bottom: 5px" src="assets/login.jpg" width="25" height="25" alt="tab img"></a> 
+          <a href="../back/logOut.php"> <img style="position: absolute ;left: 1300px ;bottom: 60px" src="assets/logout.jpg" width="20" height="20" alt="tab img"></a>                
 
                
         </div><!--/.nav-collapse -->       
@@ -294,21 +344,6 @@ foreach($listeFournisseur as $fournisseur){
   </section>
   <!-- End Chef Section -->
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   <!-- End Fournisseur -->
   <!-- Start Counter Section -->
   <section id="mu-counter">
@@ -363,364 +398,57 @@ foreach($listeFournisseur as $fournisseur){
   <!-- End Counter Section --> 
 
   <!-- Start Restaurant Menu -->
-  <section id="mu-restaurant-menu">
+  <section id="mu-chef">
     <div class="container">
       <div class="row">
         <div class="col-md-12">
-          <div class="mu-restaurant-menu-area">
+          <div class="mu-chef-area">
 
             <div class="mu-title">
-              <span class="mu-subtitle">Découvrir</span>
-              <h2>NOTRE MENU</h2>
+              <span class="mu-subtitle">Notre Menu</span>
+              <h2>Goûter à nos délices</h2>
             </div>
-            
-            <div class="mu-restaurant-menu-content">
-              <ul class="nav nav-tabs mu-restaurant-menu">
-                <li class="active"><a href="#tacos" data-toggle="tab">Tacos</a></li>
-                <li><a href="#burrito" data-toggle="tab">Burrito</a></li>
-                <li><a href="#cali" data-toggle="tab">Cali Quasdilla</a></li>
-                <li><a href="#accompagnements" data-toggle="tab">Accompagnements</a></li>
-                <li><a href="#dessert" data-toggle="tab">Desserts</a></li>
+
+            <div class="mu-chef-content">
+              <ul class="mu-chef-nav">
+               
+              <?PHP
+foreach($listeProduit as $produit){
+?>
+<li>
+                  <div class="mu-single-chef">
+                    <figure class="mu-single-chef-img">
+                      <img src="assets/img/menu/<?php echo $produit["img"]; ?>" length="80" height="180" alt="chef img">
+                    </figure>
+                    <div class="mu-single-chef-info">
+                    <h4></i><?PHP 
+                    $cat=$categorieC->afficherElementCategorie($produit['categorie']);
+                    echo  $cat->libelle;
+                    ?> </h4>
+                      <h4></i><?PHP echo $produit['libelle'];?> </h4>
+                       <h4></i><?PHP echo $produit['prix']; ?> Dt </h4>
+                    </div>
+                    <div class="mu-single-chef-social">
+                    <h5></i><?PHP echo $produit['description']; ?></h5>
+                    </div>
+                   
+                  </div>
+                </li>
+ 
+
+
+<?PHP
+}
+?>
+   
               </ul>
-
-              <!-- Tab panes -->
-              <div class="tab-content">
-                <div class="tab-pane fade in active" id="tacos">
-                  <div class="mu-tab-content-area">
-                    <div class="row">
-
-                      
-
-                          <?PHP
-                          $i=0;
-foreach($listeProduit as $produit){
-  
-  $elementP= $categorieC->afficherElementCategorie($produit['categorie']);
-  if($elementP->libelle === "tacos")
-  {
-             if($i<3){
-?>                          <div class="col-md-6">
-                             <div class="mu-tab-content-left">
-                    <ul class="mu-menu-item-nav">
-                            <li>
-                              <div class="media">
-                                <div class="media-left">
-                                  <a href="#">
-                                    <img class="media-object" src="assets/img/menu/<?php echo $produit["img"]; ?>" length="25" height="25" alt="img">
-                                  </a>
-                                </div>
-                                <div class="media-body">
-                                  <h4 class="media-heading"><a href="#"><?PHP echo $produit['libelle']; ?></a></h4>
-                                  <span class="mu-menu-price"><?PHP echo $produit['prix']; ?>  dt</span>
-                                  <p><?PHP echo $produit['description']; ?></p>
-                                </div>
-                              </div>
-                              </li>
-                              </ul>   
-                        </div>
-                      </div>
-                              <?PHP
-                              $i++; 
-              }
-              else{ ?>
-                <div class="col-md-6">
-                <div class="mu-tab-content-right">
-                   <ul class="mu-menu-item-nav">
-                     <li>
-                       <div class="media">
-                         <div class="media-left">
-                           <a href="#">
-                             <img class="media-object" src="assets/img/menu/<?php echo $produit["img"]; ?>"" alt="img">
-                           </a>
-                         </div>
-                         <div class="media-body">
-                           <h4 class="media-heading"><a href="#"><?PHP echo $produit['libelle']; ?></a></h4>
-                           <span class="mu-menu-price"><?PHP echo $produit['prix']; ?>  dt</span>
-                           <p><?PHP echo $produit['description']; ?></p>
-                         </div>
-                       </div>
-                     </li>
-                     </ul>   
-                        </div>
-                      </div>
-                      <?PHP
-              }
-            }}
-  ?>
-                           
-                   </div>
-                 </div>
-                </div>
-
-                <div class="tab-pane fade" id="burrito">
-                  <div class="mu-tab-content-area">
-                    <div class="row">
-
-                    <?PHP
-                          $i=0;
-foreach($listeProduit as $produit){
-  
-  $elementP= $categorieC->afficherElementCategorie($produit['categorie']);
-  if($elementP->libelle === "burrito")
-  {
-             if($i<3){
-?>                          <div class="col-md-6">
-                             <div class="mu-tab-content-left">
-                    <ul class="mu-menu-item-nav">
-                            <li>
-                              <div class="media">
-                                <div class="media-left">
-                                  <a href="#">
-                                    <img class="media-object" src="assets/img/menu/<?php echo $produit["img"]; ?>" length="25" height="25" alt="img">
-                                  </a>
-                                </div>
-                                <div class="media-body">
-                                  <h4 class="media-heading"><a href="#"><?PHP echo $produit['libelle']; ?></a></h4>
-                                  <span class="mu-menu-price"><?PHP echo $produit['prix']; ?>  dt</span>
-                                  <p><?PHP echo $produit['description']; ?></p>
-                                </div>
-                              </div>
-                              </li>
-                              </ul>   
-                        </div>
-                      </div>
-                              <?PHP
-                              $i++; 
-              }
-              else{ ?>
-                <div class="col-md-6">
-                <div class="mu-tab-content-right">
-                   <ul class="mu-menu-item-nav">
-                     <li>
-                       <div class="media">
-                         <div class="media-left">
-                           <a href="#">
-                             <img class="media-object" src="assets/img/menu/<?php echo $produit["img"]; ?>"" alt="img">
-                           </a>
-                         </div>
-                         <div class="media-body">
-                           <h4 class="media-heading"><a href="#"><?PHP echo $produit['libelle']; ?></a></h4>
-                           <span class="mu-menu-price"><?PHP echo $produit['prix']; ?>  dt</span>
-                           <p><?PHP echo $produit['description']; ?></p>
-                         </div>
-                       </div>
-                     </li>
-                     </ul>   
-                        </div>
-                      </div>
-                      <?PHP
-              }
-            }}
-  ?>
-                           
-                   </div>
-                 </div>
-                </div>
-                <div class="tab-pane fade" id="cali">
-                  <div class="mu-tab-content-area">
-                    <div class="row">
-
-                    <?PHP
-                          $i=0;
-foreach($listeProduit as $produit){
-  
-  $elementP= $categorieC->afficherElementCategorie($produit['categorie']);
-  if($elementP->libelle === "cali quasdilla")
-  {
-             if($i<3){
-?>                          <div class="col-md-6">
-                             <div class="mu-tab-content-left">
-                    <ul class="mu-menu-item-nav">
-                            <li>
-                              <div class="media">
-                                <div class="media-left">
-                                  <a href="#">
-                                    <img class="media-object" src="assets/img/menu/<?php echo $produit["img"]; ?>" length="25" height="25" alt="img">
-                                  </a>
-                                </div>
-                                <div class="media-body">
-                                  <h4 class="media-heading"><a href="#"><?PHP echo $produit['libelle']; ?></a></h4>
-                                  <span class="mu-menu-price"><?PHP echo $produit['prix']; ?>  dt</span>
-                                  <p><?PHP echo $produit['description']; ?></p>
-                                </div>
-                              </div>
-                              </li>
-                              </ul>   
-                        </div>
-                      </div>
-                              <?PHP
-                              $i++; 
-              }
-              else{ ?>
-                <div class="col-md-6">
-                <div class="mu-tab-content-right">
-                   <ul class="mu-menu-item-nav">
-                     <li>
-                       <div class="media">
-                         <div class="media-left">
-                           <a href="#">
-                             <img class="media-object" src="assets/img/menu/<?php echo $produit["img"]; ?>"" alt="img">
-                           </a>
-                         </div>
-                         <div class="media-body">
-                           <h4 class="media-heading"><a href="#"><?PHP echo $produit['libelle']; ?></a></h4>
-                           <span class="mu-menu-price"><?PHP echo $produit['prix']; ?>  dt</span>
-                           <p><?PHP echo $produit['description']; ?></p>
-                         </div>
-                       </div>
-                     </li>
-                     </ul>   
-                        </div>
-                      </div>
-                      <?PHP
-              }
-            }}
-  ?>
-                           
-                   </div>
-                 </div>
-                </div>
-
-                <div class="tab-pane fade" id="accompagnements">
-                  <div class="mu-tab-content-area">
-                    <div class="row">
-
-                    <?PHP
-                          $i=0;
-foreach($listeProduit as $produit){
-  
-  $elementP= $categorieC->afficherElementCategorie($produit['categorie']);
-  if($elementP->libelle === "accompagnements")
-  {
-             if($i<3){
-?>                          <div class="col-md-6">
-                             <div class="mu-tab-content-left">
-                    <ul class="mu-menu-item-nav">
-                            <li>
-                              <div class="media">
-                                <div class="media-left">
-                                  <a href="#">
-                                    <img class="media-object" src="assets/img/menu/<?php echo $produit["img"]; ?>" length="25" height="25" alt="img">
-                                  </a>
-                                </div>
-                                <div class="media-body">
-                                  <h4 class="media-heading"><a href="#"><?PHP echo $produit['libelle']; ?></a></h4>
-                                  <span class="mu-menu-price"><?PHP echo $produit['prix']; ?>  dt</span>
-                                  <p><?PHP echo $produit['description']; ?></p>
-                                </div>
-                              </div>
-                              </li>
-                              </ul>   
-                        </div>
-                      </div>
-                              <?PHP
-                              $i++; 
-              }
-              else{ ?>
-                <div class="col-md-6">
-                <div class="mu-tab-content-right">
-                   <ul class="mu-menu-item-nav">
-                     <li>
-                       <div class="media">
-                         <div class="media-left">
-                           <a href="#">
-                             <img class="media-object" src="assets/img/menu/<?php echo $produit["img"]; ?>"" alt="img">
-                           </a>
-                         </div>
-                         <div class="media-body">
-                           <h4 class="media-heading"><a href="#"><?PHP echo $produit['libelle']; ?></a></h4>
-                           <span class="mu-menu-price"><?PHP echo $produit['prix']; ?>  dt</span>
-                           <p><?PHP echo $produit['description']; ?></p>
-                         </div>
-                       </div>
-                     </li>
-                     </ul>   
-                        </div>
-                      </div>
-                      <?PHP
-              }
-            }}
-  ?>
-                           
-                   </div>
-                 </div>
-                </div>
-
-                <div class="tab-pane fade" id="dessert">
-                  <div class="mu-tab-content-area">
-                    <div class="row">
-
-                    
-
-                    
-
-                    <?PHP
-                          $i=0;
-foreach($listeProduit as $produit){
-  
-  $elementP= $categorieC->afficherElementCategorie($produit['categorie']);
-  if($elementP->libelle === "desserts")
-  {
-             if($i<3){
-?>                          <div class="col-md-6">
-                             <div class="mu-tab-content-left">
-                               <ul class="mu-menu-item-nav">
-                              <li>
-                              <div class="media">
-                                <div class="media-left">
-                                  <a href="#">
-                                    <img class="media-object" src="assets/img/menu/<?php echo $produit["img"]; ?>" length="25" height="25" alt="img">
-                                  </a>
-                                </div>
-                                <div class="media-body">
-                                  <h4 class="media-heading"><a href="#"><?PHP echo $produit['libelle']; ?></a></h4>
-                                  <span class="mu-menu-price"><?PHP echo $produit['prix']; ?>  dt</span>
-                                  <p><?PHP echo $produit['description']; ?></p>
-                                </div>
-                              </div>
-                              </li>
-                              </ul>   
-                        </div>
-                      </div>
-                              <?PHP
-                              $i++; 
-              }
-              else{ ?>
-                <div class="col-md-6">
-                <div class="mu-tab-content-right">
-                   <ul class="mu-menu-item-nav">
-                     <li>
-                       <div class="media">
-                         <div class="media-left">
-                           <a href="#">
-                             <img class="media-object" src="assets/img/menu/<?php echo $produit["img"]; ?>"" alt="img">
-                           </a>
-                         </div>
-                         <div class="media-body">
-                           <h4 class="media-heading"><a href="#"><?PHP echo $produit['libelle']; ?></a></h4>
-                           <span class="mu-menu-price"><?PHP echo $produit['prix']; ?>  dt</span>
-                           <p><?PHP echo $produit['description']; ?></p>
-                         </div>
-                       </div>
-                     </li>
-                     </ul>   
-                        </div>
-                      </div>
-                      <?PHP
-              }
-            }}
-  ?>
-                           
-                   </div>
-                 </div>
-                </div>
-              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
   </section>
+  <!-- End Chef Section -->
   <!-- End Restaurant Menu -->
 
   <!-- Start Reservation section -->
@@ -740,41 +468,72 @@ foreach($listeProduit as $produit){
 
               <div class="col-md-6">
                 <div class="mu-reservation-left">
-                <form action="" method="POST">
+                <div  id="erreur"> </div>
+                                 
+                               
+                        
+                        <hr>
+                        <br>
+                       
+                       <div id="error">
+                           <?php echo $error; ?>
+                       </div>
+                                        
+                       <form action="" name="reserervation" id="reserervation" method="POST" onclick= " return verifReservation()" >
                   <table  align="center">
-                  <div class="mu-reservation-content">
+               
                
                 <tr>
                     <td><input type="date" name="date" id="date" maxlength="20" placeholder="Date"></td>
                 </tr>
                  <br>
                  
-                </div>
-                <div class="mu-reservation-left">
+                
+                
                
                 <tr>
                     <td><input type="text" name="nb_perso" id="nb_perso" maxlength="20" placeholder="Votre nombre"></td> 
                 </tr>
-                </div>
+                
                 
                 <tr>
                     <td> <textarea name="message" id="message" cols="30" rows="10" placeholder="message" ></textarea> </td> 
                 </tr>
               
+      
+              
+             
+                <tr>
+                    <td>
+                    <select name="local" id="local">
+                     <option value="select" selected>LOCAL</option>
+                        
+          <?php
+          foreach($listeLocalM as $localC){
+           ?>
+           <option value ='<?PHP echo $localC['id_local']; ?>'> <?PHP echo $localC['adresse']; ?></option>
+           <?php
+          }
+          ?>
+          </select>   
+                     
+                    </td> 
+                </tr>
                 
-                 
-               
                
                 <div class="row">
                             <div class="col-md-12">
-                                <div class="overview-wrap">
-                                <tr> <td>    
-                                <input type="submit" class="au-btn au-btn-icon au-btn--blue" value="server une table">
+                                <div class="form-group">
+                                <tr></tr>
+                                <tr> <td> 
+                                  <br>  
+                                <button type="submit" class="mu-readmore-btn" value="Envoyer">Faites une réservation</button>
                                 </tr></td>      
                                 </div>
-                            </div>
+                                </div>
+                                </div>
                
-                          </div>
+                          
                   </table>
         </form>                   
                             
@@ -812,6 +571,7 @@ foreach($listeProduit as $produit){
       </div>
     </div>
   </section>  
+  <!-- End Reservation section -->
   <!-- End Reservation section -->
 
   <!-- Start Gallery -->
@@ -1087,6 +847,7 @@ foreach($listeChef as $chef){
   <!-- End Chef Section -->
 
 <!-- Start EVENEMEY -->
+<!-- Start EVENEMEY -->
 <section id="mu-evenement">
   <div class="container">
     <div class="row">
@@ -1096,36 +857,50 @@ foreach($listeChef as $chef){
           <div class="mu-title">
             <span class="mu-subtitle">Découvrir</span>
             <br>
-            <h2>Nos Prochaines Evenements</h2>
+            <h2>Nos événements</h2>
             <br>
           </div>
+          <?PHP
 
+foreach($listeEvenement as $evenement){
+  ?>
           <div class="row">
-            
-                  
-            <table class="table table-borderless table-striped table-earning">
-                                        <thead>
-                                            <tr>
-                                                
-                                                <th class="text-center">libelle</th>
-                                                <th class="text-center">date</th>
-                                                <th class="text-center">durée d'evenement</th>
-                                                <th class="text-center">description</th>
-                                                <th class="text-center">local</th>
-                                                <th class="text-center"></th>
-                                                <th class="text-right"></th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
- 
-         </tbody>
-        </table>  
-        </div>
-        </div>
+            <div class="col-md-6">
+             <div class="mu-about-us-left">     
+              <img src="../front/assets/img/event/<?php echo $evenement['img']; ?>"  alt="image produit " width="600" height="443">           
+              </div>
+            </div>
+            <div class="col-md-6">
+              <h1 class="mu-slider-title text-center"><?PHP echo $evenement['libelle']; ?></h1>
+              
+               <div class="mu-about-us-right text-center">
+                 <br>
+                 <br>
+                 <?PHP  $elementC= $localC1->afficherElementlocal($evenement['local']); ?>
+   
+               <p> <?PHP echo $evenement['description']; ?>
+               <br> 
+               <?PHP  echo $elementC->adresse; ?>  
+               <br>
+               <?PHP  echo $evenement['date']; ?> 
+              
+
+               <br>
+               </p> <h2><span>-Mexicaine californienne.</span></h2>                               
+                
+              </div>
+            </div>
+            </div>
+      
+            <?PHP
+}
+?>
+           </div>
       </div>
     </div>
   </div>
 </section>
+<!-- End EVENEMENT -->
 <!-- End EVENEMENT -->
  
 
@@ -1135,34 +910,45 @@ foreach($listeChef as $chef){
       <div class="row">
         <div class="col-md-12">
           <div class="mu-contact-area">
-
             <div class="mu-title">
               <span class="mu-subtitle">
                 En cas de réclamation</span>
               <h2>Contacter nous</h2>
             </div>
-
             <div class="mu-contact-content">
               <div class="row">
-
                 <div class="col-md-6">
                   <div class="mu-contact-left">
                     <!-- Email message div -->
-                  
                     <!-- Start contact form -->
-                    <form id="ajax-contact" method="post" action="" class="mu-contact-form">
-                    
-                                         
-                      <div class="form-group">
-                        <label for="subject">Sujet</label>
-                        <input type="text" class="form-control" id="subject" name="subject" placeholder="Sujet" required>
-                      </div>
-                      <div class="form-group">
-                        <label for="msg">Message</label>                        
-                        <textarea class="form-control" id="msg" name="msg"  cols="30" rows="10" placeholder="Votre message" required></textarea>
-                      </div>                      
-                      <button type="submit" class="mu-send-btn">Envoyer le message</button>
-                    </form>
+                    <form action="" name="reclamation" id="reclamation" method="POST"  >
+                  <table  align="center">
+                  <tr>
+                    <td> <label for="sujet">Sujet:</label> </td> 
+                </tr>
+                <tr>
+                    <td><input type="text" name="sujet" id="sujet" maxlength="200" placeholder="Sujet"></td>
+                </tr>
+                 <br>                
+                 <tr>
+                    <td> <label for="msg">Message:</label> </td> 
+                </tr>
+                <tr>
+                    <td> <textarea name="msg" id="msg" cols="30" rows="10" placeholder="message" ></textarea> </td> 
+                </tr>
+                <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                <tr></tr>
+                                <tr> <td> 
+                                  <br>  
+                                <button type="submit" class="mu-readmore-btn" value="Envoyer">Envoyer</button>
+                                </tr></td>      
+                                </div>
+                                </div>
+                                </div>     
+                  </table>
+        </form>       
                   </div>
                 </div>
 

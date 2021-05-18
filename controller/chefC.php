@@ -64,12 +64,13 @@ class chefC{
 						adresse = :adresse,
 						dateNais = :dateNais,
                         categorie = :categorie,
-						local = :local
+						local = :local,
 						img = :img,
 						fb = :fb
 					WHERE id = :id'
 				);
 				$query->execute([
+					'id' => $id,
 					'nom' => $chef->getNom(),
 					'prenom' => $chef->getPrenom(),
 					'email' => $chef->getEmail(),
@@ -78,8 +79,8 @@ class chefC{
 						 'categorie' => $chef->getCategories(),
 						 'local' => $chef->getLocal(),
 						 'img' => $chef->getImg(),
-						 'fb' => $chef->getFb(),
-					     'id' => $id
+						 'fb' => $chef->getFb()
+					     
                   
 				]);
 				echo $query->rowCount() . " records UPDATED successfully <br>";

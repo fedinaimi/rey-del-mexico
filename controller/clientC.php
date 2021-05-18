@@ -15,7 +15,21 @@ class clientC{
           die('Erreur: ' .$e->getMessage());
       }
     }
-    
+    function afficherElementClient($id)
+    {
+		$sql="SELECT * from client where id_client=$id";
+		$db = config::getConnexion();
+		try{
+			$query=$db->prepare($sql);
+			$query->execute();
+
+			$client=$query->fetch(PDO::FETCH_OBJ);
+			return $client;
+		}
+		catch (Exception $e){
+			die('Erreur: '.$e->getMessage());
+		}
+    }
 	
     function ajoutClient($client)
     {

@@ -137,7 +137,7 @@
         <!-- MENU SIDEBAR-->
         <aside class="menu-sidebar d-none d-lg-block">
             <div class="logo">
-                <a href="#">
+                <a href="index.php">
                     <img src="images/icon/logo.png" alt="Cool Admin" />
                 </a>
             </div>

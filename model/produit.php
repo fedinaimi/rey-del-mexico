@@ -1,15 +1,15 @@
 <?PHP
 	class produit
     {
-		private ?int $id = null;
-		private ?string $libelle = null;
-		private ?float $nb_calories= null;
-		private ?string $description = null;
-		private ?float $prix = null;
-		private ?int   $categorie = null;	
-		private ?int $fournisseur = null;	
-		private ?string $img = null;	
-		function __construct( string $libelle, float $nb_calories, float $prix,string $description,int $categorie,int $fournisseur, string $img)
+		private  $id = null;
+		private  $libelle = null;
+		private  $nb_calories= null;
+		private  $description = null;
+		private  $prix = null;
+		private    $categorie = null;	
+		private  $fournisseur = null;	
+		private  $img = null;	
+		function __construct( string $libelle, float $nb_calories, int $prix,string $description,int $categorie,int $fournisseur, string $img)
         {
 			$this->libelle=$libelle;
 			$this->nb_calories=$nb_calories;
@@ -34,7 +34,7 @@
 		function getDescription(): string{
 			return $this->description;
 		}
-		function getPrix(): float{
+		function getprix(): int{
 			return $this->prix;
 		}
 		function getCategorie(): int{
@@ -59,7 +59,7 @@
         {
 			$this->description=$description;
 		}
-		function setPrix(float $prix): void
+		function setprix(int $prix): void
         {
 			$this->prix=$prix;
 		}

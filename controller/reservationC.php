@@ -1,6 +1,6 @@
 <?php
 require_once '../../config.php';
-require_once "../../model/reservation.php"; 
+include "../../model/reservation.php"; 
 
 class reservationC
 {
@@ -22,6 +22,7 @@ class reservationC
                   'statut' => $reservation->getstatut(),
                   'client' => $reservation->getclient(),
                   'local' => $reservation->getlocal()
+                  
                   ]);
          
        } catch(Exception $e) {
@@ -29,11 +30,12 @@ class reservationC
        }
      }
     
+    
      
      function afficherreservation()
     {
 
-        $sql="SELECT * FROM reservation ";
+        $sql="SELECT * FROM reservation ORDER BY date ";
 
         $db = config::getConnexion();
         try
@@ -81,12 +83,9 @@ function modifierreservation($uti,$id_reservation){
             'message' => $uti->getmessage(),
             'statut' =>$uti->getstatut(),
             'client' =>$uti->getclient(),
-           
-            'local' =>$uti->getlocal(),
+           'local' =>$uti->getlocal(),
             'id_reservation' => $id_reservation,
-            
-
-        ]);
+           ]);
         echo $query->rowCount() . " records UPDATED successfully <br>";
     } catch (PDOException $e) {
         $e->getMessage();
@@ -116,7 +115,7 @@ function listeLocal()
       }
         }
         function recupererreservation($id_reservation){
-			$sql="SELECT * from fournisseur where	id_reservation=$id_reservation";
+			$sql="SELECT * from reservation where	id_reservation=$id_reservation";
 			$db = config::getConnexion();
 			try{
 				$query=$db->prepare($sql);
@@ -145,6 +144,7 @@ function listeLocal()
 			}
 		}     
 
-
-}
+       
+        
+    }
 ?>

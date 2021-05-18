@@ -1,8 +1,8 @@
 <?PHP
 	class categorie
     {
-		private ?int $id_categorie= null;
-		private ?string $libelle = null;	
+		private $id_categorie= null;
+		private  $libelle = null;	
 		function __construct( string $libelle)
         {
 			$this->libelle=$libelle;

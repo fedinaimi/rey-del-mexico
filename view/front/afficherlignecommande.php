@@ -1,4 +1,15 @@
+<?php
+session_start();
+include "../../controller/commandeC.php";
 
+ $commandeC=new commandeC();
+ 
+    $listcommande=$commandeC->affichercommande();
+    $N=0;
+    
+    $N=$list['nb'];
+
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -61,125 +72,155 @@
           <!-- LOGO -->       
 
            <!--  Text based logo  -->
-          <a class="navbar-brand" href="1.html">Rey Del<br>Méx<span>I</span>co</a> 
+          <a class="navbar-brand" href="index.html">Rey Del<br>Méx<span>I</span>co</a> 
 
 		      <!--  Image based logo  -->
           <!-- <a class="navbar-brand" href="index.html"><img src="assets/img/logo.png" alt="Logo img"></a>  -->
          
 
+       
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul id="top-menu" class="nav navbar-nav navbar-right mu-main-nav">
-            <li><a href="1.html">ACCUEIL</a></li>
-            <li><a href="1.html#mu-about-us">A PROPOS DE NOUS</a></li>                       
-            <li><a href="1.html#mu-restaurant-menu">MENU</a></li>                       
-            <li><a href="1.html#mu-reservation">RESERVATION</a></li>           
-            <li><a href="1.html#mu-gallery">GALLERY</a></li>
-            <li><a href="1.html#mu-chef">NOS CHEFS</a></li> 
-            <li><a href="1.html#mu-evenement">EVENEMENT</a></li> 
+            <li><a href="index.html">ACCUEIL</a></li>
+            <li><a href="index.html#mu-about-us">A PROPOS DE NOUS</a></li>                       
+                               
+            <li><a href="index.html#mu-reservation">RESERVATION</a></li>           
+            <li><a href="index.html#mu-gallery">GALLERY</a></li>
+            <li><a href="index.html#mu-chef">NOS CHEFS</a></li> 
+            <li><a href="index.html#mu-evenement">EVENEMENT</a></li> 
             <li><a href="ethos.html">ETHOS</a></li>  
-            <li><a href="commander.html">COMMANDER</a></li>  
+            <li><a href="menu.php">MENU</a></li>  
           </ul>  
-          <a href="panier.html"> <img class="right" src="assets/img/panier.png" width="25" height="25" alt="tab img"></a> 
-          <a href="connexion.html"> <img class="rightT" src="assets/login.jpg" width="25" height="25" alt="tab img"></a>                
+        
+          <br>
+         <br>
+
+         <a href="panier.php"> <img style="position: absolute ;left: 1300px ;bottom: 5px"  src="assets/img/panier.png" width="25" height="25" alt="tab img"></a> 
+          <a href="connexion.php"> <img style="position: absolute ;left: 1250px ;bottom: 5px" src="assets/login.jpg" width="25" height="25" alt="tab img"></a> 
+          <a href="../back/logOut.php"> <img style="position: absolute ;left: 1300px ;bottom: 60px" src="assets/logout.jpg" width="20" height="20" alt="tab img"></a>                
+
                
+                      
         </div><!--/.nav-collapse -->       
       </div>          
     </nav> 
   </header>
-  <!-- End header section -->
+  
+ 
 
- <!-- khedma lkol lena-->
- <!-- Start Reservation section -->
- <section id="mu-connexion">
+
+  <!-- Start Restaurant Menu -->
+  <section id="mu-restaurant-menu">
     <div class="container">
       <div class="row">
-        <div class="col-md-1202">
-          <div class="mu-connexion-area">
+        <div class="col-md-12">
+          <div class="mu-restaurant-menu-area">
 
             <div class="mu-title">
-                <br><br><br>
-                <span class="mu-subtitle">Rey Del México  </span>
-                <br><br>
-                <h2>Vous souhaite le bienvenue et vous gâte avec la vraie nourriture méxicaine</h2>
-              </div>
-  
-
-            <div class="mu-connexion-content">
+              <br><br><br>
+              <span class="mu-subtitle">Découvrir</span>
+              <br><br>
+              <h2>votre commande</h2>
               
-              <div class="col-md-5 col-md-offset-4">
-                <div class="mu-connexion-left">
-                  <form class="mu-connexion-form">
-                    <div class="row">
-                      <div class="col-md-10">
-                        <div class="form-group">                       
-                          <input type="text" class="form-control" id="nom" placeholder="Votre Nom">
-                        </div>
-                    </div>
-                      <div class="col-md-10">
-                        <div class="form-group">
-                          <input type="text" class="form-control" id="prenom" placeholder="Votre prénom">              
-                        </div>
-                      </div>
-                      <div class="row">
-                        <div class="col-md-10">
-                          <div class="form-group">                       
-                            <input type="date" class="form-control" id="dateNais">
-                          </div>
-                      </div>
-                        <div class="col-md-10">
-                          <div class="form-group">
-                            <input type="email" class="form-control" id="email" placeholder="Votre adresse mail">              
-                          </div>
-                        </div>
-                        <div class="col-md-10">
-                            <div class="form-group">
-                              <input type="password" class="form-control" id="mdp" placeholder="Votre mot de passe">              
-                            </div>
-                        </div>
+               <table class="table">
+                <thead class="thead-dark">
+                    <tr>
+                       <th scope="col" style="font-weight: 1000;font-size: 15px"><center>id ligne</center></th>
+        
+         <th scope="col"style="font-weight: 1000;font-size: 15px"><center>nom de produit</center></th>
+       
+         <th scope="col"style="font-weight: 1000;font-size: 15px"><center>quantite</center></th>
+        
+       
+        
+            <th scope="col"style="font-weight: 1000;font-size: 15px"><center>total</center></th>
+            <th scope="col"style="font-weight: 1000;font-size: 15px"><center>etat</center></th>
+            <th scope="col"style="font-weight: 1000;font-size: 15px"><center>annuler la commande</center></th>
+        
+
+         
+
+
+
+                    </tr>
+
+
+                </thead>
+                <?php
+
+
+
+
+foreach ($listcommande as $row)
+{
+   $l=0;
+   
+
+
+ ?>    
+    
+        <tr valign="middle">
+            
+            <td align="center"><?php echo $row["id_commande"] ?></td>
+            
+           
+            
+            
+            
+            <td align="center"><?php echo $row["nomproduit"]?></td>
+            <td align="center"><?php echo $row["qte"]?></td>
+            <td align="center"><?php echo $row["prix_tot"].' '.'TND' ?></td>
+            <td align="center"><?php echo $row["etat"]?></td>
+            
+       
+           
+            
+                <td>
+                
+                    
+          <input type="hidden" id="id_commande" name="id_commande" value="<?php echo $row["id_commande"] ?>">
+          <input type="hidden" id="prix_tot" name="total" value="<?php echo $row["total"] ?>">
+         
+          <input type="hidden" id="client" name="client" value="<?php echo $row["client"] ?>">
+          <center> <form action="supprimerlignecommande.php" method="get">
+               
+                    
+               <input type="hidden" id="id_commande" name="id_commande" value="<?php echo $row["id_commande"] ?>">
                         
-                      <div class=" col-md-offset-2">
-                           <button type="submit" class="mu-readmore-btn">Se connecter</button>
-                        </div>
-                     
-                    </div>
-                  </form>    
-                </div>
-              </div>
+                       <button  class="btn btn-danger" type="submit" ><i class="fa fa-trash-o" aria-hidden="true"></i></button>   </form></center>
 
-              
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-6 col-md-offset-3 ">
-        <div class="mu-inscription-right">
-          <div class="mu-opening-hour">
-            <h2>Horaire de travail</h2>
-              <ul class="list-unstyled text-center">
-                <li>
-                    <p>Lundi &amp; Mardi</p>
-                    <p>9:00 AM - 4:00 PM</p>
-                </li>
-                <li>
-                    <p>Mercredi &amp; Jeudi</p>
-                    <p>9:00 AM - Mi-nuit</p>
-                </li>
-                <li>
-                    <p>Vendredi &amp; Samedi</p>
-                    <p>9:00 AM - Mi-nuit</p>
-                </li>
-                <li>
-                    <p>Dimanche</p>
-                    <p>9:00 AM - 11:00 PM</p>
-                </li>
-              </ul>
-          </div>
-        </div>
-      </div>
-  </section>  
-  <!-- End Reservation section -->
+          
+               
+                 
+
+            
+           
+ 
+         
+            
+       
+            
+        </tr>
+<?php
+} ?>
+
+
+
+
+               </table>
+               </br>
+               
+
+
+
+
+                <?php ?>
+        
+           
+
+ 
+ 
 
   <!-- Start Footer -->
   <footer id="mu-footer">

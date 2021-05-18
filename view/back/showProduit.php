@@ -49,7 +49,7 @@
             <div class="header-mobile__bar">
                 <div class="container-fluid">
                     <div class="header-mobile-inner">
-                        <a class="logo" href="index.php">
+                        <a class="logo" href="index.html">
                             <img src="images/icon/ahmed.png" alt="CoolAdmin" />
                         </a>
                         <button class="hamburger hamburger--slider" type="button">
@@ -64,7 +64,7 @@
                 <div class="container-fluid">
                     <ul class="navbar-mobile__list list-unstyled">
                         <li class="has-sub">
-                            <a class="js-arrow" href="index.php">
+                            <a class="js-arrow" href="index.html">
                                 <i class="fa fa-bar-chart"></i>Général</a>
                             
                         </li>
@@ -73,7 +73,7 @@
                                 <i class="fas fa-users"></i>Clients</a>
                         </li>
                         <li>
-                            <a href="showCommande.php">
+                            <a href="commande.php">
                                 <i class="fas fa-cart-arrow-down"></i>Commandes</a>
                         </li>
                         <li>
@@ -121,10 +121,7 @@
                                 <i class="fas fa-music"></i>Evénements</a>
                         </li>
                       
-                        <li>
-                            <a href="showCategorieChef.php">
-                                <i class="fa fa-lightbulb-o"></i>Catégories Chefs</a>
-                        </li>
+                       
                       
                         
                     </ul>
@@ -145,7 +142,7 @@
                     <ul class="list-unstyled navbar__list">
                         
                         <li class="has-sub">
-                            <a class="js-arrow" href="index.php">
+                            <a class="js-arrow" href="index.html">
                                 <i class="fa fa-bar-chart"></i>Général</a>
                             
                         </li>
@@ -154,7 +151,7 @@
                                 <i class="fas fa-users"></i>Clients</a>
                         </li>
                         <li>
-                            <a href="showCommande.php">
+                            <a href="commande.php">
                                 <i class="fas fa-cart-arrow-down"></i>Commandes</a>
                         </li>
                         <li>
@@ -202,10 +199,7 @@
                                 <i class="fas fa-music"></i>Evénements</a>
                         </li>
                       
-                        <li>
-                            <a href="showCategorieChef.php">
-                                <i class="fa fa-lightbulb-o"></i>Catégories Chefs</a>
-                        </li>
+                      
                             </ul>
                         </li>
                     </ul>
@@ -222,7 +216,8 @@
 					<div class="container-fluid">
 						<div class="header-wrap">
 							<form class="form-header" action="" method="POST">
-								<input class="au-input au-input--xl" type="text" name="search" placeholder="Recherche produit..." />
+                            <input class="au-input au-input--xl" type="text" id="myInput" onkeyup="myFunction()" placeholder="rechercher commande" title="type in a name" />
+                                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 								<button class="au-btn--submit" type="submit">
 									<i class="zmdi zmdi-search"></i>
 								</button>
@@ -396,15 +391,29 @@
                                     
                                     <button class="au-btn au-btn-icon au-btn--blue">
                                         <a href="addProduit.php">  <i class="zmdi zmdi-plus text-center"></i>Ajouter Produit </a></button>
+                                        
                                 </div>
+                                
                             </div>
+
                         </div>
+                        
 						<div class="row">
                             <div class="col-lg-9">
 								<br>
                                 <h2 class="title-1 m-b-25">Informations Produits</h2>
+                                <div id="google_translate_element"></div>
+         <script type="text/javascript">
+             function googleTranslateElementInit() {
+                 new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
+             }
+         </script>
+
+         <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
                                 <div class="table-responsive table--no-card m-b-40">
-                                    <table class="table table-borderless table-striped table-earning">
+                                    <table id="dataTable" class="table table-borderless table-striped table-earning" >
+                                   
+			<tr>
                                         <thead>
                                             <tr>
                                                 <th class="text-center">ID</th>
@@ -455,7 +464,11 @@ foreach($listepproduit as $produit){
                                        
                                         </tbody>
                                     </table>
+                                    <a href="imprimerProduit.php?id=<?PHP echo $produit['id']; ?>">
+ <i class="zmdi zmdi"></i>imprimer</button>
+  </a>
                                 </div>
+
                             </div>
 						
 						<div class="row">
@@ -493,6 +506,26 @@ foreach($listepproduit as $produit){
 	<script src="vendor/chartjs/Chart.bundle.min.js"></script>
 	<script src="vendor/select2/select2.min.js">
 	</script>
+    <script>
+    function myFunction() {
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("myInput");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("dataTable");
+        tr = table.getElementsByTagName("tr");
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[0];
+            if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+</script>
 
 	<!-- Main JS-->
 	<script src="js/main.js"></script>

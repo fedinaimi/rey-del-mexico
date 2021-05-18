@@ -2,14 +2,15 @@
 	class evenement
     {
 		private ?int $id= null;
+		private ?string $img = null;
 		private ?string $libelle = null;
 		private ?string $date= null;
 		private ?int $duree = null;	
 		private ?string $description = null;
 		private ?int $local = null;	
-		function __construct(  string $libelle, string $date,int $duree,string $description,int  $local)
+		function __construct(  string $img,string $libelle,string $date,int $duree,string $description,int  $local)
         {
-			
+			$this->img=$img;
 			$this->libelle=$libelle;
 			$this->date=$date;
 			$this->duree=$duree;
@@ -18,6 +19,9 @@
 		}
 		function getid(): int{
 			return $this->id;
+		}
+		function getimg(): string{
+			return $this->img;
 		}
 		function getlibelle(): string{
 			return $this->libelle;
@@ -38,6 +42,10 @@
 		function setid(int $id): void
         {
 			$this->id=$id;
+		}
+		function setimg(string $img): void
+        {
+			$this->img=$img;
 		}
 		function setlibelle(string $libelle): void
         {

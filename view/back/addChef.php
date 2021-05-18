@@ -1,5 +1,5 @@
 <?php
-   
+     include 'sendemailGad.php'; 
     include_once '../../controller/chefC.php';
     include "../../controller/localC.php";
     include "../../controller/categorieChefC.php";
@@ -547,7 +547,7 @@
                     <td></td><td> <div class="row">
                             <div class="col-md-12">
                                 <div class="overview-wrap">
-                                    <input type="submit" class="au-btn au-btn-icon au-btn--blue" value="Envoyer">
+                                    <input type="submit"  id="submit" name="submit" class="au-btn au-btn-icon au-btn--blue" value="Envoyer">
                                     <input type="reset" class="au-btn au-btn-icon au-btn--blue" value="Annuler">
                                 </div>
                             </div>
@@ -598,6 +598,11 @@
 
 	<!-- Main JS-->
 	<script src="js/main.js"></script>
+    <script type="text/javascript">
+    if(window.history.replaceState){
+      window.history.replaceState(null, null, window.location.href);
+    }
+    </script>
 
 </body>
 

@@ -1,26 +1,27 @@
 <?php
 require_once '../../config.php';
-require_once "../../model/evenement.php"; 
+include "../../model/evenement.php"; 
 
 class evenementC
 {
     function ajouterevenement($evenement)
     {
           
-        $sql = "INSERT INTO evenement (libelle,date,duree,description,local)
-        values(:libelle,:date,:duree,:description,:local)";
+        $sql = "INSERT INTO evenement (img,libelle,date,duree,description,local)
+        values(:img,:libelle,:date,:duree,:description,:local)";
         $db = config::getConnexion();
         try {
          $query = $db->prepare($sql);
          $query->execute([
              
-             'libelle' => $evenement->getlibelle(),
+            'img' => $evenement->getimg(), 
+            'libelle' => $evenement->getlibelle(),
              'date' => $evenement->getdate(),
              'duree' => $evenement->getduree(),     
              'description' => $evenement->getdescription(),
              
                   'local' => $evenement->getlocal(),
-             
+                  
          ]);
          
        } catch(Exception $e) {
@@ -32,7 +33,7 @@ class evenementC
      function afficherevenement()
     {
 
-        $sql="SELECT * FROM evenement ";
+        $sql="SELECT * FROM evenement ORDER BY date";
 
         $db = config::getConnexion();
         try
@@ -77,7 +78,7 @@ function modifierevenement($uti,$id){
         $db = config::getConnexion();
         $query = $db->prepare(
             'UPDATE evenement SET 
-              
+              img= :img,
                 libelle = :libelle,
                 date = :date,
                 duree = :duree,
@@ -88,6 +89,7 @@ function modifierevenement($uti,$id){
         );
         $query->execute([
             
+            'img' => $uti->getimg(),
             'libelle' => $uti->getlibelle(),
             'date' => $uti->getdate(),
             'duree' => $uti->getduree(),

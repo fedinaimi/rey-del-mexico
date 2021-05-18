@@ -16,7 +16,20 @@ class reclamationC{
       }
     }
     
-	
+	function modifierReclamation($id,$statut)
+    {
+        $sql="update reclamation set  statut='$statut' where id_reclamation='$id'";
+        $db = config::getConnexion();
+        try
+        {
+            $db->query($sql);
+        }
+        catch (Exception $e)
+        {
+            die('Erreur: '.$e->getMessage());
+        }
+    }
+
     function ajoutReclamation($reclamation)
     {
         

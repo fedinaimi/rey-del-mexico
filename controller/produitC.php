@@ -1,12 +1,12 @@
 <?php
-require_once"../../config.php";
+require_once "../../config.php";
 include "../../model/produit.php"; 
 
 class produitC{
 
     function afficherProduit()
     {
-      $sql = " SELECT * FROM produit";
+      $sql = " SELECT * FROM produit ORDER BY prix ASC";
       $db = config::getConnexion();
       try {
         $liste= $db->query($sql);
@@ -52,7 +52,7 @@ class produitC{
         $query->execute([
             'libelle' => $produit->getLibelle(),
             'nb_calories' => $produit->getNb_calories(),
-	         	'prix' => $produit->getPrix(),
+	         	'prix' => $produit->getprix(),
             'description' => $produit->getDescription(),
 	         	'categorie' => $produit->getCategorie(),
 		    'fournisseur' => $produit->getFournisseur(),
@@ -93,7 +93,7 @@ class produitC{
 				$query->execute([
 					'libelle' => $produit->getLibelle(),
 					'nb_calories' => $produit->getNb_calories(),
-					'prix' => $produit->getPrix(),
+					'prix' => $produit->getprix(),
 						 'description' => $produit->getDescription(),
 					'categorie' => $produit->getCategorie(),
 						 'fournisseur' => $produit->getFournisseur(),
@@ -135,7 +135,22 @@ class produitC{
 				die('Erreur: '.$e->getMessage());
 			}
 		}
-		
+		function recupererProduitParCategorie($categorie){
+			$sql="SELECT * from produit where  categorie= $categorie";
+			$db = config::getConnexion();
+			try{
+				$query=$db->prepare($sql);
+				$query->execute();
+				
+				$liste= $db->query($sql);
+				return $liste;
+			}
+			catch (Exception $e){
+				die('Erreur: '.$e->getMessage());
+			}
+		}
+
+	 
 	}
 
   
