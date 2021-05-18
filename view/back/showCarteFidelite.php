@@ -421,7 +421,9 @@ foreach($listeCarte as $carte){
 
 <td class="text-center"><?PHP echo $carte['points']; ?></td>
 
-<td class="text-center"><?PHP echo $carte['statut']; ?></td>
+<td class="text-center"><?PHP
+
+if ($carte['statut']==1) {echo "Libre";} else {echo "Utilisée";} ?></td>
 <td class="text-center"><?PHP echo $carte['dateCreation']; ?></td>
 
 <td class="text-center"> 

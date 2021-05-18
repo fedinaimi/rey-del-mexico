@@ -465,15 +465,11 @@
                 <tr>
                     <td>
                          <select name="statut" id="statut">
-                         <?php if($carte->statut == 0 ){  ?>
-                         <option value="1" selected>Libre</option>
-                         <option value="2">Utilisée</option>
+                        
+                         <option value="1" <?php if ($carte->statut==1) echo "selected" ; ?>>Libre</option>
+                         <option value="2" <?php if ($carte->statut==2) echo "selected" ; ?>>Utilisée</option>
 
-                         <?php }  
-                         else { ?>    <option value="1" >Libre</option>
-                            <option value="2" selected>Utilisée</option>
-                            <?php }  ?>
-
+        
                       
                          
                         </select>

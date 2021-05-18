@@ -9,7 +9,7 @@
          { 
              if(!empty($_POST['dateCreation']))
                 {
-                $carte= new carte(0,0,$_POST['dateCreation']);
+                $carte= new carte(0,1,$_POST['dateCreation']);
                 $carteC->ajoutCarte($carte);
                 echo '<script> alert(" ajout avec succès ");
                 </script>';
