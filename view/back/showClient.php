@@ -411,6 +411,7 @@
                                                 <th class="text-center">Carte</th>
                                                 <th class="text-center"></th>
                                                 <th class="text-right"></th>
+                                                <th class="text-right"></th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -435,7 +436,21 @@ foreach($listeclient as $client){
  <input type="hidden" value=<?PHP echo $client['id_client']; ?> name="id_client">
  </form>  
  </td>
-
+ <td class="text-center"> 
+<form action="imprimerClient.php" method="get">
+<button type="submit" name="imprime" id="imprime" class="au-btn au-btn-icon au-btn--blue">
+ <i class="zmdi zmdi"></i>Imprimer</button>
+ <input type="hidden" value=<?PHP echo $client['id_client']; ?> id="id_client" name="id_client">
+ <input type="hidden" value=<?PHP echo $client['nom']; ?> id="nom" name="nom">
+ <input type="hidden" value=<?PHP echo $client['prenom']; ?> id="prenom" name="prenom">
+ <input type="hidden" value=<?PHP echo $client['dateNais']; ?> id="dateNais" name="dateNais">
+ <input type="hidden" value=<?PHP echo $client['cin']; ?> id="cin" name="cin">
+ <input type="hidden" value=<?PHP echo $client['email']; ?> id="email" name="email">
+ <input type="hidden" value=<?PHP echo $client['mdp']; ?> id="mdp" name="mdp">
+ <input type="hidden" value=<?PHP echo $client['reduction']; ?> id="reduction" name="reduction">
+ <input type="hidden" value=<?PHP echo $client['carte']; ?> id="carte" name="carte">
+ </form>  
+ </td>
  <td class="text-center"> 
  <button class="au-btn au-btn-icon au-btn--blue">
  <a href="updateClient.php?id=<?PHP echo $client['id_client']; ?>">
