@@ -1,61 +1,46 @@
-<?php
-	    include_once '../../controller/materielC.php';
-
-        include_once '../../controller/localC.php';
-      $error1 = "";
-      $error = "";
-      $materiel = null;
-      $materielC = new materielC(); 
-      $localC = new localC();
-      $listeLocal= $localC->afficherLocal();
+<?php 
+   include "../../controller/fournisseurC.php";
+   include "../../controller/produitC.php";
+   include "../../controller/categorieC.php";
+   $fournisseurC = new fournisseurC();
+  
+   $elementC= null;
+   $elementL= null;
+   $produitC = new produitC();
+   $listepproduit= $produitC->afficherProduit();
+   $categorieC = new categorieC();
+   $db= config::getConnexion();
+?>
    
     
-  
-      if( isset($_POST['libelle']) 
-          && isset($_POST['date_achat'])  
-           && isset($_POST["local"])
-           && isset($_POST["nbPieces"])
-           ) 
-           { 
-              
-               if( !empty($_POST['libelle']) &&
-               !empty($_POST['date_achat']) &&
-               !empty($_POST["local"]) &&
-               !empty($_POST["nbPieces"])
-                ) 
-               {
-            $materiel = new materiel(
-                $_POST['libelle'],
-                $_POST['date_achat'], 
-                $_POST['local'],
-                $_POST['nbPieces']
-               
-			);
-			
-            $materielC->modifierMateriel($materiel, $_GET['id']);
-            header('Location:showService.php');
-        }
-        else
-            $error = "Missing information";
-	}
 
-?>
-<!DOCTYPE html>
-<html lang="en">
+
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="">
+<!--<![endif]-->
 
 <head>
-	<!-- Required meta tags-->
-	<meta charset="UTF-8">
+<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<meta name="description" content="au theme template">
 	<meta name="author" content="Hau Nguyen">
 	<meta name="keywords" content="au theme template">
 
-	<!-- Title Page-->
-	<title>Modifier Materiel</title>
 
-	<!-- Fontfaces CSS-->
-	<link href="css/font-face.css" rel="stylesheet" media="all">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.0/normalize.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lykmapipo/themify-icons@0.1.2/css/themify-icons.css">
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/pixeden-stroke-7-icon@1.2.3/pe-icon-7-stroke/dist/pe-icon-7-stroke.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.0/css/flag-icon.min.css">
+    <link rel="stylesheet" href="assets/css/cs-skin-elastic.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link href="css/font-face.css" rel="stylesheet" media="all">
 	<link href="vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
 	<link href="vendor/font-awesome-5/css/fontawesome-all.min.css" rel="stylesheet" media="all">
 	<link href="vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
@@ -74,20 +59,25 @@
 
 	<!-- Main CSS-->
 	<link href="css/theme.css" rel="stylesheet" media="all">
+     <!-- Tweaks for older IEs--><!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
+
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
+
+    <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
 
 </head>
 
-<body class="animsition">
-
-
-    <div class="page-wrapper">
+<body>
+<div class="page-wrapper">
         <!-- HEADER MOBILE-->
         <header class="header-mobile d-block d-lg-none">
             <div class="header-mobile__bar">
                 <div class="container-fluid">
                     <div class="header-mobile-inner">
                         <a class="logo" href="index.php">
-                            <img src="images/icon/ahmed.png" alt="reydelmexico" />
+                            <img src="images/icon/ahmed.png" alt="CoolAdmin" />
                         </a>
                         <button class="hamburger hamburger--slider" type="button">
                             <span class="hamburger-box">
@@ -133,10 +123,7 @@
                             <a href="showReservation.php">
                                 <i class="far fa-calendar-plus"></i>Réservations</a>
                         </li>
-                        <li>
-                            <a href="showLivraison.php">
-                                <i class="fa fa-automobile" ></i>Livraisons</a>
-                        </li>
+                       
                         <li>
                             <a href="showCarteFidelite.php">
                                 <i class="fa fa-address-card"></i>Cartes Fidélité</a>
@@ -146,7 +133,7 @@
                                 <i class="fas fa-users"></i>Chefs</a>
                         </li>
                         <li>
-                            <a href="showMateriel.php">
+                            <a href="showService.php">
                                 <i class="	fas fa-utensils"></i>Services de table</a>
                         </li>
                         <li>
@@ -161,7 +148,6 @@
                             <a href="showCategorieChef.php">
                                 <i class="fa fa-lightbulb-o"></i>Catégories Chefs</a>
                         </li>
-                      
                        
                       
                         
@@ -175,7 +161,7 @@
         <aside class="menu-sidebar d-none d-lg-block">
             <div class="logo">
                 <a href="#">
-                    <img src="images/icon/logo.png" alt="reydelmexico" />
+                    <img src="images/icon/logo.png" alt="Cool Admin" />
                 </a>
             </div>
             <div class="menu-sidebar__content js-scrollbar1">
@@ -187,7 +173,6 @@
                                 <i class="fa fa-bar-chart"></i>Général</a>
                             
                         </li>
-                       
                         <li>
                             <a href="showClient.php">
                                 <i class="fas fa-users"></i>Clients</a>
@@ -216,10 +201,7 @@
                             <a href="showReservation.php">
                                 <i class="far fa-calendar-plus"></i>Réservations</a>
                         </li>
-                        <li>
-                            <a href="showLivraison.php">
-                                <i class="fa fa-automobile" ></i>Livraisons</a>
-                        </li>
+                      
                         <li>
                             <a href="showCarteFidelite.php">
                                 <i class="fa fa-address-card"></i>Cartes Fidélité</a>
@@ -229,7 +211,7 @@
                                 <i class="fas fa-users"></i>Chefs</a>
                         </li>
                         <li>
-                            <a href="showMateriel.php">
+                            <a href="showService.php">
                                 <i class="	fas fa-utensils"></i>Services de table</a>
                         </li>
                         <li>
@@ -240,13 +222,11 @@
                             <a href="showEvenement.php">
                                 <i class="fas fa-music"></i>Evénements</a>
                         </li>
+                      
                         <li>
                             <a href="showCategorieChef.php">
                                 <i class="fa fa-lightbulb-o"></i>Catégories Chefs</a>
                         </li>
-                      
-                      
-                      
                             </ul>
                         </li>
                     </ul>
@@ -262,7 +242,8 @@
 				<div class="section__content section__content--p30">
 					<div class="container-fluid">
 						<div class="header-wrap">
-							
+                        <button class="au-btn au-btn-icon au-btn--blue">
+                                    <a href="findFourni.php">   <i class="zmdi zmdi">recherche Fournisseur</i></a></button>
 							<div class="header-button">
                                 <div class="noti-wrap">
                                     <div class="noti__item js-item-menu">
@@ -284,7 +265,7 @@
                                             </div>
                                             <div class="mess__item">
                                                 <div class="image img-cir img-40">
-                                                    <img src="back/images/icon/avatar-04.jpg" alt="Diane Myers" />
+                                                    <img src="images/icon/avatar-04.jpg" alt="Diane Myers" />
                                                 </div>
                                                 <div class="content">
                                                     <h6>Diane Myers</h6>
@@ -410,7 +391,7 @@
                                                 
                                             </div>
                                             <div class="account-dropdown__footer">
-                                            <a href="logOut.php"><!--page officielle0-->
+                                            <a href="logOut.php"> <!--page officielle0-->
                                                     <i class="zmdi zmdi-power"></i>Se déconnecter</a>
                                             </div>
                                         </div>
@@ -421,99 +402,127 @@
                     </div>
                 </div>
             </header>
-            <!-- HEADER DESKTOP-->
-			<!-- MAIN CONTENT-->
-			<div class="main-content">
-				<div class="section__content section__content--p30">
-					<div class="container-fluid">
-						
-						<div class="row">
-                            <div class="col-lg-9">
-								<br>
-                              
-                            <div class="col-md-12">
-                                <div class="overview-wrap">
+
+   
+        
+
+                <div class="col-lg-1000">
+            <div class="card">
+                        <div class="card-header">
+                        <br>
+                        <br><br>
+                            <strong class="card-title">  <h2 class="title-1 m-b-25">Informations Produits</h2></strong>
+                        </div>
+                        <table> 
+                        <tr>
+                        <td></td>
+                        
+                        <div class="overview-wrap">
                                     
                                     <button class="au-btn au-btn-icon au-btn--blue">
-                                    <a href="showMateriel.php">  <i class="zmdi zmdi text-center"></i>Retour à la liste</button></a>
+                                    <a href="showProduit.php">  <i class="zmdi zmdi text-center"></i>Retour à la liste</button></a>
                                 </div>
                             </div>
+        
+                        <form method="get" action="triProduit.php">
+                            <p>
+                            <td>
+                                <br>
+                                <label for="tri"><h1> Trier  :</h4> </label><br>
+    
+                                    <select name="tri" id="tri" >
+                                    <option value="id" selected>ID</option>
+                                       <option value="libelle" >Libelle</option>
+                                       <option value="nb_calories">NB calories</option>
+                                      
+                                      
+                                    </select>
+                                    <input type="submit" value="Trier" class="au-btn au-btn-icon au-btn--blue" /> 
+                              </p>
+                              <br>
+                              
+                               
+                                 </td>
+                             </form>
+                            
+                             </tr>
+                        </table>
+                       
+        
+        <hr>
+         <div class="col-md-12">
+                              
                         
-                                 <hr>
-                                 <br>
-                                <h2 class="title-1 m-b-25 text-center">Modifier Materiel</h2>
-                                <div id="error">
-                                    <?php echo $error; ?>
-                                </div>
-			<?php
-			if (isset($_GET['id']))
-			{
-				$materiel = $materielC->recupererMateriel1($_GET['id']);	
-		     ?>
-
-                <form action="" method="POST" >
-                  <table  align="center">
-                
-                  <tr> 
-                    <td> <label for="libelle">Libelle: </label>
-                    </td> 
-                </tr>
-                 <tr>
-                    <td><input type="text" name="libelle" id="libelle" value = "<?php echo $materiel->libelle; ?>" required maxlength="20"></td>
-                </tr>
-                <tr>
-                    <td><label for="date_achat">date_achat: </label>  </td> 
-                </tr> 
-                <tr>
-                    <td><input type="date" name="date_achat" id="date_achat" value = "<?php echo $materiel->date_achat; ?>" required maxlength="20"></td>
-                </tr>
-                <tr>
-                    <td><label for="nbPieces">Nombre des pieces: </label>  </td> 
-                </tr> 
-                <tr>
-                    <td><input type="number" min="0" name="nbPieces" id="nbPieces" value = "<?php echo $materiel->nbPieces; ?>" required maxlength="20"></td>
-                </tr>
-               
-                <tr>
-                    <td><label for="local">Local:</label></td> 
-                </tr> 
-                <tr>
-                    <td>
-                    <select name="local" id="local" required >
-                     <option value="0" selected>Select</option>
-                        
-          <?php
-          foreach($listeLocal as $localC){
-           ?>
-           <option value ='<?PHP echo $localC['id_local']; ?>'> <?PHP echo $localC['adresse']; ?></option>
-           <?php
-          }
-          ?>
-          </select>   
+                      <div class="card-body">
+                      <div class="col-lg-1000">
+            <div class="table-responsive">
+           
+            <div class="col-lg-100">
+                <table class="table   table-bordered" width:"100%" height:"100%">
+                <div class="col-lg-1000">
+                    <thead>
+                        <tr>
+                        <th class="text-center">ID</th>
+                                                <th class="text-center">Image</th>
+                                                <th class="text-center">Libelle</th>
+                                                <th class="text-center">Nb Calories</th>
+                                                <th class="text-center">Prix</th>
+                                                <th class="text-center">Description</th>
+                                                <th class="text-center">Catégorie</th>
+                                                <th class="text-center">Fournisseur</th>
+                                                
+                                               
+                                               
+                        </tr>
+    </thead>
+    <tbody>
+    <?php
+         $tri = isset($_GET['tri']) ? $_GET['tri'] : 'id';
+         try
+ {
+    $sql = $db->query('SELECT * FROM produit ORDER BY '.$tri.'') or die(print_r($bdd->errorInfo()));  
+          
+                while($produit = $sql->fetch())
+                {
+   
+                    ?>
+<tr>
+<td class="text-center"><?PHP echo $produit['id']; ?></td>
+<td><img src="../front/assets/img/menu/<?php echo $produit["img"]; ?>" length="25" height="25" alt="image fourni "/></td>
+<td class="text-center"><?PHP echo $produit['libelle']; ?></td>
+<td class="text-center"><?PHP echo $produit['nb_calories']; ?></td>
+<td class="text-center"><?PHP echo $produit['prix']; ?></td>
+<td class="text-center"><?PHP echo $produit['description']; ?></td>
+<td class="text-center">
+    <?PHP 
+   $elementC= $categorieC->afficherElementCategorie($produit['categorie']);
+   echo $elementC->libelle;
+     ?>
+</td>
+<td class="text-center"> 
+<?PHP
+$elementL= $fournisseurC->afficherElementFournisseur($produit['fournisseur']);
+ echo $elementL->nom; echo " "; echo $elementL->prenom;
+?>
+</td> </tr>
+        
+        
+  <?php
+                  }
+             
+$sql->closeCursor();
+}
+catch(Exception $e)
+{
+die('Erreur : '.$e->getMessage());
+}
+?>
+</table>
+</div>                 
                      
-                    </td> 
-                </tr>
-                <tr></tr>
-                <tr></tr>
-                <tr>
-                    <td></td><td> <div class="row">
-                            <div class="col-md-12">
-                                <div class="overview-wrap">
-                                    <input type="submit" class="au-btn au-btn-icon au-btn--blue" value="Envoyer">
-                                    <input type="reset" class="au-btn au-btn-icon au-btn--blue" value="Annuler">
-                                </div>
-                            </div>
-                </div></td></tr>
-                
-                  </table>
-        </form>                   
-        <?php
-		}
-		?>                      
-   </div>
-</div>
-						
-                 	<div class="row">
+                      </div>
+                      </div>
+                      <div class="row">
 								<div class="col-md-12">
 										<div class="copyright">
 												<p>&copy; Copyright.Tous droits réservés. <a href="../front/index.php">Rey Del México</a>.</p>
@@ -521,15 +530,22 @@
 								</div>
 						</div>
 
-					</div>
+
+
+                        </div>
 				</div>
 			</div>
-		
+		</div>
 		<!-- END PAGE CONTAINER-->
 
-	
+	</div>
 
-	<!-- Jquery JS-->
+    <!-- Right Panel -->
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
 	<script src="vendor/jquery-3.2.1.min.js"></script>
 	<!-- Bootstrap JS-->
 	<script src="vendor/bootstrap-4.1/popper.min.js"></script>
@@ -553,14 +569,8 @@
 	<!-- Main JS-->
 	<script src="js/main.js"></script>
 
+
+
 </body>
 
 </html>
-<!-- end document-->
-
-
-
-
-
-
-

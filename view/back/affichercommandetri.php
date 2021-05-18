@@ -51,7 +51,7 @@ include "../../controller/commandeC.php";
             <div class="header-mobile__bar">
                 <div class="container-fluid">
                     <div class="header-mobile-inner">
-                        <a class="logo" href="index.html">
+                        <a class="logo" href="index.php">
                             <img src="images/icon/ahmed.png" alt="CoolAdmin" />
                         </a>
                         <button class="hamburger hamburger--slider" type="button">
@@ -65,64 +65,63 @@ include "../../controller/commandeC.php";
             <nav class="navbar-mobile">
                 <div class="container-fluid">
                     <ul class="navbar-mobile__list list-unstyled">
-                        <li class="has-sub">
-                            <a class="js-arrow" href="index.html">
+                    <li class="has-sub">
+                            <a class="js-arrow" href="index.php">
                                 <i class="fa fa-bar-chart"></i>Général</a>
                             
                         </li>
                         <li>
-                            <a href="client.html">
+                            <a href="showClient.php">
                                 <i class="fas fa-users"></i>Clients</a>
                         </li>
                         <li>
-                            <a href="commande.html">
+                            <a href="commande.php">
                                 <i class="fas fa-cart-arrow-down"></i>Commandes</a>
                         </li>
                         <li>
-                            <a href="produit.html">
+                            <a href="showProduit.php">
                                 <i class="fa fa-pie-chart"></i>Produits</a>
                         </li>
                         <li>
-                            <a href="catégorie.html">
+                            <a href="showCategorie.php">
                                 <i class="fa fa-lightbulb-o"></i>Catégories</a>
                         </li>
                         <li>
-                            <a href="fournisseur.html">
+                            <a href="showFournisseur.php">
                                 <i class="fas fa-users"></i>Fournisseurs</a>
                         </li>
                         <li>
-                            <a href="réclamation.html">
+                            <a href="showReclamation.php">
                                 <i class="fas fa-comment-alt"></i>Réclamations</a>
                         </li>
                         <li>
-                            <a href="réservation.html">
+                            <a href="showReservation.php">
                                 <i class="far fa-calendar-plus"></i>Réservations</a>
                         </li>
                         <li>
-                            <a href="livraison.html">
+                            <a href="showLivraison.php">
                                 <i class="fa fa-automobile" ></i>Livraisons</a>
                         </li>
                         <li>
-                            <a href="carte_fidélité.html">
+                            <a href="showCarteFidelite.php">
                                 <i class="fa fa-address-card"></i>Cartes Fidélité</a>
                         </li>
                         <li>
-                            <a href="chef.html">
+                            <a href="showChef.php">
                                 <i class="fas fa-users"></i>Chefs</a>
                         </li>
                         <li>
-                            <a href="service.html">
+                            <a href="showService.php">
                                 <i class="	fas fa-utensils"></i>Services de table</a>
                         </li>
                         <li>
-                            <a href="local.html">
+                            <a href="showLocal.php">
                                 <i class="fas fa-map-marker-alt"></i>Locaux</a>
                         </li>
                         <li>
-                            <a href="evenement.html">
+                            <a href="showEvenement.php">
                                 <i class="fas fa-music"></i>Evénements</a>
                         </li>
-                      
                       
                       
                         
@@ -143,61 +142,61 @@ include "../../controller/commandeC.php";
                 <nav class="navbar-sidebar">
                     <ul class="list-unstyled navbar__list">
                         
-                        <li class="has-sub">
-                            <a class="js-arrow" href="index.html">
+                    <li class="has-sub">
+                            <a class="js-arrow" href="index.php">
                                 <i class="fa fa-bar-chart"></i>Général</a>
                             
                         </li>
                         <li>
-                            <a href="client.html">
+                            <a href="showClient.php">
                                 <i class="fas fa-users"></i>Clients</a>
                         </li>
                         <li>
-                            <a href="commande.html">
+                            <a href="commande.php">
                                 <i class="fas fa-cart-arrow-down"></i>Commandes</a>
                         </li>
                         <li>
-                            <a href="produit.html">
+                            <a href="showProduit.php">
                                 <i class="fa fa-pie-chart"></i>Produits</a>
                         </li>
                         <li>
-                            <a href="catégorie.html">
+                            <a href="showCategorie.php">
                                 <i class="fa fa-lightbulb-o"></i>Catégories</a>
                         </li>
                         <li>
-                            <a href="fournisseur.html">
+                            <a href="showFournisseur.php">
                                 <i class="fas fa-users"></i>Fournisseurs</a>
                         </li>
                         <li>
-                            <a href="réclamation.html">
+                            <a href="showReclamation.php">
                                 <i class="fas fa-comment-alt"></i>Réclamations</a>
                         </li>
                         <li>
-                            <a href="réservation.html">
+                            <a href="showReservation.php">
                                 <i class="far fa-calendar-plus"></i>Réservations</a>
                         </li>
                         <li>
-                            <a href="livraison.html">
+                            <a href="showLivraison.php">
                                 <i class="fa fa-automobile" ></i>Livraisons</a>
                         </li>
                         <li>
-                            <a href="carte_fidélité.html">
+                            <a href="showCarteFidelite.php">
                                 <i class="fa fa-address-card"></i>Cartes Fidélité</a>
                         </li>
                         <li>
-                            <a href="chef.html">
+                            <a href="showChef.php">
                                 <i class="fas fa-users"></i>Chefs</a>
                         </li>
                         <li>
-                            <a href="service.html">
+                            <a href="showService.php">
                                 <i class="	fas fa-utensils"></i>Services de table</a>
                         </li>
                         <li>
-                            <a href="local.html">
+                            <a href="showLocal.php">
                                 <i class="fas fa-map-marker-alt"></i>Locaux</a>
                         </li>
                         <li>
-                            <a href="evenement.html">
+                            <a href="showEvenement.php">
                                 <i class="fas fa-music"></i>Evénements</a>
                         </li>
                       
@@ -368,7 +367,7 @@ include "../../controller/commandeC.php";
                                                 
                                             </div>
                                             <div class="account-dropdown__footer">
-                                                <a href="1.html"> <!--page officielle0-->
+                                            <a href="logOut.php"><!--page officielle0-->
                                                     <i class="zmdi zmdi-power"></i>Se déconnecter</a>
                                             </div>
                                         </div>
@@ -519,7 +518,7 @@ foreach ($listcommande as $row)
 						<div class="row">
 								<div class="col-md-12">
 										<div class="copyright">
-												<p>&copy; Copyright.Tous droits réservés. <a href="1.html">Rey Del México</a>.</p>
+												<p>&copy; Copyright.Tous droits réservés. <a href="../front/index.php">Rey Del México</a>.</p>
 										</div>
 								</div>
 						</div>

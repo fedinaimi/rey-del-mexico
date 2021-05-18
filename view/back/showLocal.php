@@ -75,7 +75,7 @@ session_start();
                             
                         </li>
                         <li>
-                            <a href="showClientlient.php">
+                            <a href="showClient.php">
                                 <i class="fas fa-users"></i>Clients</a>
                         </li>
                         <li>
@@ -152,7 +152,7 @@ session_start();
                             
                         </li>
                         <li>
-                            <a href="showClientlient.php">
+                            <a href="showClient.php">
                                 <i class="fas fa-users"></i>Clients</a>
                         </li>
                         <li>

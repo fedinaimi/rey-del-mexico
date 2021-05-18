@@ -27,7 +27,7 @@ if( !empty($_POST['nom']) &&
              )
                 {
                 $client= new client($_POST['nom'],$_POST['prenom'],$_POST['dateNais'],$_POST['cin'],$_POST['email'] ,
-                $_POST['mdp'],0 ,7);
+                $_POST['mdp'],0 ,21);
                 $clientC->ajoutClient($client);
                 header('Location:index.php');
                 }

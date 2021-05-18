@@ -15,7 +15,21 @@ class fournisseurC{
           die('Erreur: ' .$e->getMessage());
       }
     }
-	
+	function afficherElementFournisseur($id)
+    {
+		$sql="SELECT * from fournisseur where	id_fournisseur=$id";
+		$db = config::getConnexion();
+		try{
+			$query=$db->prepare($sql);
+			$query->execute();
+
+			$fourni=$query->fetch(PDO::FETCH_OBJ);
+			return $fourni;
+		}
+		catch (Exception $e){
+			die('Erreur: '.$e->getMessage());
+		}
+    }
 	
     function ajoutFournisseur($fourni)
     {

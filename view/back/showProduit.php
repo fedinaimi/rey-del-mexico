@@ -49,7 +49,7 @@
             <div class="header-mobile__bar">
                 <div class="container-fluid">
                     <div class="header-mobile-inner">
-                        <a class="logo" href="index.html">
+                        <a class="logo" href="index.php">
                             <img src="images/icon/ahmed.png" alt="CoolAdmin" />
                         </a>
                         <button class="hamburger hamburger--slider" type="button">
@@ -64,12 +64,12 @@
                 <div class="container-fluid">
                     <ul class="navbar-mobile__list list-unstyled">
                         <li class="has-sub">
-                            <a class="js-arrow" href="index.html">
+                            <a class="js-arrow" href="index.php">
                                 <i class="fa fa-bar-chart"></i>Général</a>
                             
                         </li>
                         <li>
-                            <a href="showClientlient.php">
+                            <a href="showClient.php">
                                 <i class="fas fa-users"></i>Clients</a>
                         </li>
                         <li>
@@ -142,12 +142,12 @@
                     <ul class="list-unstyled navbar__list">
                         
                         <li class="has-sub">
-                            <a class="js-arrow" href="index.html">
+                            <a class="js-arrow" href="index.php">
                                 <i class="fa fa-bar-chart"></i>Général</a>
                             
                         </li>
                         <li>
-                            <a href="showClientlient.php">
+                            <a href="showClient.php">
                                 <i class="fas fa-users"></i>Clients</a>
                         </li>
                         <li>
@@ -369,7 +369,7 @@
                                                 
                                             </div>
                                             <div class="account-dropdown__footer">
-                                                <a href="1.html"> <!--page officielle0-->
+                                            <a href="logOut.php"> <!--page officielle0-->
                                                     <i class="zmdi zmdi-power"></i>Se déconnecter</a>
                                             </div>
                                         </div>
@@ -393,7 +393,13 @@
                                         <a href="addProduit.php">  <i class="zmdi zmdi-plus text-center"></i>Ajouter Produit </a></button>
                                         
                                 </div>
-                                
+                                <div class="overview-wrap">
+                                <br>
+                                  
+                                        <button class="au-btn au-btn-icon au-btn--blue">
+                                    
+                                    <a href="triProduit.php">  <i class="zmdi zmdi-plus text-center"></i>Trier Produits </a></button>
+                                </div>
                             </div>
 
                         </div>
@@ -474,7 +480,7 @@ foreach($listepproduit as $produit){
 						<div class="row">
 								<div class="col-md-12">
 										<div class="copyright">
-												<p>&copy; Copyright.Tous droits réservés. <a href="1.html">Rey Del México</a>.</p>
+												<p>&copy; Copyright.Tous droits réservés. <a href="../front/index.php">Rey Del México</a>.</p>
 										</div>
 								</div>
 						</div>

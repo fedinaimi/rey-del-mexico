@@ -95,7 +95,7 @@
                             
                         </li>
                         <li>
-                            <a href="showClientlient.php">
+                            <a href="showClient.php">
                                 <i class="fas fa-users"></i>Clients</a>
                         </li>
                         <li>
@@ -173,7 +173,7 @@
                             
                         </li>
                         <li>
-                            <a href="showClientlient.php">
+                            <a href="showClient.php">
                                 <i class="fas fa-users"></i>Clients</a>
                         </li>
                         <li>
@@ -390,7 +390,7 @@
                                                 
                                             </div>
                                             <div class="account-dropdown__footer">
-                                                <a href="1.html"> <!--page officielle0-->
+                                            <a href="logOut.php"> <!--page officielle0-->
                                                     <i class="zmdi zmdi-power"></i>Se déconnecter</a>
                                             </div>
                                         </div>
@@ -416,11 +416,17 @@
                         <tr>
                         <td></td>
                         
-                       
+                        <div class="overview-wrap">
+                                    
+                                    <button class="au-btn au-btn-icon au-btn--blue">
+                                    <a href="showFournisseur.php">  <i class="zmdi zmdi text-center"></i>Retour à la liste</button></a>
+                                </div>
+                            </div>
         
                         <form method="get" action="triFournisseur.php">
                             <p>
                             <td>
+                                <br>
                                 <label for="tri"><h1> Trier  :</h4> </label><br>
     
                                     <select name="tri" id="tri" >
@@ -443,6 +449,9 @@
                        
         
         <hr>
+         <div class="col-md-12">
+                              
+                        
                       <div class="card-body">
                       <div class="col-lg-1000">
             <div class="table-responsive">

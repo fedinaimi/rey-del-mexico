@@ -69,7 +69,7 @@
                             
                         </li>
                         <li>
-                            <a href="showClientlient.php">
+                            <a href="showClient.php">
                                 <i class="fas fa-users"></i>Clients</a>
                         </li>
                         <li>
@@ -150,7 +150,7 @@
                             
                         </li>
                         <li>
-                            <a href="showClientlient.php">
+                            <a href="showClient.php">
                                 <i class="fas fa-users"></i>Clients</a>
                         </li>
                         <li>
@@ -447,7 +447,7 @@ foreach($listeCategorie as $categorie){
 						<div class="row">
 								<div class="col-md-12">
 										<div class="copyright">
-												<p>&copy; Copyright.Tous droits réservés. <a href="1.html">Rey Del México</a>.</p>
+												<p>&copy; Copyright.Tous droits réservés. <a href="../front/index.php">Rey Del México</a>.</p>
 										</div>
 								</div>
 						</div>

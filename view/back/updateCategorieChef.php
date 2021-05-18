@@ -1,10 +1,10 @@
 <?php
 	  
-      require_once '../../controller/categorieC.php';
+      require_once '../../controller/categorieChefC.php';
     
 	$error = "";
     $error1 = "";
-    $categorieC = new categorieC(); 
+    $categorieC = new categorieChefC(); 
 	if (
         isset($_POST['libelle']) 
         
@@ -12,13 +12,13 @@
 		if (!empty($_POST['libelle']) 
            
         ) {
-            $categorie= new categorie(
+            $categorie= new categorieChef(
                 $_POST['libelle']
                
 			);
 			
-            $categorieC->modifierCategorie($categorie, $_GET['id']);
-            header('Location:showCategorie.php');
+            $categorieC->modifierCategorieChef($categorie, $_GET['id']);
+            header('Location:showCategorieChef.php');
         }
         else
             $error = "Missing information";
@@ -90,7 +90,7 @@
                             
                         </li>
                         <li>
-                            <a href="showClientlient.php">
+                            <a href="showClient.php">
                                 <i class="fas fa-users"></i>Clients</a>
                         </li>
                         <li>
@@ -171,7 +171,7 @@
                             
                         </li>
                         <li>
-                            <a href="showClientlient.php">
+                            <a href="showClient.php">
                                 <i class="fas fa-users"></i>Clients</a>
                         </li>
                         <li>
@@ -391,7 +391,7 @@
                                                 
                                             </div>
                                             <div class="account-dropdown__footer">
-                                                <a href="1.html"> <!--page officielle0-->
+                                            <a href="logOut.php"><!--page officielle0-->
                                                     <i class="zmdi zmdi-power"></i>Se déconnecter</a>
                                             </div>
                                         </div>
@@ -429,7 +429,7 @@
 			<?php
 			if (isset($_GET['id']))
 			{
-				$categorie = $categorieC->recupererCategorie1($_GET['id']);	
+				$categorie = $categorieC->recupererCategorieChef1($_GET['id']);	
 		       ?>
                 <form action="" method="POST" >
                   <table  align="center">
@@ -468,7 +468,7 @@
                  	<div class="row">
 								<div class="col-md-12">
 										<div class="copyright">
-												<p>&copy; Copyright.Tous droits réservés. <a href="front/1.html">Rey Del México</a>.</p>
+												<p>&copy; Copyright.Tous droits réservés. <a href="../front/index.php">Rey Del México</a>.</p>
 										</div>
 								</div>
 						</div>

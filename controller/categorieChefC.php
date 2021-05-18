@@ -6,7 +6,7 @@ class categorieChefC{
 
     function afficherCategorieChef()
     {
-      $sql = " SELECT * FROM categorieChef order by id DESC ";
+      $sql = " SELECT * FROM categoriechef order by id DESC ";
       $db = config::getConnexion();
       try {
         $liste= $db->query($sql);
@@ -17,7 +17,7 @@ class categorieChefC{
     }
 	function afficherElementCategorieChef($id)
     {
-		$sql="SELECT * from categorieChef where	id=$id";
+		$sql="SELECT * from categoriechef where	id=$id";
 		$db = config::getConnexion();
 		try{
 			$query=$db->prepare($sql);
@@ -35,7 +35,7 @@ class categorieChefC{
     function ajoutCategorieChef($categorieChef)
     {
         
-       $sql = "INSERT INTO categorieChef (libelle)
+       $sql = "INSERT INTO categoriechef (libelle)
        values(:libelle)";
        $db = config::getConnexion();
        try {
@@ -49,7 +49,7 @@ class categorieChefC{
       }
     }
     function supprimerCategorieChef($id){
-			$sql="DELETE FROM categorieChef WHERE id= :id";
+			$sql="DELETE FROM categoriechef WHERE id= :id";
 			$db = config::getConnexion();
 			$req=$db->prepare($sql);
 			$req->bindValue(':id',$id);
@@ -64,13 +64,13 @@ class categorieChefC{
 			try {
 				$db = config::getConnexion();
 				$query = $db->prepare(
-					'UPDATE categorieChef SET 
+					'UPDATE categoriechef SET 
 						libelle  = :libelle 	
 
 					WHERE id = :id'
 				);
 				$query->execute([
-					'libelle' => $Utilisateur->getLibelle(),
+					'libelle' => $Utilisateur->getLibelleChef(),
 					'id' => $id
 					
 				]);

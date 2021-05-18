@@ -122,7 +122,7 @@
                             
                         </li>
                         <li>
-                            <a href="showClientlient.php">
+                            <a href="showClient.php">
                                 <i class="fas fa-users"></i>Clients</a>
                         </li>
                         <li>
@@ -203,7 +203,7 @@
                             
                         </li>
                         <li>
-                            <a href="showClientlient.php">
+                            <a href="showClient.php">
                                 <i class="fas fa-users"></i>Clients</a>
                         </li>
                         <li>
@@ -422,7 +422,7 @@
                                                 
                                             </div>
                                             <div class="account-dropdown__footer">
-                                                <a href="1.html"> <!--page officielle0-->
+                                            <a href="logOut.php"><!--page officielle0-->
                                                     <i class="zmdi zmdi-power"></i>Se déconnecter</a>
                                             </div>
                                         </div>
@@ -499,12 +499,11 @@
                 <td>
               <?php  $elementCat = $categorie1C->afficherElementCategorie($fournisseur->categorie); ?>
                      <select name="categorie" id="categorie" required>
-                     <option value="<?php echo $fournisseur->categorie; ?>" selected> <?php echo $elementCat->libelle; ?> </option>
-                        
+                
                <?php
                 foreach($listeCategorie as $listeC){
                ?>
-                <option value ='<?PHP echo $listeC['id_categorie']; ?>'> <?PHP echo $listeC['libelle']; ?></option>
+                <option value ='<?PHP echo $listeC['id_categorie']; ?>' <?php if ($fournisseur->categorie==$listeC['id_categorie']) echo "selected" ; ?>> <?PHP echo $listeC['libelle']; ?></option>
                    <?php
              }
                   ?>
@@ -518,15 +517,11 @@
                     <td>
                     <?php  $elementLocal = $local1C->afficherElementLocal($fournisseur->local); ?>
                     <select name="local" id="local" required>
-                     <option value="select" selected>Select</option>
-                     <option value="<?php echo $fournisseur->local; ?>" selected> <?php echo $elementLocal->adresse; ?> </option>
-
-
                         
           <?php
           foreach($listeLocal as $localC){
            ?>
-           <option value ='<?PHP echo $localC['id_local']; ?>'> <?PHP echo $localC['adresse']; ?></option>
+           <option value ='<?PHP echo $localC['id_local']; ?>' <?php if ($fournisseur->local==$localC['id_local']) echo "selected" ; ?>> <?PHP echo $localC['adresse']; ?></option>
            <?php
           }
           ?>
@@ -572,7 +567,7 @@
                  	<div class="row">
 								<div class="col-md-12">
 										<div class="copyright">
-												<p>&copy; Copyright.Tous droits réservés. <a href="front/1.html">Rey Del México</a>.</p>
+												<p>&copy; Copyright.Tous droits réservés. <a href="../front/index.php">Rey Del México</a>.</p>
 										</div>
 								</div>
 						</div>
