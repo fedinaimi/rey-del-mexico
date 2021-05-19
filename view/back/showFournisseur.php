@@ -385,7 +385,17 @@
 				<div class="section__content section__content--p30">
 					<div class="container-fluid">
 						<div class="row">
+                        <div id="google_translate_element"></div>
+         <script type="text/javascript">
+             function googleTranslateElementInit() {
+                 new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
+             }
+         </script>
+
+         <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit">
+         </script> </div>
                             <div class="col-md-12">
+                            
                                 <div class="overview-wrap">
                                 <br>
                                     <button class="au-btn au-btn-icon au-btn--blue">
@@ -395,7 +405,7 @@
                                 </div>
                                 <div class="overview-wrap">
                                 <br>
-                                  
+                              
                                         <button class="au-btn au-btn-icon au-btn--blue">
                                     
                                     <a href="triFournisseur.php">  <i class="zmdi zmdi-plus text-center"></i>Trier Fournisseur </a></button>
@@ -405,8 +415,10 @@
 						<div class="row">
                             <div class="col-lg-9">
 								<br>
+                                
                                 <h2 class="title-1 m-b-25">Informations Fournisseurs</h2>
                                 <div class="table-responsive table--no-card m-b-40">
+                                
                                     <table class="table table-borderless table-striped table-earning">
                                         <thead>
                                             <tr>
@@ -497,6 +509,7 @@ $elementL= $localC->afficherElementLocal($fournisseur['local']);
 						
 						<div class="row">
 								<div class="col-md-12">
+                              
 										<div class="copyright">
 												<p>&copy; Copyright.Tous droits réservés. <a href="../front/index.php">Rey Del México</a>.</p>
 										</div>
